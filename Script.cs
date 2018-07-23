@@ -2,7 +2,6 @@
 using GTA;
 using GTA.Native;
 using System;
-using System.Drawing;
 
 public class GGOHudScript : Script
 {
@@ -30,11 +29,11 @@ public class GGOHudScript : Script
 
     public static void DrawShapesOnTick(object Sender, EventArgs Event)
     {
-        UIRectangle CharacterBackground = new UIRectangle(Coords.CalculatePoint(80, 77), Coords.CalculateSize(5, 15), Color.Black);
-        CharacterBackground.Draw();
+        UIRectangle PlayerInfoBG = new UIRectangle(Coords.CalculatePoint(79, 77), Coords.CalculateSize(5, 15), Colors.Background);
+        PlayerInfoBG.Draw();
 
-        UIRectangle BulletsBackground = new UIRectangle(Coords.CalculatePoint(91.2f, 77), Coords.CalculateSize(5, 3.5f), Color.Black);
-        BulletsBackground.Draw();
+        UIRectangle SecondaryAmmoBG = new UIRectangle(Coords.CalculatePoint(90.2f, 77), Coords.CalculateSize(5, 3.5f), Colors.Background);
+        SecondaryAmmoBG.Draw();
     }
 
     public static void ChangeOnTick(object Sender, EventArgs Event)
