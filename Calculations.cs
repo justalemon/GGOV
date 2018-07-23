@@ -1,17 +1,18 @@
 ﻿using GTA;
+using System;
 
 namespace GGOHud
 {
     class Calculations
     {
-        public static float CalculateVertical(float Offset)
+        public static int CalculateVertical(float Offset)
         {
-            return Game.ScreenResolution.Height / Offset;
+            return Convert.ToInt32(Game.ScreenResolution.Height / Offset);
         }
 
-        public static float CalculateHorizontal(float Offset)
+        public static int CalculateHorizontal(float Offset)
         {
-            return Game.ScreenResolution.Width / Offset;
+            return Convert.ToInt32(Game.ScreenResolution.Width / Offset);
         }
     }
 }
