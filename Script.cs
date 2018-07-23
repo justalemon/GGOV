@@ -10,7 +10,7 @@ public class GGOHudScript : Script
     {
         Tick += DrawOnTick;
 
-        Function.Call(Hash.DISPLAY_HUD, Config.GetValue("GGOHud", "DisableGameUI", true));
+        Function.Call(Hash.DISPLAY_HUD, !Config.GetValue("GGOHud", "DisableGameUI", true));
     }
 
     public static void DrawOnTick(object Sender, EventArgs Event)
