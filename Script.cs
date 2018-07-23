@@ -9,12 +9,19 @@ public class GGOHudScript : Script
     public GGOHudScript()
     {
         Tick += DrawOnTick;
-
-        Function.Call(Hash.DISPLAY_HUD, !Config.GetValue("GGOHud", "DisableGameUI", true));
+        Tick += ChangeOnTick;
     }
 
     public static void DrawOnTick(object Sender, EventArgs Event)
     {
+        
+    }
 
+    public static void ChangeOnTick(object Sender, EventArgs Event)
+    {
+        if (Config.GetValue("GGOHud", "DisableRadarAndHUD", true))
+        {
+            Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
+        }
     }
 }
