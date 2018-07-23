@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace GGOHud
 {
-    class Calculations
+    class Coords
     {
         public static int CalculateVertical(float Offset)
         {
