@@ -23,12 +23,18 @@ public class GGOHudScript : Script
     {
         UIText CharacterNameHUD = new UIText(CharacterName, Calculations.CalculatePoint(80.1f, 77.5f), 0.325f);
         CharacterNameHUD.Draw();
+
+        UIText BulletsHUD = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Calculations.CalculatePoint(91.75f, 77.6f), 0.475f);
+        BulletsHUD.Draw();
     }
 
     public static void DrawShapesOnTick(object Sender, EventArgs Event)
     {
         UIRectangle CharacterBackground = new UIRectangle(Calculations.CalculatePoint(80, 77), Calculations.CalculateSize(5, 15), Color.Black);
         CharacterBackground.Draw();
+
+        UIRectangle BulletsBackground = new UIRectangle(Calculations.CalculatePoint(91.2f, 77), Calculations.CalculateSize(5, 3.5f), Color.Black);
+        BulletsBackground.Draw();
     }
 
     public static void ChangeOnTick(object Sender, EventArgs Event)
