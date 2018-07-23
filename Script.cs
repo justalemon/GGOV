@@ -6,7 +6,7 @@ using System.Drawing;
 
 public class GGOHudScript : Script
 {
-    public static ScriptSettings Config = ScriptSettings.Load("script\\GGOHud.ini");
+    public static ScriptSettings Config = ScriptSettings.Load("scripts\\GGOHud.ini");
     public static string CharacterName = Game.Player.Name;
 
     public GGOHudScript()
