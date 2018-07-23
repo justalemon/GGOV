@@ -16,9 +16,14 @@ namespace GGOHud
             return Convert.ToInt32((Game.ScreenResolution.Width / 100) * Offset);
         }
 
-        public static Point CalculateComplete(float Width, float Height)
+        public static Point CalculatePoint(float Width, float Height)
         {
             return new Point(CalculateHorizontal(Height), CalculateVertical(Width));
+        }
+
+        public static Size CalculateSize(float Width, float Height)
+        {
+            return new Size(CalculateHorizontal(Height), CalculateVertical(Width));
         }
     }
 }
