@@ -13,9 +13,9 @@ namespace GGOHud
         public static readonly Point PrimaryDummy = Coords.CalculatePoint(85f, 74.5f);
         public static readonly Point SecondaryDummy = Coords.CalculatePoint(90.5f, 74.5f);
 
-        // Images for the primary and secondary image
-        public static readonly Point PrimaryImage = Coords.CalculatePoint(83.75f, 81.5f);
-        public static readonly Point SecondaryImage = Coords.CalculatePoint(89f, 81.5f);
+        // Images for the primary and secondary guns
+        public static readonly Point PrimaryImage = Coords.CalculatePoint(83.55f, 81.5f);
+        public static readonly Point SecondaryImage = Coords.CalculatePoint(89.25f, 81.5f);
 
         // Fields with information
         public static readonly Point PlayerName = Coords.CalculatePoint(79.1f, 77.5f);
