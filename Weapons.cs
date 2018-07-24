@@ -7,6 +7,16 @@ namespace GGOHud
     {
         // Weapons that can be considered sidearm/secondary
         public static readonly List<WeaponHash> Sidearms = new List<WeaponHash> {
+            // Melee
+            WeaponHash.Knife,
+            WeaponHash.Nightstick,
+            WeaponHash.Hammer,
+            WeaponHash.Bat,
+            WeaponHash.Crowbar,
+            WeaponHash.GolfClub,
+            WeaponHash.Dagger,
+            WeaponHash.BattleAxe,
+            WeaponHash.KnuckleDuster,
             // Pistols
             WeaponHash.StunGun,
             WeaponHash.FlareGun,
@@ -41,7 +51,9 @@ namespace GGOHud
             WeaponHash.Unarmed,
             WeaponHash.Flare,
             WeaponHash.Ball,
-            WeaponHash.Snowball
+            WeaponHash.Snowball,
+            WeaponHash.Bottle,
+            WeaponHash.Flashlight
         };
     }
 }
