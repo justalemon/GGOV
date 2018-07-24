@@ -69,9 +69,6 @@
     <Content Include="GGOHud\GUN_Bat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGOHud\GUN_Bottle.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="GGOHud\GUN_CarbineRifle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
