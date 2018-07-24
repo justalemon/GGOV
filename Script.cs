@@ -47,7 +47,7 @@ public class GGOHudScript : Script
             Draw.Dummy(Position.SecondaryAmmoDummy);
         }
         // Second Row - Ammo for primary weapons - Example: 30 (for the Bullpup Rifle)
-        else if (Checks.IsCurrentWeaponSidearm())
+        else if (!Checks.IsCurrentWeaponSidearm())
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Position.PrimaryAmmo);
             Draw.Dummy(Position.SecondaryAmmoDummy);
