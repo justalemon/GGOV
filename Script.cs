@@ -43,19 +43,19 @@ public class GGOHudScript : Script
         // Draw dummies if the weapon should not be shown
         if (Checks.IsCurrentWeaponBanned())
         {
-            Draw.Dummy(Position.PrimaryAmmo);
-            Draw.Dummy(Position.SecondaryAmmo);
+            Draw.Dummy(Position.PrimaryAmmoDummy);
+            Draw.Dummy(Position.SecondaryAmmoDummy);
         }
         // Second Row - Ammo for primary weapons - Example: 30 (for the Bullpup Rifle)
         else if (Checks.IsCurrentWeaponSidearm())
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Position.PrimaryAmmo);
-            Draw.Dummy(Position.SecondaryAmmo);
+            Draw.Dummy(Position.SecondaryAmmoDummy);
         }
         // Third Row - Ammo for sidearms - Example: 9 (for the .50 Pistol)
         else
         {
-            Draw.Dummy(Position.PrimaryAmmo);
+            Draw.Dummy(Position.PrimaryAmmoDummy);
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Position.SecondaryAmmo);
         }
     }
@@ -76,7 +76,7 @@ public class GGOHudScript : Script
         }
         else
         {
-            Draw.Dummy(Position.PrimaryDummy);
+            Draw.Dummy(Position.PrimaryIconDummy);
         }
 
         // Secondary Weapon
@@ -86,7 +86,7 @@ public class GGOHudScript : Script
         }
         else
         {
-            Draw.Dummy(Position.SecondaryDummy);
+            Draw.Dummy(Position.SecondaryIconDummy);
         }
 
         // Store the image that we need over here

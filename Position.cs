@@ -9,9 +9,11 @@ namespace GGOHud
         public static readonly Point PrimaryIcon = Coords.CalculatePoint(84.5f, 73.5f);
         public static readonly Point SecondaryIcon = Coords.CalculatePoint(90f, 73.5f);
 
-        // Dummies for the Icons (not equiped, invalid or banned)
-        public static readonly Point PrimaryDummy = Coords.CalculatePoint(85f, 74.5f);
-        public static readonly Point SecondaryDummy = Coords.CalculatePoint(90.5f, 74.5f);
+        // Dummies for the Icons and Ammo Counters (not equiped, invalid or banned)
+        public static readonly Point PrimaryIconDummy = Coords.CalculatePoint(85f, 74.5f);
+        public static readonly Point SecondaryIconDummy = Coords.CalculatePoint(90.5f, 74.5f);
+        public static readonly Point PrimaryAmmoDummy = Coords.CalculatePoint(85f, 78.4f);
+        public static readonly Point SecondaryAmmoDummy = Coords.CalculatePoint(90.75f, 78.4f);
 
         // Images for the primary and secondary guns
         public static readonly Point PrimaryImage = Coords.CalculatePoint(83.55f, 81.5f);
