@@ -123,7 +123,7 @@ public class GGOHudScript : Script
 
         // Second Row
         // Primary Ammo
-        Draw.Rectangle(Position.PrimaryAmmoBG, Position.IconBGSize, Colors.Background);
+        Draw.Rectangle(Position.PrimaryAmmoBG, Position.SquaredBG, Colors.Background);
         // Primary Weapon
         if (!Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
         {
@@ -132,7 +132,7 @@ public class GGOHudScript : Script
 
         // Third Row
         // Secondary Ammo
-        Draw.Rectangle(Position.SecondaryAmmoBG, Position.IconBGSize, Colors.Background);
+        Draw.Rectangle(Position.SecondaryAmmoBG, Position.SquaredBG, Colors.Background);
         // Secondary Weapon
         if (Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
         {
