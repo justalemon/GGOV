@@ -6,21 +6,31 @@ using System.IO;
 
 public class GGOHudScript : Script
 {
+    // Settings
     public static ScriptSettings Config = ScriptSettings.Load("scripts\\GGOHud.ini");
+    // Character Name on the Right Side
     public static string CharacterName = Game.Player.Name;
+    // Get the directory on the scripts folder
+    // Example: E:\Grand Theft Auto V Mods\scripts\GGOHud
     public static string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\GGOHud\\";
 
+    // Player Icon
     public static string PlayerImage = BaseDirectory + "HUD_Character.png";
+    // Primary Icon
     public static string PrimaryGunImage = BaseDirectory + "HUD_GunPrimary.png";
+    // Secondary Icon
     public static string SecondaryGunImage = BaseDirectory + "HUD_GunSecondary.png";
 
     public GGOHudScript()
     {
+        // Register the events
+        // TODO: See if having multiple events slow the script down
         Tick += DrawTextOnTick;
         Tick += DrawShapesOnTick;
         Tick += DrawImagesOnTick;
         Tick += ChangeOnTick;
         
+        // If the Character Name on the config has changed, use it
         if (Config.GetValue("GGOHud", "CharacterName", "default") != "default")
             CharacterName = Config.GetValue("GGOHud", "CharacterName", "default");
     }
