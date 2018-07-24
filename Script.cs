@@ -41,7 +41,7 @@ public class GGOHudScript : Script
         Draw.Text(CharacterName, Position.PlayerName, 0.325f);
 
         // Draw dummies if the weapon should not be shown
-        if (Weapons.Hidden.Contains(Game.Player.Character.Weapons.Current.Hash))
+        if (Checks.IsCurrentWeaponBanned())
         {
             Draw.Dummy(Position.PrimaryAmmo);
             Draw.Dummy(Position.SecondaryAmmo);
