@@ -50,6 +50,7 @@
     <Compile Include="Colors.cs" />
     <Compile Include="Coords.cs" />
     <Compile Include="Draw.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

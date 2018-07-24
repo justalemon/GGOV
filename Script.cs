@@ -10,16 +10,6 @@ public class GGOHudScript : Script
     public static ScriptSettings Config = ScriptSettings.Load("scripts\\GGOHud.ini");
     // Character Name on the Right Side
     public static string CharacterName = Game.Player.Name;
-    // Get the directory on the scripts folder
-    // Example: E:\Grand Theft Auto V Mods\scripts\GGOHud
-    public static string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\GGOHud\\";
-
-    // Player Icon
-    public static string PlayerImage = BaseDirectory + "HUD_Character.png";
-    // Primary Icon
-    public static string PrimaryGunImage = BaseDirectory + "HUD_GunPrimary.png";
-    // Secondary Icon
-    public static string SecondaryGunImage = BaseDirectory + "HUD_GunSecondary.png";
 
     public GGOHudScript()
     {
@@ -62,17 +52,23 @@ public class GGOHudScript : Script
 
     public static void DrawImagesOnTick(object Sender, EventArgs Event)
     {
+        // Store the locations of the Icons here
+        string WeaponImage = Image.GetWeapon();
+        string PlayerIcon = Image.GetIcon(Image.Icon.Player);
+        string PrimaryIcon = Image.GetIcon(Image.Icon.Primary);
+        string SecondaryIcon = Image.GetIcon(Image.Icon.Secondary);
+
         // Set of Icons
         // Player Icon
-        if (File.Exists(PlayerImage))
+        if (File.Exists(PlayerIcon))
         {
-            Draw.Texture(PlayerImage, Position.PlayerIcon, Position.IconSize);
+            Draw.Texture(PlayerIcon, Position.PlayerIcon, Position.IconSize);
         }
 
         // Primary Icon
-        if (File.Exists(PrimaryGunImage) && !Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
+        if (File.Exists(PrimaryIcon) && !Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
         {
-            Draw.Texture(PrimaryGunImage, Position.PrimaryIcon, Position.IconSize);
+            Draw.Texture(PrimaryIcon, Position.PrimaryIcon, Position.IconSize);
         }
         else
         {
@@ -80,17 +76,14 @@ public class GGOHudScript : Script
         }
 
         // Secondary Weapon
-        if (File.Exists(SecondaryGunImage) && Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
+        if (File.Exists(SecondaryIcon) && Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
         {
-            Draw.Texture(SecondaryGunImage, Position.SecondaryIcon, Position.IconSize);
+            Draw.Texture(SecondaryIcon, Position.SecondaryIcon, Position.IconSize);
         }
         else
         {
             Draw.Dummy(Position.SecondaryIconDummy);
         }
-
-        // Store the image that we need over here
-        string WeaponImage = BaseDirectory + "GUN_" + Game.Player.Character.Weapons.Current.Hash.ToString() + ".png";
 
         // Second Row
         // Picture for the primary weapon - Example: (see GUN_CarbineRifle.png for the Carbine)
