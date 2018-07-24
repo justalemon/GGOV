@@ -10,6 +10,10 @@ public class GGOHudScript : Script
     public static string CharacterName = Game.Player.Name;
     public static string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\GGOHud\\";
 
+    public static string PlayerImage = BaseDirectory + "HUD_Character.png";
+    public static string PrimaryGunImage = BaseDirectory + "HUD_GunPrimary.png";
+    public static string SecondaryGunImage = BaseDirectory + "HUD_GunSecondary.png";
+
     public GGOHudScript()
     {
         Tick += DrawTextOnTick;
@@ -23,39 +27,73 @@ public class GGOHudScript : Script
 
     public static void DrawTextOnTick(object Sender, EventArgs Event)
     {
-        // First Row
-        // Player name
-        // Example: LLENN
-        UIText PlayerInfoName = new UIText(CharacterName, Coords.CalculatePoint(79.1f, 77.5f), 0.325f);
-        PlayerInfoName.Draw();
+        // First Row - Player name - Example: LLENN
+        Draw.Text(CharacterName, Position.PlayerName, 0.325f);
 
-        // Second Row
-        // Ammo for primary weapons like Assault Rifles and Shotguns
-        // Example: 30 (for the Bullpup Rifle)
-        UIText PrimaryAmmo = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Coords.CalculatePoint(85, 77.6f), 0.475f);
-        PrimaryAmmo.Draw();
-
-        // Third Row
-        // Ammo for secondary weapons like Pistols and Knifes
-        // Example: 9 (for the .50 Pistol)
-        UIText SecondaryAmmo = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Coords.CalculatePoint(90.75f, 77.6f), 0.475f);
-        SecondaryAmmo.Draw();
+        // Draw dummies if the weapon should not be shown
+        if (Weapons.Hidden.Contains(Game.Player.Character.Weapons.Current.Hash))
+        {
+            Draw.Dummy(Position.PrimaryAmmo);
+            Draw.Dummy(Position.SecondaryAmmo);
+        }
+        // Second Row - Ammo for primary weapons - Example: 30 (for the Bullpup Rifle)
+        else if (!Weapons.Sidearms.Contains(Game.Player.Character.Weapons.Current.Hash))
+        {
+            Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Position.PrimaryAmmo);
+            Draw.Dummy(Position.SecondaryAmmo);
+        }
+        // Third Row - Ammo for sidearms - Example: 9 (for the .50 Pistol)
+        else
+        {
+            Draw.Dummy(Position.PrimaryAmmo);
+            Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Position.SecondaryAmmo);
+        }
     }
 
     public static void DrawImagesOnTick(object Sender, EventArgs Event)
     {
-        // Second Row
-        // Picture for the primary weapon
-        // Example: (see 0x3D2E1AE8.png for the Carabine)
-        string WeaponImage = BaseDirectory + Game.Player.Character.Weapons.Current.Model.ToString() + ".png";
-        if (File.Exists(WeaponImage))
+        // Set of Icons
+        // Player Icon
+        if (File.Exists(PlayerImage))
         {
-            UI.DrawTexture(WeaponImage, 1, 0, 200, Coords.CalculatePoint(83.75f, 81.5f), Coords.CalculateSize(6.75f, 9.50f));
+            Draw.Texture(PlayerImage, Position.PlayerIcon, Position.IconSize);
+        }
+
+        // Primary Icon
+        if (File.Exists(PrimaryGunImage) && !Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
+        {
+            Draw.Texture(PrimaryGunImage, Position.PrimaryIcon, Position.IconSize);
         }
         else
         {
-            UIText WeaponImageDummy = new UIText("-", Coords.CalculatePoint(85, 77.6f), 0.475f);
-            WeaponImageDummy.Draw();
+            Draw.Dummy(Position.PrimaryDummy);
+        }
+
+        // Secondary Weapon
+        if (File.Exists(SecondaryGunImage) && Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
+        {
+            Draw.Texture(SecondaryGunImage, Position.SecondaryIcon, Position.IconSize);
+        }
+        else
+        {
+            Draw.Dummy(Position.SecondaryDummy);
+        }
+
+        // Store the image that we need over here
+        string WeaponImage = BaseDirectory + "GUN_" + Game.Player.Character.Weapons.Current.Hash.ToString() + ".png";
+
+        // Second Row
+        // Picture for the primary weapon - Example: (see GUN_CarbineRifle.png for the Carbine)
+        if (File.Exists(WeaponImage) && !Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
+        {
+            Draw.Texture(WeaponImage, Position.PrimaryImage, Position.WeaponSize);
+        }
+
+        // Third Row
+        // Picture for the sidearm - Example: (see GUN_APPistol.png for the AP Pistol)
+        if (File.Exists(WeaponImage) && Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
+        {
+            Draw.Texture(WeaponImage, Position.SecondaryImage, Position.WeaponSize);
         }
     }
 
@@ -63,39 +101,38 @@ public class GGOHudScript : Script
     {
         // Left Icons
         // Player Info
-        UIRectangle PlayerIconBG = new UIRectangle(Coords.CalculatePoint(79f, 73.2f), Coords.CalculateSize(5, 3.5f), Colors.Background);
-        PlayerIconBG.Draw();
+        Draw.Rectangle(Position.PlayerIconBG, Position.IconBGSize, Colors.Background);
         // Primary Weapon
-        UIRectangle PrimaryIconBG = new UIRectangle(Coords.CalculatePoint(84.6f, 73.2f), Coords.CalculateSize(5, 3.5f), Colors.Background);
-        PrimaryIconBG.Draw();
+        Draw.Rectangle(Position.PrimaryIconBG, Position.IconBGSize, Colors.Background);
         // Secondary Weapon
-        UIRectangle SecondaryIconBG = new UIRectangle(Coords.CalculatePoint(90.2f, 73.2f), Coords.CalculateSize(5, 3.5f), Colors.Background);
-        SecondaryIconBG.Draw();
+        Draw.Rectangle(Position.SecondaryIconBG, Position.IconBGSize, Colors.Background);
 
         // First Row
         // Player Info
-        UIRectangle PlayerInfoBG = new UIRectangle(Coords.CalculatePoint(79, 77), Coords.CalculateSize(5, 15), Colors.Background);
-        PlayerInfoBG.Draw();
+        Draw.Rectangle(Position.PlayerInfoBG, Position.PlayerBGSize, Colors.Background);
 
         // Second Row
         // Primary Ammo
-        UIRectangle PrimaryAmmoBG = new UIRectangle(Coords.CalculatePoint(84.6f, 77), Coords.CalculateSize(5, 3.5f), Colors.Background);
-        PrimaryAmmoBG.Draw();
+        Draw.Rectangle(Position.PrimaryAmmoBG, Position.IconBGSize, Colors.Background);
         // Primary Weapon
-        UIRectangle PrimaryGunBG = new UIRectangle(Coords.CalculatePoint(84.6f, 80.8f), Coords.CalculateSize(5, 11.1f), Colors.Background);
-        PrimaryGunBG.Draw();
+        if (!Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
+        {
+            Draw.Rectangle(Position.PrimaryBG, Position.WeaponBG, Colors.Background);
+        }
 
         // Third Row
         // Secondary Ammo
-        UIRectangle SecondaryAmmoBG = new UIRectangle(Coords.CalculatePoint(90.2f, 77), Coords.CalculateSize(5, 3.5f), Colors.Background);
-        SecondaryAmmoBG.Draw();
+        Draw.Rectangle(Position.SecondaryAmmoBG, Position.IconBGSize, Colors.Background);
         // Secondary Weapon
-        UIRectangle SecondaryGunBG = new UIRectangle(Coords.CalculatePoint(90.2f, 80.8f), Coords.CalculateSize(5, 11.1f), Colors.Background);
-        SecondaryGunBG.Draw();
+        if (Checks.IsCurrentWeaponSidearm() && !Checks.IsCurrentWeaponBanned())
+        {
+            Draw.Rectangle(Position.SecondaryBG, Position.WeaponBG, Colors.Background);
+        }
     }
 
     public static void ChangeOnTick(object Sender, EventArgs Event)
     {
+        // Disable the radar if is requested
         if (Config.GetValue("GGOHud", "DisableRadarAndHUD", true))
         {
             Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
