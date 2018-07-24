@@ -38,7 +38,7 @@ public class GGOHudScript : Script
     public static void DrawTextOnTick(object Sender, EventArgs Event)
     {
         // First Row - Player name - Example: LLENN
-        Draw.Text(CharacterName, Position.PlayerName, 0.325f);
+        Draw.Text(CharacterName, Position.PlayerName, 0.325f, false);
 
         // Draw dummies if the weapon should not be shown
         if (Checks.IsCurrentWeaponBanned())
@@ -111,11 +111,11 @@ public class GGOHudScript : Script
     {
         // Left Icons
         // Player Info
-        Draw.Rectangle(Position.PlayerIconBG, Position.IconBGSize, Colors.Background);
+        Draw.Rectangle(Position.PlayerIconBG, Position.SquaredBG, Colors.Background);
         // Primary Weapon
-        Draw.Rectangle(Position.PrimaryIconBG, Position.IconBGSize, Colors.Background);
+        Draw.Rectangle(Position.PrimaryIconBG, Position.SquaredBG, Colors.Background);
         // Secondary Weapon
-        Draw.Rectangle(Position.SecondaryIconBG, Position.IconBGSize, Colors.Background);
+        Draw.Rectangle(Position.SecondaryIconBG, Position.SquaredBG, Colors.Background);
 
         // First Row
         // Player Info

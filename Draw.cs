@@ -11,9 +11,9 @@ namespace GGOHud
         /// <param name="Message">The message to draw.</param>
         /// <param name="Position">The position on the screen.</param>
         /// <param name="FontSize">The size of the font.</param>
-        public static void Text(string Message, Point Position, float FontSize = 0.475f)
+        public static void Text(string Message, Point Position, float FontSize = 0.475f, bool Centered = true)
         {
-            UIText ToDraw = new UIText(Message, Position, FontSize);
+            UIText ToDraw = new UIText(Message, Position, FontSize, Color.White, GTA.Font.ChaletLondon, Centered);
             ToDraw.Draw();
         }
 
