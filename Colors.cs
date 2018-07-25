@@ -12,5 +12,17 @@ namespace GGOHud
         public static readonly Color Damaged = Color.FromArgb(255, 247, 227, 18);
         // Health: Under 20%
         public static readonly Color NearDeath = Color.FromArgb(255, 200, 0, 0);
+
+        public static Color FromHealth(int Max, int Value)
+        {
+            int Percentage = (Max / 100) * Value;
+
+            if (Value <= 25)
+                return NearDeath;
+            else if (Value <= 50 && Value >= 25)
+                return Damaged;
+            else
+                return Healthy;
+        }
     }
 }

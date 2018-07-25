@@ -2,6 +2,7 @@
 using GTA;
 using GTA.Native;
 using System;
+using System.Drawing;
 
 public class GGOHudScript : Script
 {
@@ -17,6 +18,7 @@ public class GGOHudScript : Script
         Tick += DrawTextOnTick;
         Tick += DrawShapesOnTick;
         Tick += DrawImagesOnTick;
+        Tick += DrawHealthOnTick;
         Tick += ChangeOnTick;
         
         // If the Character Name on the config has changed, use it
@@ -103,6 +105,28 @@ public class GGOHudScript : Script
         {
             Draw.Rectangle(Position.SecondaryBG, Position.WeaponBG, Colors.Background);
         }
+    }
+
+    public static void DrawHealthOnTick(object Sender, EventArgs Event)
+    {
+        // Calculate the bar size
+        int Health = Game.Player.Character.Health;
+        int MaxHealth = 100; // NOTE: Using Game.Player.Character.MaxHealth will always return 200
+        int HealthPercentage = Convert.ToInt32(((float)Health / MaxHealth) * 100f);
+        float Size = (Position.HealthBarS.Width / 100f) * HealthPercentage;
+
+        // Store the changes on a new object
+        Size BarSize = Position.HealthBarS;
+        BarSize.Width = Convert.ToInt32(Size);
+        
+        // First, draw the dividers so they are in the background
+        Draw.Rectangle(Position.HealthDividerOne, Position.HealthBarDivider, Colors.Healthy);
+        Draw.Rectangle(Position.HealthDividerTwo, Position.HealthBarDivider, Colors.Healthy);
+        Draw.Rectangle(Position.HealthDividerThree, Position.HealthBarDivider, Colors.Healthy);
+        Draw.Rectangle(Position.HealthDividerFour, Position.HealthBarDivider, Colors.Healthy);
+
+        // Then, draw the bar by itself
+        Draw.Rectangle(Position.HealthBar, BarSize, Colors.FromHealth(MaxHealth, HealthPercentage));
     }
 
     public static void ChangeOnTick(object Sender, EventArgs Event)

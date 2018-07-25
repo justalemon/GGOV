@@ -39,7 +39,14 @@ namespace GGOHud
         public static readonly Point PrimaryBG = Coords.CalculatePoint(84.6f, 80.25f);
         public static readonly Point SecondaryBG = Coords.CalculatePoint(90.2f, 80.25f);
 
-        // Size of the Backgrounds
+        // Health Bar
+        public static readonly Point HealthBar = Coords.CalculatePoint(82.507f, 77.625f);
+        public static readonly Point HealthDividerOne = Coords.CalculatePoint(82.25f, 77.625f);
+        public static readonly Point HealthDividerTwo = Coords.CalculatePoint(82.25f, 82.175f);
+        public static readonly Point HealthDividerThree = Coords.CalculatePoint(82.25f, 86.725f);
+        public static readonly Point HealthDividerFour = Coords.CalculatePoint(82.25f, 91.3f);
+
+        // Sizes
         // Icon Size
         public static readonly Size IconSize = Coords.CalculateSize(4.75f, 2.8f);
         // Icon Background
@@ -50,5 +57,8 @@ namespace GGOHud
         public static readonly Size WeaponSize = Coords.CalculateSize(6.75f, 9.50f);
         // Weapon Background
         public static readonly Size WeaponBG = Coords.CalculateSize(5f, 11.75f);
+        // Health Bar
+        public static readonly Size HealthBarS = Coords.CalculateSize(0.4f, 13.8f);
+        public static readonly Size HealthBarDivider = Coords.CalculateSize(1.1f, 0.1f);
     }
 }
