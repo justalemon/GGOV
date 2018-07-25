@@ -110,8 +110,8 @@ public class GGOHudScript : Script
     public static void DrawHealthOnTick(object Sender, EventArgs Event)
     {
         // Calculate the bar size
-        int Health = Game.Player.Character.Health;
-        int MaxHealth = 100; // NOTE: Using Game.Player.Character.MaxHealth will always return 200
+        int Health = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character) - 100;
+        int MaxHealth = Function.Call<int>(Hash.GET_ENTITY_MAX_HEALTH, Game.Player.Character) - 100;
         int HealthPercentage = Convert.ToInt32(((float)Health / MaxHealth) * 100f);
         float Size = (Position.HealthBarS.Width / 100f) * HealthPercentage;
 
