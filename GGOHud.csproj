@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Checks.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="Coords.cs" />
     <Compile Include="Draw.cs" />
