@@ -3,7 +3,7 @@ using System;
 
 namespace GGOHud
 {
-    class Image
+    class Images
     {
         /// <summary>
         /// The type of Icon to get.

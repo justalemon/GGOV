@@ -53,10 +53,10 @@ public class GGOHudScript : Script
     public static void DrawImagesOnTick(object Sender, EventArgs Event)
     {
         // Store the locations of the Icons here
-        string WeaponImage = Image.GetWeapon();
-        string PlayerIcon = Image.GetIcon(Image.Icon.Player);
-        string PrimaryIcon = Image.GetIcon(Image.Icon.Primary);
-        string SecondaryIcon = Image.GetIcon(Image.Icon.Secondary);
+        string WeaponImage = Images.GetWeapon();
+        string PlayerIcon = Images.GetIcon(Images.Icon.Player);
+        string PrimaryIcon = Images.GetIcon(Images.Icon.Primary);
+        string SecondaryIcon = Images.GetIcon(Images.Icon.Secondary);
 
         // Set of Icons
         // Player Icon
