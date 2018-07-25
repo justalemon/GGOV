@@ -1,5 +1,6 @@
 ﻿using GTA;
 using System.Drawing;
+using System.IO;
 
 namespace GGOHud
 {
@@ -30,13 +31,16 @@ namespace GGOHud
 
         /// <summary>
         /// Draws a texture from a file on the disk.
-        /// REMEMBER TO USE RELATIVE PATH's!
         /// </summary>
         /// <param name="Filename">The image file to draw.</param>
         /// <param name="Position">The position on the screen.</param>
         /// <param name="DrawSize">The size of the image being drawn.</param>
-        public static void Texture(string Filename, Point Position, Size DrawSize)
+        /// <param name="FailSafe">If the Draw should be ignored if the file does not exist.</param>
+        public static void Texture(string Filename, Point Position, Size DrawSize, bool FailSafe = false)
         {
+            if (!File.Exists(Filename) && FailSafe)
+                return;
+
             UI.DrawTexture(Filename, 0, 0, 200, Position, DrawSize);
         }
 
