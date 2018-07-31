@@ -57,10 +57,10 @@ public class GGOHudScript : Script
     public static void DrawImagesOnTick(object Sender, EventArgs Event)
     {
         // Store the locations of the Icons here
-        string WeaponImage = Images.GetWeapon();
-        string PlayerIcon = Images.GetIcon(Images.Icon.Player);
-        string PrimaryIcon = Images.GetIcon(Images.Icon.Primary);
-        string SecondaryIcon = Images.GetIcon(Images.Icon.Secondary);
+        string WeaponImage = GUI.GetWeapon();
+        string PlayerIcon = GUI.GetIcon(GUI.Icon.Player);
+        string PrimaryIcon = GUI.GetIcon(GUI.Icon.Primary);
+        string SecondaryIcon = GUI.GetIcon(GUI.Icon.Secondary);
         Point PrimaryDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconDummy"));
         Point SecondaryDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconDummy"));
 
