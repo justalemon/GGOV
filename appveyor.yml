@@ -38,7 +38,7 @@ before_build:
 # Now, build the solution and convert the description from Markdown to HTML
 build_script:
   - cmd: msbuild.exe GGOHud.sln /t:Build /p:Configuration=Release;Platform=x64
-  - cmd: python -m markdown -f 5modsDescription.html description.md
+  - cmd: python -m markdown -v -f 5modsDescription.html description.md
 
 # Create artifacts to test the automated builds
 after_build:
