@@ -48,3 +48,5 @@ after_build:
 artifacts:
   - path: GGOHudBuild.7z
     name: GGOHud SHVDN Mod with Pictures
+  - path: 5modsDescription.html
+    name: Description for the 5mods page
