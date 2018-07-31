@@ -31,8 +31,8 @@ namespace GGOHud
         public static readonly Point PrimaryAmmoDummy = Coords.CalculatePoint(85f, 78.1f);
         public static readonly Point SecondaryAmmoDummy = Coords.CalculatePoint(90.75f, 78.1f);
         // Images
-        public static readonly Point PrimaryImage = Coords.CalculatePoint(83.55f, 81f);
-        public static readonly Point SecondaryImage = Coords.CalculatePoint(89.25f, 81f);
+        public static readonly Point PrimaryImage = Coords.CalculatePoint(85.25f, 81.25f);
+        public static readonly Point SecondaryImage = Coords.CalculatePoint(90.75f, 81.25f);
         // Backgrounds
         public static readonly Point PrimaryAmmoBG = Coords.CalculatePoint(84.6f, 77f);
         public static readonly Point SecondaryAmmoBG = Coords.CalculatePoint(90.2f, 77f);
@@ -53,8 +53,8 @@ namespace GGOHud
         public static readonly Size SquaredBG = Coords.CalculateSize(5f, 3f);
         // Player Information
         public static readonly Size PlayerBGSize = Coords.CalculateSize(5f, 15f);
-        // Weapon Icon
-        public static readonly Size WeaponSize = Coords.CalculateSize(6.75f, 9.50f);
+        // Weapon Picture
+        public static readonly Size WeaponSize = Coords.CalculateSize(3.25f, 9.5f);
         // Weapon Background
         public static readonly Size WeaponBG = Coords.CalculateSize(5f, 11.75f);
         // Health Bar
