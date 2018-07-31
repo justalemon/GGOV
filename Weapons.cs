@@ -18,17 +18,17 @@ namespace GGOHud
         }
         /// <summary>
         /// Types of weapons that are not going to be shown on the HUD.
-        /// In order: Gas Can (Type), Throwables, Fists (Type), None/Phone (Type)
+        /// In order: Gas Can (Type), Throwables, Fists (Type), None/Phone (Type).
         /// </summary>
         public static readonly List<int> Banned = new List<int> { 1595662460, 1548507267, -1609580060, 0 };
         /// <summary>
         /// Types of weapons that can be considered sidearm either by the size or firing mechanism.
-        /// In order: Pistol (Type), Stun Gun (Type), SMG
+        /// In order: Pistol (Type), Stun Gun (Type), SMG.
         /// </summary>
         public static readonly List<int> Sidearms = new List<int> { 416676503, 690389602, -957766203 };
         /// <summary>
         /// Types of weapons that can be considered melee.
-        /// In order: Melee (Type), Boxer (Type)
+        /// In order: Melee (Type), Boxer (Type).
         /// </summary>
         public static readonly List<int> Melee = new List<int> { -1609580060, -728555052 };
 

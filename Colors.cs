@@ -13,6 +13,12 @@ namespace GGOHud
         // Health: Under 20%
         public static readonly Color NearDeath = Color.FromArgb(255, 200, 0, 0);
 
+        /// <summary>
+        /// Returns a color based of the current player health.
+        /// </summary>
+        /// <param name="Max">The maximum health that the player can have. This is usually 100.</param>
+        /// <param name="Value">The current health of the player.</param>
+        /// <returns>A color based on the player health.</returns>
         public static Color FromHealth(int Max, int Value)
         {
             int Percentage = (Max / 100) * Value;

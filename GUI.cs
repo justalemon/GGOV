@@ -7,7 +7,7 @@ namespace GGOHud
     class GUI
     {
         /// <summary>
-        /// The type of Icon to get.
+        /// The type of Image to load.
         /// </summary>
         public enum Icon
         {
@@ -32,7 +32,7 @@ namespace GGOHud
         }
 
         /// <summary>
-        /// Gets a gun picture.
+        /// Gets a gun picture from the current one that the player has.
         /// </summary>
         /// <returns>The absolute location of the weapon.</returns>
         public static string GetWeapon()
@@ -41,6 +41,11 @@ namespace GGOHud
             return Folder + "GUN_" + CurrentWeapon + ".png";
         }
 
+        /// <summary>
+        /// Creates a Size from a set of config parameters.
+        /// </summary>
+        /// <param name="ConfigName">The name of the config parameters. Both of them will get appended with W & H.</param>
+        /// <returns>The Size based on the current game resolution.</returns>
         public static Size SizeFromConfig(string ConfigName)
         {
             float WidthOffset = GGOHudScript.Config.GetValue("Sizes", ConfigName + "W", 0f);
@@ -52,11 +57,22 @@ namespace GGOHud
             return new Size(Width, Heigth);
         }
 
+        /// <summary>
+        /// Creates a Point from a set of config parameters.
+        /// </summary>
+        /// <param name="ConfigName">The name of the config parameters. Both of them will get appended with X & Y.</param>
+        /// <returns>The Position on screen based on the current game resolution.</returns>
         public static Point PointFromConfig(string ConfigName)
         {
             return PointFromConfig(ConfigName + "X", ConfigName + "Y");
         }
 
+        /// <summary>
+        /// Creates a Point from two parameters.
+        /// </summary>
+        /// <param name="XConfig">The X parameter.</param>
+        /// <param name="YConfig">The Y parameter.</param>
+        /// <returns>The Position on screen based on the current game resolution.</returns>
         public static Point PointFromConfig(string XConfig, string YConfig)
         {
             float XOffset = GGOHudScript.Config.GetValue("Positions", XConfig, 0f);
