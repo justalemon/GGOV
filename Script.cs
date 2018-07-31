@@ -4,7 +4,7 @@ using GTA.Native;
 using System;
 using System.Drawing;
 
-public class GGOHudScript : Script
+public class ScriptHUD : Script
 {
     /// <summary>
     /// Load our Script Settings from the SHVDN folder.
@@ -43,7 +43,7 @@ public class GGOHudScript : Script
     /// </summary>
     public static string SecondaryIcon = GUI.GetIcon(GUI.Icon.Secondary);
 
-    public GGOHudScript()
+    public ScriptHUD()
     {
         // Register the event
         Tick += OnTick;

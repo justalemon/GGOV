@@ -27,7 +27,7 @@ namespace GGOHud
         /// <returns>The absolute location of the icon.</returns>
         public static string GetIcon(Icon Type)
         {
-            string IconName = GGOHudScript.Config.GetValue("GGOHud", Type.ToString() + "Icon", "HUD_Generic");
+            string IconName = ScriptHUD.Config.GetValue("GGOHud", Type.ToString() + "Icon", "HUD_Generic");
             return Folder + IconName + ".png";
         }
 
@@ -48,8 +48,8 @@ namespace GGOHud
         /// <returns>The Size based on the current game resolution.</returns>
         public static Size SizeFromConfig(string ConfigName)
         {
-            float WidthOffset = GGOHudScript.Config.GetValue("Sizes", ConfigName + "W", 0f);
-            float HeigthOffset = GGOHudScript.Config.GetValue("Sizes", ConfigName + "H", 0f);
+            float WidthOffset = ScriptHUD.Config.GetValue("Sizes", ConfigName + "W", 0f);
+            float HeigthOffset = ScriptHUD.Config.GetValue("Sizes", ConfigName + "H", 0f);
 
             int Width = Convert.ToInt32((Game.ScreenResolution.Width / 100) * WidthOffset);
             int Heigth = Convert.ToInt32((Game.ScreenResolution.Height / 100) * HeigthOffset);
@@ -75,8 +75,8 @@ namespace GGOHud
         /// <returns>The Position on screen based on the current game resolution.</returns>
         public static Point PointFromConfig(string XConfig, string YConfig)
         {
-            float XOffset = GGOHudScript.Config.GetValue("Positions", XConfig, 0f);
-            float YOffset = GGOHudScript.Config.GetValue("Positions", YConfig, 0f);
+            float XOffset = ScriptHUD.Config.GetValue("Positions", XConfig, 0f);
+            float YOffset = ScriptHUD.Config.GetValue("Positions", YConfig, 0f);
 
             int X = Convert.ToInt32((Game.ScreenResolution.Width / 100) * XOffset);
             int Y = Convert.ToInt32((Game.ScreenResolution.Height / 100) * YOffset);
