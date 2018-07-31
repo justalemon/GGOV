@@ -1,6 +1,8 @@
 # Files
 *.suo
 [Tt]est.cs
+*.html
+*.7z
 # Folders
 Debug/
 Release/
