@@ -46,7 +46,7 @@ after_build:
 
 # And attach them to the build
 artifacts:
-  - path: GGOHudBuild.7z
-    name: GGOHud SHVDN Mod with Pictures
+  - path: GGOHud.7z
+    name: Mod with Pictures
   - path: 5modsDescription.html
     name: Description for the 5mods page
