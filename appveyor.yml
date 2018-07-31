@@ -42,7 +42,7 @@ build_script:
 
 # Create artifacts to test the automated builds
 after_build:
-  - cmd: 7z a GGOHudBuild.7z %APPVEYOR_BUILD_FOLDER%\bin\x64\Release\* GGOHud\*.png
+  - cmd: 7z a GGOHud.7z %APPVEYOR_BUILD_FOLDER%\bin\x64\Release\* GGOHud\*.png
 
 # And attach them to the build
 artifacts:
