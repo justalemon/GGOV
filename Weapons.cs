@@ -16,84 +16,21 @@ namespace GGOHud
             Sidearm = 1,
             Melee = 2
         }
-
         /// <summary>
-        /// Weapons that are not going to be shown on the HUD.
-        /// See the coments on the code to know why they are considered banned.
+        /// Types of weapons that are not going to be shown on the HUD.
+        /// In order: Gas Can (Type), Throwables, Fists (Type), None/Phone (Type)
         /// </summary>
-        public static readonly List<WeaponHash> Banned = new List<WeaponHash>
-        {
-            // Your hands are not firearms
-            WeaponHash.Unarmed,
-            // Flares are used to mark positions
-            WeaponHash.Flare,
-            // Recreational does not count
-            WeaponHash.Ball,
-            // If you enable the snow in-game they can be found everywhere
-            WeaponHash.Snowball,
-            // Improvised weapons should not be included
-            WeaponHash.Bottle,
-            // Is a standard flashlight, nothing that can kill
-            WeaponHash.Flashlight
-        };
-
+        public static readonly List<int> Banned = new List<int> { 1595662460, 1548507267, -1609580060, 0 };
         /// <summary>
-        /// Weapons that can be considered sidearm either by the size or firing mechanism.
+        /// Types of weapons that can be considered sidearm either by the size or firing mechanism.
+        /// In order: Pistol (Type), Stun Gun (Type), SMG
         /// </summary>
-        public static readonly List<WeaponHash> Sidearms = new List<WeaponHash> {
-            // Melee
-            WeaponHash.Knife,
-            WeaponHash.Nightstick,
-            WeaponHash.Hammer,
-            WeaponHash.Bat,
-            WeaponHash.Crowbar,
-            WeaponHash.GolfClub,
-            WeaponHash.Dagger,
-            WeaponHash.BattleAxe,
-            WeaponHash.KnuckleDuster,
-            // Pistols
-            WeaponHash.StunGun,
-            WeaponHash.FlareGun,
-            WeaponHash.SNSPistol,
-            WeaponHash.SNSPistolMk2,
-            WeaponHash.VintagePistol,
-            WeaponHash.CombatPistol,
-            WeaponHash.Pistol,
-            WeaponHash.PistolMk2,
-            WeaponHash.APPistol,
-            WeaponHash.HeavyPistol,
-            WeaponHash.Pistol50,
-            WeaponHash.MarksmanPistol,
-            WeaponHash.DoubleActionRevolver,
-            WeaponHash.Revolver,
-            WeaponHash.RevolverMk2,
-            // Machine Guns
-            WeaponHash.MicroSMG,
-            WeaponHash.MiniSMG,
-            WeaponHash.MachinePistol,
-            // Shotguns
-            WeaponHash.SawnOffShotgun,
-            WeaponHash.SweeperShotgun,
-            // Assault Rifles
-            WeaponHash.CompactRifle,
-            // Heavy Weapons
-            WeaponHash.CompactGrenadeLauncher
-        };
-
+        public static readonly List<int> Sidearms = new List<int> { 416676503, 690389602, -957766203 };
         /// <summary>
-        /// Weapons that can be considered melee.
+        /// Types of weapons that can be considered melee.
+        /// In order: Melee (Type), Boxer (Type)
         /// </summary>
-        public static readonly List<WeaponHash> Melee = new List<WeaponHash> {
-            WeaponHash.Knife,
-            WeaponHash.Nightstick,
-            WeaponHash.Hammer,
-            WeaponHash.Bat,
-            WeaponHash.Crowbar,
-            WeaponHash.GolfClub,
-            WeaponHash.Dagger,
-            WeaponHash.BattleAxe,
-            WeaponHash.KnuckleDuster,
-        };
+        public static readonly List<int> Melee = new List<int> { -1609580060, -728555052 };
 
         /// <summary>
         /// Checks the weapon that the player currently has equiped.
@@ -102,16 +39,16 @@ namespace GGOHud
         public static Type CurrentType()
         {
             // Store the hash of the current weapon
-            WeaponHash CurrentWeapon = Game.Player.Character.Weapons.Current.Hash;
+            int WeaponType = Function.Call<int>(Hash.GET_WEAPONTYPE_GROUP, Game.Player.Character.Weapons.Current.Hash.GetHashCode());
 
             // If the weapon is Banned
-            if (Banned.Contains(CurrentWeapon))
+            if (Banned.Contains(WeaponType))
                 return Type.Banned;
             // If the weapon is not a firearm
-            if (Melee.Contains(CurrentWeapon))
+            if (Melee.Contains(WeaponType))
                 return Type.Melee;
             // If the weapon is a small firearm
-            if (Sidearms.Contains(CurrentWeapon))
+            if (Sidearms.Contains(WeaponType))
                 return Type.Sidearm;
             // If the weapon is other than the previous ones
             else
