@@ -16,8 +16,9 @@ assembly_info:
   assembly_version: "{version}"
   assembly_file_version: "{version}"
 
-# Use the tag if the build was trigered with one
+# Add Python 3.6 on the Path and use the tag if the build was trigered with one
 init:
+  - cmd: set PATH=C:\\Python36-x64;%PATH%
   - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true")
       {
@@ -25,16 +26,19 @@ init:
       }
 
 # Maybe in the future we are going to need submodules
+# Update PIP and install Markdown to convert description.md
 install:
   - cmd: git submodule update --init --recursive
+  - cmd: python -m pip install -U pip markdown
 
 # Restore our NuGet packages
 before_build:
   - cmd: nuget restore GGOHud.sln
 
-# Now, build the solution
+# Now, build the solution and convert the description from Markdown to HTML
 build_script:
   - cmd: msbuild.exe GGOHud.sln /t:Build /p:Configuration=Release;Platform=x64
+  - cmd: python -m markdown -f 5modsDescription.html description.md
 
 # Create artifacts to test the automated builds
 after_build:
