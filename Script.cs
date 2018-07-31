@@ -6,9 +6,13 @@ using System.Drawing;
 
 public class GGOHudScript : Script
 {
-    // Settings
+    /// <summary>
+    /// Load our Script Settings from the SHVDN folder.
+    /// </summary>
     public static ScriptSettings Config = ScriptSettings.Load("scripts\\GGOHud.ini");
-    // Character Name on the Right Side
+    /// <summary>
+    /// Store the player name that shows on top of the health bar.
+    /// </summary>
     public static string CharacterName = Game.Player.Name;
 
     public GGOHudScript()
@@ -16,28 +20,30 @@ public class GGOHudScript : Script
         // Register the event
         Tick += OnTick;
         
-        // If the Character Name on the config has changed, use it
+        // Change the player name if the user has changed it
         if (Config.GetValue("GGOHud", "CharacterName", "default") != "default")
             CharacterName = Config.GetValue("GGOHud", "CharacterName", "default");
     }
 
     public static void OnTick(object Sender, EventArgs Event)
     {
-        // Store our temporary information here
+        // Store our dummy location information here
         Point PrimaryAmmoDummy = Point.Add(GUI.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"), GUI.SizeFromConfig("AmmoDummy"));
         Point SecondaryAmmoDummy = Point.Add(GUI.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"), GUI.SizeFromConfig("AmmoDummy"));
         Point PrimaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconDummy"));
         Point SecondaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconDummy"));
+        // As well our images
         string WeaponImage = GUI.GetWeapon();
         string PlayerIcon = GUI.GetIcon(GUI.Icon.Player);
         string PrimaryIcon = GUI.GetIcon(GUI.Icon.Primary);
         string SecondaryIcon = GUI.GetIcon(GUI.Icon.Secondary);
 
-        // Player name
+        // Draw our player/character name
         Draw.Text(CharacterName, GUI.PointFromConfig("PlayerName"), 0.325f, false);
-        // Player Icon
+        // Draw the player icon
         Draw.Texture(PlayerIcon, GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"));
         // Backgrounds
+        // In order: Player Icon, Primary Icon, Secondary Icon, Player Info, Ammo Primary, Ammo Secondary
         Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundPlayerY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
@@ -45,7 +51,7 @@ public class GGOHudScript : Script
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
 
-        // Draw dummies if the weapon should not be shown
+        // Draw dummies if the weapon is banned
         if (Weapons.CurrentType() == Weapons.Type.Banned)
         {
             Draw.Dummy(PrimaryAmmoDummy);
@@ -80,7 +86,7 @@ public class GGOHudScript : Script
         int HealthPercentage = Convert.ToInt32(((float)Health / MaxHealth) * 100f);
         float Size = (GUI.SizeFromConfig("HealthBar").Width / 100f) * HealthPercentage;
 
-        // Store the changes on a new object
+        // Store the size of the bar in a new object
         Size BarSize = GUI.SizeFromConfig("HealthBar");
         BarSize.Width = Convert.ToInt32(Size);
         
