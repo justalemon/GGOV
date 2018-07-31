@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Colors.cs" />
-    <Compile Include="Coords.cs" />
     <Compile Include="GUI.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="Images.cs" />
