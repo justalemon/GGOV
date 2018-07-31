@@ -51,7 +51,6 @@
     <Compile Include="GUI.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="Images.cs" />
-    <Compile Include="Position.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Weapons.cs" />
