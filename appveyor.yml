@@ -16,6 +16,14 @@ assembly_info:
   assembly_version: "{version}"
   assembly_file_version: "{version}"
 
+# Use the tag if the build was trigered with one
+init:
+  - ps: >-
+      if ($env:APPVEYOR_REPO_TAG -eq "true")
+      {
+        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
+      }
+
 # Maybe in the future we are going to need submodules
 install:
   - cmd: git submodule update --init --recursive
