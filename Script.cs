@@ -14,6 +14,34 @@ public class GGOHudScript : Script
     /// Store the player name that shows on top of the health bar.
     /// </summary>
     public static string CharacterName = Game.Player.Name;
+    /// <summary>
+    /// Dummy location for the primary ammo.
+    /// </summary>
+    public static Point PrimaryAmmoDummy = Point.Add(GUI.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"), GUI.SizeFromConfig("AmmoDummy"));
+    /// <summary>
+    /// Dummy location for the secondary ammo.
+    /// </summary>
+    public static Point SecondaryAmmoDummy = Point.Add(GUI.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"), GUI.SizeFromConfig("AmmoDummy"));
+    /// <summary>
+    /// Dummy location for the primary icon.
+    /// </summary>
+    public static Point PrimaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconDummy"));
+    /// <summary>
+    /// Dummy location for the secondary icon.
+    /// </summary>
+    public static Point SecondaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconDummy"));
+    /// <summary>
+    /// The player icon to load up.
+    /// </summary>
+    public static string PlayerIcon = GUI.GetIcon(GUI.Icon.Player);
+    /// <summary>
+    /// The primary icon to load up.
+    /// </summary>
+    public static string PrimaryIcon = GUI.GetIcon(GUI.Icon.Primary);
+    /// <summary>
+    /// The secondary icon to load up.
+    /// </summary>
+    public static string SecondaryIcon = GUI.GetIcon(GUI.Icon.Secondary);
 
     public GGOHudScript()
     {
@@ -27,16 +55,8 @@ public class GGOHudScript : Script
 
     public static void OnTick(object Sender, EventArgs Event)
     {
-        // Store our dummy location information here
-        Point PrimaryAmmoDummy = Point.Add(GUI.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"), GUI.SizeFromConfig("AmmoDummy"));
-        Point SecondaryAmmoDummy = Point.Add(GUI.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"), GUI.SizeFromConfig("AmmoDummy"));
-        Point PrimaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconDummy"));
-        Point SecondaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconDummy"));
-        // As well our images
+        // Store our current weapon to show
         string WeaponImage = GUI.GetWeapon();
-        string PlayerIcon = GUI.GetIcon(GUI.Icon.Player);
-        string PrimaryIcon = GUI.GetIcon(GUI.Icon.Primary);
-        string SecondaryIcon = GUI.GetIcon(GUI.Icon.Secondary);
 
         // Draw our player/character name
         Draw.Text(CharacterName, GUI.PointFromConfig("PlayerName"), 0.325f, false);
