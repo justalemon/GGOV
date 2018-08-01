@@ -44,3 +44,17 @@ after_build:
 artifacts:
   - path: GGOHud.7z
     name: Mod with Pictures
+
+# Autodeploy on tags
+deploy:
+  release: v$(appveyor_build_version)
+  description: "Released from AppVeyor"
+  provider: GitHub
+  auth_token:
+    secure: "DkvKC8KRj8AipGu/oWW/J2e6jMWt2xXQfKU7oefFMsp0ZMfzz+OR9Y9XpML+ZmG4"
+  artifact: GGOHud.7z
+  draft: false
+  prerelease: true
+  on:
+    branch: master
+    appveyor_repo_tag: true
