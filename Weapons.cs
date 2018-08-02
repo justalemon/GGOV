@@ -45,43 +45,50 @@ namespace GGOHud
         /// Checks the weapon that the player currently has equiped.
         /// </summary>
         /// <returns>The Type of weapon.</returns>
-        public static Type CurrentType()
+        public static Type CurrentWeaponType
         {
-            // Store the hash of the current weapon
-            int WeaponType = Function.Call<int>(Hash.GET_WEAPONTYPE_GROUP, Game.Player.Character.Weapons.Current.Hash.GetHashCode());
+            get
+            {
+                // Store the hash of the current weapon
+                int WeaponType = Function.Call<int>(Hash.GET_WEAPONTYPE_GROUP, Game.Player.Character.Weapons.Current.Hash.GetHashCode());
 
-            // If the weapon is Banned
-            if (Banned.Contains(WeaponType))
-                return Type.Banned;
-            // If the weapon is not a firearm
-            if (Melee.Contains(WeaponType))
-                return Type.Melee;
-            // If the weapon is a small firearm
-            if (Sidearms.Contains(WeaponType))
-                return Type.Sidearm;
-            // If the weapon is other than the previous ones
-            else
-                return Type.Main;
+                // If the weapon is Banned
+                if (Banned.Contains(WeaponType))
+                    return Type.Banned;
+                // If the weapon is not a firearm
+                if (Melee.Contains(WeaponType))
+                    return Type.Melee;
+                // If the weapon is a small firearm
+                if (Sidearms.Contains(WeaponType))
+                    return Type.Sidearm;
+                // If the weapon is other than the previous ones
+                else
+                    return Type.Main;
+            }
         }
 
         /// <summary>
         /// Checks if the player is using 2 guns with "Dual Wield" by jedijosh920.
         /// </summary>
         /// <returns>true if the player is "Dual Wielding", false otherwise.</returns>
-        public static bool IsPlayerDualWielding()
+        public static bool IsPlayerDualWielding
         {
-            // For each set of animations
-            foreach (List<string> AnimSet in Anims)
+            get
             {
-                // See if the animation is playing
-                bool ItIs = Function.Call<bool>(Hash.IS_ENTITY_PLAYING_ANIM, Game.Player.Character, AnimSet[0], AnimSet[1], 3);
+                // For each set of animations
+                foreach (List<string> AnimSet in Anims)
+                {
+                    // See if the animation is playing
+                    bool ItIs = Function.Call<bool>(Hash.IS_ENTITY_PLAYING_ANIM, Game.Player.Character, AnimSet[0], AnimSet[1], 3);
 
-                // If it is, we know that the player is using dual weapons
-                if (ItIs)
-                    return true;
+                    // If it is, we know that the player is using dual weapons
+                    if (ItIs)
+                        return true;
+                }
+                // If none of the animations are playing, just return
+                return false;
             }
-            // If none of the animations are playing, just return
-            return false;
+            
         }
     }
 }

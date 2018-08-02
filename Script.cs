@@ -72,7 +72,7 @@ public class ScriptHUD : Script
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
 
         // Draw dummies if the weapon is banned
-        if (Weapons.CurrentType() == Weapons.Type.Banned)
+        if (Weapons.CurrentWeaponType == Weapons.Type.Banned)
         {
             Draw.Dummy(PrimaryAmmoDummy);
             Draw.Dummy(SecondaryAmmoDummy);
@@ -80,7 +80,7 @@ public class ScriptHUD : Script
             Draw.Dummy(SecondaryIconDummy);
         }
         // Pimary weapon information
-        else if (Weapons.CurrentType() == Weapons.Type.Main)
+        else if (Weapons.CurrentWeaponType == Weapons.Type.Main)
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"));
             Draw.Dummy(SecondaryAmmoDummy);
@@ -90,7 +90,7 @@ public class ScriptHUD : Script
             Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImagePrimaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
         // Secondary/Sidearm information
-        else if (Weapons.CurrentType() == Weapons.Type.Sidearm)
+        else if (Weapons.CurrentWeaponType == Weapons.Type.Sidearm)
         {
             Draw.Dummy(PrimaryAmmoDummy);
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"));
