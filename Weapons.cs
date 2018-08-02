@@ -31,6 +31,15 @@ namespace GGOHud
         /// In order: Melee (Type), Boxer (Type).
         /// </summary>
         public static readonly List<int> Melee = new List<int> { -1609580060, -728555052 };
+        /// <summary>
+        /// Animations used by jedijosh920's Dual Wield mod.
+        /// Note: I got used to 'list = [["a", "b"], ["1", "2"]]' in Python, so...
+        /// </summary>
+        public static List<List<string>> Anims = new List<List<string>> {
+            new List<string> { "holster", "unholster_2h" },
+            new List<string> { "holster", "melee@holster" },
+            new List<string> { "anim@veh@armordillo@turret@base", "sit_aim_down" }
+        };
 
         /// <summary>
         /// Checks the weapon that the player currently has equiped.
@@ -53,6 +62,26 @@ namespace GGOHud
             // If the weapon is other than the previous ones
             else
                 return Type.Main;
+        }
+
+        /// <summary>
+        /// Checks if the player is using 2 guns with "Dual Wield" by jedijosh920.
+        /// </summary>
+        /// <returns>true if the player is "Dual Wielding", false otherwise.</returns>
+        public static bool IsPlayerDualWielding()
+        {
+            // For each set of animations
+            foreach (List<string> AnimSet in Anims)
+            {
+                // See if the animation is playing
+                bool ItIs = Function.Call<bool>(Hash.IS_ENTITY_PLAYING_ANIM, Game.Player.Character, AnimSet[0], AnimSet[1], 3);
+
+                // If it is, we know that the player is using dual weapons
+                if (ItIs)
+                    return true;
+            }
+            // If none of the animations are playing, just return
+            return false;
         }
     }
 }
