@@ -14,7 +14,8 @@ namespace GGOHud
             Banned = -1,
             Main = 0,
             Sidearm = 1,
-            Melee = 2
+            Melee = 2,
+            Double = 3
         }
         /// <summary>
         /// Types of weapons that are not going to be shown on the HUD.
@@ -52,16 +53,16 @@ namespace GGOHud
                 // Store the hash of the current weapon
                 int WeaponType = Function.Call<int>(Hash.GET_WEAPONTYPE_GROUP, Game.Player.Character.Weapons.Current.Hash.GetHashCode());
 
-                // If the weapon is Banned
+                // Return the first match, in order
+                // From dangerous to normal
                 if (Banned.Contains(WeaponType))
                     return Type.Banned;
-                // If the weapon is not a firearm
-                if (Melee.Contains(WeaponType))
+                else if (Melee.Contains(WeaponType))
                     return Type.Melee;
-                // If the weapon is a small firearm
-                if (Sidearms.Contains(WeaponType))
+                else if (IsPlayerDualWielding)
+                    return Type.Double;
+                else if (Sidearms.Contains(WeaponType))
                     return Type.Sidearm;
-                // If the weapon is other than the previous ones
                 else
                     return Type.Main;
             }

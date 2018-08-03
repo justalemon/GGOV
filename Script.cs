@@ -55,6 +55,12 @@ public class ScriptHUD : Script
 
     public static void OnTick(object Sender, EventArgs Event)
     {
+        // Temporary variables to check that everything is good
+        bool PrimaryDummy = true;
+        bool SecondaryDummy = true;
+        bool DrawPrimary = false;
+        bool DrawSecondary = false;
+
         // Store our current weapon to show
         string WeaponImage = GUI.GetWeapon();
 
@@ -70,32 +76,46 @@ public class ScriptHUD : Script
         Draw.Rectangle(GUI.PointFromConfig("PlayerBackground"), GUI.SizeFromConfig("PlayerBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        
+        if (Weapons.CurrentWeaponType == Weapons.Type.Main)
+        {
+            PrimaryDummy = false;
+            DrawPrimary = true;
+        }
+        else if (Weapons.CurrentWeaponType == Weapons.Type.Sidearm)
+        {
+            PrimaryDummy = true;
+            DrawPrimary = false;
+        }
+        else if (Weapons.CurrentWeaponType == Weapons.Type.Double)
+        {
+            PrimaryDummy = false;
+            SecondaryDummy = false;
+            DrawPrimary = true;
+            DrawSecondary = true;
+        }
 
-        // Draw dummies if the weapon is banned
-        if (Weapons.CurrentWeaponType == Weapons.Type.Banned)
+        if (PrimaryDummy)
         {
             Draw.Dummy(PrimaryAmmoDummy);
-            Draw.Dummy(SecondaryAmmoDummy);
             Draw.Dummy(PrimaryIconDummy);
+        }
+        if (SecondaryDummy)
+        {
+            Draw.Dummy(SecondaryAmmoDummy);
             Draw.Dummy(SecondaryIconDummy);
         }
-        // Pimary weapon information
-        else if (Weapons.CurrentWeaponType == Weapons.Type.Main)
+        if (DrawPrimary)
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"));
-            Draw.Dummy(SecondaryAmmoDummy);
             Draw.Texture(PrimaryIcon, GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconSize"));
-            Draw.Dummy(SecondaryIconDummy);
             Draw.Texture(WeaponImage, GUI.PointFromConfig("WeaponGenericX", "WeaponPrimaryY"), GUI.SizeFromConfig("WeaponImage"), true);
             Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImagePrimaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
-        // Secondary/Sidearm information
-        else if (Weapons.CurrentWeaponType == Weapons.Type.Sidearm)
+        if (DrawSecondary)
         {
-            Draw.Dummy(PrimaryAmmoDummy);
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"));
             Draw.Texture(SecondaryIcon, GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconSize"));
-            Draw.Dummy(PrimaryIconDummy);
             Draw.Texture(WeaponImage, GUI.PointFromConfig("WeaponGenericX", "WeaponSecondaryY"), GUI.SizeFromConfig("WeaponImage"), true);
             Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImageSecondaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
