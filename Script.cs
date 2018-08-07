@@ -88,8 +88,8 @@ public class ScriptHUD : Script
         }
         else if (Weapons.CurrentWeaponType == Weapons.Type.Sidearm)
         {
-            PrimaryDummy = true;
-            DrawPrimary = false;
+            SecondaryDummy = false;
+            DrawSecondary = true;
         }
         else if (Weapons.CurrentWeaponType == Weapons.Type.Double)
         {
