@@ -123,25 +123,15 @@ public class ScriptHUD : Script
             Draw.Image(WeaponImage, GUI.PointFromConfig("WeaponGenericX", "WeaponSecondaryY"), GUI.SizeFromConfig("WeaponImage"), true);
             Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImageSecondaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
-
-        // Calculate the bar size
-        int Health = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character) - 100;
-        int MaxHealth = Function.Call<int>(Hash.GET_ENTITY_MAX_HEALTH, Game.Player.Character) - 100;
-        int HealthPercentage = Convert.ToInt32(((float)Health / MaxHealth) * 100f);
-        float Size = (GUI.SizeFromConfig("HealthBar").Width / 100f) * HealthPercentage;
-
-        // Store the size of the bar in a new object
-        Size BarSize = GUI.SizeFromConfig("HealthBar");
-        BarSize.Width = Convert.ToInt32(Size);
         
-        // First, draw the dividers so they are in the background
+        // Draw the dividers so they are in the background
         Draw.Rectangle(GUI.PointFromConfig("HealthDividerOneX", "HealthDividerY"), GUI.SizeFromConfig("HealthDivider"), Colors.Divider);
         Draw.Rectangle(GUI.PointFromConfig("HealthDividerTwoX", "HealthDividerY"), GUI.SizeFromConfig("HealthDivider"), Colors.Divider);
         Draw.Rectangle(GUI.PointFromConfig("HealthDividerThreeX", "HealthDividerY"), GUI.SizeFromConfig("HealthDivider"), Colors.Divider);
         Draw.Rectangle(GUI.PointFromConfig("HealthDividerFourX", "HealthDividerY"), GUI.SizeFromConfig("HealthDivider"), Colors.Divider);
 
-        // Then, draw the bar by itself
-        Draw.Rectangle(GUI.PointFromConfig("HealthBar"), BarSize, Colors.FromHealth(MaxHealth, HealthPercentage));
+        // To finish, let's draw the health bar
+        Draw.HealthBar(GUI.PointFromConfig("HealthBar"), GUI.SizeFromConfig("HealthBar"), Game.Player.Character);
 
         // Disable the radar if the user want to
         if (Config.GetValue("GGOHud", "DisableRadarAndHUD", true))

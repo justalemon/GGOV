@@ -1,4 +1,6 @@
 ﻿using GTA;
+using GTA.Native;
+using System;
 using System.Drawing;
 using System.IO;
 
@@ -54,6 +56,21 @@ namespace GGOHud
         {
             UIRectangle ToDraw = new UIRectangle(Position, DrawSize, ShapeColor);
             ToDraw.Draw();
+        }
+
+        public static void HealthBar(Point Position, Size DrawSize, Entity DestinationEntity)
+        {
+            // Calculate the bar size
+            int Health = Function.Call<int>(Hash.GET_ENTITY_HEALTH, DestinationEntity) - 100;
+            int MaxHealth = Function.Call<int>(Hash.GET_ENTITY_MAX_HEALTH, DestinationEntity) - 100;
+            int HealthPercentage = Convert.ToInt32(((float)Health / MaxHealth) * 100f);
+            float Size = (DrawSize.Width / 100f) * HealthPercentage;
+
+            // Store the size of the bar in a new object
+            DrawSize.Width = Convert.ToInt32(Size);
+
+            // Then, draw the bar by itself
+            Rectangle(Position, DrawSize, Colors.FromHealth(MaxHealth, HealthPercentage));
         }
     }
 }
