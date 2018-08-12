@@ -78,10 +78,12 @@ public class ScriptHUD : Script
 
         // Draw our player/character name
         Draw.Text(CharacterName, GUI.PointFromConfig("PlayerName"), 0.325f, false);
-        // Draw the player icon
+        // Draw the player icon on both the main section and squad
         Draw.Image(Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"), true);
+        Draw.Image(Images["SquadIconOne"], GUI.PointFromConfig("IconSquadX", "IconSquadFirstY"), GUI.SizeFromConfig("IconSize"), true);
         // Backgrounds
-        // In order: Player Icon, Primary Icon, Secondary Icon, Player Info, Ammo Primary, Ammo Secondary
+        // In order: Squad, Player Icon, Primary Icon, Secondary Icon, Player Info, Ammo Primary, Ammo Secondary
+        Draw.Rectangle(GUI.PointFromConfig("BackgroundSquadX", "BackgroundSquadFirstY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundPlayerY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
