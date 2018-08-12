@@ -38,10 +38,11 @@ public class ScriptHUD : Script
         { "PlayerIcon", Tools.ResourceToFile(Resources.ImagePlayer) },
         { "PrimaryIcon", Tools.ResourceToFile(Resources.ImageGun) },
         { "SecondaryIcon", Tools.ResourceToFile(Resources.ImageGun) },
-        { "SquadIconOne", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIconTwo", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIconThree", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIconFour", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIcon1", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIcon2", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIcon3", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIcon4", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIcon5", Tools.ResourceToFile(Resources.ImagePlayer) }
     }; 
 
     public ScriptHUD()
@@ -78,12 +79,9 @@ public class ScriptHUD : Script
 
         // Draw our player/character name
         Draw.Text(CharacterName, GUI.PointFromConfig("PlayerName"), 0.325f, false);
-        // Draw the player icon on both the main section and squad
-        Draw.Image(Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"), true);
-        Draw.Image(Images["SquadIconOne"], GUI.PointFromConfig("IconSquadX", "IconSquadFirstY"), GUI.SizeFromConfig("IconSize"), true);
+        // Draw the player icon
+        Draw.Image(Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"));
         // Backgrounds
-        // Squad: You
-        Draw.Rectangle(GUI.PointFromConfig("BackgroundSquadX", "BackgroundSquadFirstY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         // Player icon
         Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPlayerY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         // Primary icon
@@ -153,6 +151,40 @@ public class ScriptHUD : Script
         if (Config.GetValue("GGOHud", "DisableRadarAndHUD", true))
         {
             Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
+        }
+
+        // Squad Information
+        int Count = 1; // We start with one, the player
+        List<Ped> FriendlyPeds = new List<Ped>
+        {
+            Game.Player.Character
+        };
+
+        // Add the peds on the list if they are part of the mision and the ped does not hate the player.
+        // Also check that we are not adding the player again.
+        foreach (Ped ThePed in World.GetNearbyPeds(Game.Player.Character.Position, 50f))
+        {
+            if (Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, ThePed) &&
+                Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, ThePed, Game.Player.Character) != 5 &&
+                !Function.Call<bool>(Hash.IS_PED_A_PLAYER, ThePed))
+            {
+                FriendlyPeds.Add(ThePed);
+            }
+        }
+
+        foreach (Ped Friendly in FriendlyPeds)
+        {
+            if (Count > 5)
+            {
+                return;
+            }
+
+            Point GeneralPosition = GUI.PointFromConfig("IconSquadX", "IconSquadFirstY") + GUI.SizeFromConfig("SquadOffset");
+
+            Draw.Image(Images["SquadIcon" + Count.ToString()], new Point(GeneralPosition.X, GeneralPosition.Y * Count), GUI.SizeFromConfig("IconSize"), true);
+            Draw.Rectangle(new Point(GeneralPosition.X, GeneralPosition.Y * Count) + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+
+            Count += 1;
         }
     }
 }
