@@ -83,10 +83,10 @@ public class ScriptHUD : Script
         Draw.Image(Images["SquadIconOne"], GUI.PointFromConfig("IconSquadX", "IconSquadFirstY"), GUI.SizeFromConfig("IconSize"), true);
         // Backgrounds
         // In order: Squad, Player Icon, Primary Icon, Secondary Icon, Player Info, Ammo Primary, Ammo Secondary
-        Draw.Rectangle(GUI.PointFromConfig("BackgroundSquadX", "BackgroundSquadFirstY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
-        Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundPlayerY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
-        Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
-        Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        Draw.Rectangle(GUI.PointFromConfig("BackgroundSquadX", "BackgroundSquadFirstY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPlayerY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPrimaryY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconSecondaryY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("PlayerBackground"), GUI.SizeFromConfig("PlayerBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
