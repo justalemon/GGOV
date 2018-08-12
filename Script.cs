@@ -48,10 +48,17 @@ public class ScriptHUD : Script
     {
         // Register the event
         Tick += OnTick;
+        Aborted += OnAbort;
         
         // Change the player name if the user has changed it
         if (Config.GetValue("GGOHud", "CharacterName", "default") != "default")
             CharacterName = Config.GetValue("GGOHud", "CharacterName", "default");
+    }
+
+    public static void OnAbort(object Sender, EventArgs Event)
+    {
+        // Delete our folder with images once the script is disabled or reloaded
+        Directory.Delete(Path.Combine(Path.GetTempPath(), "GGOHud"), true);
     }
 
     public static void OnTick(object Sender, EventArgs Event)
