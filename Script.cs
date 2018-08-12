@@ -82,13 +82,19 @@ public class ScriptHUD : Script
         Draw.Image(Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"), true);
         Draw.Image(Images["SquadIconOne"], GUI.PointFromConfig("IconSquadX", "IconSquadFirstY"), GUI.SizeFromConfig("IconSize"), true);
         // Backgrounds
-        // In order: Squad, Player Icon, Primary Icon, Secondary Icon, Player Info, Ammo Primary, Ammo Secondary
+        // Squad: You
         Draw.Rectangle(GUI.PointFromConfig("BackgroundSquadX", "BackgroundSquadFirstY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Player icon
         Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPlayerY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Primary icon
         Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPrimaryY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Secondary icon
         Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconSecondaryY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Player information
         Draw.Rectangle(GUI.PointFromConfig("PlayerBackground"), GUI.SizeFromConfig("PlayerBackground"), Colors.Background);
+        // Primary ammo
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Secondary ammo
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         
         if (Weapons.CurrentWeaponType == Weapons.Type.Main)
