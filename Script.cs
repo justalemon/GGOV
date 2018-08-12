@@ -1,8 +1,11 @@
 ﻿using GGOHud;
+using GGOHud.Properties;
 using GTA;
 using GTA.Native;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 
 public class ScriptHUD : Script
 {
@@ -30,27 +33,32 @@ public class ScriptHUD : Script
     /// Dummy location for the secondary icon.
     /// </summary>
     public static Point SecondaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconDummy"));
-    /// <summary>
-    /// The player icon to load up.
-    /// </summary>
-    public static string PlayerIcon = GUI.GetIcon(GUI.Icon.Player);
-    /// <summary>
-    /// The primary icon to load up.
-    /// </summary>
-    public static string PrimaryIcon = GUI.GetIcon(GUI.Icon.Primary);
-    /// <summary>
-    /// The secondary icon to load up.
-    /// </summary>
-    public static string SecondaryIcon = GUI.GetIcon(GUI.Icon.Secondary);
+    public static Dictionary<string, string> Images = new Dictionary<string, string>
+    {
+        { "PlayerIcon", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "PrimaryIcon", Tools.ResourceToFile(Resources.ImageGun) },
+        { "SecondaryIcon", Tools.ResourceToFile(Resources.ImageGun) },
+        { "SquadIconOne", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIconTwo", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIconThree", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIconFour", Tools.ResourceToFile(Resources.ImagePlayer) },
+    }; 
 
     public ScriptHUD()
     {
         // Register the event
         Tick += OnTick;
+        Aborted += OnAbort;
         
         // Change the player name if the user has changed it
         if (Config.GetValue("GGOHud", "CharacterName", "default") != "default")
             CharacterName = Config.GetValue("GGOHud", "CharacterName", "default");
+    }
+
+    public static void OnAbort(object Sender, EventArgs Event)
+    {
+        // Delete our folder with images once the script is disabled or reloaded
+        Directory.Delete(Path.Combine(Path.GetTempPath(), "GGOHud"), true);
     }
 
     public static void OnTick(object Sender, EventArgs Event)
@@ -71,7 +79,7 @@ public class ScriptHUD : Script
         // Draw our player/character name
         Draw.Text(CharacterName, GUI.PointFromConfig("PlayerName"), 0.325f, false);
         // Draw the player icon
-        Draw.Image(PlayerIcon, GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"));
+        Draw.Image(Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"), true);
         // Backgrounds
         // In order: Player Icon, Primary Icon, Secondary Icon, Player Info, Ammo Primary, Ammo Secondary
         Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundPlayerY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
@@ -112,14 +120,14 @@ public class ScriptHUD : Script
         if (DrawPrimary)
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"));
-            Draw.Image(PrimaryIcon, GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconSize"));
+            Draw.Image(Images["PrimaryIcon"], GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconSize"), true);
             Draw.Image(WeaponImage, GUI.PointFromConfig("WeaponGenericX", "WeaponPrimaryY"), GUI.SizeFromConfig("WeaponImage"), true);
             Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImagePrimaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
         if (DrawSecondary)
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"));
-            Draw.Image(SecondaryIcon, GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconSize"));
+            Draw.Image(Images["SecondaryIcon"], GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconSize"), true);
             Draw.Image(WeaponImage, GUI.PointFromConfig("WeaponGenericX", "WeaponSecondaryY"), GUI.SizeFromConfig("WeaponImage"), true);
             Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImageSecondaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
