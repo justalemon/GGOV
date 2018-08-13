@@ -1,5 +1,5 @@
 ﻿using GGOHud;
-using GGOHud.Properties;
+using GGOHud.Tools;
 using GTA;
 using GTA.Native;
 using System;
@@ -12,37 +12,29 @@ public class ScriptHUD : Script
     /// <summary>
     /// Load our Script Settings from the SHVDN folder.
     /// </summary>
-    public static ScriptSettings Config = ScriptSettings.Load("scripts\\GGOHud.ini");
-    /// <summary>
-    /// Store the player name that shows on top of the health bar.
-    /// </summary>
-    public static string CharacterName = Game.Player.Name;
+    public static ScriptSettings ScriptConfig = ScriptSettings.Load("scripts\\GGOHud.ini");
     /// <summary>
     /// Dummy location for the primary ammo.
     /// </summary>
-    public static Point PrimaryAmmoDummy = Point.Add(GUI.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"), GUI.SizeFromConfig("AmmoDummy"));
+    public static Point PrimaryAmmoDummy = Point.Add(Config.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"), Config.SizeFromConfig("AmmoDummy"));
     /// <summary>
     /// Dummy location for the secondary ammo.
     /// </summary>
-    public static Point SecondaryAmmoDummy = Point.Add(GUI.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"), GUI.SizeFromConfig("AmmoDummy"));
+    public static Point SecondaryAmmoDummy = Point.Add(Config.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"), Config.SizeFromConfig("AmmoDummy"));
     /// <summary>
     /// Dummy location for the primary icon.
     /// </summary>
-    public static Point PrimaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconDummy"));
+    public static Point PrimaryIconDummy = Point.Add(Config.PointFromConfig("IconGenericX", "IconPrimaryY"), Config.SizeFromConfig("IconDummy"));
     /// <summary>
     /// Dummy location for the secondary icon.
     /// </summary>
-    public static Point SecondaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconDummy"));
+    public static Point SecondaryIconDummy = Point.Add(Config.PointFromConfig("IconGenericX", "IconSecondaryY"), Config.SizeFromConfig("IconDummy"));
 
     public ScriptHUD()
     {
         // Register the event
         Tick += OnTick;
         Aborted += OnAbort;
-        
-        // Change the player name if the user has changed it
-        if (Config.GetValue("GGOHud", "CharacterName", "default") != "default")
-            CharacterName = Config.GetValue("GGOHud", "CharacterName", "default");
     }
 
     public static void OnAbort(object Sender, EventArgs Event)
@@ -64,25 +56,25 @@ public class ScriptHUD : Script
         bool DrawSecondary = false;
 
         // Store our current weapon to show
-        string WeaponImage = GUI.GetWeapon();
+        string WeaponImage = Images.WeaponImage;
 
         // Draw our player/character name
-        Draw.Text(CharacterName, GUI.PointFromConfig("PlayerName"), 0.325f, false);
+        Draw.Text(Names.Player(), Config.PointFromConfig("PlayerName"), 0.325f, false);
         // Draw the player icon
-        Draw.Image(Data.Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"));
+        Draw.Image(Data.Icons["PlayerIcon"], Config.PointFromConfig("IconGenericX", "IconPlayerY"), Config.SizeFromConfig("IconSize"));
         // Backgrounds
         // Player icon
-        Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPlayerY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        Draw.Rectangle(Config.PointFromConfig("IconGenericX", "IconPlayerY") + Config.SizeFromConfig("IconBGOffset"), Config.SizeFromConfig("SquaredBackground"), Colors.Background);
         // Primary icon
-        Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPrimaryY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        Draw.Rectangle(Config.PointFromConfig("IconGenericX", "IconPrimaryY") + Config.SizeFromConfig("IconBGOffset"), Config.SizeFromConfig("SquaredBackground"), Colors.Background);
         // Secondary icon
-        Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconSecondaryY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        Draw.Rectangle(Config.PointFromConfig("IconGenericX", "IconSecondaryY") + Config.SizeFromConfig("IconBGOffset"), Config.SizeFromConfig("SquaredBackground"), Colors.Background);
         // Player information
-        Draw.Rectangle(GUI.PointFromConfig("PlayerBackground"), GUI.SizeFromConfig("PlayerBackground"), Colors.Background);
+        Draw.Rectangle(Config.PointFromConfig("PlayerBackground"), Config.SizeFromConfig("PlayerBackground"), Colors.Background);
         // Primary ammo
-        Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        Draw.Rectangle(Config.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundPrimaryY"), Config.SizeFromConfig("SquaredBackground"), Colors.Background);
         // Secondary ammo
-        Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        Draw.Rectangle(Config.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundSecondaryY"), Config.SizeFromConfig("SquaredBackground"), Colors.Background);
         
         if (Weapons.CurrentWeaponType == Weapons.Type.Main)
         {
@@ -114,30 +106,30 @@ public class ScriptHUD : Script
         }
         if (DrawPrimary)
         {
-            Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"));
-            Draw.Image(Data.Images["PrimaryIcon"], GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconSize"), true);
-            Draw.Image(WeaponImage, GUI.PointFromConfig("WeaponGenericX", "WeaponPrimaryY"), GUI.SizeFromConfig("WeaponImage"), true);
-            Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImagePrimaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
+            Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Config.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"));
+            Draw.Image(Data.Icons["PrimaryIcon"], Config.PointFromConfig("IconGenericX", "IconPrimaryY"), Config.SizeFromConfig("IconSize"), true);
+            Draw.Image(WeaponImage, Config.PointFromConfig("WeaponGenericX", "WeaponPrimaryY"), Config.SizeFromConfig("WeaponImage"), true);
+            Draw.Rectangle(Config.PointFromConfig("WeaponImageGenericX", "WeaponImagePrimaryY"), Config.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
         if (DrawSecondary)
         {
-            Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"));
-            Draw.Image(Data.Images["SecondaryIcon"], GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconSize"), true);
-            Draw.Image(WeaponImage, GUI.PointFromConfig("WeaponGenericX", "WeaponSecondaryY"), GUI.SizeFromConfig("WeaponImage"), true);
-            Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImageSecondaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
+            Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Config.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"));
+            Draw.Image(Data.Icons["SecondaryIcon"], Config.PointFromConfig("IconGenericX", "IconSecondaryY"), Config.SizeFromConfig("IconSize"), true);
+            Draw.Image(WeaponImage, Config.PointFromConfig("WeaponGenericX", "WeaponSecondaryY"), Config.SizeFromConfig("WeaponImage"), true);
+            Draw.Rectangle(Config.PointFromConfig("WeaponImageGenericX", "WeaponImageSecondaryY"), Config.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
         
         // Draw the dividers so they are in the background
-        Draw.Rectangle(GUI.PointFromConfig("HealthDividerOneX", "HealthDividerY"), GUI.SizeFromConfig("HealthDivider"), Colors.Divider);
-        Draw.Rectangle(GUI.PointFromConfig("HealthDividerTwoX", "HealthDividerY"), GUI.SizeFromConfig("HealthDivider"), Colors.Divider);
-        Draw.Rectangle(GUI.PointFromConfig("HealthDividerThreeX", "HealthDividerY"), GUI.SizeFromConfig("HealthDivider"), Colors.Divider);
-        Draw.Rectangle(GUI.PointFromConfig("HealthDividerFourX", "HealthDividerY"), GUI.SizeFromConfig("HealthDivider"), Colors.Divider);
+        Draw.Rectangle(Config.PointFromConfig("HealthDividerOneX", "HealthDividerY"), Config.SizeFromConfig("HealthDivider"), Colors.Divider);
+        Draw.Rectangle(Config.PointFromConfig("HealthDividerTwoX", "HealthDividerY"), Config.SizeFromConfig("HealthDivider"), Colors.Divider);
+        Draw.Rectangle(Config.PointFromConfig("HealthDividerThreeX", "HealthDividerY"), Config.SizeFromConfig("HealthDivider"), Colors.Divider);
+        Draw.Rectangle(Config.PointFromConfig("HealthDividerFourX", "HealthDividerY"), Config.SizeFromConfig("HealthDivider"), Colors.Divider);
 
         // To finish, let's draw the health bar
-        Draw.HealthBar(GUI.PointFromConfig("HealthBar"), GUI.SizeFromConfig("HealthBar"), Game.Player.Character);
+        Draw.HealthBar(Config.PointFromConfig("HealthBar"), Config.SizeFromConfig("HealthBar"), Game.Player.Character);
 
         // Disable the radar if the user want to
-        if (Config.GetValue("GGOHud", "DisableRadarAndHUD", true))
+        if (ScriptConfig.GetValue("GGOHud", "DisableRadarAndHUD", true))
         {
             Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
         }
@@ -167,33 +159,18 @@ public class ScriptHUD : Script
             {
                 return;
             }
-
-            string Name;
-
-            if (Friendly.IsPlayer)
-            {
-                Name = CharacterName;
-            }
-            else if (Data.Names.ContainsKey(Friendly.Model.Hash))
-            {
-                Name = Data.Names[Friendly.Model.Hash];
-            }
-            else
-            {
-                Name = Friendly.Model.Hash.ToString();
-            }
             
-            Size Offset = GUI.SizeFromConfig("SquadOffset");
-            Size Square = GUI.SizeFromConfig("SquaredBackground");
-            Point GeneralPosition = GUI.PointFromConfig("IconSquadX", "IconSquadFirstY") + Offset;
+            Size Offset = Config.SizeFromConfig("SquadOffset");
+            Size Square = Config.SizeFromConfig("SquaredBackground");
+            Point GeneralPosition = Config.PointFromConfig("IconSquadX", "IconSquadFirstY") + Offset;
             Point InfoPosition = new Point(GeneralPosition.X + Square.Width + Offset.Width, GeneralPosition.Y * Count);
 
-            Draw.Image(Data.Images["SquadIcon" + Count.ToString()], new Point(GeneralPosition.X, GeneralPosition.Y * Count), GUI.SizeFromConfig("IconSize"), true);
-            Draw.Rectangle(new Point(GeneralPosition.X + GUI.SizeFromConfig("IconBGOffset").Width, GeneralPosition.Y * Count), Square, Colors.Background);
-            Draw.Rectangle(InfoPosition, GUI.SizeFromConfig("SquadBackground"), Colors.Background);
+            Draw.Image(Data.Icons["SquadIcon" + Count.ToString()], new Point(GeneralPosition.X, GeneralPosition.Y * Count), Config.SizeFromConfig("IconSize"), true);
+            Draw.Rectangle(new Point(GeneralPosition.X + Config.SizeFromConfig("IconBGOffset").Width, GeneralPosition.Y * Count), Square, Colors.Background);
+            Draw.Rectangle(InfoPosition, Config.SizeFromConfig("SquadBackground"), Colors.Background);
 
-            Draw.HealthBar(InfoPosition + GUI.SizeFromConfig("SquadHealthPos"), GUI.SizeFromConfig("SquadHealthBar"), Friendly);
-            Draw.Text(Name, InfoPosition + GUI.SizeFromConfig("SquadNameOffset"), 0.3f, false);
+            Draw.HealthBar(InfoPosition + Config.SizeFromConfig("SquadHealthPos"), Config.SizeFromConfig("SquadHealthBar"), Friendly);
+            Draw.Text(Names.Ped(Friendly), InfoPosition + Config.SizeFromConfig("SquadNameOffset"), 0.3f, false);
 
             Count += 1;
         }

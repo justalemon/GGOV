@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GGOHud
+namespace GGOHud.Tools
 {
     class Colors
     {

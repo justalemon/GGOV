@@ -1,12 +1,16 @@
-﻿using System;
+﻿using GTA;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
-namespace GGOHud
+namespace GGOHud.Tools
 {
-    class Tools
+    /// <summary>
+    /// Tools to create, edit and manipulate the UI images.
+    /// </summary>
+    class Images
     {
         /// <summary>
         /// A set of characters to create random strings.
@@ -16,6 +20,19 @@ namespace GGOHud
         /// Our generator of random characters.
         /// </summary>
         public static Random Generator = new Random();
+
+        /// <summary>
+        /// Gets a gun image based on the player current weapon.
+        /// </summary>
+        /// <returns>The absolute location of the weapon.</returns>
+        public static string WeaponImage
+        {
+            get
+            {
+                string CurrentWeapon = Game.Player.Character.Weapons.Current.Hash.ToString();
+                return AppDomain.CurrentDomain.BaseDirectory + "\\GGOHud\\" + "GUN_" + CurrentWeapon + ".png";
+            }
+        }
 
         /// <summary>
         /// A function that saves a resource to a temporary file.
