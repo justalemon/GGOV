@@ -1,5 +1,5 @@
 # Base for our build versions
-version: "0.1.0.{build}"
+version: "0.2.0.{build}"
 
 # Specify or build image
 image: Visual Studio 2017
