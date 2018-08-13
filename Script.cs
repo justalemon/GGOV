@@ -33,26 +33,6 @@ public class ScriptHUD : Script
     /// Dummy location for the secondary icon.
     /// </summary>
     public static Point SecondaryIconDummy = Point.Add(GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconDummy"));
-    public static Dictionary<string, string> Images = new Dictionary<string, string>
-    {
-        { "PlayerIcon", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "PrimaryIcon", Tools.ResourceToFile(Resources.ImageGun) },
-        { "SecondaryIcon", Tools.ResourceToFile(Resources.ImageGun) },
-        { "SquadIcon1", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIcon2", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIcon3", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIcon4", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIcon5", Tools.ResourceToFile(Resources.ImagePlayer) }
-    };
-    public static Dictionary<int, string> Names = new Dictionary<int, string>
-    {
-        { -597926235, "Cheng" },
-        { 2089096292, "Translator" },
-        { 1240128502, "Chef" },
-        { 1706635382, "Lamar" },
-        { 915948376, "Stretch" },
-        { -1643617475, "A. Owner" }
-    };
 
     public ScriptHUD()
     {
@@ -89,7 +69,7 @@ public class ScriptHUD : Script
         // Draw our player/character name
         Draw.Text(CharacterName, GUI.PointFromConfig("PlayerName"), 0.325f, false);
         // Draw the player icon
-        Draw.Image(Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"));
+        Draw.Image(Data.Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"));
         // Backgrounds
         // Player icon
         Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPlayerY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
@@ -135,14 +115,14 @@ public class ScriptHUD : Script
         if (DrawPrimary)
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"));
-            Draw.Image(Images["PrimaryIcon"], GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconSize"), true);
+            Draw.Image(Data.Images["PrimaryIcon"], GUI.PointFromConfig("IconGenericX", "IconPrimaryY"), GUI.SizeFromConfig("IconSize"), true);
             Draw.Image(WeaponImage, GUI.PointFromConfig("WeaponGenericX", "WeaponPrimaryY"), GUI.SizeFromConfig("WeaponImage"), true);
             Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImagePrimaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
         if (DrawSecondary)
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), GUI.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"));
-            Draw.Image(Images["SecondaryIcon"], GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconSize"), true);
+            Draw.Image(Data.Images["SecondaryIcon"], GUI.PointFromConfig("IconGenericX", "IconSecondaryY"), GUI.SizeFromConfig("IconSize"), true);
             Draw.Image(WeaponImage, GUI.PointFromConfig("WeaponGenericX", "WeaponSecondaryY"), GUI.SizeFromConfig("WeaponImage"), true);
             Draw.Rectangle(GUI.PointFromConfig("WeaponImageGenericX", "WeaponImageSecondaryY"), GUI.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
@@ -194,9 +174,9 @@ public class ScriptHUD : Script
             {
                 Name = CharacterName;
             }
-            else if (Names.ContainsKey(Friendly.Model.Hash))
+            else if (Data.Names.ContainsKey(Friendly.Model.Hash))
             {
-                Name = Names[Friendly.Model.Hash];
+                Name = Data.Names[Friendly.Model.Hash];
             }
             else
             {
@@ -208,7 +188,7 @@ public class ScriptHUD : Script
             Point GeneralPosition = GUI.PointFromConfig("IconSquadX", "IconSquadFirstY") + Offset;
             Point InfoPosition = new Point(GeneralPosition.X + Square.Width + Offset.Width, GeneralPosition.Y * Count);
 
-            Draw.Image(Images["SquadIcon" + Count.ToString()], new Point(GeneralPosition.X, GeneralPosition.Y * Count), GUI.SizeFromConfig("IconSize"), true);
+            Draw.Image(Data.Images["SquadIcon" + Count.ToString()], new Point(GeneralPosition.X, GeneralPosition.Y * Count), GUI.SizeFromConfig("IconSize"), true);
             Draw.Rectangle(new Point(GeneralPosition.X + GUI.SizeFromConfig("IconBGOffset").Width, GeneralPosition.Y * Count), Square, Colors.Background);
             Draw.Rectangle(InfoPosition, GUI.SizeFromConfig("SquadBackground"), Colors.Background);
 
