@@ -189,13 +189,13 @@ public class ScriptHUD : Script
             {
                 Name = CharacterName;
             }
-            else if (Names.ContainsKey(Friendly.GetHashCode()))
+            else if (Names.ContainsKey(Friendly.Model.Hash))
             {
-                Name = Names[Friendly.GetHashCode()];
+                Name = Names[Friendly.Model.Hash];
             }
             else
             {
-                Name = Friendly.GetHashCode().ToString();
+                Name = Friendly.Model.Hash.ToString();
             }
             
             Size Offset = GUI.SizeFromConfig("SquadOffset");
@@ -208,7 +208,6 @@ public class ScriptHUD : Script
             Draw.Rectangle(InfoPosition, GUI.SizeFromConfig("SquadBackground"), Colors.Background);
 
             Draw.HealthBar(InfoPosition + GUI.SizeFromConfig("SquadHealthPos"), GUI.SizeFromConfig("SquadHealthBar"), Friendly);
-
             Draw.Text(Name, InfoPosition + GUI.SizeFromConfig("SquadNameOffset"), 0.3f, false);
 
             Count += 1;
