@@ -43,7 +43,11 @@ public class ScriptHUD : Script
         { "SquadIcon3", Tools.ResourceToFile(Resources.ImagePlayer) },
         { "SquadIcon4", Tools.ResourceToFile(Resources.ImagePlayer) },
         { "SquadIcon5", Tools.ResourceToFile(Resources.ImagePlayer) }
-    }; 
+    };
+    public static Dictionary<int, string> Names = new Dictionary<int, string>
+    {
+
+    };
 
     public ScriptHUD()
     {
@@ -179,10 +183,33 @@ public class ScriptHUD : Script
                 return;
             }
 
-            Point GeneralPosition = GUI.PointFromConfig("IconSquadX", "IconSquadFirstY") + GUI.SizeFromConfig("SquadOffset");
+            string Name;
+
+            if (Friendly.IsPlayer)
+            {
+                Name = CharacterName;
+            }
+            else if (Names.ContainsKey(Friendly.GetHashCode()))
+            {
+                Name = Names[Friendly.GetHashCode()];
+            }
+            else
+            {
+                Name = Friendly.GetHashCode().ToString();
+            }
+            
+            Size Offset = GUI.SizeFromConfig("SquadOffset");
+            Size Square = GUI.SizeFromConfig("SquaredBackground");
+            Point GeneralPosition = GUI.PointFromConfig("IconSquadX", "IconSquadFirstY") + Offset;
+            Point InfoPosition = new Point(GeneralPosition.X + Square.Width + Offset.Width, GeneralPosition.Y * Count);
 
             Draw.Image(Images["SquadIcon" + Count.ToString()], new Point(GeneralPosition.X, GeneralPosition.Y * Count), GUI.SizeFromConfig("IconSize"), true);
-            Draw.Rectangle(new Point(GeneralPosition.X, GeneralPosition.Y * Count) + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+            Draw.Rectangle(new Point(GeneralPosition.X + GUI.SizeFromConfig("IconBGOffset").Width, GeneralPosition.Y * Count), Square, Colors.Background);
+            Draw.Rectangle(InfoPosition, GUI.SizeFromConfig("SquadBackground"), Colors.Background);
+
+            Draw.HealthBar(InfoPosition + GUI.SizeFromConfig("SquadHealthPos"), GUI.SizeFromConfig("SquadHealthBar"), Friendly);
+
+            Draw.Text(Name, InfoPosition + GUI.SizeFromConfig("SquadNameOffset"), 0.3f, false);
 
             Count += 1;
         }
