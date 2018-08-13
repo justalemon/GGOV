@@ -38,11 +38,16 @@ public class ScriptHUD : Script
         { "PlayerIcon", Tools.ResourceToFile(Resources.ImagePlayer) },
         { "PrimaryIcon", Tools.ResourceToFile(Resources.ImageGun) },
         { "SecondaryIcon", Tools.ResourceToFile(Resources.ImageGun) },
-        { "SquadIconOne", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIconTwo", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIconThree", Tools.ResourceToFile(Resources.ImagePlayer) },
-        { "SquadIconFour", Tools.ResourceToFile(Resources.ImagePlayer) },
-    }; 
+        { "SquadIcon1", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIcon2", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIcon3", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIcon4", Tools.ResourceToFile(Resources.ImagePlayer) },
+        { "SquadIcon5", Tools.ResourceToFile(Resources.ImagePlayer) }
+    };
+    public static Dictionary<int, string> Names = new Dictionary<int, string>
+    {
+
+    };
 
     public ScriptHUD()
     {
@@ -64,7 +69,7 @@ public class ScriptHUD : Script
     public static void OnTick(object Sender, EventArgs Event)
     {
         // If the game is stil loading or is paused, do not draw the elements on screen
-        if (Game.IsLoading || Game.IsPaused)
+        if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive)
             return;
 
         // Temporary variables to check that everything is good
@@ -79,14 +84,19 @@ public class ScriptHUD : Script
         // Draw our player/character name
         Draw.Text(CharacterName, GUI.PointFromConfig("PlayerName"), 0.325f, false);
         // Draw the player icon
-        Draw.Image(Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"), true);
+        Draw.Image(Images["PlayerIcon"], GUI.PointFromConfig("IconGenericX", "IconPlayerY"), GUI.SizeFromConfig("IconSize"));
         // Backgrounds
-        // In order: Player Icon, Primary Icon, Secondary Icon, Player Info, Ammo Primary, Ammo Secondary
-        Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundPlayerY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
-        Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
-        Draw.Rectangle(GUI.PointFromConfig("BackgroundGenericX", "BackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Player icon
+        Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPlayerY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Primary icon
+        Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconPrimaryY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Secondary icon
+        Draw.Rectangle(GUI.PointFromConfig("IconGenericX", "IconSecondaryY") + GUI.SizeFromConfig("IconBGOffset"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Player information
         Draw.Rectangle(GUI.PointFromConfig("PlayerBackground"), GUI.SizeFromConfig("PlayerBackground"), Colors.Background);
+        // Primary ammo
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundPrimaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
+        // Secondary ammo
         Draw.Rectangle(GUI.PointFromConfig("AmmoBackgroundX", "AmmoBackgroundSecondaryY"), GUI.SizeFromConfig("SquaredBackground"), Colors.Background);
         
         if (Weapons.CurrentWeaponType == Weapons.Type.Main)
@@ -145,6 +155,62 @@ public class ScriptHUD : Script
         if (Config.GetValue("GGOHud", "DisableRadarAndHUD", true))
         {
             Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
+        }
+
+        // Squad Information
+        int Count = 1; // We start with one, the player
+        List<Ped> FriendlyPeds = new List<Ped>
+        {
+            Game.Player.Character
+        };
+
+        // Add the peds on the list if they are part of the mision and the ped does not hate the player.
+        // Also check that we are not adding the player again.
+        foreach (Ped ThePed in World.GetNearbyPeds(Game.Player.Character.Position, 50f))
+        {
+            if (Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, ThePed) &&
+                Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, ThePed, Game.Player.Character) != 5 &&
+                !Function.Call<bool>(Hash.IS_PED_A_PLAYER, ThePed))
+            {
+                FriendlyPeds.Add(ThePed);
+            }
+        }
+
+        foreach (Ped Friendly in FriendlyPeds)
+        {
+            if (Count > 5)
+            {
+                return;
+            }
+
+            string Name;
+
+            if (Friendly.IsPlayer)
+            {
+                Name = CharacterName;
+            }
+            else if (Names.ContainsKey(Friendly.Model.Hash))
+            {
+                Name = Names[Friendly.Model.Hash];
+            }
+            else
+            {
+                Name = Friendly.Model.Hash.ToString();
+            }
+            
+            Size Offset = GUI.SizeFromConfig("SquadOffset");
+            Size Square = GUI.SizeFromConfig("SquaredBackground");
+            Point GeneralPosition = GUI.PointFromConfig("IconSquadX", "IconSquadFirstY") + Offset;
+            Point InfoPosition = new Point(GeneralPosition.X + Square.Width + Offset.Width, GeneralPosition.Y * Count);
+
+            Draw.Image(Images["SquadIcon" + Count.ToString()], new Point(GeneralPosition.X, GeneralPosition.Y * Count), GUI.SizeFromConfig("IconSize"), true);
+            Draw.Rectangle(new Point(GeneralPosition.X + GUI.SizeFromConfig("IconBGOffset").Width, GeneralPosition.Y * Count), Square, Colors.Background);
+            Draw.Rectangle(InfoPosition, GUI.SizeFromConfig("SquadBackground"), Colors.Background);
+
+            Draw.HealthBar(InfoPosition + GUI.SizeFromConfig("SquadHealthPos"), GUI.SizeFromConfig("SquadHealthBar"), Friendly);
+            Draw.Text(Name, InfoPosition + GUI.SizeFromConfig("SquadNameOffset"), 0.3f, false);
+
+            Count += 1;
         }
     }
 }
