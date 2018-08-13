@@ -55,9 +55,6 @@ public class ScriptHUD : Script
         bool DrawPrimary = false;
         bool DrawSecondary = false;
 
-        // Store our current weapon to show
-        string WeaponImage = Images.WeaponImage;
-
         // Draw our player/character name
         Draw.Text(Names.Player(), Config.PointFromConfig("PlayerName"), 0.325f, false);
         // Draw the player icon
@@ -108,14 +105,14 @@ public class ScriptHUD : Script
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Config.PointFromConfig("AmmoGenericX", "AmmoPrimaryY"));
             Draw.Image(Data.Icons["PrimaryIcon"], Config.PointFromConfig("IconGenericX", "IconPrimaryY"), Config.SizeFromConfig("IconSize"), true);
-            Draw.Image(WeaponImage, Config.PointFromConfig("WeaponGenericX", "WeaponPrimaryY"), Config.SizeFromConfig("WeaponImage"), true);
+            Draw.Image(Images.WeaponImage, Config.PointFromConfig("WeaponGenericX", "WeaponPrimaryY"), Config.SizeFromConfig("WeaponImage"), true);
             Draw.Rectangle(Config.PointFromConfig("WeaponImageGenericX", "WeaponImagePrimaryY"), Config.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
         if (DrawSecondary)
         {
             Draw.Text(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), Config.PointFromConfig("AmmoGenericX", "AmmoSecondaryY"));
             Draw.Image(Data.Icons["SecondaryIcon"], Config.PointFromConfig("IconGenericX", "IconSecondaryY"), Config.SizeFromConfig("IconSize"), true);
-            Draw.Image(WeaponImage, Config.PointFromConfig("WeaponGenericX", "WeaponSecondaryY"), Config.SizeFromConfig("WeaponImage"), true);
+            Draw.Image(Images.WeaponImage, Config.PointFromConfig("WeaponGenericX", "WeaponSecondaryY"), Config.SizeFromConfig("WeaponImage"), true);
             Draw.Rectangle(Config.PointFromConfig("WeaponImageGenericX", "WeaponImageSecondaryY"), Config.SizeFromConfig("WeaponBackground"), Colors.Background);
         }
         
