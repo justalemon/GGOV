@@ -46,7 +46,12 @@ public class ScriptHUD : Script
     };
     public static Dictionary<int, string> Names = new Dictionary<int, string>
     {
-
+        { -597926235, "Cheng" },
+        { 2089096292, "Translator" },
+        { 1240128502, "Chef" },
+        { 1706635382, "Lamar" },
+        { 915948376, "Stretch" },
+        { -1643617475, "A. Owner" }
     };
 
     public ScriptHUD()
