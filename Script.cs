@@ -46,7 +46,7 @@ public class ScriptHUD : Script
     public static void OnTick(object Sender, EventArgs Event)
     {
         // If the game is stil loading or is paused, do not draw the elements on screen
-        if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive)
+        if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive || !Function.Call<bool>(Hash.IS_PLAYER_CONTROL_ON, Game.Player))
             return;
 
         // Temporary variables to check that everything is good
