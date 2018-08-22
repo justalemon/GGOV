@@ -1,4 +1,5 @@
 ﻿using GTA;
+using System;
 
 namespace GGOHud
 {
@@ -14,12 +15,13 @@ namespace GGOHud
         private string ConfigBase;
         /// <summary>
         /// If the debug mode should be enabled.
+        /// This check for "Debug" on the config file and the environment variable "DevGTA"
         /// </summary>
         public bool Debug
         {
             get
             {
-                return RawSettings.GetValue(ConfigBase, "Debug", false);
+                return RawSettings.GetValue(ConfigBase, "Debug", false) || Environment.GetEnvironmentVariable("DevGTA", EnvironmentVariableTarget.User) == "true";
             }
         }
 
