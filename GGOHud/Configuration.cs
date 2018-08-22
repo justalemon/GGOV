@@ -38,5 +38,14 @@ namespace GGOHud
             Raw = ScriptSettings.Load(ConfigFile);
             ConfigBase = Base;
         }
+
+        /// <summary>
+        /// Converts a relative screen position into an absolute one.
+        /// </summary>
+        /// <returns></returns>
+        private static int Absolute(float Relative, int Value)
+        {
+            return Convert.ToInt32((Value / 100) * Relative);
+        }
     }
 }
