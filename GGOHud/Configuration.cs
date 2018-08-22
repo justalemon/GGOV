@@ -3,6 +3,9 @@ using System;
 
 namespace GGOHud
 {
+    /// <summary>
+    /// Configuration parser for the script.
+    /// </summary>
     public class Configuration
     {
         /// <summary>
@@ -15,7 +18,7 @@ namespace GGOHud
         private string ConfigBase;
         /// <summary>
         /// If the debug mode should be enabled.
-        /// This check for "Debug" on the config file and the environment variable "DevGTA"
+        /// This check for "Debug" on the config file and the environment variable "DevGTA".
         /// </summary>
         public bool Debug
         {
@@ -25,6 +28,11 @@ namespace GGOHud
             }
         }
 
+        /// <summary>
+        /// Loads up a INI file that contains our configuration.
+        /// </summary>
+        /// <param name="ConfigFile">The configuration file.</param>
+        /// <param name="Base">The base of our configuration.</param>
         public Configuration(string ConfigFile, string Base)
         {
             RawSettings = ScriptSettings.Load(ConfigFile);
