@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using System;
 
 namespace GGOHud
@@ -11,7 +11,7 @@ namespace GGOHud
         /// <summary>
         /// The raw ScriptSettings instance.
         /// </summary>
-        private ScriptSettings RawSettings;
+        private ScriptSettings Raw;
         /// <summary>
         /// The base for the config (aka the base element).
         /// </summary>
@@ -24,7 +24,7 @@ namespace GGOHud
         {
             get
             {
-                return RawSettings.GetValue(ConfigBase, "Debug", false) || Environment.GetEnvironmentVariable("DevGTA", EnvironmentVariableTarget.User) == "true";
+                return Raw.GetValue(ConfigBase, "Debug", false) || Environment.GetEnvironmentVariable("DevGTA", EnvironmentVariableTarget.User) == "true";
             }
         }
 
@@ -35,7 +35,7 @@ namespace GGOHud
         /// <param name="Base">The base of our configuration.</param>
         public Configuration(string ConfigFile, string Base)
         {
-            RawSettings = ScriptSettings.Load(ConfigFile);
+            Raw = ScriptSettings.Load(ConfigFile);
             ConfigBase = Base;
         }
     }
