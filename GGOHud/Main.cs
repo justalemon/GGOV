@@ -1,4 +1,5 @@
 using GTA;
+using System;
 using System.Globalization;
 using System.Threading;
 
@@ -18,10 +19,18 @@ namespace GGOHud
             CultureCopy.NumberFormat.NumberDecimalSeparator = ".";
             Thread.CurrentThread.CurrentCulture = CultureCopy;
 
+            // Add our OnTick event
+            Tick += OnTick;
+
             if (Config.Debug)
             {
                 UI.Notify("GGOHud has been enabled.");
             }
+        }
+
+        private void OnTick(object Sender, EventArgs Args)
+        {
+
         }
     }
 }
