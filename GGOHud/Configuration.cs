@@ -1,5 +1,6 @@
-using GTA;
+﻿using GTA;
 using System;
+using System.Drawing;
 
 namespace GGOHud
 {
@@ -16,6 +17,7 @@ namespace GGOHud
         /// The base for the config (aka the base element).
         /// </summary>
         private string ConfigBase;
+
         /// <summary>
         /// If the debug mode should be enabled.
         /// This check for "Debug" on the config file and the environment variable "DevGTA".
@@ -25,6 +27,17 @@ namespace GGOHud
             get
             {
                 return Raw.GetValue(ConfigBase, "Debug", false) || Environment.GetEnvironmentVariable("DevGTA", EnvironmentVariableTarget.User) == "true";
+            }
+        }
+        /// <summary>
+        /// The size of the icons without counting the background.
+        /// </summary>
+        public Size IconSize
+        {
+            get
+            {
+                return new Size(Absolute(Raw.GetValue(ConfigBase, "IconSizeW", 2.8f), Game.ScreenResolution.Width),
+                                Absolute(Raw.GetValue(ConfigBase, "IconSizeH", 4.75f), Game.ScreenResolution.Height));
             }
         }
 
