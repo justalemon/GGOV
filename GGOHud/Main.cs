@@ -15,9 +15,10 @@ namespace GGOHud
         public GGOHud()
         {
             // Patch our locale so we don't have the "coma vs dot" problem
-            CultureInfo CultureCopy = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
-            CultureCopy.NumberFormat.NumberDecimalSeparator = ".";
-            Thread.CurrentThread.CurrentCulture = CultureCopy;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
             // Add our OnTick event
             Tick += OnTick;
