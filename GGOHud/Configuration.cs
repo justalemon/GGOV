@@ -30,14 +30,36 @@ namespace GGOHud
             }
         }
         /// <summary>
-        /// The size of the icons without counting the background.
+        /// The size of the icon images without counting the background.
         /// </summary>
-        public Size IconSize
+        public Size IconImage
         {
             get
             {
-                return new Size(Absolute(Raw.GetValue(ConfigBase, "IconSizeW", 2.8f), Game.ScreenResolution.Width),
-                                Absolute(Raw.GetValue(ConfigBase, "IconSizeH", 4.75f), Game.ScreenResolution.Height));
+                return new Size(Absolute(Raw.GetValue(ConfigBase, "IconImageW", 2.7f), Game.ScreenResolution.Width),
+                                Absolute(Raw.GetValue(ConfigBase, "IconImageH", 5f), Game.ScreenResolution.Height));
+            }
+        }
+        /// <summary>
+        /// The position of the icon background relative to the image.
+        /// </summary>
+        public Size IconBackground
+        {
+            get
+            {
+                return new Size(Absolute(Raw.GetValue(ConfigBase, "IconBackgroundW", 2.85f), Game.ScreenResolution.Width),
+                                Absolute(Raw.GetValue(ConfigBase, "IconBackgroundH", 5.3f), Game.ScreenResolution.Height));
+            }
+        }
+        /// <summary>
+        /// The space difference between the image and the background for the icons.
+        /// </summary>
+        public Size IconRelative
+        {
+            get
+            {
+                return new Size(Absolute(Raw.GetValue(ConfigBase, "IconRelativeW", 0.1f), Game.ScreenResolution.Width),
+                                Absolute(Raw.GetValue(ConfigBase, "IconRelativeH", 1f), Game.ScreenResolution.Height));
             }
         }
 
