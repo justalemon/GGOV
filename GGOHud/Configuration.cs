@@ -30,6 +30,16 @@ namespace GGOHud
             }
         }
         /// <summary>
+        /// If the HUD and Radar should be disabled
+        /// </summary>
+        public bool HudDisabled
+        {
+            get
+            {
+                return Raw.GetValue(ConfigBase, "HudDisabled", false);
+            }
+        }
+        /// <summary>
         /// The size of the icon images without counting the background.
         /// </summary>
         public Size IconImage

@@ -42,6 +42,12 @@ namespace GGOHud
             {
                 return;
             }
+
+            // Disable the original game HUD and radar if is requested
+            if (Config.HudDisabled)
+            {
+                Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
+            }
         }
     }
 }
