@@ -23,9 +23,13 @@ namespace GGOHud
             // Add our OnTick event
             Tick += OnTick;
 
+            // Show some debug messages if the user wants to
             if (Config.Debug)
             {
-                UI.Notify("GGOHud has been enabled.");
+                UI.Notify("~p~GGOHud~s~: Loading...");
+                UI.Notify("~p~GGOHud~s~: Icon image size is " + Config.IconImage.Width.ToString() + "w, " + Config.IconImage.Height.ToString() + "h");
+                UI.Notify("~p~GGOHud~s~: Icon background size is " + Config.IconBackground.Width.ToString() + "w, " + Config.IconBackground.Height.ToString() + "h");
+                UI.Notify("~p~GGOHud~s~: Icon image diff is " + Config.IconRelative.Width.ToString() + "w, " + Config.IconRelative.Height.ToString() + "h");
             }
         }
 
