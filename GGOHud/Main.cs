@@ -10,7 +10,7 @@ namespace GGOHud
         /// <summary>
         /// Class to get our configuration values.
         /// </summary>
-        public Configuration Config = new Configuration("scripts\\GGOHud.ini", "GGOHud");
+        public static Configuration Config = new Configuration("scripts\\GGOHud.ini", "GGOHud");
 
         public GGOHud()
         {
