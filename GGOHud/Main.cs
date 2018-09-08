@@ -27,7 +27,6 @@ namespace GGOHud
             // Show some debug messages if the user wants to
             if (Config.Debug)
             {
-                UI.Notify("~p~GGOHud~s~: Loading...");
                 UI.Notify("~p~GGOHud~s~: Icon image size is " + Config.IconImage.Width.ToString() + "w, " + Config.IconImage.Height.ToString() + "h");
                 UI.Notify("~p~GGOHud~s~: Icon background size is " + Config.IconBackground.Width.ToString() + "w, " + Config.IconBackground.Height.ToString() + "h");
                 UI.Notify("~p~GGOHud~s~: Icon image diff is " + Config.IconRelative.Width.ToString() + "w, " + Config.IconRelative.Height.ToString() + "h");
