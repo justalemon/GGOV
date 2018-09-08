@@ -69,7 +69,29 @@ namespace GGOHud
             get
             {
                 return new Size(Absolute(Raw.GetValue(ConfigBase, "IconRelativeW", 0.1f), Game.ScreenResolution.Width),
-                                Absolute(Raw.GetValue(ConfigBase, "IconRelativeH", 1f), Game.ScreenResolution.Height));
+                                Absolute(Raw.GetValue(ConfigBase, "IconRelativeH", 0.1f), Game.ScreenResolution.Height));
+            }
+        }
+        /// <summary>
+        /// The position of the squad related elements, starting by the first icon.
+        /// </summary>
+        public Point SquadPosition
+        {
+            get
+            {
+                return new Point(Absolute(Raw.GetValue(ConfigBase, "SquadPositionX", 0.1f), Game.ScreenResolution.Width),
+                                 Absolute(Raw.GetValue(ConfigBase, "SquadPositionY", 0.1f), Game.ScreenResolution.Height));
+            }
+        }
+        /// <summary>
+        /// The relative separation between the squad elements.
+        /// </summary>
+        public Size SquadRelative
+        {
+            get
+            {
+                return new Size(Absolute(Raw.GetValue(ConfigBase, "SquadRelativeW", 0.1f), Game.ScreenResolution.Width),
+                                Absolute(Raw.GetValue(ConfigBase, "SquadRelativeH", 0.1f), Game.ScreenResolution.Height));
             }
         }
 
