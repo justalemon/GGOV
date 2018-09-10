@@ -42,10 +42,12 @@ namespace GGOHud
             // Show some debug messages if the user wants to
             if (Config.Debug)
             {
-                UI.Notify("~p~GGOHud~s~: Icon image size is " + Config.IconImage.Width.ToString() + "w, " + Config.IconImage.Height.ToString() + "h");
-                UI.Notify("~p~GGOHud~s~: Icon background size is " + Config.IconBackground.Width.ToString() + "w, " + Config.IconBackground.Height.ToString() + "h");
-                UI.Notify("~p~GGOHud~s~: Icon image diff is " + Config.IconRelative.Width.ToString() + "w, " + Config.IconRelative.Height.ToString() + "h");
-                UI.Notify("~p~GGOHud~s~: Squad position is " + Config.SquadPosition.X.ToString() + "x, " + Config.SquadPosition.Y.ToString() + "y");
+                UI.Notify("~p~GGOHud~s~: IconImage: " + Config.IconImage.Width.ToString() + "w, " + Config.IconImage.Height.ToString() + "h");
+                UI.Notify("~p~GGOHud~s~: IconBackground: " + Config.IconBackground.Width.ToString() + "w, " + Config.IconBackground.Height.ToString() + "h");
+                UI.Notify("~p~GGOHud~s~: IconRelative: " + Config.IconRelative.Width.ToString() + "w, " + Config.IconRelative.Height.ToString() + "h");
+                UI.Notify("~p~GGOHud~s~: SquadRelative: " + Config.SquadRelative.Width.ToString() + "w, " + Config.SquadRelative.Height.ToString() + "h");
+
+                UI.Notify("~p~GGOHud~s~: SquadPosition: " + Config.SquadPosition.X.ToString() + "x, " + Config.SquadPosition.Y.ToString() + "y");
             }
         }
 
