@@ -112,7 +112,7 @@ namespace GGOHud
         /// <returns></returns>
         private static int Absolute(float Relative, int Value)
         {
-            return Convert.ToInt32((Value / 100) * Relative);
+            return Convert.ToInt32((Relative / 100) * Value);
         }
     }
 }
