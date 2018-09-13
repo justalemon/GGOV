@@ -47,11 +47,11 @@ namespace GGOHud
             {
                 return HealthNormal;
             }
-            else if (Percentage <= 49 && Percentage >= 25)
+            else if (Percentage <= 50 && Percentage >= 25)
             {
                 return HealthDanger;
             }
-            else if (Percentage <= 24)
+            else if (Percentage <= 25)
             {
                 return HealthDying;
             }
