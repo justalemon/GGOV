@@ -9,7 +9,7 @@ namespace GGOHud
         /// <summary>
         /// Color for the backgrounds of the items.
         /// </summary>
-        public static Color Background = Color.FromArgb(200, 0, 0, 0);
+        public static Color Background = Color.FromArgb(175, 0, 0, 0);
         /// <summary>
         /// Color for the dividers of the health bar.
         /// </summary>
