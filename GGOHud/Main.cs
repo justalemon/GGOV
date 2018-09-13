@@ -42,12 +42,16 @@ namespace GGOHud
             // Show some debug messages if the user wants to
             if (Config.Debug)
             {
-                UI.Notify("~p~GGOHud~s~: IconImage: " + Config.IconImage.Width.ToString() + "w, " + Config.IconImage.Height.ToString() + "h");
-                UI.Notify("~p~GGOHud~s~: IconBackground: " + Config.IconBackground.Width.ToString() + "w, " + Config.IconBackground.Height.ToString() + "h");
-                UI.Notify("~p~GGOHud~s~: IconRelative: " + Config.IconRelative.Width.ToString() + "w, " + Config.IconRelative.Height.ToString() + "h");
-                UI.Notify("~p~GGOHud~s~: SquadRelative: " + Config.SquadRelative.Width.ToString() + "w, " + Config.SquadRelative.Height.ToString() + "h");
+                UI.Notify("~p~GGOHud~s~: Starting the Mod...");
 
-                UI.Notify("~p~GGOHud~s~: SquadPosition: " + Config.SquadPosition.X.ToString() + "x, " + Config.SquadPosition.Y.ToString() + "y");
+                UI.Notify("~g~GGOHud~s~: IconImage: " + Config.IconImage.Width.ToString() + "w, " + Config.IconImage.Height.ToString() + "h");
+                UI.Notify("~g~GGOHud~s~: IconBackground: " + Config.IconBackground.Width.ToString() + "w, " + Config.IconBackground.Height.ToString() + "h");
+                UI.Notify("~g~GGOHud~s~: IconRelative: " + Config.IconRelative.Width.ToString() + "w, " + Config.IconRelative.Height.ToString() + "h");
+                UI.Notify("~g~GGOHud~s~: SquadRelative: " + Config.SquadRelative.Width.ToString() + "w, " + Config.SquadRelative.Height.ToString() + "h");
+                UI.Notify("~g~GGOHud~s~: SquadInfoSize: " + Config.SquadInfoSize.Width.ToString() + "w, " + Config.SquadInfoSize.Height.ToString() + "h");
+                UI.Notify("~g~GGOHud~s~: HealthBarSize: " + Config.HealthBarSize.Width.ToString() + "w, " + Config.HealthBarSize.Height.ToString() + "h");
+
+                UI.Notify("~b~GGOHud~s~: SquadPosition: " + Config.SquadPosition.X.ToString() + "x, " + Config.SquadPosition.Y.ToString() + "y");
             }
         }
 
@@ -95,6 +99,9 @@ namespace GGOHud
 
                 Point Position = new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.SquadRelative.Height) * Count);
                 Draw.Icon(Images["Squad" + Count.ToString()], Position);
+
+                Point InfoPosition = new Point(Config.SquadPosition.X + Config.IconBackground.Width + Config.SquadRelative.Width, (Config.SquadPosition.Y + Config.SquadRelative.Height) * Count);
+                Draw.PedInfo(Friendly, InfoPosition);
 
                 Count++;
             }

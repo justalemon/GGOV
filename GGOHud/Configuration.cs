@@ -94,6 +94,72 @@ namespace GGOHud
                                 PercentageOf(Raw.GetValue(ConfigBase, "SquadRelativeH", 0.1f), Game.ScreenResolution.Height));
             }
         }
+        /// <summary>
+        /// The size of the squad friend information.
+        /// </summary>
+        public Size SquadInfoSize
+        {
+            get
+            {
+                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "SquadInfoSizeW", 0.1f), Game.ScreenResolution.Width),
+                                PercentageOf(Raw.GetValue(ConfigBase, "SquadInfoSizeH", 0.1f), Game.ScreenResolution.Height));
+            }
+        }
+        /// <summary>
+        /// The size of the health bar based on the squad background.
+        /// </summary>
+        public Size HealthBarSize
+        {
+            get
+            {
+                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "HealthBarSizeW", 0.1f), Game.ScreenResolution.Width),
+                                PercentageOf(Raw.GetValue(ConfigBase, "HealthBarSizeH", 0.1f), Game.ScreenResolution.Height));
+            }
+        }
+        /// <summary>
+        /// The position of the health bar based on the background.
+        /// </summary>
+        public Size HealthBarOffset
+        {
+            get
+            {
+                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "HealthBarOffsetW", 0.1f), SquadInfoSize.Width),
+                                PercentageOf(Raw.GetValue(ConfigBase, "HealthBarOffsetH", 0.1f), SquadInfoSize.Height));
+            }
+        }
+        /// <summary>
+        /// The offset for the player name related to the background.
+        /// </summary>
+        public Size PlayerNameOffset
+        {
+            get
+            {
+                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "PlayerNameOffsetW", 0.1f), SquadInfoSize.Width),
+                                PercentageOf(Raw.GetValue(ConfigBase, "PlayerNameOffsetH", 0.1f), SquadInfoSize.Height));
+            }
+        }
+        /// <summary>
+        /// The offset for the player name related to the background.
+        /// </summary>
+        public Size HealthDividerSize
+        {
+            get
+            {
+                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerSizeW", 0.1f), SquadInfoSize.Width),
+                                PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerSizeH", 0.1f), SquadInfoSize.Height));
+            }
+        }
+        /// <summary>
+        /// The offset for the health bar dividers.
+        /// </summary>
+        public Size HealthDividerOffset
+        {
+            get
+            {
+                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerOffsetW", 0.1f), SquadInfoSize.Width),
+                                PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerOffsetH", 0.1f), SquadInfoSize.Height));
+            }
+        }
 
         /// <summary>
         /// Loads up a INI file that contains our configuration.
