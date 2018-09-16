@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 
-namespace GGOHud
+namespace GGO
 {
     /// <summary>
     /// Configuration parser for the script.

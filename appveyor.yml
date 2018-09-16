@@ -21,19 +21,19 @@ init:
 
 # Restore our NuGet packages
 before_build:
-  - cmd: nuget restore GGOHud.sln
+  - cmd: nuget restore GGO.sln
 
 # Now, build the solution
 build_script:
-  - cmd: msbuild.exe GGOHud.sln /t:Build /p:Configuration=Release;Platform=x64
+  - cmd: msbuild.exe GGO.sln /t:Build /p:Configuration=Release;Platform=x64
 
 # Create artifacts to test the automated builds
 after_build:
-  - cmd: 7z a GGOHud.7z %APPVEYOR_BUILD_FOLDER%\GGOHud\bin\x64\Release\*
+  - cmd: 7z a GGO.7z %APPVEYOR_BUILD_FOLDER%\GGO\bin\x64\Release\*
 
 # And attach them to the build
 artifacts:
-  - path: GGOHud.7z
+  - path: GGO.7z
     name: Complete Mod
 
 # Autodeploy on tags
@@ -42,7 +42,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: "DkvKC8KRj8AipGu/oWW/J2e6jMWt2xXQfKU7oefFMsp0ZMfzz+OR9Y9XpML+ZmG4"
-  artifact: GGOHud.7z
+  artifact: GGO.7z
   draft: false
   prerelease: true
   on:
