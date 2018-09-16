@@ -12,7 +12,7 @@ namespace GGO
         /// <summary>
         /// The raw ScriptSettings instance.
         /// </summary>
-        private static ScriptSettings Raw = ScriptSettings.Load("scripts\\GGO.ini");
+        private static ScriptSettings Raw = ScriptSettings.Load("scripts\\GGO.Singleplayer.ini");
         /// <summary>
         /// The base for the config (aka the base element).
         /// </summary>
