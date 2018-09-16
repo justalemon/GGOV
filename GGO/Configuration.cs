@@ -12,17 +12,17 @@ namespace GGO
         /// <summary>
         /// The raw ScriptSettings instance.
         /// </summary>
-        private ScriptSettings Raw;
+        private static ScriptSettings Raw = ScriptSettings.Load("scripts\\GGO.ini");
         /// <summary>
         /// The base for the config (aka the base element).
         /// </summary>
-        private string ConfigBase;
+        private static string ConfigBase = "GGO";
 
         /// <summary>
         /// If the debug mode should be enabled.
         /// This check for "Debug" on the config file and the environment variable "DevGTA".
         /// </summary>
-        public bool Debug
+        public static bool Debug
         {
             get
             {
@@ -32,7 +32,7 @@ namespace GGO
         /// <summary>
         /// If the HUD and Radar should be disabled
         /// </summary>
-        public bool HudDisabled
+        public static bool HudDisabled
         {
             get
             {
@@ -42,7 +42,7 @@ namespace GGO
         /// <summary>
         /// The size of the icon images without counting the background.
         /// </summary>
-        public Size IconImage
+        public static Size IconImage
         {
             get
             {
@@ -53,7 +53,7 @@ namespace GGO
         /// <summary>
         /// The position of the icon background relative to the image.
         /// </summary>
-        public Size IconBackground
+        public static Size IconBackground
         {
             get
             {
@@ -64,7 +64,7 @@ namespace GGO
         /// <summary>
         /// The space difference between the image and the background for the icons.
         /// </summary>
-        public Size IconRelative
+        public static Size IconRelative
         {
             get
             {
@@ -75,7 +75,7 @@ namespace GGO
         /// <summary>
         /// The position of the squad related elements, starting by the first icon.
         /// </summary>
-        public Point SquadPosition
+        public static Point SquadPosition
         {
             get
             {
@@ -86,7 +86,7 @@ namespace GGO
         /// <summary>
         /// The relative separation between the squad elements.
         /// </summary>
-        public Size SquadRelative
+        public static Size SquadRelative
         {
             get
             {
@@ -97,7 +97,7 @@ namespace GGO
         /// <summary>
         /// The size of the squad friend information.
         /// </summary>
-        public Size SquadInfoSize
+        public static Size SquadInfoSize
         {
             get
             {
@@ -108,7 +108,7 @@ namespace GGO
         /// <summary>
         /// The size of the health bar based on the squad background.
         /// </summary>
-        public Size HealthBarSize
+        public static Size HealthBarSize
         {
             get
             {
@@ -119,7 +119,7 @@ namespace GGO
         /// <summary>
         /// The position of the health bar based on the background.
         /// </summary>
-        public Size HealthBarOffset
+        public static Size HealthBarOffset
         {
             get
             {
@@ -130,7 +130,7 @@ namespace GGO
         /// <summary>
         /// The offset for the player name related to the background.
         /// </summary>
-        public Size PlayerNameOffset
+        public static Size PlayerNameOffset
         {
             get
             {
@@ -141,7 +141,7 @@ namespace GGO
         /// <summary>
         /// The offset for the player name related to the background.
         /// </summary>
-        public Size HealthDividerSize
+        public static Size HealthDividerSize
         {
             get
             {
@@ -152,24 +152,13 @@ namespace GGO
         /// <summary>
         /// The offset for the health bar dividers.
         /// </summary>
-        public Size HealthDividerOffset
+        public static Size HealthDividerOffset
         {
             get
             {
                 return new Size(PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerOffsetW", 0.1f), SquadInfoSize.Width),
                                 PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerOffsetH", 0.1f), SquadInfoSize.Height));
             }
-        }
-
-        /// <summary>
-        /// Loads up a INI file that contains our configuration.
-        /// </summary>
-        /// <param name="ConfigFile">The configuration file.</param>
-        /// <param name="Base">The base of our configuration.</param>
-        public Configuration(string ConfigFile, string Base)
-        {
-            Raw = ScriptSettings.Load(ConfigFile);
-            ConfigBase = Base;
         }
 
         /// <summary>

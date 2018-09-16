@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace GGO
 {
-    class Tools
+    public class Tools
     {
         /// <summary>
         /// The list of valid characters for our random image names.
