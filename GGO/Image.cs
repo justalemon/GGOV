@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace GGO
 {
-    public class Tools
+    public class Image
     {
         /// <summary>
         /// Our generator of random characters.

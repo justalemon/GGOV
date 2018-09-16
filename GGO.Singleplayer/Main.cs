@@ -18,12 +18,12 @@ namespace GGO.Singleplayer
             /// </summary>
             public static Dictionary<string, string> Images = new Dictionary<string, string>
             {
-                { "Squad1", Tools.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad2", Tools.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad3", Tools.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad4", Tools.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad5", Tools.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad6", Tools.ResourceToPNG(Resources.ImageCharacter) }
+                { "Squad1", Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad2", Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad3", Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad4", Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad5", Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad6", Image.ResourceToPNG(Resources.ImageCharacter) }
             };
 
             public GGO()
