@@ -10,14 +10,14 @@ namespace GGO
         /// <summary>
         /// Draws an icon with it's respective background.
         /// </summary>
-        public static void Icon(string ImageFile, Point Position)
+        public static void Icon(string ImageFile, Point Position, Size Background, Size Relative, Size Icon)
         {
-            UIRectangle Rect = new UIRectangle(Position, Configuration.IconBackground, Colors.Background);
+            UIRectangle Rect = new UIRectangle(Position, Background, Colors.Background);
             Rect.Draw();
 
-            Point ImagePos = Position + Configuration.IconRelative;
+            Point ImagePos = Position + Relative;
 
-            UI.DrawTexture(ImageFile, 0, 0, 200, ImagePos, Configuration.IconImage);
+            UI.DrawTexture(ImageFile, 0, 0, 200, ImagePos, Icon);
         }
 
         /// <summary>
@@ -26,30 +26,28 @@ namespace GGO
         /// <param name="Character">The ped to get the information.</param>
         /// <param name="Position">The position on the screen.</param>
         /// <param name="TotalSize">The full size of the information field.</param>
-        public static void PedInfo(Ped Character, Point Position)
+        public static void PedInfo(Ped Character, Point Position, Size InfoSize, Size HealthSize, Size Offset, Size DividerOffset, Size Divider, Size PlayerOffset)
         {
-            UIRectangle Background = new UIRectangle(Position, Configuration.SquadInfoSize, Colors.Background);
+            UIRectangle Background = new UIRectangle(Position, InfoSize, Colors.Background);
             Background.Draw();
 
             float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Character);
             float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Character);
             float Percentage = (CurrentHealth / MaxHealth) * 100;
-            float Width = (Percentage / 100) * Configuration.HealthBarSize.Width;
-            Size HealthSize = new Size(Convert.ToInt32(Width), Configuration.HealthBarSize.Height);
-            Point HealthPosition = Position + Configuration.HealthBarOffset;
+            float Width = (Percentage / 100) * HealthSize.Width;
+            Size NewHealthSize = new Size(Convert.ToInt32(Width), HealthSize.Height);
+            Point HealthPosition = Position + Offset;
 
-            UIRectangle DividerOne = new UIRectangle(HealthPosition + Configuration.HealthDividerOffset, Configuration.HealthDividerSize, Colors.Divider);
+            UIRectangle DividerOne = new UIRectangle(HealthPosition + DividerOffset, DividerOffset, Colors.Divider);
             DividerOne.Draw();
 
-            UIRectangle DividerFive = new UIRectangle(HealthPosition + new Size(HealthSize.Width, 0) + Configuration.HealthDividerOffset - new Size(Configuration.HealthDividerSize.Width, 0), Configuration.HealthDividerSize, Colors.Divider);
+            UIRectangle DividerFive = new UIRectangle(HealthPosition + new Size(NewHealthSize.Width, 0) + DividerOffset - new Size(Divider.Width, 0), Divider, Colors.Divider);
             DividerFive.Draw();
 
-            UIRectangle HealthBar = new UIRectangle(HealthPosition, HealthSize, Colors.GetPedHealthColor(Character));
+            UIRectangle HealthBar = new UIRectangle(HealthPosition, NewHealthSize, Colors.GetPedHealthColor(Character));
             HealthBar.Draw();
 
-            UI.ShowSubtitle(HealthSize.ToString());
-
-            UIText Name = new UIText(Character.Model.GetHashCode().ToString(), Position + Configuration.PlayerNameOffset, 0.3f);
+            UIText Name = new UIText(Character.Model.GetHashCode().ToString(), Position + PlayerOffset, 0.3f);
             Name.Draw();
         }
     }
