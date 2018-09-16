@@ -9,10 +9,6 @@ namespace GGO
     public class Tools
     {
         /// <summary>
-        /// The list of valid characters for our random image names.
-        /// </summary>
-        private static string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        /// <summary>
         /// Our generator of random characters.
         /// </summary>
         private static Random Generator = new Random();
@@ -24,7 +20,7 @@ namespace GGO
         /// <returns>A random alphanumeric string of the desired length.</returns>
         public static string RandomString(int Length)
         {
-            return new string(Enumerable.Repeat(Characters, Length).Select(s => s[Generator.Next(s.Length)]).ToArray());
+            return new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", Length).Select(s => s[Generator.Next(s.Length)]).ToArray());
         }
         /// <summary>
         /// Creates a PNG file from a resource image.
