@@ -46,8 +46,8 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "IconImageW", 2.7f), Game.ScreenResolution.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "IconImageH", 5f), Game.ScreenResolution.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "IconImageW", 2.7f), Game.ScreenResolution.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "IconImageH", 5f), Game.ScreenResolution.Height));
             }
         }
         /// <summary>
@@ -57,8 +57,8 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "IconBackgroundW", 2.85f), Game.ScreenResolution.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "IconBackgroundH", 5.3f), Game.ScreenResolution.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "IconBackgroundW", 2.85f), Game.ScreenResolution.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "IconBackgroundH", 5.3f), Game.ScreenResolution.Height));
             }
         }
         /// <summary>
@@ -68,8 +68,8 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "IconRelativeW", 0.1f), Game.ScreenResolution.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "IconRelativeH", 0.1f), Game.ScreenResolution.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "IconRelativeW", 0.1f), Game.ScreenResolution.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "IconRelativeH", 0.1f), Game.ScreenResolution.Height));
             }
         }
         /// <summary>
@@ -79,8 +79,8 @@ namespace GGO
         {
             get
             {
-                return new Point(PercentageOf(Raw.GetValue(ConfigBase, "SquadPositionX", 0.1f), Game.ScreenResolution.Width),
-                                 PercentageOf(Raw.GetValue(ConfigBase, "SquadPositionY", 0.1f), Game.ScreenResolution.Height));
+                return new Point(Math.Percentage(Raw.GetValue(ConfigBase, "SquadPositionX", 0.1f), Game.ScreenResolution.Width),
+                                 Math.Percentage(Raw.GetValue(ConfigBase, "SquadPositionY", 0.1f), Game.ScreenResolution.Height));
             }
         }
         /// <summary>
@@ -90,8 +90,8 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "SquadRelativeW", 0.1f), Game.ScreenResolution.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "SquadRelativeH", 0.1f), Game.ScreenResolution.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "SquadRelativeW", 0.1f), Game.ScreenResolution.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "SquadRelativeH", 0.1f), Game.ScreenResolution.Height));
             }
         }
         /// <summary>
@@ -101,8 +101,8 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "SquadInfoSizeW", 0.1f), Game.ScreenResolution.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "SquadInfoSizeH", 0.1f), Game.ScreenResolution.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "SquadInfoSizeW", 0.1f), Game.ScreenResolution.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "SquadInfoSizeH", 0.1f), Game.ScreenResolution.Height));
             }
         }
         /// <summary>
@@ -112,8 +112,8 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "HealthBarSizeW", 0.1f), Game.ScreenResolution.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "HealthBarSizeH", 0.1f), Game.ScreenResolution.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "HealthBarSizeW", 0.1f), Game.ScreenResolution.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "HealthBarSizeH", 0.1f), Game.ScreenResolution.Height));
             }
         }
         /// <summary>
@@ -123,8 +123,8 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "HealthBarOffsetW", 0.1f), SquadInfoSize.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "HealthBarOffsetH", 0.1f), SquadInfoSize.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "HealthBarOffsetW", 0.1f), SquadInfoSize.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "HealthBarOffsetH", 0.1f), SquadInfoSize.Height));
             }
         }
         /// <summary>
@@ -134,8 +134,8 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "PlayerNameOffsetW", 0.1f), SquadInfoSize.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "PlayerNameOffsetH", 0.1f), SquadInfoSize.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "PlayerNameOffsetW", 0.1f), SquadInfoSize.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "PlayerNameOffsetH", 0.1f), SquadInfoSize.Height));
             }
         }
         /// <summary>
@@ -145,8 +145,8 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerSizeW", 0.1f), SquadInfoSize.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerSizeH", 0.1f), SquadInfoSize.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "HealthDividerSizeW", 0.1f), SquadInfoSize.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "HealthDividerSizeH", 0.1f), SquadInfoSize.Height));
             }
         }
         /// <summary>
@@ -156,18 +156,9 @@ namespace GGO
         {
             get
             {
-                return new Size(PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerOffsetW", 0.1f), SquadInfoSize.Width),
-                                PercentageOf(Raw.GetValue(ConfigBase, "HealthDividerOffsetH", 0.1f), SquadInfoSize.Height));
+                return new Size(Math.Percentage(Raw.GetValue(ConfigBase, "HealthDividerOffsetW", 0.1f), SquadInfoSize.Width),
+                                Math.Percentage(Raw.GetValue(ConfigBase, "HealthDividerOffsetH", 0.1f), SquadInfoSize.Height));
             }
-        }
-
-        /// <summary>
-        /// Calculates the percentage of a number.
-        /// </summary>
-        /// <returns>The value that corresponds to that percentage.</returns>
-        private static int PercentageOf(float Percentage, int Of)
-        {
-            return Convert.ToInt32((Percentage / 100) * Of);
         }
     }
 }
