@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GGO", "GGO\GGO.csproj", "{A5E55619-60C3-44D8-8E69-5CDB4370A875}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GGO.Common", "GGO.Common\GGO.Common.csproj", "{A5E55619-60C3-44D8-8E69-5CDB4370A875}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GGO.Singleplayer", "GGO.Singleplayer\GGO.Singleplayer.csproj", "{8A7DD0EF-E686-46B3-8854-97ECA65D2BB7}"
 EndProject

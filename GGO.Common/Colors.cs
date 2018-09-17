@@ -2,7 +2,7 @@
 using GTA.Native;
 using System.Drawing;
 
-namespace GGO
+namespace GGO.Common
 {
     class Colors
     {

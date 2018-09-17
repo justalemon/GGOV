@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 
-namespace GGO
+namespace GGO.Common
 {
     public static class Math
     {

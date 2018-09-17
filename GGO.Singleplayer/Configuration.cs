@@ -1,5 +1,4 @@
-﻿using GGO;
-using GTA;
+﻿using GTA;
 using System;
 using System.Drawing;
 
@@ -27,46 +26,46 @@ namespace GGO.Singleplayer
         /// <summary>
         /// The size of the icon images without counting the background.
         /// </summary>
-        public static Size IconImage = Math.SizeFromConfig(Raw, "IconImage");
+        public static Size IconImage = Common.Math.SizeFromConfig(Raw, "IconImage");
         /// <summary>
         /// The position of the icon background relative to the image.
         /// </summary>
-        public static Size IconBackground = Math.SizeFromConfig(Raw, "IconBackground");
+        public static Size IconBackground = Common.Math.SizeFromConfig(Raw, "IconBackground");
         /// <summary>
         /// The space difference between the image and the background for the icons.
         /// </summary>
-        public static Size IconRelative = Math.SizeFromConfig(Raw, "IconRelative");
+        public static Size IconRelative = Common.Math.SizeFromConfig(Raw, "IconRelative");
         /// <summary>
         /// The position of the squad related elements, starting by the first icon.
         /// </summary>
-        public static Point SquadPosition = Math.PointFromConfig(Raw, "SquadPosition");
+        public static Point SquadPosition = Common.Math.PointFromConfig(Raw, "SquadPosition");
         /// <summary>
         /// The relative separation between the squad elements.
         /// </summary>
-        public static Size SquadRelative = Math.SizeFromConfig(Raw, "SquadRelative");
+        public static Size SquadRelative = Common.Math.SizeFromConfig(Raw, "SquadRelative");
         /// <summary>
         /// The size of the squad friend information.
         /// </summary>
-        public static Size SquadInfoSize = Math.SizeFromConfig(Raw, "SquadInfoSize");
+        public static Size SquadInfoSize = Common.Math.SizeFromConfig(Raw, "SquadInfoSize");
         /// <summary>
         /// The size of the health bar based on the squad background.
         /// </summary>
-        public static Size HealthBarSize = Math.SizeFromConfig(Raw, "HealthBarSize");
+        public static Size HealthBarSize = Common.Math.SizeFromConfig(Raw, "HealthBarSize");
         /// <summary>
         /// The position of the health bar based on the background.
         /// </summary>
-        public static Size HealthBarOffset = Math.SizeFromConfig(Raw, "HealthBarOffset");
+        public static Size HealthBarOffset = Common.Math.SizeFromConfig(Raw, "HealthBarOffset");
         /// <summary>
         /// The offset for the player name related to the background.
         /// </summary>
-        public static Size PlayerNameOffset = Math.SizeFromConfig(Raw, "PlayerNameOffset");
+        public static Size PlayerNameOffset = Common.Math.SizeFromConfig(Raw, "PlayerNameOffset");
         /// <summary>
         /// The offset for the player name related to the background.
         /// </summary>
-        public static Size HealthDividerSize = Math.SizeFromConfig(Raw, "HealthDividerSize");
+        public static Size HealthDividerSize = Common.Math.SizeFromConfig(Raw, "HealthDividerSize");
         /// <summary>
         /// The offset for the health bar dividers.
         /// </summary>
-        public static Size HealthDividerOffset = Math.SizeFromConfig(Raw, "HealthDividerOffset");
+        public static Size HealthDividerOffset = Common.Math.SizeFromConfig(Raw, "HealthDividerOffset");
     }
 }

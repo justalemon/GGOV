@@ -3,7 +3,7 @@ using GTA.Native;
 using System;
 using System.Drawing;
 
-namespace GGO
+namespace GGO.Common
 {
     public class Draw
     {

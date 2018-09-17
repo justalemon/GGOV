@@ -58,9 +58,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GGO\GGO.csproj">
+    <ProjectReference Include="..\GGO.Common\GGO.Common.csproj">
       <Project>{a5e55619-60c3-44d8-8e69-5cdb4370a875}</Project>
-      <Name>GGO</Name>
+      <Name>GGO.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

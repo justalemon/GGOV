@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GGO.Properties {
+namespace GGO.Common.Properties {
     using System;
     
     

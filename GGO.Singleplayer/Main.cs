@@ -1,4 +1,4 @@
-﻿using GGO.Properties;
+﻿using GGO.Common.Properties;
 using GTA;
 using GTA.Native;
 using System;
@@ -18,12 +18,12 @@ namespace GGO.Singleplayer
             /// </summary>
             public static Dictionary<string, string> Images = new Dictionary<string, string>
             {
-                { "Squad1", Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad2", Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad3", Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad4", Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad5", Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad6", Image.ResourceToPNG(Resources.ImageCharacter) }
+                { "Squad1", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad2", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad3", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad4", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad5", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Squad6", Common.Image.ResourceToPNG(Resources.ImageCharacter) }
             };
 
             public GGO()
@@ -96,10 +96,10 @@ namespace GGO.Singleplayer
                     }
 
                     Point Position = new Point(Configuration.SquadPosition.X, (Configuration.SquadPosition.Y + Configuration.SquadRelative.Height) * Count);
-                    Draw.Icon(Images["Squad" + Count.ToString()], Position, Configuration.IconBackground, Configuration.IconRelative, Configuration.IconImage);
+                    Common.Draw.Icon(Images["Squad" + Count.ToString()], Position, Configuration.IconBackground, Configuration.IconRelative, Configuration.IconImage);
 
                     Point InfoPosition = new Point(Configuration.SquadPosition.X + Configuration.IconBackground.Width + Configuration.SquadRelative.Width, (Configuration.SquadPosition.Y + Configuration.SquadRelative.Height) * Count);
-                    Draw.PedInfo(Friendly, InfoPosition, Configuration.SquadInfoSize, Configuration.HealthBarSize, Configuration.HealthBarOffset, Configuration.HealthDividerOffset, Configuration.HealthDividerSize, Configuration.PlayerNameOffset);
+                    Common.Draw.PedInfo(Friendly, InfoPosition, Configuration.SquadInfoSize, Configuration.HealthBarSize, Configuration.HealthBarOffset, Configuration.HealthDividerOffset, Configuration.HealthDividerSize, Configuration.PlayerNameOffset);
 
                     Count++;
                 }
