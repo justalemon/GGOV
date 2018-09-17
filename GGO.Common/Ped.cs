@@ -126,7 +126,15 @@ namespace GGO.Common
         {
             float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, ThePed) - 100;
             float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, ThePed) - 100;
-            return (CurrentHealth / MaxHealth) * 100;
+
+            if (ThePed.IsDead)
+            {
+                return 0f;
+            }
+            else
+            {
+                return (CurrentHealth / MaxHealth) * 100;
+            }
         }
     }
 }
