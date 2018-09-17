@@ -43,7 +43,7 @@ namespace GGO.Common
 
         public static string Name(this Ped ThePed, string Custom = "default")
         {
-            if (Custom == "Default" && ThePed == Game.Player.Character)
+            if (Custom == "default" && ThePed == Game.Player.Character)
             {
                 return Game.Player.Name;
             }
