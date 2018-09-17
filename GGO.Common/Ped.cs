@@ -1,4 +1,6 @@
-using GTA;
+﻿using GTA;
+using GTA.Native;
+using System;
 using System.Collections.Generic;
 
 namespace GGO.Common
@@ -65,6 +67,18 @@ namespace GGO.Common
             {
                 return ThePed.Model.Hash.ToString();
             }
+        }
+
+        /// <summary>
+        /// Gets the health percentage for the ped.
+        /// </summary>
+        /// <param name="ThePed">The ped to check.</param>
+        /// <returns>The health percentage.</returns>
+        public static float HealthPercentage(this Ped ThePed)
+        {
+            float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, ThePed);
+            float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, ThePed);
+            return (CurrentHealth / MaxHealth) * 100;
         }
     }
 }

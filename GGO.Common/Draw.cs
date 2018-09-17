@@ -32,10 +32,7 @@ namespace GGO.Common
             UIRectangle Background = new UIRectangle(Position, InfoSize, Colors.Background);
             Background.Draw();
 
-            float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Character);
-            float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Character);
-            float Percentage = (CurrentHealth / MaxHealth) * 100;
-            float Width = (Percentage / 100) * HealthSize.Width;
+            float Width = (Character.HealthPercentage() / 100) * HealthSize.Width;
             Size NewHealthSize = new Size(Convert.ToInt32(Width), HealthSize.Height);
             Point HealthPosition = Position + Offset;
 

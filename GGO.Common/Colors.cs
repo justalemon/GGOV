@@ -38,20 +38,15 @@ namespace GGO.Common
         /// <returns></returns>
         public static Color GetPedHealthColor(Ped ThePed)
         {
-            float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, ThePed);
-            float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, ThePed);
-
-            float Percentage = (CurrentHealth / MaxHealth) * 100;
-
-            if (Percentage >= 50 && Percentage <= 100)
+            if (ThePed.HealthPercentage() >= 50 && ThePed.HealthPercentage() <= 100)
             {
                 return HealthNormal;
             }
-            else if (Percentage <= 50 && Percentage >= 25)
+            else if (ThePed.HealthPercentage() <= 50 && ThePed.HealthPercentage() >= 25)
             {
                 return HealthDanger;
             }
-            else if (Percentage <= 25)
+            else if (ThePed.HealthPercentage() <= 25)
             {
                 return HealthDying;
             }
