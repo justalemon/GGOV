@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using GTA.Native;
 using System.Collections.Generic;
 using System.Drawing;
@@ -120,8 +120,8 @@ namespace GGO.Common
         /// <returns>The health percentage.</returns>
         public static float HealthPercentage(this Ped ThePed)
         {
-            float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, ThePed);
-            float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, ThePed);
+            float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, ThePed) - 100;
+            float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, ThePed) - 100;
             return (CurrentHealth / MaxHealth) * 100;
         }
     }
