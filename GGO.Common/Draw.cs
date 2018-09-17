@@ -1,4 +1,4 @@
-using GGO.Common;
+﻿using GGO.Common;
 using GTA;
 using GTA.Native;
 using System;
@@ -45,10 +45,21 @@ namespace GGO.Common
             Size NewHealthSize = new Size(Convert.ToInt32(Width), HealthSize.Height);
             Point HealthPosition = Position + Offset;
 
-            UIRectangle DividerOne = new UIRectangle(HealthPosition + DividerOffset, DividerOffset, Colors.Divider);
+            int HealthSep = HealthSize.Width / 4;
+
+            UIRectangle DividerOne = new UIRectangle(HealthPosition + DividerOffset, Divider, CDivider);
             DividerOne.Draw();
 
-            UIRectangle DividerFive = new UIRectangle(HealthPosition + new Size(NewHealthSize.Width, 0) + DividerOffset - new Size(Divider.Width, 0), Divider, Colors.Divider);
+            UIRectangle DividerTwo = new UIRectangle(HealthPosition + new Size(HealthSep * 1, 0) + DividerOffset, Divider, CDivider);
+            DividerTwo.Draw();
+
+            UIRectangle DividerThree = new UIRectangle(HealthPosition + new Size(HealthSep * 2, 0) + DividerOffset, Divider, CDivider);
+            DividerThree.Draw();
+
+            UIRectangle DividerFour = new UIRectangle(HealthPosition + new Size(HealthSep * 3, 0) + DividerOffset, Divider, CDivider);
+            DividerFour.Draw();
+
+            UIRectangle DividerFive = new UIRectangle(HealthPosition + new Size(HealthSize.Width, 0) + DividerOffset - new Size(Divider.Width, 0), Divider, CDivider);
             DividerFive.Draw();
 
             UIRectangle HealthBar = new UIRectangle(HealthPosition, NewHealthSize, Character.HealthColor());
