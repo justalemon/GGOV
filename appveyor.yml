@@ -1,17 +1,12 @@
-# Remember to change this after the next release
 version: "1.0.0.{build}"
-
-# Use the latest image
 image: Visual Studio 2017
 
-# Patch our assembly information so we have the same version as the build
 assembly_info:
   patch: true
   file: Properties\AssemblyInfo.cs
   assembly_version: "{version}"
   assembly_file_version: "{version}"
 
-# Use the tag if the build was trigered with one
 init:
   - ps: >-
       if ($env:APPVEYOR_REPO_TAG -eq "true")
@@ -19,30 +14,28 @@ init:
         Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))"
       }
 
-# Restore our NuGet packages
 before_build:
   - cmd: nuget restore GGO.sln
 
-# Now, build the solution
 build_script:
   - cmd: msbuild.exe GGO.sln /t:Build /p:Configuration=Release;Platform=x64
 
-# Create artifacts to test the automated builds
 after_build:
-  - cmd: 7z a GGO.7z %APPVEYOR_BUILD_FOLDER%\GGO\bin\x64\Release\*
+  - cmd: 7z a GGOCommon.7z %APPVEYOR_BUILD_FOLDER%\GGO.Common\bin\x64\Release\*
+  - cmd: 7z a GGOSingleplayer.7z %APPVEYOR_BUILD_FOLDER%\GGO.Singleplayer\bin\x64\Release\*
 
-# And attach them to the build
 artifacts:
-  - path: GGO.7z
-    name: Complete Mod
+  - path: GGOCommon.7z
+    name: Common base for the mod
+  - path: GGOSingleplayer.7z
+    name: Singleplayer SHVDN mod
 
-# Autodeploy on tags
 deploy:
   release: v$(appveyor_build_version)
   provider: GitHub
   auth_token:
     secure: "DkvKC8KRj8AipGu/oWW/J2e6jMWt2xXQfKU7oefFMsp0ZMfzz+OR9Y9XpML+ZmG4"
-  artifact: GGO.7z
+  artifact: GGOSingleplayer.7z,GGOCommon.7z
   draft: false
   prerelease: true
   on:
