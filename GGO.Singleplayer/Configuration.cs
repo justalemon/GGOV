@@ -20,6 +20,10 @@ namespace GGO.Singleplayer
         /// </summary>
         public static bool Debug = Raw.GetValue("GGO", "Debug", false) || Environment.GetEnvironmentVariable("DevGTA", EnvironmentVariableTarget.User) == "true";
         /// <summary>
+        /// The player desired name.
+        /// </summary>
+        public static string Name = Raw.GetValue("GGO", "Name", "default");
+        /// <summary>
         /// If the HUD and Radar should be disabled
         /// </summary>
         public static bool HudDisabled = Raw.GetValue("GGO", "HudDisabled", false);

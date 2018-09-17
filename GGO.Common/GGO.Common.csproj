@@ -51,6 +51,7 @@
     <Compile Include="Colors.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="Math.cs" />
+    <Compile Include="Ped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

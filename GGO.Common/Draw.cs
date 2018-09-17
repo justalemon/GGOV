@@ -1,4 +1,5 @@
-﻿using GTA;
+﻿using GGO.Common;
+using GTA;
 using GTA.Native;
 using System;
 using System.Drawing;
@@ -26,7 +27,7 @@ namespace GGO.Common
         /// <param name="Character">The ped to get the information.</param>
         /// <param name="Position">The position on the screen.</param>
         /// <param name="TotalSize">The full size of the information field.</param>
-        public static void PedInfo(Ped Character, Point Position, Size InfoSize, Size HealthSize, Size Offset, Size DividerOffset, Size Divider, Size PlayerOffset)
+        public static void PedInfo(Ped Character, Point Position, Size InfoSize, Size HealthSize, Size Offset, Size DividerOffset, Size Divider, Size PlayerOffset, string CName)
         {
             UIRectangle Background = new UIRectangle(Position, InfoSize, Colors.Background);
             Background.Draw();
@@ -47,7 +48,7 @@ namespace GGO.Common
             UIRectangle HealthBar = new UIRectangle(HealthPosition, NewHealthSize, Colors.GetPedHealthColor(Character));
             HealthBar.Draw();
 
-            UIText Name = new UIText(Character.Model.GetHashCode().ToString(), Position + PlayerOffset, 0.3f);
+            UIText Name = new UIText(Character.Name(CName), Position + PlayerOffset, 0.3f);
             Name.Draw();
         }
     }
