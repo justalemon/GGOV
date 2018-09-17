@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using GTA.Native;
 using System.Collections.Generic;
 
@@ -6,6 +6,9 @@ namespace GGO.Common
 {
     public static class PedExtension
     {
+        /// <summary>
+        /// List of names to show on the HUD.
+        /// </summary>
         public static Dictionary<int, string> Names = new Dictionary<int, string>
         {
             // Missing Ones: Karim, Gus, Norm, McReary, Daryl, Hugh, Karl, Feltz
