@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Colors.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="Math.cs" />
     <Compile Include="Ped.cs" />

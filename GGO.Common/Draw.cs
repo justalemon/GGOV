@@ -1,4 +1,4 @@
-﻿using GGO.Common;
+using GGO.Common;
 using GTA;
 using GTA.Native;
 using System;
@@ -9,11 +9,20 @@ namespace GGO.Common
     public class Draw
     {
         /// <summary>
+        /// Color for the backgrounds of the items.
+        /// </summary>
+        public static Color CBackground = Color.FromArgb(175, 0, 0, 0);
+        /// <summary>
+        /// Color for the dividers of the health bar.
+        /// </summary>
+        public static Color CDivider = Color.FromArgb(125, 230, 230, 230);
+
+        /// <summary>
         /// Draws an icon with it's respective background.
         /// </summary>
         public static void Icon(string ImageFile, Point Position, Size Background, Size Relative, Size Icon)
         {
-            UIRectangle Rect = new UIRectangle(Position, Background, Colors.Background);
+            UIRectangle Rect = new UIRectangle(Position, Background, CBackground);
             Rect.Draw();
 
             Point ImagePos = Position + Relative;
@@ -29,7 +38,7 @@ namespace GGO.Common
         /// <param name="TotalSize">The full size of the information field.</param>
         public static void PedInfo(Ped Character, Point Position, Size InfoSize, Size HealthSize, Size Offset, Size DividerOffset, Size Divider, Size PlayerOffset, string CName)
         {
-            UIRectangle Background = new UIRectangle(Position, InfoSize, Colors.Background);
+            UIRectangle Background = new UIRectangle(Position, InfoSize, CBackground);
             Background.Draw();
 
             float Width = (Character.HealthPercentage() / 100) * HealthSize.Width;
@@ -42,7 +51,7 @@ namespace GGO.Common
             UIRectangle DividerFive = new UIRectangle(HealthPosition + new Size(NewHealthSize.Width, 0) + DividerOffset - new Size(Divider.Width, 0), Divider, Colors.Divider);
             DividerFive.Draw();
 
-            UIRectangle HealthBar = new UIRectangle(HealthPosition, NewHealthSize, Colors.GetPedHealthColor(Character));
+            UIRectangle HealthBar = new UIRectangle(HealthPosition, NewHealthSize, Character.HealthColor());
             HealthBar.Draw();
 
             UIText Name = new UIText(Character.Name(CName), Position + PlayerOffset, 0.3f);
