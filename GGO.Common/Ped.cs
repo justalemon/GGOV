@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using System.Collections.Generic;
 
 namespace GGO.Common
@@ -41,6 +41,12 @@ namespace GGO.Common
             { 1401530684, "Feltz" },
         };
 
+        /// <summary>
+        /// Returns the name of a ped based on the model.
+        /// </summary>
+        /// <param name="ThePed">The ped to check.</param>
+        /// <param name="Custom">The custom name for the player ped.</param>
+        /// <returns>The name that corresponds for the ped.</returns>
         public static string Name(this Ped ThePed, string Custom = "default")
         {
             if (Custom == "default" && ThePed == Game.Player.Character)
