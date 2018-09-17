@@ -53,12 +53,12 @@
     <Compile Include="Math.cs" />
     <Compile Include="Ped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Image.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -70,10 +70,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ImageWeapon.png" />
+    <None Include="Resources\ImageCharacter.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ImageCharacter.png" />
+    <None Include="Resources\ImageWeapon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
