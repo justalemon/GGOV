@@ -1,4 +1,4 @@
-using GTA;
+﻿using GTA;
 using GTA.Native;
 using System.Collections.Generic;
 using System.Drawing;
@@ -43,7 +43,11 @@ namespace GGO.Common
             { -409745176, "Taliana" },
             { 1209091352, "Norm" },
             { 357551935, "Paige" },
-            { 1401530684, "Feltz" },
+            // Others
+            { -927261102, "Mani" }, // Mariachi on Downtown Vinewood
+            { 880829941, "Imp. Rage" }, // Super Hero on West Vinewood
+            { -835930287, "Jesse" }, // Jesus on Del Perro Pier
+            { -264140789, "Andy Moon" }, // Crazy Dude on Magellan Ave
         };
         /// <summary>
         /// Color for a ped with health over 100% (stupid but posible).
