@@ -23,7 +23,13 @@ namespace GGO.Singleplayer
                 { "Squad3", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
                 { "Squad4", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
                 { "Squad5", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad6", Common.Image.ResourceToPNG(Resources.ImageCharacter) }
+                { "Squad6", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "Dead1", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "Dead2", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "Dead3", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "Dead4", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "Dead5", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "Dead6", Common.Image.ResourceToPNG(Resources.ImageDead) }
             };
 
             public GGO()
@@ -95,8 +101,19 @@ namespace GGO.Singleplayer
                         return;
                     }
 
+                    string ImagePath;
+
+                    if (Friendly.IsDead)
+                    {
+                        ImagePath = Images["Dead" + Count.ToString()];
+                    }
+                    else
+                    {
+                        ImagePath = Images["Squad" + Count.ToString()];
+                    }
+
                     Point Position = new Point(Configuration.SquadPosition.X, (Configuration.SquadPosition.Y + Configuration.SquadRelative.Height) * Count);
-                    Common.Draw.Icon(Images["Squad" + Count.ToString()], Position, Configuration.IconBackground, Configuration.IconRelative, Configuration.IconImage);
+                    Common.Draw.Icon(ImagePath, Position, Configuration.IconBackground, Configuration.IconRelative, Configuration.IconImage);
 
                     Point InfoPosition = new Point(Configuration.SquadPosition.X + Configuration.IconBackground.Width + Configuration.SquadRelative.Width, (Configuration.SquadPosition.Y + Configuration.SquadRelative.Height) * Count);
                     Common.Draw.PedInfo(Friendly, InfoPosition, Configuration.SquadInfoSize, Configuration.HealthBarSize, Configuration.HealthBarOffset, Configuration.HealthDividerOffset, Configuration.HealthDividerSize, Configuration.PlayerNameOffset, Configuration.Name);
