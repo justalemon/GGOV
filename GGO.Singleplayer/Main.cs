@@ -1,4 +1,4 @@
-﻿using GGO.Common.Properties;
+using GGO.Common.Properties;
 using GTA;
 using GTA.Native;
 using System;
@@ -78,9 +78,9 @@ namespace GGO.Singleplayer
                 // First, create a list and a count with the player
                 int Count = 1;
                 List<Ped> Squad = new List<Ped>
-            {
-                Game.Player.Character
-            };
+                {
+                    Game.Player.Character
+                };
 
                 // Run over the peds and add them to the list, up to 6 of them including the player
                 foreach (Ped NearbyPed in World.GetNearbyPeds(Game.Player.Character.Position, 50f))
