@@ -1,4 +1,4 @@
-using GTA;
+﻿using GTA;
 using GTA.Native;
 using System.Collections.Generic;
 using System.Drawing;
@@ -56,7 +56,7 @@ namespace GGO.Common
         /// <summary>
         /// Color for a ped with health over 100% (stupid but posible).
         /// </summary>
-        public static Color HealthStupid = Color.FromArgb(255);
+        public static Color HealthStupid = Color.FromArgb(255, 0, 191, 255);
         /// <summary>
         /// Color for a ped with health above 50% and under 100%.
         /// </summary>
