@@ -18,18 +18,18 @@ namespace GGO.Singleplayer
             /// </summary>
             public static Dictionary<string, string> Images = new Dictionary<string, string>
             {
-                { "Squad1", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad2", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad3", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad4", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad5", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Squad6", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "Dead1", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "Dead2", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "Dead3", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "Dead4", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "Dead5", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "Dead6", Common.Image.ResourceToPNG(Resources.ImageDead) }
+                { "SquadAlive1", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "SquadAlive2", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "SquadAlive3", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "SquadAlive4", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "SquadAlive5", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "SquadAlive6", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
+                { "SquadDead1", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "SquadDead2", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "SquadDead3", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "SquadDead4", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "SquadDead5", Common.Image.ResourceToPNG(Resources.ImageDead) },
+                { "SquadDead6", Common.Image.ResourceToPNG(Resources.ImageDead) }
             };
 
             public GGO()
@@ -105,11 +105,11 @@ namespace GGO.Singleplayer
 
                     if (Friendly.IsDead)
                     {
-                        ImagePath = Images["Dead" + Count.ToString()];
+                        ImagePath = Images["SquadDead" + Count.ToString()];
                     }
                     else
                     {
-                        ImagePath = Images["Squad" + Count.ToString()];
+                        ImagePath = Images["SquadAlive" + Count.ToString()];
                     }
 
                     Point Position = new Point(Configuration.SquadPosition.X, (Configuration.SquadPosition.Y + Configuration.SquadRelative.Height) * Count);
