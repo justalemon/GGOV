@@ -1,3 +1,4 @@
+using GGO.Common;
 using GGO.Common.Properties;
 using GTA;
 using GTA.Native;
@@ -85,9 +86,9 @@ namespace GGO.Singleplayer
                 // Run over the peds and add them to the list, up to 6 of them including the player
                 foreach (Ped NearbyPed in World.GetNearbyPeds(Game.Player.Character.Position, 50f))
                 {
-                    if (Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, NearbyPed) &&
+                    if (NearbyPed.IsMissionEntity() &&
                         Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, NearbyPed, Game.Player.Character) != 5 &&
-                        !Function.Call<bool>(Hash.IS_PED_A_PLAYER, NearbyPed))
+                        !NearbyPed.IsPlayer)
                     {
                         Squad.Add(NearbyPed);
                     }
