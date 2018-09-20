@@ -86,9 +86,7 @@ namespace GGO.Singleplayer
                 // Run over the peds and add them to the list, up to 6 of them including the player
                 foreach (Ped NearbyPed in World.GetNearbyPeds(Game.Player.Character.Position, 50f))
                 {
-                    if (NearbyPed.IsMissionEntity() &&
-                        Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, NearbyPed, Game.Player.Character) != 5 &&
-                        !NearbyPed.IsPlayer)
+                    if (NearbyPed.IsMissionEntity() && NearbyPed.IsFriendly() && !NearbyPed.IsPlayer)
                     {
                         Squad.Add(NearbyPed);
                     }

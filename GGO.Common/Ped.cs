@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using GTA.Native;
 using System.Collections.Generic;
 using System.Drawing;
@@ -49,6 +49,10 @@ namespace GGO.Common
             { -835930287, "Jesse" }, // Jesus on Del Perro Pier
             { -264140789, "Andy Moon" }, // Crazy Dude on Magellan Ave
         };
+        /// <summary>
+        /// Relationships that are considered friendly.
+        /// </summary>
+        public static List<int> Relationships = new List<int> { 0, 1, 2 };
         /// <summary>
         /// Color for a ped with health over 100% (stupid but posible).
         /// </summary>
@@ -145,6 +149,17 @@ namespace GGO.Common
         public static bool IsMissionEntity(this Ped ThePed)
         {
             return Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, ThePed);
+        }
+
+        /// <summary>
+        /// Checks if the ped is friendly against the player.
+        /// </summary>
+        /// <param name="ThePed">The ped to check.</param>
+        /// <returns>True if the ped likes or respect the player, False otherwise.</returns>
+        public static bool IsFriendly(this Ped ThePed)
+        {
+            int Relation = Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, ThePed, Game.Player.Character);
+            return Relationships.Contains(Relation);
         }
     }
 }
