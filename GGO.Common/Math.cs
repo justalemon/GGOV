@@ -12,7 +12,7 @@ namespace GGO.Common
         /// <returns>The value that corresponds to that percentage.</returns>
         public static int Percentage(float Percentage, int Of)
         {
-            return Convert.ToInt32((Percentage / 100) * Of);
+            return Convert.ToInt32(Of * Percentage);
         }
 
         /// <summary>
