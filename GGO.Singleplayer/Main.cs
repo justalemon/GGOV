@@ -15,6 +15,10 @@ namespace GGO.Singleplayer
         public class GGO : Script
         {
             /// <summary>
+            /// Our configuration parameters.
+            /// </summary>
+            public static Configuration Config = new Configuration("scripts\\GGO.Common.json", Game.ScreenResolution);
+            /// <summary>
             /// Our list of images.
             /// </summary>
             public static Dictionary<string, string> Images = new Dictionary<string, string>
@@ -45,18 +49,18 @@ namespace GGO.Singleplayer
                 Tick += OnTick;
 
                 // Show some debug messages if the user wants to
-                if (Configuration.Debug)
+                if (Config.Debug)
                 {
                     UI.Notify("~p~GGO~s~: Starting the Mod...");
 
-                    UI.Notify("~g~GGO~s~: IconImage: " + Configuration.IconImage.Width.ToString() + "w, " + Configuration.IconImage.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: IconBackground: " + Configuration.IconBackground.Width.ToString() + "w, " + Configuration.IconBackground.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: IconRelative: " + Configuration.IconRelative.Width.ToString() + "w, " + Configuration.IconRelative.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: SquadRelative: " + Configuration.SquadRelative.Width.ToString() + "w, " + Configuration.SquadRelative.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: SquadInfoSize: " + Configuration.SquadInfoSize.Width.ToString() + "w, " + Configuration.SquadInfoSize.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: HealthBarSize: " + Configuration.HealthBarSize.Width.ToString() + "w, " + Configuration.HealthBarSize.Height.ToString() + "h");
+                    UI.Notify("~g~GGO~s~: IconImage: " + Config.IconImageSize.Width.ToString() + "w, " + Config.IconImageSize.Height.ToString() + "h");
+                    UI.Notify("~g~GGO~s~: IconBackground: " + Config.IconBackgroundSize.Width.ToString() + "w, " + Config.IconBackgroundSize.Height.ToString() + "h");
+                    UI.Notify("~g~GGO~s~: IconRelative: " + Config.IconPosition.Width.ToString() + "w, " + Config.IconPosition.Height.ToString() + "h");
+                    UI.Notify("~g~GGO~s~: SquadRelative: " + Config.ElementsRelative.Width.ToString() + "w, " + Config.ElementsRelative.Height.ToString() + "h");
+                    UI.Notify("~g~GGO~s~: SquadInfoSize: " + Config.SquadInfoSize.Width.ToString() + "w, " + Config.SquadInfoSize.Height.ToString() + "h");
+                    UI.Notify("~g~GGO~s~: HealthBarSize: " + Config.SquadHealthSize.Width.ToString() + "w, " + Config.SquadHealthSize.Height.ToString() + "h");
 
-                    UI.Notify("~b~GGO~s~: SquadPosition: " + Configuration.SquadPosition.X.ToString() + "x, " + Configuration.SquadPosition.Y.ToString() + "y");
+                    UI.Notify("~b~GGO~s~: SquadPosition: " + Config.SquadPosition.X.ToString() + "x, " + Config.SquadPosition.Y.ToString() + "y");
                 }
             }
 
@@ -70,7 +74,7 @@ namespace GGO.Singleplayer
                 }
 
                 // Disable the original game HUD and radar if is requested
-                if (Configuration.HudDisabled)
+                if (Config.DisableHud)
                 {
                     Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
                 }
@@ -111,11 +115,11 @@ namespace GGO.Singleplayer
                         ImagePath = Images["SquadAlive" + Count.ToString()];
                     }
 
-                    Point Position = new Point(Configuration.SquadPosition.X, (Configuration.SquadPosition.Y + Configuration.SquadRelative.Height) * Count);
-                    Common.Draw.Icon(ImagePath, Position, Configuration.IconBackground, Configuration.IconRelative, Configuration.IconImage);
+                    Point Position = new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
+                    Common.Draw.Icon(ImagePath, Position, Config.IconBackgroundSize, Config.IconPosition, Config.IconImageSize);
 
-                    Point InfoPosition = new Point(Configuration.SquadPosition.X + Configuration.IconBackground.Width + Configuration.SquadRelative.Width, (Configuration.SquadPosition.Y + Configuration.SquadRelative.Height) * Count);
-                    Common.Draw.PedInfo(Friendly, InfoPosition, Configuration.SquadInfoSize, Configuration.HealthBarSize, Configuration.HealthBarOffset, Configuration.HealthDividerOffset, Configuration.HealthDividerSize, Configuration.PlayerNameOffset, Configuration.Name);
+                    Point InfoPosition = new Point(Config.SquadPosition.X + Config.IconBackgroundSize.Width + Config.ElementsRelative.Width, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
+                    Common.Draw.PedInfo(Friendly, InfoPosition, Config.SquadInfoSize, Config.SquadHealthSize, Config.SquadHealthPos, Config.DividerPosition, Config.DividerSize, Config.NamePosition, Config.Name);
 
                     Count++;
                 }
