@@ -45,20 +45,12 @@ namespace GGO.Common
 
             int HealthSep = Config.SquadHealthSize.Width / 4;
 
-            UIRectangle DividerOne = new UIRectangle(HealthPosition + Config.DividerPosition, Config.DividerSize, CDivider);
-            DividerOne.Draw();
-
-            UIRectangle DividerTwo = new UIRectangle(HealthPosition + new Size(HealthSep * 1, 0) + Config.DividerPosition, Config.DividerSize, CDivider);
-            DividerTwo.Draw();
-
-            UIRectangle DividerThree = new UIRectangle(HealthPosition + new Size(HealthSep * 2, 0) + Config.DividerPosition, Config.DividerSize, CDivider);
-            DividerThree.Draw();
-
-            UIRectangle DividerFour = new UIRectangle(HealthPosition + new Size(HealthSep * 3, 0) + Config.DividerPosition, Config.DividerSize, CDivider);
-            DividerFour.Draw();
-
-            UIRectangle DividerFive = new UIRectangle(HealthPosition + new Size(Config.SquadHealthSize.Width, 0) + Config.DividerPosition - new Size(Config.DividerSize.Width, 0), Config.DividerSize, CDivider);
-            DividerFive.Draw();
+            for (int Count = 0; Count < 5; Count++)
+            {
+                Point Pos = HealthPosition + new Size(HealthSep * Count, 0) + Config.DividerPosition;
+                UIRectangle Divider = new UIRectangle(Pos, Config.DividerSize, CDivider);
+                Divider.Draw();
+            }
 
             UIRectangle HealthBar = new UIRectangle(HealthPosition, NewHealthSize, Character.HealthColor());
             HealthBar.Draw();
