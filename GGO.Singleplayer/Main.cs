@@ -116,10 +116,10 @@ namespace GGO.Singleplayer
                     }
 
                     Point Position = new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
-                    Common.Draw.Icon(ImagePath, Position, Config.IconBackgroundSize, Config.IconPosition, Config.IconImageSize);
+                    Draw.Icon(Config, ImagePath, Position);
 
                     Point InfoPosition = new Point(Config.SquadPosition.X + Config.IconBackgroundSize.Width + Config.ElementsRelative.Width, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
-                    Common.Draw.PedInfo(Friendly, InfoPosition, Config.SquadInfoSize, Config.SquadHealthSize, Config.SquadHealthPos, Config.DividerPosition, Config.DividerSize, Config.NamePosition, Config.Name);
+                    Draw.PedInfo(Config, Friendly, InfoPosition);
 
                     Count++;
                 }
