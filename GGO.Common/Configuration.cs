@@ -28,6 +28,7 @@ namespace GGO.Common
                 return (bool)Raw["disable_hud"];
             }
         }
+
         public Size ElementsRelative
         {
             get
@@ -56,6 +57,7 @@ namespace GGO.Common
                 return CreateSize("name_pos");
             }
         }
+
         public Size IconImageSize
         {
             get
@@ -77,6 +79,7 @@ namespace GGO.Common
                 return CreateSize("icon_relative_pos");
             }
         }
+
         public Point SquadPosition
         {
             get
@@ -105,6 +108,7 @@ namespace GGO.Common
                 return CreateSize("squad_health_pos");
             }
         }
+
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }
 

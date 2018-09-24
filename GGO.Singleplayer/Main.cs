@@ -37,25 +37,18 @@ namespace GGO.Singleplayer
                 { "SquadDead5", Common.Image.ResourceToPNG(Resources.ImageDead) },
                 { "SquadDead6", Common.Image.ResourceToPNG(Resources.ImageDead) }
             };
+            public static Debug DebugWindow = new Debug(Config);
 
             public GGO()
             {
                 // Add our OnTick event
                 Tick += OnTick;
+                Aborted += OnAbort;
 
-                // Show some debug messages if the user wants to
+                // Show the debug window if the user wants to
                 if (Config.Debug)
                 {
-                    UI.Notify("~p~GGO~s~: Starting the Mod...");
-
-                    UI.Notify("~g~GGO~s~: IconImage: " + Config.IconImageSize.Width.ToString() + "w, " + Config.IconImageSize.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: IconBackground: " + Config.IconBackgroundSize.Width.ToString() + "w, " + Config.IconBackgroundSize.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: IconRelative: " + Config.IconPosition.Width.ToString() + "w, " + Config.IconPosition.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: SquadRelative: " + Config.ElementsRelative.Width.ToString() + "w, " + Config.ElementsRelative.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: SquadInfoSize: " + Config.SquadInfoSize.Width.ToString() + "w, " + Config.SquadInfoSize.Height.ToString() + "h");
-                    UI.Notify("~g~GGO~s~: HealthBarSize: " + Config.SquadHealthSize.Width.ToString() + "w, " + Config.SquadHealthSize.Height.ToString() + "h");
-
-                    UI.Notify("~b~GGO~s~: SquadPosition: " + Config.SquadPosition.X.ToString() + "x, " + Config.SquadPosition.Y.ToString() + "y");
+                    DebugWindow.Show();
                 }
             }
 
@@ -107,6 +100,12 @@ namespace GGO.Singleplayer
                         Count++;
                     }
                 }
+            }
+
+            public static void OnAbort(object Sender, EventArgs Args)
+            {
+                // Close the debug window
+                DebugWindow.Close();
             }
         }
     }
