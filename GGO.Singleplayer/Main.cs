@@ -40,12 +40,6 @@ namespace GGO.Singleplayer
 
             public GGO()
             {
-                // Patch our locale so we don't have the "coma vs dot" problem
-                Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
-                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
-
                 // Add our OnTick event
                 Tick += OnTick;
 
