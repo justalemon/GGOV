@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 
 namespace GGO.Singleplayer
@@ -80,48 +81,37 @@ namespace GGO.Singleplayer
                 }
 
                 // Draw the squad information on the top left
-                // First, create a list and a count with the player
+                // First, create a list to start counting
                 int Count = 1;
-                List<Ped> Squad = new List<Ped>
+
+                // Then, Run over the peds and draw them on the screen (up to 6 of them, including the player)
+                // NOTE: We order them by ped hash because the players have lower hash codes than the rest of entities
+                foreach (Ped Friendly in World.GetNearbyPeds(Game.Player.Character.Position, 50f).OrderBy(P => P.GetHashCode()))
                 {
-                    Game.Player.Character
-                };
-
-                // Run over the peds and add them to the list, up to 6 of them including the player
-                foreach (Ped NearbyPed in World.GetNearbyPeds(Game.Player.Character.Position, 50f))
-                {
-                    if (NearbyPed.IsMissionEntity() && NearbyPed.IsFriendly() && !NearbyPed.IsPlayer)
+                    // Check that the ped is a mission entity and is friendly
+                    if (Friendly.IsMissionEntity() && Friendly.IsFriendly() && Count <= 6)
                     {
-                        Squad.Add(NearbyPed);
+                        // Select the icon image by checking that the ped is either dead or alive
+                        string ImagePath;
+                        if (Friendly.IsDead)
+                        {
+                            ImagePath = Images["SquadDead" + Count.ToString()];
+                        }
+                        else
+                        {
+                            ImagePath = Images["SquadAlive" + Count.ToString()];
+                        }
+
+                        // Finally, draw the icon
+                        Point Position = new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
+                        Draw.Icon(Config, ImagePath, Position);
+                        // And the information of it
+                        Point InfoPosition = new Point(Config.SquadPosition.X + Config.IconBackgroundSize.Width + Config.ElementsRelative.Width, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
+                        Draw.PedInfo(Config, Friendly, InfoPosition);
+
+                        // To end this up, increase the count of peds "rendered"
+                        Count++;
                     }
-                }
-
-                // At this point the list is full of peds that are on our squad, so draw them on the HUD
-                foreach (Ped Friendly in Squad)
-                {
-                    if (Count > 6)
-                    {
-                        return;
-                    }
-
-                    string ImagePath;
-
-                    if (Friendly.IsDead)
-                    {
-                        ImagePath = Images["SquadDead" + Count.ToString()];
-                    }
-                    else
-                    {
-                        ImagePath = Images["SquadAlive" + Count.ToString()];
-                    }
-
-                    Point Position = new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
-                    Draw.Icon(Config, ImagePath, Position);
-
-                    Point InfoPosition = new Point(Config.SquadPosition.X + Config.IconBackgroundSize.Width + Config.ElementsRelative.Width, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
-                    Draw.PedInfo(Config, Friendly, InfoPosition);
-
-                    Count++;
                 }
             }
         }
