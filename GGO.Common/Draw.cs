@@ -36,19 +36,33 @@ namespace GGO.Common
         /// <param name="Character">The ped to get the information.</param>
         /// <param name="Position">The position on the screen.</param>
         /// <param name="TotalSize">The full size of the information field.</param>
-        public static void PedInfo(Configuration Config, Ped Character, Point Position)
+        public static void PedInfo(Configuration Config, Ped Character, Point Position, bool Player = false)
         {
+            // If is the player, make the background and health bar bigger
+            Size BackgroundSize;
+            Size HealthSize;
+            if (Player)
+            {
+                BackgroundSize = Config.PlayerInfoSize;
+                HealthSize = Config.PlayerHealthSize;
+            }
+            else
+            {
+                BackgroundSize = Config.SquadInfoSize;
+                HealthSize = Config.SquadHealthSize;
+            }
+
             // First, draw the black background
-            UIRectangle Background = new UIRectangle(Position, Config.SquadInfoSize, CBackground);
+            UIRectangle Background = new UIRectangle(Position, BackgroundSize, CBackground);
             Background.Draw();
 
             // Then, calculate the health bar: (Percentage / 100) * DefaultWidth
-            float Width = (Character.HealthPercentage() / 100) * Config.SquadHealthSize.Width;
+            float Width = (Character.HealthPercentage() / 100) * HealthSize.Width;
             // Create a Size with the required size
-            Size NewHealthSize = new Size(Convert.ToInt32(Width), Config.SquadHealthSize.Height);
+            Size NewHealthSize = new Size(Convert.ToInt32(Width), HealthSize.Height);
 
             // For the dividers, get the distance between each one of them
-            int HealthSep = Config.SquadHealthSize.Width / 4;
+            int HealthSep = HealthSize.Width / 4;
 
             // Prior to drawing the health bar we need the separators
             for (int Count = 0; Count < 5; Count++)

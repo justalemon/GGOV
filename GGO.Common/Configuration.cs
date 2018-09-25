@@ -116,6 +116,20 @@ namespace GGO.Common
                 return CreatePoint("player_general_pos");
             }
         }
+        public Size PlayerInfoSize
+        {
+            get
+            {
+                return CreateSize("player_info_size");
+            }
+        }
+        public Size PlayerHealthSize
+        {
+            get
+            {
+                return CreateSize("player_health_size");
+            }
+        }
 
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }

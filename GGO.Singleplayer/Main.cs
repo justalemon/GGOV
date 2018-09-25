@@ -49,6 +49,7 @@ namespace GGO.Singleplayer
 
                 // Player information goes here
                 Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageCharacter, "Player"), Config.PlayerPosition);
+                Draw.PedInfo(Config, Game.Player.Character, new Point(Config.PlayerPosition.X + Config.IconBackgroundSize.Width + Config.ElementsRelative.Width, Config.PlayerPosition.Y), true);
 
                 // Draw the squad information on the top left
                 // First, create a list to start counting
