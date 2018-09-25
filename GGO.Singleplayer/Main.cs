@@ -5,9 +5,7 @@ using GTA.Native;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 
 namespace GGO.Singleplayer
 {
