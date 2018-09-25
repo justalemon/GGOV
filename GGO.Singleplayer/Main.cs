@@ -47,6 +47,9 @@ namespace GGO.Singleplayer
                     Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
                 }
 
+                // Player information goes here
+                Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageCharacter, "Player"), Config.PlayerPosition);
+
                 // Draw the squad information on the top left
                 // First, create a list to start counting
                 int Count = 1;

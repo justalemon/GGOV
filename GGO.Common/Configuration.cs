@@ -109,6 +109,14 @@ namespace GGO.Common
             }
         }
 
+        public Point PlayerPosition
+        {
+            get
+            {
+                return CreatePoint("player_general_pos");
+            }
+        }
+
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }
         /// <summary>
