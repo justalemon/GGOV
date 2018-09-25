@@ -17,24 +17,6 @@ namespace GGO.Singleplayer
             /// Our configuration parameters.
             /// </summary>
             public static Configuration Config = new Configuration("scripts", Game.ScreenResolution);
-            /// <summary>
-            /// Our list of images.
-            /// </summary>
-            public static Dictionary<string, string> Images = new Dictionary<string, string>
-            {
-                { "SquadAlive1", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "SquadAlive2", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "SquadAlive3", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "SquadAlive4", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "SquadAlive5", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "SquadAlive6", Common.Image.ResourceToPNG(Resources.ImageCharacter) },
-                { "SquadDead1", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "SquadDead2", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "SquadDead3", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "SquadDead4", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "SquadDead5", Common.Image.ResourceToPNG(Resources.ImageDead) },
-                { "SquadDead6", Common.Image.ResourceToPNG(Resources.ImageDead) }
-            };
             public static Debug DebugWindow = new Debug(Config);
 
             public GGO()
@@ -80,11 +62,11 @@ namespace GGO.Singleplayer
                         string ImagePath;
                         if (Friendly.IsDead)
                         {
-                            ImagePath = Images["SquadDead" + Count.ToString()];
+                            ImagePath = Common.Image.ResourceToPNG(Resources.ImageDead, "SquadDead" + Count.ToString());
                         }
                         else
                         {
-                            ImagePath = Images["SquadAlive" + Count.ToString()];
+                            ImagePath = Common.Image.ResourceToPNG(Resources.ImageCharacter, "SquadAlive" + Count.ToString());
                         }
 
                         // Finally, draw the icon
