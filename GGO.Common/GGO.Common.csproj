@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Configuration.cs" />
     <Compile Include="Draw.cs" />
+    <Compile Include="Names.cs" />
     <Compile Include="Ped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Image.cs" />
@@ -64,6 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GGO.Common.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO.Names.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

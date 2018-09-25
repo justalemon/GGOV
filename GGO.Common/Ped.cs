@@ -8,48 +8,6 @@ namespace GGO.Common
     public static class PedExtension
     {
         /// <summary>
-        /// List of names to show on the HUD.
-        /// </summary>
-        public static Dictionary<int, string> Names = new Dictionary<int, string>
-        {
-            // Missing Ones: Karim, Gus, Norm, McReary, Daryl, Hugh, Karl, Feltz
-            // Main Characters
-            // Thanks SWolfie for remembering this!
-            { -1686040670, "Trevor" },
-            { 225514697, "Michael" },
-            { -1692214353, "Franklin" },
-            // Missions
-            { 1830688247, "Amanda" },
-            { -1111799518, "Brad" },
-            { -520477356, "Casey" },
-            { 1240128502, "Chef" },
-            { 365775923, "Dave" },
-            { -1674727288, "Dom" },
-            { 351016938, "Chop" },
-            { -1313761614, "Floyd" },
-            { 1459905209, "Jimmy" },
-            { 1302784073, "Lester" },
-            { 1706635382, "Lamar" },
-            { -304305299, "Mr K" },
-            { -1124046095, "Ron" },
-            { 915948376, "Stretch" },
-            { -566941131, "Tracy" },
-            { -597926235, "Tao Cheng" },
-            { 2089096292, "Translator" },
-            { -1835459726, "Wade" },
-            // Heists
-            { 712602007, "Eddie" },
-            { 994527967, "Eddie" },
-            { -409745176, "Taliana" },
-            { 1209091352, "Norm" },
-            { 357551935, "Paige" },
-            // Others
-            { -927261102, "Mani" }, // Mariachi on Downtown Vinewood
-            { 880829941, "Imp. Rage" }, // Super Hero on West Vinewood
-            { -835930287, "Jesse" }, // Jesus on Del Perro Pier
-            { -264140789, "Andy Moon" }, // Crazy Dude on Magellan Ave
-        };
-        /// <summary>
         /// Relationships that are considered friendly.
         /// </summary>
         public static List<int> Relationships = new List<int> { 0, 1, 2 };
@@ -109,11 +67,11 @@ namespace GGO.Common
         /// <param name="ThePed">The ped to check.</param>
         /// <param name="Custom">The custom name for the player ped.</param>
         /// <returns>The name that corresponds for the ped.</returns>
-        public static string Name(this Ped ThePed, string Custom = "default")
+        public static string Name(this Ped ThePed, Configuration Config)
         {
             // If the ped is the player and the custom name has not been changed
             // Return the Social Club username
-            if (Custom == "default" && ThePed == Game.Player.Character)
+            if (Config.Name == "default" && ThePed == Game.Player.Character)
             {
                 return Game.Player.Name;
             }
@@ -121,13 +79,13 @@ namespace GGO.Common
             // Return that custom name
             else if (ThePed == Game.Player.Character)
             {
-                return Custom;
+                return Config.Name;
             }
             // If is not the player but there is a custom name available
             // Return that ped name
-            else if (Names.ContainsKey(ThePed.Model.Hash))
+            else if (Config.PedNames.IsNameDefined(ThePed.Model.Hash))
             {
-                return Names[ThePed.Model.Hash];
+                return Config.PedNames.GetName(ThePed.Model.Hash);
             }
             // If none of the previous ones work
             // Return the hash as a string

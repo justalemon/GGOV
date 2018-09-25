@@ -65,7 +65,7 @@ namespace GGO.Common
             HealthBar.Draw();
 
             // And finally, draw the ped name
-            UIText Name = new UIText(Character.Name(Config.Name), Position + Config.NamePosition, 0.3f);
+            UIText Name = new UIText(Character.Name(Config), Position + Config.NamePosition, 0.3f);
             Name.Draw();
         }
     }

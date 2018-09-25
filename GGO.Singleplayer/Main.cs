@@ -18,7 +18,7 @@ namespace GGO.Singleplayer
             /// <summary>
             /// Our configuration parameters.
             /// </summary>
-            public static Configuration Config = new Configuration("scripts\\GGO.Common.json", Game.ScreenResolution);
+            public static Configuration Config = new Configuration("scripts", Game.ScreenResolution);
             /// <summary>
             /// Our list of images.
             /// </summary>

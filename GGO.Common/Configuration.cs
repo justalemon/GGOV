@@ -111,6 +111,10 @@ namespace GGO.Common
 
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }
+        /// <summary>
+        /// The list of Ped Names.
+        /// </summary>
+        public Names PedNames;
 
         /// <summary>
         /// Loads up the configuration from "GGO.Common.json"
@@ -118,9 +122,11 @@ namespace GGO.Common
         public Configuration(string Location, Size CurrentResolution)
         {
             // Read all of the text that is in the file
-            string Content = File.ReadAllText(Location);
+            string Content = File.ReadAllText(Location + "\\GGO.Common.json");
             // Load it on the parser
             Raw = JObject.Parse(Content);
+            // Dump our ped names
+            PedNames = new Names(Location +  "\\GGO.Names.json");
             // And store our current resolution
             Resolution = CurrentResolution;
         }
