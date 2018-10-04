@@ -19,6 +19,8 @@ namespace GGO.Singleplayer
             public static Configuration Config = new Configuration("scripts", Game.ScreenResolution);
             public static Debug DebugWindow = new Debug(Config);
 
+            private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
             public GGO()
             {
                 // Add our OnTick event
@@ -28,12 +30,16 @@ namespace GGO.Singleplayer
                 // Show the debug window if the user wants to
                 if (Config.Debug)
                 {
+                    NLog.LogManager.Configuration.LoggingRules.FirstOrDefault().EnableLoggingForLevel(NLog.LogLevel.Debug);
                     DebugWindow.Show();
+                    Logger.Debug("Debug window enabled");
                 }
+                Logger.Info("GGO initialized");
             }
 
             private void OnTick(object Sender, EventArgs Args)
             {
+                Logger.Debug("Tick!");
                 // Do not draw the UI elements if the game is loading, paused, player is dead or it cannot be controlled
                 if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive ||
                     !Function.Call<bool>(Hash.IS_PLAYER_CONTROL_ON, Game.Player))
@@ -84,8 +90,10 @@ namespace GGO.Singleplayer
 
             public static void OnAbort(object Sender, EventArgs Args)
             {
+                Logger.Info("Abort event received");
                 // Close the debug window
                 DebugWindow.Close();
+                Logger.Debug("Debug window closed");
             }
         }
     }
