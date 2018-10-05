@@ -84,7 +84,7 @@ namespace GGO.Common
         {
             get
             {
-                return CreatePoint("squad_general_pos");
+                return new Point(CreateSize("squad_general_pos"));
             }
         }
         public Size SquadInfoSize
@@ -167,14 +167,6 @@ namespace GGO.Common
         private Size CreateSize(string ConfigOption)
         {
             return new Size((int)(Resolution.Width * (float)Raw[ConfigOption][0]), (int)(Resolution.Height * (float)Raw[ConfigOption][1]));
-        }
-        /// <summary>
-        /// Creates a Point from a JSON array.
-        /// </summary>
-        /// <returns>The working Point.</returns>
-        private Point CreatePoint(string ConfigOption)
-        {
-            return new Point((int)(Resolution.Width * (float)Raw[ConfigOption][0]), (int)(Resolution.Height * (float)Raw[ConfigOption][1]));
         }
     }
 }
