@@ -130,6 +130,13 @@ namespace GGO.Common
                 return CreateSize("player_health_size");
             }
         }
+        public Size AmmoBackgroundSize
+        {
+            get
+            {
+                return CreateSize("player_ammo_size");
+            }
+        }
 
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }

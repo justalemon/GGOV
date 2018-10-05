@@ -40,5 +40,7 @@
 	// The size for the rectangle with the player information
 	"player_info_size": [ 0.118, 0.048 ],
 	// Self explanatory: The size for the player health bar
-	"player_health_size": [ 0.11, 0.004 ]
+	"player_health_size": [ 0.11, 0.004 ],
+	// The size of the ammo count
+	"player_ammo_size": [ 0.027, 0.048 ]
 }
