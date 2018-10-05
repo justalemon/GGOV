@@ -113,7 +113,7 @@ namespace GGO.Common
         {
             get
             {
-                return CreatePoint("player_general_pos");
+                return new Point(CreateSize("player_general_pos"));
             }
         }
         public Size PlayerInfoSize
