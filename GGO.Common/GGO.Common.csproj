@@ -87,5 +87,104 @@
   <ItemGroup>
     <None Include="Resources\ImageDead.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunAssaultSMG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunBat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunBullpupShotgun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunCarbineRifle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunCombatMG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunCombatPDW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunCombatPistol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunCompactRifle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunCrowbar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunDoubleBarrelShotgun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunFlareGun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunGolfClub.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunHammer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunHeavySniper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunKnife.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunMarksmanPistol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunMG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunMicroSMG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunMinigun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunNightstick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunPistol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunPistol50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunPumpShotgun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunRevolver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunSawnOffShotgun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunSMG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunSniperRifle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunStunGun.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunSwitchBlade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunAdvancedRifle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunAPPistol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunAssaultRifle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GunAssaultShotgun.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
