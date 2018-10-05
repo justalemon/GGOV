@@ -33,6 +33,10 @@
             this.PlayerName = new System.Windows.Forms.Label();
             this.Version = new System.Windows.Forms.Label();
             this.SizesPositions = new System.Windows.Forms.GroupBox();
+            this.AmmoBackgroundSize = new System.Windows.Forms.Label();
+            this.PlayerHealthSize = new System.Windows.Forms.Label();
+            this.PlayerInfoSize = new System.Windows.Forms.Label();
+            this.PlayerPosition = new System.Windows.Forms.Label();
             this.SquadHealthPos = new System.Windows.Forms.Label();
             this.SquadHealthSize = new System.Windows.Forms.Label();
             this.SquadInfoSize = new System.Windows.Forms.Label();
@@ -90,6 +94,10 @@
             // 
             // SizesPositions
             // 
+            this.SizesPositions.Controls.Add(this.AmmoBackgroundSize);
+            this.SizesPositions.Controls.Add(this.PlayerHealthSize);
+            this.SizesPositions.Controls.Add(this.PlayerInfoSize);
+            this.SizesPositions.Controls.Add(this.PlayerPosition);
             this.SizesPositions.Controls.Add(this.SquadHealthPos);
             this.SizesPositions.Controls.Add(this.SquadHealthSize);
             this.SizesPositions.Controls.Add(this.SquadInfoSize);
@@ -107,6 +115,42 @@
             this.SizesPositions.TabIndex = 1;
             this.SizesPositions.TabStop = false;
             this.SizesPositions.Text = "Sizes and Positions";
+            // 
+            // AmmoBackgroundSize
+            // 
+            this.AmmoBackgroundSize.AutoSize = true;
+            this.AmmoBackgroundSize.Location = new System.Drawing.Point(6, 237);
+            this.AmmoBackgroundSize.Name = "AmmoBackgroundSize";
+            this.AmmoBackgroundSize.Size = new System.Drawing.Size(114, 13);
+            this.AmmoBackgroundSize.TabIndex = 17;
+            this.AmmoBackgroundSize.Text = "AmmoBackgroundSize";
+            // 
+            // PlayerHealthSize
+            // 
+            this.PlayerHealthSize.AutoSize = true;
+            this.PlayerHealthSize.Location = new System.Drawing.Point(6, 224);
+            this.PlayerHealthSize.Name = "PlayerHealthSize";
+            this.PlayerHealthSize.Size = new System.Drawing.Size(87, 13);
+            this.PlayerHealthSize.TabIndex = 16;
+            this.PlayerHealthSize.Text = "PlayerHealthSize";
+            // 
+            // PlayerInfoSize
+            // 
+            this.PlayerInfoSize.AutoSize = true;
+            this.PlayerInfoSize.Location = new System.Drawing.Point(6, 211);
+            this.PlayerInfoSize.Name = "PlayerInfoSize";
+            this.PlayerInfoSize.Size = new System.Drawing.Size(74, 13);
+            this.PlayerInfoSize.TabIndex = 15;
+            this.PlayerInfoSize.Text = "PlayerInfoSize";
+            // 
+            // PlayerPosition
+            // 
+            this.PlayerPosition.AutoSize = true;
+            this.PlayerPosition.Location = new System.Drawing.Point(6, 198);
+            this.PlayerPosition.Name = "PlayerPosition";
+            this.PlayerPosition.Size = new System.Drawing.Size(73, 13);
+            this.PlayerPosition.TabIndex = 14;
+            this.PlayerPosition.Text = "PlayerPosition";
             // 
             // SquadHealthPos
             // 
@@ -256,5 +300,9 @@
         private System.Windows.Forms.Label SquadHealthSize;
         private System.Windows.Forms.StatusStrip InfoStrip;
         private System.Windows.Forms.Label SquadHealthPos;
+        private System.Windows.Forms.Label AmmoBackgroundSize;
+        private System.Windows.Forms.Label PlayerHealthSize;
+        private System.Windows.Forms.Label PlayerInfoSize;
+        private System.Windows.Forms.Label PlayerPosition;
     }
 }
