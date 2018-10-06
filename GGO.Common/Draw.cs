@@ -1,4 +1,5 @@
 ﻿using GTA;
+using GTA.Native;
 using System;
 using System.Drawing;
 
@@ -81,6 +82,14 @@ namespace GGO.Common
             // And finally, draw the ped name
             UIText Name = new UIText(Character.Name(Config), Position + Config.NamePosition, 0.3f);
             Name.Draw();
+        }
+
+        public static void Ammo(Configuration Config, int CurrentAmmo)
+        {
+            Point BackgroundPos = new Point(Config.PlayerPosition.X + Config.ElementsRelative.Width + Config.IconBackgroundSize.Width,
+                                            Config.PlayerPosition.Y + Config.ElementsRelative.Height + Config.IconBackgroundSize.Height);
+            UIRectangle Background = new UIRectangle(BackgroundPos, Config.AmmoBackgroundSize, CBackground);
+            Background.Draw();
         }
     }
 }
