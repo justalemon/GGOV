@@ -19,10 +19,11 @@ namespace GGO.Singleplayer
             public static Configuration Config = new Configuration("scripts", Game.ScreenResolution);
             public static Debug DebugWindow = new Debug(Config);
 
-            private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+            private static LogHelper Logger;
 
             public GGO()
             {
+                Logger = new LogHelper();
                 // Add our OnTick event
                 Tick += OnTick;
                 Aborted += OnAbort;
@@ -30,7 +31,7 @@ namespace GGO.Singleplayer
                 // Show the debug window if the user wants to
                 if (Config.Debug)
                 {
-                    NLog.LogManager.Configuration.LoggingRules.FirstOrDefault().EnableLoggingForLevel(NLog.LogLevel.Debug);
+                    LogHelper.LogLevel = LogLevel.Debug;
                     DebugWindow.Show();
                     Logger.Debug("Debug window enabled");
                 }

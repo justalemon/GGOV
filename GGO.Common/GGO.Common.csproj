@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogHelper.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="Names.cs" />
