@@ -3,7 +3,6 @@ using GGO.Common.Properties;
 using GTA;
 using GTA.Native;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
@@ -46,6 +45,13 @@ namespace GGO.Singleplayer
                 {
                     Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
                 }
+
+                // Player information goes here
+                Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageCharacter, "Player"), Config.PlayerPosition);
+                Draw.PedInfo(Config, Game.Player.Character, new Point(Config.PlayerPosition.X + Config.IconBackgroundSize.Width + Config.ElementsRelative.Width, Config.PlayerPosition.Y), true);
+
+                Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), new Point(Config.PlayerPosition.X, Config.PlayerPosition.Y + Config.ElementsRelative.Height + Config.IconBackgroundSize.Height));
+                Draw.Ammo(Config, Game.Player.Character.Weapons.Current.AmmoInClip);
 
                 // Draw the squad information on the top left
                 // First, create a list to start counting

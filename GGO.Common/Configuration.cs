@@ -109,6 +109,35 @@ namespace GGO.Common
             }
         }
 
+        public Point PlayerPosition
+        {
+            get
+            {
+                return new Point(CreateSize("player_general_pos"));
+            }
+        }
+        public Size PlayerInfoSize
+        {
+            get
+            {
+                return CreateSize("player_info_size");
+            }
+        }
+        public Size PlayerHealthSize
+        {
+            get
+            {
+                return CreateSize("player_health_size");
+            }
+        }
+        public Size AmmoBackgroundSize
+        {
+            get
+            {
+                return CreateSize("player_ammo_size");
+            }
+        }
+
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }
         /// <summary>
