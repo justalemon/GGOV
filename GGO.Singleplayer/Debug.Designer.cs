@@ -33,7 +33,6 @@
             this.PlayerName = new System.Windows.Forms.Label();
             this.Version = new System.Windows.Forms.Label();
             this.SizesPositions = new System.Windows.Forms.GroupBox();
-            this.AmmoBackgroundSize = new System.Windows.Forms.Label();
             this.PlayerHealthSize = new System.Windows.Forms.Label();
             this.PlayerInfoSize = new System.Windows.Forms.Label();
             this.PlayerPosition = new System.Windows.Forms.Label();
@@ -130,15 +129,6 @@
             this.SizesPositions.TabIndex = 1;
             this.SizesPositions.TabStop = false;
             this.SizesPositions.Text = "Sizes and Positions";
-            // 
-            // AmmoBackgroundSize
-            // 
-            this.AmmoBackgroundSize.AutoSize = true;
-            this.AmmoBackgroundSize.Location = new System.Drawing.Point(6, 237);
-            this.AmmoBackgroundSize.Name = "AmmoBackgroundSize";
-            this.AmmoBackgroundSize.Size = new System.Drawing.Size(114, 13);
-            this.AmmoBackgroundSize.TabIndex = 17;
-            this.AmmoBackgroundSize.Text = "AmmoBackgroundSize";
             // 
             // PlayerHealthSize
             // 
