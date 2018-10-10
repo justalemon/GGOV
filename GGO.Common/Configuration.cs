@@ -143,6 +143,13 @@ namespace GGO.Common
                 return CreateSize("weapon_image_size");
             }
         }
+        public Point AmmoOffset
+        {
+            get
+            {
+                return new Point(CreateSize("ammo_offset_pos"));
+            }
+        }
 
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }

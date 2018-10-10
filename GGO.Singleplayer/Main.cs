@@ -16,7 +16,7 @@ namespace GGO.Singleplayer
             /// <summary>
             /// Our configuration parameters.
             /// </summary>
-            public static Configuration Config = new Configuration("scripts", Game.ScreenResolution);
+            public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT)); //Use UI HEIGHT & WIDTH, UI set to static 1280x720 and scaled up to resolution.
             public static Debug DebugWindow = new Debug(Config);
 
             public GGO()
@@ -64,7 +64,7 @@ namespace GGO.Singleplayer
                 Point NameInfoPosition = new Point(xPos, Config.PlayerPosition.Y);
 
                 // Send the points off to be drawn
-                Draw.PlayerInfo(Config, NamePosition, NameInfoPosition);
+                Draw.PedInfo(Config, new Ped(Game.Player.Character.Handle), NamePosition, NameInfoPosition, true);
 
                 // Generate the points for the main hand weapon, this will include the ammo icon, ammo counter, and weapon icon (when applicable).
                 Point MainHandPosition = new Point(Config.PlayerPosition.X, (NamePosition.Y + yIncriment));
@@ -72,7 +72,7 @@ namespace GGO.Singleplayer
                 Point MainHandWeaponPosition = new Point(xPos + xIncriment, (NameInfoPosition.Y + yIncriment));
 
                 // Send the points off to be drawn
-                Draw.PlayerMainHand(Config, MainHandPosition, MainHandAmmoPosition, MainHandWeaponPosition);
+                Draw.PlayerWeapon(Config, MainHandPosition, MainHandAmmoPosition, MainHandWeaponPosition);
 
                 // Generate the points for the off hand weapon, this will include the ammo icon, ammo counter, and weapon icon (when applicable).
                 Point OffHandPosition = new Point(Config.PlayerPosition.X, (MainHandPosition.Y + yIncriment));
@@ -80,7 +80,7 @@ namespace GGO.Singleplayer
                 Point OffHandWeaponPosition = new Point(xPos + xIncriment, (MainHandPosition.Y + yIncriment));
 
                 // Send the points off to be drawn
-                Draw.PlayerOffHand(Config, OffHandPosition, OffHandAmmoPosition, OffHandWeaponPosition);
+                Draw.PlayerWeapon(Config, OffHandPosition, OffHandAmmoPosition, OffHandWeaponPosition, true);
             }
 
             private void UpdateSquadInfo()
@@ -96,23 +96,10 @@ namespace GGO.Singleplayer
                     // Check that the ped is a mission entity and is friendly
                     if (Friendly.IsMissionEntity() && Friendly.IsFriendly() && Count <= 6)
                     {
-                        // Select the icon image by checking that the ped is either dead or alive
-                        string ImagePath;
-                        if (Friendly.IsDead)
-                        {
-                            ImagePath = Common.Image.ResourceToPNG(Resources.ImageDead, "SquadDead" + Count.ToString());
-                        }
-                        else
-                        {
-                            ImagePath = Common.Image.ResourceToPNG(Resources.ImageCharacter, "SquadAlive" + Count.ToString());
-                        }
-
-                        // Finally, draw the icon
                         Point Position = new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
-                        Draw.Icon(Config, ImagePath, Position);
                         // And the information of it
                         Point InfoPosition = new Point(Config.SquadPosition.X + Config.IconBackgroundSize.Width + Config.ElementsRelative.Width, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
-                        Draw.PedInfo(Config, Friendly, InfoPosition);
+                        Draw.PedInfo(Config, Friendly, Position, InfoPosition, false, Count);
 
                         // To end this up, increase the count of peds "rendered"
                         Count++;
