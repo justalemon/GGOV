@@ -124,17 +124,11 @@ namespace GGO.Common
         public static void PlayerMainHand(Configuration Config, Point HandPosition, Point AmmoPosition, Point WeaponPosition)
         {
             // Do not display main hand weapons for these types.
-            if (Weapons.CurrentWeaponType == Weapons.Type.Banned || Weapons.CurrentWeaponType == Weapons.Type.Sidearm)
+            if (Weapons.CurrentWeaponType == Weapons.Type.Banned || Weapons.CurrentWeaponType == Weapons.Type.Sidearm || Weapons.CurrentWeaponType == Weapons.Type.Melee)
             {
                 Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoWeaponMain"), HandPosition);
                 Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoAmmoMain"), AmmoPosition);
                 return;
-            }
-            // If the type is melee, do not display ammo icon or ammo counter
-            else if (Weapons.CurrentWeaponType == Weapons.Type.Melee)
-            {
-                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "MeleeWeaponMain"), HandPosition);
-                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoAmmoMain"), AmmoPosition);
             }
             else
             {
@@ -144,7 +138,7 @@ namespace GGO.Common
                 UIRectangle AmmoBackground = new UIRectangle(AmmoPosition, Config.IconBackgroundSize, CBackground);
                 AmmoBackground.Draw();
                 // Finally, draw the ammo counter on top
-                UIText Ammo = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), AmmoPosition + Config.NamePosition, 1f);
+                UIText Ammo = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), AmmoPosition + Config.NamePosition, .8f, Color.White, GTA.Font.Monospace, true);
                 Ammo.Draw();
             }
 
@@ -177,6 +171,12 @@ namespace GGO.Common
                 Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoAmmoOff"), AmmoPosition);
                 return;
             }
+            // If the type is melee, do not display ammo icon or ammo counter
+            else if (Weapons.CurrentWeaponType == Weapons.Type.Melee)
+            {
+                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "MeleeWeaponMain"), HandPosition);
+                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoAmmoMain"), AmmoPosition);
+            }
             else
             {
                 // Draw the ammo icon
@@ -185,7 +185,7 @@ namespace GGO.Common
                 UIRectangle AmmoBackground = new UIRectangle(AmmoPosition, Config.IconBackgroundSize, CBackground);
                 AmmoBackground.Draw();
                 // Finally, draw the ammo counter on top
-                UIText Ammo = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), AmmoPosition + Config.NamePosition, 1f);
+                UIText Ammo = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), AmmoPosition + Config.NamePosition, .8f, Color.White, GTA.Font.Monospace, true);
                 Ammo.Draw();
             }
 
