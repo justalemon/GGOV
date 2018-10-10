@@ -149,29 +149,7 @@ namespace GGO.Common
             {
                 return new Point(CreateSize("ammo_offset_pos"));
             }
-        }
-
-        public Point PlayerPosition
-        {
-            get
-            {
-                return new Point(CreateSize("player_general_pos"));
-            }
-        }
-        public Size PlayerInfoSize
-        {
-            get
-            {
-                return CreateSize("player_info_size");
-            }
-        }
-        public Size PlayerHealthSize
-        {
-            get
-            {
-                return CreateSize("player_health_size");
-            }
-        }
+        }S
         public Size AmmoBackgroundSize
         {
             get
