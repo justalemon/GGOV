@@ -3,7 +3,6 @@ using GGO.Common.Properties;
 using GTA;
 using GTA.Native;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 

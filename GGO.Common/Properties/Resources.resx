@@ -118,6 +118,105 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GunAdvancedRifle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunAdvancedRifle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunAPPistol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunAPPistol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunAssaultRifle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunAssaultRifle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunAssaultShotgun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunAssaultShotgun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunAssaultSMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunAssaultSMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunBat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunBat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunBullpupShotgun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunBullpupShotgun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunCarbineRifle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunCarbineRifle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunCombatMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunCombatMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunCombatPDW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunCombatPDW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunCombatPistol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunCombatPistol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunCompactRifle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunCompactRifle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunCrowbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunCrowbar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunDoubleBarrelShotgun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunDoubleBarrelShotgun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunFlareGun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunFlareGun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunGolfClub" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunGolfClub.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunHammer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunHammer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunHeavySniper" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunHeavySniper.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunKnife" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunKnife.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunMarksmanPistol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunMarksmanPistol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunMicroSMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunMicroSMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunMinigun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunMinigun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunNightstick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunNightstick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunPistol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunPistol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunPistol50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunPistol50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunPumpShotgun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunPumpShotgun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunRevolver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunRevolver.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunSawnOffShotgun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunSawnOffShotgun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunSMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunSMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunSniperRifle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunSniperRifle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunStunGun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunStunGun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunSwitchBlade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunSwitchBlade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ImageCharacter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImageCharacter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

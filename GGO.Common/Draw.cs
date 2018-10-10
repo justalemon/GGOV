@@ -1,4 +1,5 @@
-﻿using GTA;
+using GTA;
+using GTA.Native;
 using System;
 using System.Drawing;
 using System.Collections.Generic;
@@ -143,6 +144,14 @@ namespace GGO.Common
 
             // Draw the weapon
             Weapon(Config, WeaponPosition);
+        }
+      
+        public static void Ammo(Configuration Config, int CurrentAmmo)
+        {
+            Point BackgroundPos = new Point(Config.PlayerPosition.X + Config.ElementsRelative.Width + Config.IconBackgroundSize.Width,
+                                            Config.PlayerPosition.Y + Config.ElementsRelative.Height + Config.IconBackgroundSize.Height);
+            UIRectangle Background = new UIRectangle(BackgroundPos, Config.AmmoBackgroundSize, CBackground);
+            Background.Draw();
         }
     }
 }
