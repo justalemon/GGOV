@@ -63,6 +63,336 @@ namespace GGO.Common.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap GUN_Bat {
+            get {
+                object obj = ResourceManager.GetObject("GUN_Bat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_Crowbar {
+            get {
+                object obj = ResourceManager.GetObject("GUN_Crowbar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_GolfClub {
+            get {
+                object obj = ResourceManager.GetObject("GUN_GolfClub", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_Hammer {
+            get {
+                object obj = ResourceManager.GetObject("GUN_Hammer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_Nightstick {
+            get {
+                object obj = ResourceManager.GetObject("GUN_Nightstick", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_StunGun {
+            get {
+                object obj = ResourceManager.GetObject("GUN_StunGun", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_CMPRIFLE {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_CMPRIFLE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_COMBATPDW {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_COMBATPDW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_DAGGER {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_DAGGER", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_DBSHGN {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_DBSHGN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_FLAREGUN {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_FLAREGUN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_MG {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_MG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_MG_CBT {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_MG_CBT", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_MINIGUN {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_MINIGUN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_MKPISTOL {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_MKPISTOL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_PIST {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_PIST", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_PIST_50 {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_PIST_50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_PIST_AP {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_PIST_AP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_PIST_CBT {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_PIST_CBT", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_REVOLVER {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_REVOLVER", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_RIFLE_ADV {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_RIFLE_ADV", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_RIFLE_ASL {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_RIFLE_ASL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_RIFLE_CBN {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_RIFLE_CBN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SG_ASL {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SG_ASL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SG_BLP {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SG_BLP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SG_PMP {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SG_PMP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SG_SOF {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SG_SOF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SMG {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SMG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SMG_ASL {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SMG_ASL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SMG_MCR {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SMG_MCR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SNIP_HVY {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SNIP_HVY", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SNIP_RIF {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SNIP_RIF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap GUN_WTT_SWBLADE {
+            get {
+                object obj = ResourceManager.GetObject("GUN_WTT_SWBLADE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap ImageCharacter {
             get {
                 object obj = ResourceManager.GetObject("ImageCharacter", resourceCulture);
@@ -86,6 +416,16 @@ namespace GGO.Common.Properties {
         public static System.Drawing.Bitmap ImageWeapon {
             get {
                 object obj = ResourceManager.GetObject("ImageWeapon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap NoWeapon {
+            get {
+                object obj = ResourceManager.GetObject("NoWeapon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

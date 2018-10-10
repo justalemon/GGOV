@@ -108,6 +108,41 @@ namespace GGO.Common
                 return CreateSize("squad_health_pos");
             }
         }
+        public Point PlayerPosition
+        {
+            get
+            {
+                return new Point(CreateSize("player_general_pos"));
+            }
+        }
+        public Size PlayerInfoSize
+        {
+            get
+            {
+                return CreateSize("player_info_size");
+            }
+        }
+        public Size PlayerHealthSize
+        {
+            get
+            {
+                return CreateSize("player_health_size");
+            }
+        }
+        public Size PlayerHealthPos
+        {
+            get
+            {
+                return CreateSize("player_health_pos");
+            }
+        }
+        public Size WeaponImageSize
+        {
+            get
+            {
+                return CreateSize("weapon_image_size");
+            }
+        }
 
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }

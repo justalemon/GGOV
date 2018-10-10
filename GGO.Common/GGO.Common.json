@@ -1,37 +1,49 @@
 {
-	// Remember the following for positions and sizes:
-	// The first value is X/Width and the second value is Y/Height
-	// We are using decimals, so put a value between 1 and 0
+    // Remember the following for positions and sizes:
+    // The first value is X/Width and the second value is Y/Height
+    // We are using decimals, so put a value between 1 and 0
 
-	// If the game should show the debugging window
-	"debug": false,
-	// A custom player name. This does not have effect on FiveM!
-	"name": "default",
-	// If the entire game HUD should be disabled
-	"disable_hud": false,
+    // If the game should show the debugging window
+    "debug": false,
+    // A custom player name. This does not have effect on FiveM!
+    "name": "default",
+    // If the entire game HUD should be disabled
+    "disable_hud": false,
 
-	// The relative position between screen elements
-	"elements_relative": [ 0.0055, 0.01 ],
-	// The size for the dividers on the health bar
-	"divider_size": [ 0.001, 0.012 ],
-	// Position of the dividers relative to the health bar
-	"divider_pos": [ 0, -0.004 ],
-	// Position of the names relative to the background
-	"name_pos": [ 0.0025, 0.001 ],
+    // The relative position between screen elements
+    "elements_relative": [ 0.0055, 0.01 ],
+    // The size for the dividers on the health bar
+    "divider_size": [ 0.001, 0.012 ],
+    // Position of the dividers relative to the health bar
+    "divider_pos": [ 0, -0.004 ],
+    // Position of the names relative to the background
+    "name_pos": [ 0.0025, 0.001 ],
 
-	// The size for the images of the icons
-	"icon_image_size": [ 0.0255, 0.045 ],
-	// The size of the background black rectangle for the icons
-	"icon_background_size": [ 0.027, 0.048 ],
-	// The position of the image relative to the background
-	"icon_relative_pos": [ 0.001, 0.001 ],
+    // The size for the images of the icons
+    "icon_image_size": [ 0.0255, 0.045 ],
+    // The size of the background black rectangle for the icons
+    "icon_background_size": [ 0.027, 0.048 ],
+    // The position of the image relative to the background
+    "icon_relative_pos": [ 0.001, 0.001 ],
 
-	// The position of the squad elements (usually top-left)
-	"squad_general_pos": [ 0.0475, 0.045 ],
-	// The size for the rectangles with squad information
-	"squad_info_size": [ 0.057, 0.048 ],
-	// Self explanatory: The size for the squad health bar
-	"squad_health_size": [ 0.048, 0.004 ],
-	// The position of the health bar relative to the background
-	"squad_health_pos": [ 0.0045, 0.034 ]
+    // The position of the squad elements (usually top-left)
+    "squad_general_pos": [ 0.0475, 0.045 ],
+    // The size for the rectangles with squad information
+    "squad_info_size": [ 0.057, 0.048 ],
+    // Self explanatory: The size for the squad health bar
+    "squad_health_size": [ 0.048, 0.004 ],
+    // The position of the health bar relative to the background
+    "squad_health_pos": [ 0.0045, 0.034 ],
+
+    // The position of the player information (usually bottom-right)
+    "player_general_pos": [ 0.4825, 0.4805 ],
+    // The size for the rectangles with the player information
+    "player_info_size": [ 0.12, 0.048 ],
+    // The size of the player health bar (slightly smaller than the rectanlge)
+    "player_health_size": [ 0.111, 0.004 ],
+    // The position of the health bar relative to the background
+    "player_health_pos": [ 0.0045, 0.034 ],
+
+    // The size for the images of the weapons
+    "weapon_image_size": [ 0.0875, 0.045 ]
 }
