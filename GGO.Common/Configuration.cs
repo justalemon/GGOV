@@ -149,7 +149,7 @@ namespace GGO.Common
             {
                 return new Point(CreateSize("ammo_offset_pos"));
             }
-        }S
+        }
         public Size AmmoBackgroundSize
         {
             get
