@@ -70,10 +70,14 @@ namespace GGO.Common
             Single textScale = isPlayer ? 0.4f : 0.3f;
 
             // Draw the player icon
-            if(Character.IsAlive)
+            if (Character.IsAlive)
+            {
                 Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageCharacter, iconText + "Alive"), Position);
+            }
             else
+            {
                 Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageDead, iconText + "Dead"), Position);
+            }
 
             // First, draw the black background
             UIRectangle Background = new UIRectangle(InfoPosition, InfoSize, CBackground);
@@ -127,8 +131,10 @@ namespace GGO.Common
                 Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoWeapon" + hand), HandPosition);
                 Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoAmmo" + hand), AmmoPosition);
                 // Only continue on to draw weapon if it is melee and this is the off hand.
-                if(!(Weapons.CurrentWeaponType == Weapons.Type.Melee && isOffHand))
+                if (!(Weapons.CurrentWeaponType == Weapons.Type.Melee && isOffHand))
+                {
                     return;
+                }
             }
             else
             {
