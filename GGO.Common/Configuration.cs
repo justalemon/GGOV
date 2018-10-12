@@ -108,7 +108,6 @@ namespace GGO.Common
                 return CreateSize("squad_health_pos");
             }
         }
-
         public Point PlayerPosition
         {
             get
@@ -128,6 +127,27 @@ namespace GGO.Common
             get
             {
                 return CreateSize("player_health_size");
+            }
+        }
+        public Size PlayerHealthPos
+        {
+            get
+            {
+                return CreateSize("player_health_pos");
+            }
+        }
+        public Size WeaponImageSize
+        {
+            get
+            {
+                return CreateSize("weapon_image_size");
+            }
+        }
+        public Point AmmoOffset
+        {
+            get
+            {
+                return new Point(CreateSize("ammo_offset_pos"));
             }
         }
         public Size AmmoBackgroundSize

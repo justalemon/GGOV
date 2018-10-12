@@ -1,7 +1,8 @@
-﻿using GTA;
+using GTA;
 using GTA.Native;
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace GGO.Common
 {
@@ -28,33 +29,58 @@ namespace GGO.Common
             // Calculate the position of the image
             Point ImagePos = Position + Config.IconPosition;
             // And finally, add the image on top
-            UI.DrawTexture(ImageFile, 0, 0, 200, ImagePos, Config.IconImageSize);
+            UI.DrawTexture(ImageFile, 0, 0, 100, ImagePos, Config.IconImageSize);
+        }
+
+        /// <summary>
+        /// Draws the icon and background for currently held weapon.
+        /// </summary>
+        /// <param name="Config"></param>
+        /// <param name="WeaponPosition"></param>
+        public static void Weapon(Configuration Config, Point WeaponPosition)
+        {
+            // Calculate the background width for the weapon size.
+            int width = Config.PlayerInfoSize.Width - Config.IconBackgroundSize.Width - Config.ElementsRelative.Width;
+            // Draw the weapon icon background
+            UIRectangle WeaponBackground = new UIRectangle(WeaponPosition, new Size(width, Config.PlayerInfoSize.Height), CBackground);
+            WeaponBackground.Draw();
+
+            // Get the image for the current weapon
+            string ImageFile = Common.Image.ResourceToPNG(Weapons.CurrentWeaponResource, Weapons.CurrentWeaponName);
+            // Draw the weapon icon on top of the background
+            Point ImagePos = WeaponPosition + Config.IconPosition;
+            UI.DrawTexture(ImageFile, 0, 0, 100, ImagePos, Config.WeaponImageSize);
         }
 
         /// <summary>
         /// Draws the complete information of a ped. That includes name and health.
         /// </summary>
+        /// <param name="Config">Configuration settings.</param>
         /// <param name="Character">The ped to get the information.</param>
-        /// <param name="Position">The position on the screen.</param>
-        /// <param name="TotalSize">The full size of the information field.</param>
-        public static void PedInfo(Configuration Config, Ped Character, Point Position, bool Player = false)
+        /// <param name="Position">The position for the ped icon.</param>
+        /// <param name="InfoPosition">The position for the ped information.</param>
+        /// <param name="Player">Whether this is the player HUD or squad HUD.</param>
+        /// <param name="SquadCount">The number of the friendly within the squad.</param>
+        public static void PedInfo(Configuration Config, Ped Character, Point Position, Point InfoPosition, bool isPlayer, int SquadCount = 0)
         {
-            // If is the player, make the background and health bar bigger
-            Size BackgroundSize;
-            Size HealthSize;
-            if (Player)
+            Size InfoSize = isPlayer ? Config.PlayerInfoSize : Config.SquadInfoSize;
+            Size HealthSize = isPlayer ? Config.PlayerHealthSize : Config.SquadHealthSize;
+            Size HealthPos = isPlayer ? Config.PlayerHealthPos : Config.SquadHealthPos;
+            string iconText = isPlayer ? "Player" : "Squad" + SquadCount;
+            Single textScale = isPlayer ? 0.4f : 0.3f;
+
+            // Draw the player icon
+            if (Character.IsAlive)
             {
-                BackgroundSize = Config.PlayerInfoSize;
-                HealthSize = Config.PlayerHealthSize;
+                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageCharacter, iconText + "Alive"), Position);
             }
             else
             {
-                BackgroundSize = Config.SquadInfoSize;
-                HealthSize = Config.SquadHealthSize;
+                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageDead, iconText + "Dead"), Position);
             }
 
             // First, draw the black background
-            UIRectangle Background = new UIRectangle(Position, BackgroundSize, CBackground);
+            UIRectangle Background = new UIRectangle(InfoPosition, InfoSize, CBackground);
             Background.Draw();
 
             // Then, calculate the health bar: (Percentage / 100) * DefaultWidth
@@ -69,21 +95,63 @@ namespace GGO.Common
             for (int Count = 0; Count < 5; Count++)
             {
                 // Calculate the position of the separator
-                Point Pos = (Position + Config.SquadHealthPos) + new Size(HealthSep * Count, 0) + Config.DividerPosition;
+                Point Pos = (InfoPosition + HealthPos) + new Size(HealthSep * Count, 0) + Config.DividerPosition;
                 // And draw it on screen
                 UIRectangle Divider = new UIRectangle(Pos, Config.DividerSize, CDivider);
                 Divider.Draw();
             }
 
             // After the separators are there, draw the health bar on the top
-            UIRectangle HealthBar = new UIRectangle(Position + Config.SquadHealthPos, NewHealthSize, Character.HealthColor());
+            UIRectangle HealthBar = new UIRectangle(InfoPosition + HealthPos, NewHealthSize, Character.HealthColor());
             HealthBar.Draw();
 
             // And finally, draw the ped name
-            UIText Name = new UIText(Character.Name(Config), Position + Config.NamePosition, 0.3f);
+            UIText Name = new UIText(Character.Name(Config), InfoPosition + Config.NamePosition, textScale);
             Name.Draw();
         }
 
+        /// <summary>
+        /// Draws the main hand weapon, or middle bar, to the HUD.
+        /// </summary>
+        /// <param name="Config">Config settings.</param>
+        /// <param name="HandPosition">Position for the ammo icon.</param>
+        /// <param name="AmmoPosition">Position for the ammo counter.</param>
+        /// <param name="WeaponPosition">Position for the weapon icon.</param>
+        /// <param name="isOffHand">Whether the Weapon is the off hand weapon or main hand weapon.</param>
+        public static void PlayerWeapon(Configuration Config, Point HandPosition, Point AmmoPosition, Point WeaponPosition, bool isOffHand = false)
+        {
+            //Setup for whether this is the main or off hand.
+            string hand = isOffHand ? "Off" : "Main";
+            List<Weapons.Type> NoDraw = new List<Weapons.Type>() { Weapons.Type.Banned, Weapons.Type.Melee };
+            NoDraw.Add(isOffHand ? Weapons.Type.Main : Weapons.Type.Sidearm);
+
+            // Do not display main hand weapons for these types.
+            if (NoDraw.Contains(Weapons.CurrentWeaponType))
+            {
+                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoWeapon" + hand), HandPosition);
+                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoAmmo" + hand), AmmoPosition);
+                // Only continue on to draw weapon if it is melee and this is the off hand.
+                if (!(Weapons.CurrentWeaponType == Weapons.Type.Melee && isOffHand))
+                {
+                    return;
+                }
+            }
+            else
+            {
+                // Draw the ammo icon
+                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageWeapon, "Weapon" + hand), HandPosition);
+                // Then draw the background for the ammo counter
+                UIRectangle AmmoBackground = new UIRectangle(AmmoPosition, Config.IconBackgroundSize, CBackground);
+                AmmoBackground.Draw();
+                // Finally, draw the ammo counter on top, adding offset so the text is always centered.
+                UIText Ammo = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), new Point(AmmoPosition.X + Config.AmmoOffset.X, AmmoPosition.Y + Config.AmmoOffset.Y), .6f, Color.White, GTA.Font.Monospace, true);
+                Ammo.Draw();
+            }
+
+            // Draw the weapon
+            Weapon(Config, WeaponPosition);
+        }
+      
         public static void Ammo(Configuration Config, int CurrentAmmo)
         {
             Point BackgroundPos = new Point(Config.PlayerPosition.X + Config.ElementsRelative.Width + Config.IconBackgroundSize.Width,

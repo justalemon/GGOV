@@ -41,7 +41,10 @@ namespace GGO.Singleplayer
             PlayerPosition.Text = string.Format("player_general_pos: {0}", Config.PlayerPosition);
             PlayerInfoSize.Text = string.Format("player_info_size: {0}", Config.PlayerInfoSize);
             PlayerHealthSize.Text = string.Format("player_health_size: {0}", Config.PlayerHealthSize);
-            AmmoBackgroundSize.Text = string.Format("player_ammo_size: {0}", Config.AmmoBackgroundSize);
+            PlayerHealthPosition.Text = string.Format("player_health_pos: {0}", Config.PlayerHealthPos);
+
+            WeaponImageSize.Text = string.Format("weapon_image_size: {0}", Config.WeaponImageSize);
+            AmmoPosition.Text = string.Format("ammo_offset_pos: {0}", Config.AmmoOffset);
         }
     }
 }
