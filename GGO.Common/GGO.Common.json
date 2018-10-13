@@ -46,7 +46,7 @@
     "player_health_pos": [ 0.0045, 0.035 ],
 
     // The size for the images of the weapons
-    "weapon_image_size": [ 0.0875, 0.045 ],
+    "weapon_image_size": [ 0.0875, 0.037 ],
     // The offset to center the ammo text 1/2 icon background width, 1/12 icon background height
     "ammo_offset_pos": [ 0.0135, 0.004 ]
 }
