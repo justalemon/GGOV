@@ -7,6 +7,9 @@ namespace GGO.Common
 {
     public class Configuration
     {
+        /// <summary>
+        /// If the Debug window should be shown.
+        /// </summary>
         public bool Debug
         {
             get
@@ -14,6 +17,9 @@ namespace GGO.Common
                 return (bool)Raw["debug"] || Environment.GetEnvironmentVariable("DevGTA", EnvironmentVariableTarget.User) == "true";
             }
         }
+        /// <summary>
+        /// The name for the current player.
+        /// </summary>
         public string Name
         {
             get
@@ -21,6 +27,9 @@ namespace GGO.Common
                 return (string)Raw["name"];
             }
         }
+        /// <summary>
+        /// If the default Radar and Hud should be disabled.
+        /// </summary>
         public bool DisableHud
         {
             get
@@ -29,13 +38,19 @@ namespace GGO.Common
             }
         }
 
-        public Size ElementsRelative
+        /// <summary>
+        /// Separation between the UI elements.
+        /// </summary>
+        public Size CommonSpace
         {
             get
             {
                 return CreateSize("elements_relative");
             }
         }
+        /// <summary>
+        /// Size for the dividers on the health bars.
+        /// </summary>
         public Size DividerSize
         {
             get

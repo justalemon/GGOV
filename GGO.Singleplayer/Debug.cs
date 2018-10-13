@@ -24,7 +24,7 @@ namespace GGO.Singleplayer
             PlayerName.Text = string.Format("Custom name: {0}", Config.Name);
             HudDisabled.Text = string.Format("HUD Disabled: {0}", Config.DisableHud);
 
-            ElementsRelative.Text = string.Format("elements_relative: {0}", Config.ElementsRelative);
+            ElementsRelative.Text = string.Format("elements_relative: {0}", Config.CommonSpace);
             DividerSize.Text = string.Format("divider_size: {0}", Config.DividerSize);
             DividerPosition.Text = string.Format("divider_pos: {0}", Config.DividerPosition);
             NamePosition.Text = string.Format("name_pos: {0}", Config.NamePosition);

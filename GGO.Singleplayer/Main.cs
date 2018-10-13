@@ -54,9 +54,9 @@ namespace GGO.Singleplayer
             private void UpdatePlayerInfo()
             {
                 // the incriments at which the elements are moved, to avoid confusion and cut down on operations
-                int xPos = Config.PlayerPosition.X + Config.IconBackgroundSize.Width + Config.ElementsRelative.Width;
-                int yIncriment = Config.IconBackgroundSize.Height + Config.ElementsRelative.Height;
-                int xIncriment = Config.IconBackgroundSize.Width + Config.ElementsRelative.Width;
+                int xPos = Config.PlayerPosition.X + Config.IconBackgroundSize.Width + Config.CommonSpace.Width;
+                int yIncriment = Config.IconBackgroundSize.Height + Config.CommonSpace.Height;
+                int xIncriment = Config.IconBackgroundSize.Width + Config.CommonSpace.Width;
 
                 // Generate the points for the name and name info, this will be the player icon as well as the name and health bar.
                 Point NamePosition = new Point(Config.PlayerPosition.X, Config.PlayerPosition.Y);
@@ -95,9 +95,9 @@ namespace GGO.Singleplayer
                     // Check that the ped is a mission entity and is friendly
                     if (Friendly.IsMissionEntity() && Friendly.IsFriendly() && Count <= 6)
                     {
-                        Point Position = new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
+                        Point Position = new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
                         // And the information of it
-                        Point InfoPosition = new Point(Config.SquadPosition.X + Config.IconBackgroundSize.Width + Config.ElementsRelative.Width, (Config.SquadPosition.Y + Config.ElementsRelative.Height) * Count);
+                        Point InfoPosition = new Point(Config.SquadPosition.X + Config.IconBackgroundSize.Width + Config.CommonSpace.Width, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
                         Draw.PedInfo(Config, Friendly, Position, InfoPosition, false, Count);
 
                         // To end this up, increase the count of peds "rendered"

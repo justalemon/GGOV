@@ -40,7 +40,7 @@ namespace GGO.Common
         public static void Weapon(Configuration Config, Point WeaponPosition)
         {
             // Calculate the background width for the weapon size.
-            int width = Config.PlayerInfoSize.Width - Config.IconBackgroundSize.Width - Config.ElementsRelative.Width;
+            int width = Config.PlayerInfoSize.Width - Config.IconBackgroundSize.Width - Config.CommonSpace.Width;
             // Draw the weapon icon background
             UIRectangle WeaponBackground = new UIRectangle(WeaponPosition, new Size(width, Config.PlayerInfoSize.Height), CBackground);
             WeaponBackground.Draw();
@@ -154,8 +154,8 @@ namespace GGO.Common
       
         public static void Ammo(Configuration Config, int CurrentAmmo)
         {
-            Point BackgroundPos = new Point(Config.PlayerPosition.X + Config.ElementsRelative.Width + Config.IconBackgroundSize.Width,
-                                            Config.PlayerPosition.Y + Config.ElementsRelative.Height + Config.IconBackgroundSize.Height);
+            Point BackgroundPos = new Point(Config.PlayerPosition.X + Config.CommonSpace.Width + Config.IconBackgroundSize.Width,
+                                            Config.PlayerPosition.Y + Config.CommonSpace.Height + Config.IconBackgroundSize.Height);
             UIRectangle Background = new UIRectangle(BackgroundPos, Config.AmmoBackgroundSize, CBackground);
             Background.Draw();
         }
