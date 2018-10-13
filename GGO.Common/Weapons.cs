@@ -1,10 +1,10 @@
-﻿using GTA;
+using GTA;
 using System.Drawing;
 using System.Collections.Generic;
 
 namespace GGO.Common
 {
-    class Weapons
+    public class Weapons
     {
         /// <summary>
         /// The type of the weapon that the player currently has.
