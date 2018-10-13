@@ -61,7 +61,7 @@ namespace GGO.Common
         /// <param name="InfoPosition">The position for the ped information.</param>
         /// <param name="Player">Whether this is the player HUD or squad HUD.</param>
         /// <param name="SquadCount">The number of the friendly within the squad.</param>
-        public static void PedInfo(Configuration Config, Ped Character, Point Position, Point InfoPosition, bool isPlayer, int SquadCount = 0)
+        public static void PedInfo(Configuration Config, Ped Character, bool isPlayer, int SquadCount = 0)
         {
             Size InfoSize = isPlayer ? Config.PlayerInfoSize : Config.SquadInfoSize;
             Size HealthSize = isPlayer ? Config.PlayerHealthSize : Config.SquadHealthSize;
@@ -69,14 +69,17 @@ namespace GGO.Common
             string iconText = isPlayer ? "Player" : "Squad" + SquadCount;
             Single textScale = isPlayer ? 0.4f : 0.3f;
 
+            Point IconPosition = isPlayer ? Config.PlayerPosition : Config.GetSquadPosition(SquadCount);
+            Point InfoPosition = isPlayer ? Config.PlayerPosition : Config.GetSquadPosition(SquadCount, true);
+
             // Draw the player icon
             if (Character.IsAlive)
             {
-                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageCharacter, iconText + "Alive"), Position);
+                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageCharacter, iconText + "Alive"), IconPosition);
             }
             else
             {
-                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageDead, iconText + "Dead"), Position);
+                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageDead, iconText + "Dead"), IconPosition);
             }
 
             // First, draw the black background

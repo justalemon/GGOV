@@ -86,7 +86,7 @@ namespace GGO.Singleplayer
             {
                 // Draw the squad information on the top left
                 // First, create a list to start counting
-                int Count = 1;
+                int Count = 0;
 
                 // Then, Run over the peds and draw them on the screen (up to 6 of them, including the player)
                 // NOTE: We order them by ped hash because the players have lower hash codes than the rest of entities
@@ -95,10 +95,7 @@ namespace GGO.Singleplayer
                     // Check that the ped is a mission entity and is friendly
                     if (Friendly.IsMissionEntity() && Friendly.IsFriendly() && Count <= 6)
                     {
-                        Point Position = new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
-                        // And the information of it
-                        Point InfoPosition = new Point(Config.SquadPosition.X + Config.IconBackgroundSize.Width + Config.CommonSpace.Width, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
-                        Draw.PedInfo(Config, Friendly, Position, InfoPosition, false, Count);
+                        Draw.PedInfo(Config, Friendly, false, Count);
 
                         // To end this up, increase the count of peds "rendered"
                         Count++;

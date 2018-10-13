@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -193,6 +193,20 @@ namespace GGO.Common
             PedNames = new Names(Location +  "\\GGO.Names.json");
             // And store our current resolution
             Resolution = CurrentResolution;
+        }
+
+        public Point GetSquadPosition(int Count, bool Info = false)
+        {
+            Count++;
+
+            if (Info)
+            {
+                return new Point(SquadPosition.X + IconBackgroundSize.Width + CommonSpace.Width, (SquadPosition.Y + CommonSpace.Height) * Count);
+            }
+            else
+            {
+                return new Point(SquadPosition.X, (SquadPosition.Y + CommonSpace.Height) * Count);
+            }
         }
 
         /// <summary>
