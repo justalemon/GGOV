@@ -47,7 +47,7 @@ namespace GGO.Common
             WeaponBackground.Draw();
 
             // Get the image for the current weapon
-            string ImageFile = Common.Image.ResourceToPNG(Weapons.CurrentWeaponResource, Weapons.CurrentWeaponName);
+            string ImageFile = Image.ResourceToPNG(Weapons.CurrentWeaponResource, Weapons.CurrentWeaponName);
             // Draw the weapon icon on top of the background
             Point ImagePos = WeaponPosition + Config.IconPosition;
             UI.DrawTexture(ImageFile, 0, 0, 100, ImagePos, Config.WeaponImageSize);
@@ -76,11 +76,11 @@ namespace GGO.Common
             // Draw the player icon
             if (Character.IsAlive)
             {
-                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageCharacter, iconText + "Alive"), IconPosition);
+                Icon(Config, Image.ResourceToPNG(Resources.ImageCharacter, iconText + "Alive"), IconPosition);
             }
             else
             {
-                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageDead, iconText + "Dead"), IconPosition);
+                Icon(Config, Image.ResourceToPNG(Resources.ImageDead, iconText + "Dead"), IconPosition);
             }
 
             // First, draw the black background
@@ -132,8 +132,8 @@ namespace GGO.Common
             // Do not display main hand weapons for these types.
             if (NoDraw.Contains(Weapons.CurrentWeaponType))
             {
-                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoWeapon" + hand), HandPosition);
-                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.NoWeapon, "NoAmmo" + hand), AmmoPosition);
+                Icon(Config, Image.ResourceToPNG(Resources.NoWeapon, "NoWeapon" + hand), HandPosition);
+                Icon(Config, Image.ResourceToPNG(Resources.NoWeapon, "NoAmmo" + hand), AmmoPosition);
                 // Only continue on to draw weapon if it is melee and this is the off hand.
                 if (!(Weapons.CurrentWeaponType == Weapons.Type.Melee && isOffHand))
                 {
@@ -143,7 +143,7 @@ namespace GGO.Common
             else
             {
                 // Draw the ammo icon
-                Icon(Config, Common.Image.ResourceToPNG(Properties.Resources.ImageWeapon, "Weapon" + hand), HandPosition);
+                Icon(Config, Image.ResourceToPNG(Resources.ImageWeapon, "Weapon" + hand), HandPosition);
                 // Then draw the background for the ammo counter
                 UIRectangle AmmoBackground = new UIRectangle(AmmoPosition, Config.IconBackgroundSize, CBackground);
                 AmmoBackground.Draw();
