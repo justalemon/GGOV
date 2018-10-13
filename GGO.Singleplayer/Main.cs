@@ -63,7 +63,7 @@ namespace GGO.Singleplayer
                 Point NameInfoPosition = new Point(xPos, Config.PlayerPosition.Y);
 
                 // Send the points off to be drawn
-                Draw.PedInfo(Config, new Ped(Game.Player.Character.Handle), NamePosition, NameInfoPosition, true);
+                Draw.PedInfo(Config, Game.Player.Character, true);
 
                 // Generate the points for the main hand weapon, this will include the ammo icon, ammo counter, and weapon icon (when applicable).
                 Point MainHandPosition = new Point(Config.PlayerPosition.X, (NamePosition.Y + yIncriment));
