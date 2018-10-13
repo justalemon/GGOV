@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -58,6 +58,18 @@ namespace GGO.Common
                 return CreateSize("divider_size");
             }
         }
+
+        /// <summary>
+        /// The position of the player elements.
+        /// </summary>
+        public Point PlayerPosition
+        {
+            get
+            {
+                return new Point(CreateSize("player_general_pos"));
+            }
+        }
+
         public Size DividerPosition
         {
             get
@@ -121,13 +133,6 @@ namespace GGO.Common
             get
             {
                 return CreateSize("squad_health_pos");
-            }
-        }
-        public Point PlayerPosition
-        {
-            get
-            {
-                return new Point(CreateSize("player_general_pos"));
             }
         }
         public Size PlayerInfoSize
