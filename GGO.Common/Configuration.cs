@@ -200,6 +200,12 @@ namespace GGO.Common
             Resolution = CurrentResolution;
         }
 
+        /// <summary>
+        /// Gets the specific position for the squad member.
+        /// </summary>
+        /// <param name="Count">The index of the squad member (zero based).</param>
+        /// <param name="Info">If the location of the info should be returned.</param>
+        /// <returns>A Point with the on screen position.</returns>
         public Point GetSquadPosition(int Count, bool Info = false)
         {
             Count++;
