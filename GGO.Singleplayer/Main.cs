@@ -57,20 +57,30 @@ namespace GGO.Singleplayer
                     // Check that the ped is a mission entity and is friendly
                     if (NearbyPed.IsMissionEntity() && NearbyPed.IsFriendly() && Count <= 6)
                     {
+                        // Select the correct image and name for the file
+                        string ImageName = NearbyPed.IsAlive ? "SquadAlive" : "SquadDead";
+                        Bitmap ImageType = NearbyPed.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
+
+                        // Draw the icon and the ped info
+                        Draw.Icon(Config, Common.Image.ResourceToPNG(ImageType, ImageName + Count), Config.GetSquadPosition(Count));
                         Draw.PedInfo(Config, NearbyPed, false, Count);
 
                         // To end this up, increase the count of peds "rendered"
                         Count++;
                     }
                 }
+
+                // Then, start by drawing the player info
+                Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
+                Draw.PedInfo(Config, Game.Player.Character, true);
             }
 
             private void UpdatePlayerInfo()
             {
                 // the incriments at which the elements are moved, to avoid confusion and cut down on operations
-                int xPos = Config.PlayerIcon.X + Config.IconBackgroundSize.Width + Config.CommonSpace.Width;
-                int yIncriment = Config.IconBackgroundSize.Height + Config.CommonSpace.Height;
-                int xIncriment = Config.IconBackgroundSize.Width + Config.CommonSpace.Width;
+                int xPos = Config.PlayerIcon.X + Config.SquaredBackground.Width + Config.CommonSpace.Width;
+                int yIncriment = Config.SquaredBackground.Height + Config.CommonSpace.Height;
+                int xIncriment = Config.SquaredBackground.Width + Config.CommonSpace.Width;
 
                 // Generate the points for the name and name info, this will be the player icon as well as the name and health bar.
                 Point NamePosition = new Point(Config.PlayerIcon.X, Config.PlayerIcon.Y);

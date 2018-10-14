@@ -23,7 +23,7 @@ namespace GGO.Common
         public static void Icon(Configuration Config, string ImageFile, Point Position)
         {
             // Draw the rectangle on the background
-            UIRectangle Rect = new UIRectangle(Position, Config.IconBackgroundSize, CBackground);
+            UIRectangle Rect = new UIRectangle(Position, Config.SquaredBackground, CBackground);
             Rect.Draw();
 
             // Calculate the position of the image
@@ -40,7 +40,7 @@ namespace GGO.Common
         public static void Weapon(Configuration Config, Point WeaponPosition)
         {
             // Calculate the background width for the weapon size.
-            int width = Config.PlayerInfoSize.Width - Config.IconBackgroundSize.Width - Config.CommonSpace.Width;
+            int width = Config.PlayerInfoSize.Width - Config.SquaredBackground.Width - Config.CommonSpace.Width;
             // Draw the weapon icon background
             UIRectangle WeaponBackground = new UIRectangle(WeaponPosition, new Size(width, Config.PlayerInfoSize.Height), CBackground);
             WeaponBackground.Draw();
@@ -67,20 +67,9 @@ namespace GGO.Common
             Size HealthSize = isPlayer ? Config.PlayerHealthSize : Config.SquadHealthSize;
             Size HealthPos = isPlayer ? Config.PlayerHealthPos : Config.SquadHealthPos;
             string iconText = isPlayer ? "Player" : "Squad" + SquadCount;
-            Single textScale = isPlayer ? 0.4f : 0.3f;
+            float textScale = isPlayer ? 0.4f : 0.3f;
 
-            Point IconPosition = isPlayer ? Config.PlayerIcon : Config.GetSquadPosition(SquadCount);
-            Point InfoPosition = isPlayer ? Config.PlayerIcon : Config.GetSquadPosition(SquadCount, true);
-
-            // Draw the player icon
-            if (Character.IsAlive)
-            {
-                Icon(Config, Image.ResourceToPNG(Resources.ImageCharacter, iconText + "Alive"), IconPosition);
-            }
-            else
-            {
-                Icon(Config, Image.ResourceToPNG(Resources.ImageDead, iconText + "Dead"), IconPosition);
-            }
+            Point InfoPosition = isPlayer ? Config.PlayerInfo : Config.GetSquadPosition(SquadCount, true);
 
             // First, draw the black background
             UIRectangle Background = new UIRectangle(InfoPosition, InfoSize, CBackground);
@@ -144,7 +133,7 @@ namespace GGO.Common
                 // Draw the ammo icon
                 Icon(Config, Image.ResourceToPNG(Resources.ImageWeapon, "Weapon" + hand), HandPosition);
                 // Then draw the background for the ammo counter
-                UIRectangle AmmoBackground = new UIRectangle(AmmoPosition, Config.IconBackgroundSize, CBackground);
+                UIRectangle AmmoBackground = new UIRectangle(AmmoPosition, Config.SquaredBackground, CBackground);
                 AmmoBackground.Draw();
                 // Finally, draw the ammo counter on top, adding offset so the text is always centered.
                 UIText Ammo = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), new Point(AmmoPosition.X + Config.AmmoOffset.X, AmmoPosition.Y + Config.AmmoOffset.Y), .6f, Color.White, GTA.Font.Monospace, true);
@@ -157,8 +146,8 @@ namespace GGO.Common
       
         public static void Ammo(Configuration Config, int CurrentAmmo)
         {
-            Point BackgroundPos = new Point(Config.PlayerIcon.X + Config.CommonSpace.Width + Config.IconBackgroundSize.Width,
-                                            Config.PlayerIcon.Y + Config.CommonSpace.Height + Config.IconBackgroundSize.Height);
+            Point BackgroundPos = new Point(Config.PlayerIcon.X + Config.CommonSpace.Width + Config.SquaredBackground.Width,
+                                            Config.PlayerIcon.Y + Config.CommonSpace.Height + Config.SquaredBackground.Height);
             UIRectangle Background = new UIRectangle(BackgroundPos, Config.AmmoBackgroundSize, CBackground);
             Background.Draw();
         }

@@ -49,6 +49,16 @@ namespace GGO.Common
             }
         }
         /// <summary>
+        /// Size for the squared backgrounds.
+        /// </summary>
+        public Size SquaredBackground
+        {
+            get
+            {
+                return CreateSize("icon_background_size");
+            }
+        }
+        /// <summary>
         /// Size for the dividers on the health bars.
         /// </summary>
         public Size DividerSize
@@ -60,13 +70,23 @@ namespace GGO.Common
         }
 
         /// <summary>
-        /// The position of the player elements.
+        /// The position of the player icon.
         /// </summary>
         public Point PlayerIcon
         {
             get
             {
                 return new Point(CreateSize("player_general_pos"));
+            }
+        }
+        /// <summary>
+        /// The position of the player information.
+        /// </summary>
+        public Point PlayerInfo
+        {
+            get
+            {
+                return new Point(PlayerIcon.X + SquaredBackground.Width + CommonSpace.Width, PlayerIcon.Y);
             }
         }
 
@@ -90,13 +110,6 @@ namespace GGO.Common
             get
             {
                 return CreateSize("icon_image_size");
-            }
-        }
-        public Size IconBackgroundSize
-        {
-            get
-            {
-                return CreateSize("icon_background_size");
             }
         }
         public Size IconPosition
@@ -212,7 +225,7 @@ namespace GGO.Common
 
             if (Info)
             {
-                return new Point(SquadPosition.X + IconBackgroundSize.Width + CommonSpace.Width, (SquadPosition.Y + CommonSpace.Height) * Count);
+                return new Point(SquadPosition.X + SquaredBackground.Width + CommonSpace.Width, (SquadPosition.Y + CommonSpace.Height) * Count);
             }
             else
             {

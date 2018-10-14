@@ -30,7 +30,7 @@ namespace GGO.Singleplayer
             NamePosition.Text = string.Format("name_pos: {0}", Config.NamePosition);
 
             IconImageSize.Text = string.Format("icon_image_size: {0}", Config.IconImageSize);
-            IconBackgroundSize.Text = string.Format("icon_background_size: {0}", Config.IconBackgroundSize);
+            IconBackgroundSize.Text = string.Format("icon_background_size: {0}", Config.SquaredBackground);
             IconPosition.Text = string.Format("icon_relative_pos: {0}", Config.IconPosition);
 
             SquadPosition.Text = string.Format("squad_general_pos: {0}", Config.SquadPosition);
