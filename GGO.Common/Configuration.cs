@@ -62,7 +62,7 @@ namespace GGO.Common
         /// <summary>
         /// The position of the player elements.
         /// </summary>
-        public Point PlayerPosition
+        public Point PlayerIcon
         {
             get
             {

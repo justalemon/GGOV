@@ -69,8 +69,8 @@ namespace GGO.Common
             string iconText = isPlayer ? "Player" : "Squad" + SquadCount;
             Single textScale = isPlayer ? 0.4f : 0.3f;
 
-            Point IconPosition = isPlayer ? Config.PlayerPosition : Config.GetSquadPosition(SquadCount);
-            Point InfoPosition = isPlayer ? Config.PlayerPosition : Config.GetSquadPosition(SquadCount, true);
+            Point IconPosition = isPlayer ? Config.PlayerIcon : Config.GetSquadPosition(SquadCount);
+            Point InfoPosition = isPlayer ? Config.PlayerIcon : Config.GetSquadPosition(SquadCount, true);
 
             // Draw the player icon
             if (Character.IsAlive)
@@ -157,8 +157,8 @@ namespace GGO.Common
       
         public static void Ammo(Configuration Config, int CurrentAmmo)
         {
-            Point BackgroundPos = new Point(Config.PlayerPosition.X + Config.CommonSpace.Width + Config.IconBackgroundSize.Width,
-                                            Config.PlayerPosition.Y + Config.CommonSpace.Height + Config.IconBackgroundSize.Height);
+            Point BackgroundPos = new Point(Config.PlayerIcon.X + Config.CommonSpace.Width + Config.IconBackgroundSize.Width,
+                                            Config.PlayerIcon.Y + Config.CommonSpace.Height + Config.IconBackgroundSize.Height);
             UIRectangle Background = new UIRectangle(BackgroundPos, Config.AmmoBackgroundSize, CBackground);
             Background.Draw();
         }

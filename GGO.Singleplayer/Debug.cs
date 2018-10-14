@@ -38,7 +38,7 @@ namespace GGO.Singleplayer
             SquadHealthSize.Text = string.Format("squad_health_size: {0}", Config.SquadHealthSize);
             SquadHealthPos.Text = string.Format("squad_health_pos: {0}", Config.SquadHealthPos);
 
-            PlayerPosition.Text = string.Format("player_general_pos: {0}", Config.PlayerPosition);
+            PlayerPosition.Text = string.Format("player_general_pos: {0}", Config.PlayerIcon);
             PlayerInfoSize.Text = string.Format("player_info_size: {0}", Config.PlayerInfoSize);
             PlayerHealthSize.Text = string.Format("player_health_size: {0}", Config.PlayerHealthSize);
             PlayerHealthPosition.Text = string.Format("player_health_pos: {0}", Config.PlayerHealthPos);
