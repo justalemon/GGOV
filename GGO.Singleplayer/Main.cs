@@ -52,12 +52,12 @@ namespace GGO.Singleplayer
 
                 // Then, Run over the peds and draw them on the screen (up to 6 of them, including the player)
                 // NOTE: We order them by ped hash because the players have lower hash codes than the rest of entities
-                foreach (Ped Friendly in World.GetNearbyPeds(Game.Player.Character.Position, 50f).OrderBy(P => P.GetHashCode()))
+                foreach (Ped NearbyPed in World.GetNearbyPeds(Game.Player.Character.Position, 50f).OrderBy(P => P.GetHashCode()))
                 {
                     // Check that the ped is a mission entity and is friendly
-                    if (Friendly.IsMissionEntity() && Friendly.IsFriendly() && Count <= 6)
+                    if (NearbyPed.IsMissionEntity() && NearbyPed.IsFriendly() && Count <= 6)
                     {
-                        Draw.PedInfo(Config, Friendly, false, Count);
+                        Draw.PedInfo(Config, NearbyPed, false, Count);
 
                         // To end this up, increase the count of peds "rendered"
                         Count++;
