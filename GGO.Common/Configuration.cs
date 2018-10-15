@@ -90,6 +90,29 @@ namespace GGO.Common
             }
         }
 
+        /// <summary>
+        /// The position of the ammo for the primary weapon.
+        /// </summary>
+        public Point PrimaryAmmo
+        {
+            get
+            {
+                return new Point(PlayerIcon.X + CommonSpace.Width + SquaredBackground.Width,
+                                 PlayerIcon.Y + CommonSpace.Height + SquaredBackground.Height);
+            }
+        }
+        /// <summary>
+        /// The position of the ammo for the secondary weapon.
+        /// </summary>
+        public Point SecondaryAmmo
+        {
+            get
+            {
+                return new Point(PlayerIcon.X + CommonSpace.Width + SquaredBackground.Width,
+                                 PlayerIcon.Y + (CommonSpace.Height * 2) + (SquaredBackground.Height * 2));
+            }
+        }
+
         public Size DividerPosition
         {
             get
