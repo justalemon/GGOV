@@ -1,5 +1,4 @@
 using GTA;
-using System.Drawing;
 using System.Collections.Generic;
 
 namespace GGO.Common
@@ -57,33 +56,6 @@ namespace GGO.Common
                     return Type.Sidearm;
                 else
                     return Type.Main;
-            }
-        }
-
-        /// <summary>
-        /// Gets the display name from the hash of the weapon with added prefix for resources.
-        /// </summary>
-        /// <returns>The name of the weapon.</returns>
-        public static string CurrentWeaponName
-        {
-            get
-            {
-                return "GUN_" + GTA.Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash);
-            }
-        }
-
-        /// <summary>
-        /// Gets the Bitmap resource of the current weapon.
-        /// </summary>
-        /// <returns>The bitmap of the weapon.</returns>
-        public static Bitmap CurrentWeaponResource
-        {
-            get
-            {
-                if((Bitmap)Properties.Resources.ResourceManager.GetObject(CurrentWeaponName) != null)
-                    return (Bitmap)Properties.Resources.ResourceManager.GetObject(CurrentWeaponName);
-                else
-                    return (Bitmap)Properties.Resources.ResourceManager.GetObject("GUN_WTT_PIST");
             }
         }
     }

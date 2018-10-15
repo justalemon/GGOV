@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using GGO.Common.Properties;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
@@ -6,6 +7,24 @@ namespace GGO.Common
 {
     public class Image
     {
+        /// <summary>
+        /// Creates a PNG file from a resource image.
+        /// </summary>
+        /// <param name="Origin">The name of the resource.</param>
+        /// <param name="Filename">The output filename.</param>
+        /// <returns>The absolute path of the output file.</returns>
+        public static string ResourceToPNG(string Origin, string Filename)
+        {
+            Bitmap Current = (Bitmap)Resources.ResourceManager.GetObject("Gun" + Origin);
+
+            if (Current == null)
+            {
+                Current = Resources.GUN_Bat;
+            }
+
+            return ResourceToPNG(Current, Filename);
+        }
+
         /// <summary>
         /// Creates a PNG file from a resource image.
         /// </summary>
