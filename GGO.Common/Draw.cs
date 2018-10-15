@@ -143,7 +143,7 @@ namespace GGO.Common
             // Draw the weapon
             Weapon(Config, WeaponPosition);
         }
-      
+        
         /// <summary>
         /// Draws the information about the player ammo.
         /// </summary>

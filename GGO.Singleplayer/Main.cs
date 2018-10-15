@@ -74,7 +74,9 @@ namespace GGO.Singleplayer
                 Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
                 Draw.PedInfo(Config, Game.Player.Character, true);
 
+                Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
                 Draw.Ammo(Config, false);
+                Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
                 Draw.Ammo(Config, true);
             }
 

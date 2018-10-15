@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -90,6 +90,26 @@ namespace GGO.Common
             }
         }
 
+        /// <summary>
+        /// The position of the icon for the primary weapon.
+        /// </summary>
+        public Point PrimaryIcon
+        {
+            get
+            {
+                return new Point(PlayerIcon.X, PlayerIcon.Y + CommonSpace.Height + SquaredBackground.Height);
+            }
+        }
+        /// <summary>
+        /// The position of the icon for the primary weapon.
+        /// </summary>
+        public Point SecondaryIcon
+        {
+            get
+            {
+                return new Point(PlayerIcon.X, PlayerIcon.Y + (CommonSpace.Height * 2) + (SquaredBackground.Height * 2));
+            }
+        }
         /// <summary>
         /// The position of the ammo for the primary weapon.
         /// </summary>
