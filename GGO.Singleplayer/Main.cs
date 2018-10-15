@@ -73,6 +73,9 @@ namespace GGO.Singleplayer
                 // Then, start by drawing the player info
                 Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
                 Draw.PedInfo(Config, Game.Player.Character, true);
+
+                Draw.Ammo(Config, false);
+                Draw.Ammo(Config, true);
             }
 
             private void UpdatePlayerInfo()

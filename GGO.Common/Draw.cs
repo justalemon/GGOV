@@ -144,11 +144,16 @@ namespace GGO.Common
             Weapon(Config, WeaponPosition);
         }
       
-        public static void Ammo(Configuration Config, int CurrentAmmo)
+        /// <summary>
+        /// Draws the information about the player ammo.
+        /// </summary>
+        /// <param name="Config">The mod settings.</param>
+        /// <param name="Sidearm">If the specified ammo is for the sidearm.</param>
+        public static void Ammo(Configuration Config, bool Sidearm)
         {
-            Point BackgroundPos = new Point(Config.PlayerIcon.X + Config.CommonSpace.Width + Config.SquaredBackground.Width,
-                                            Config.PlayerIcon.Y + Config.CommonSpace.Height + Config.SquaredBackground.Height);
-            UIRectangle Background = new UIRectangle(BackgroundPos, Config.AmmoBackgroundSize, CBackground);
+            Point Location = Sidearm ? Config.SecondaryAmmo : Config.PrimaryAmmo;
+
+            UIRectangle Background = new UIRectangle(Location, Config.SquaredBackground, CBackground);
             Background.Draw();
         }
     }
