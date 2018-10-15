@@ -151,8 +151,10 @@ namespace GGO.Common
         /// <param name="Sidearm">If the specified ammo is for the sidearm.</param>
         public static void Ammo(Configuration Config, bool Sidearm)
         {
+            // Start by selecting the correct location for the primary or secondary weapon
             Point Location = Sidearm ? Config.SecondaryAmmo : Config.PrimaryAmmo;
 
+            // Then, draw the background
             UIRectangle Background = new UIRectangle(Location, Config.SquaredBackground, CBackground);
             Background.Draw();
         }
