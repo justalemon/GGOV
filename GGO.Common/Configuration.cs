@@ -206,13 +206,6 @@ namespace GGO.Common
                 return new Point(CreateSize("ammo_offset_pos"));
             }
         }
-        public Size AmmoBackgroundSize
-        {
-            get
-            {
-                return CreateSize("player_ammo_size");
-            }
-        }
 
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }
