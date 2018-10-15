@@ -46,10 +46,10 @@ namespace GGO.Common
             WeaponBackground.Draw();
 
             // Get the image for the current weapon
-            string ImageFile = Image.ResourceToPNG(Weapons.CurrentWeaponResource, Weapons.CurrentWeaponName);
+            // string ImageFile = Image.ResourceToPNG(Weapons.CurrentWeaponResource, Weapons.CurrentWeaponName);
             // Draw the weapon icon on top of the background
             Point ImagePos = WeaponPosition + Config.IconPosition;
-            UI.DrawTexture(ImageFile, 0, 0, 100, ImagePos, Config.WeaponImageSize);
+            // UI.DrawTexture(ImageFile, 0, 0, 100, ImagePos, Config.WeaponImageSize);
         }
 
         /// <summary>

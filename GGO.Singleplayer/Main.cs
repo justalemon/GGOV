@@ -78,37 +78,6 @@ namespace GGO.Singleplayer
                 Draw.Ammo(Config, true);
             }
 
-            private void UpdatePlayerInfo()
-            {
-                // the incriments at which the elements are moved, to avoid confusion and cut down on operations
-                int xPos = Config.PlayerIcon.X + Config.SquaredBackground.Width + Config.CommonSpace.Width;
-                int yIncriment = Config.SquaredBackground.Height + Config.CommonSpace.Height;
-                int xIncriment = Config.SquaredBackground.Width + Config.CommonSpace.Width;
-
-                // Generate the points for the name and name info, this will be the player icon as well as the name and health bar.
-                Point NamePosition = new Point(Config.PlayerIcon.X, Config.PlayerIcon.Y);
-                Point NameInfoPosition = new Point(xPos, Config.PlayerIcon.Y);
-
-                // Send the points off to be drawn
-                Draw.PedInfo(Config, Game.Player.Character, true);
-
-                // Generate the points for the main hand weapon, this will include the ammo icon, ammo counter, and weapon icon (when applicable).
-                Point MainHandPosition = new Point(Config.PlayerIcon.X, (NamePosition.Y + yIncriment));
-                Point MainHandAmmoPosition = new Point(xPos, (NameInfoPosition.Y + yIncriment));
-                Point MainHandWeaponPosition = new Point(xPos + xIncriment, (NameInfoPosition.Y + yIncriment));
-
-                // Send the points off to be drawn
-                Draw.PlayerWeapon(Config, MainHandPosition, MainHandAmmoPosition, MainHandWeaponPosition);
-
-                // Generate the points for the off hand weapon, this will include the ammo icon, ammo counter, and weapon icon (when applicable).
-                Point OffHandPosition = new Point(Config.PlayerIcon.X, (MainHandPosition.Y + yIncriment));
-                Point OffHandAmmoPosition = new Point(xPos, (MainHandPosition.Y + yIncriment));
-                Point OffHandWeaponPosition = new Point(xPos + xIncriment, (MainHandPosition.Y + yIncriment));
-
-                // Send the points off to be drawn
-                Draw.PlayerWeapon(Config, OffHandPosition, OffHandAmmoPosition, OffHandWeaponPosition, true);
-            }
-
             public static void OnAbort(object Sender, EventArgs Args)
             {
                 // Close the debug window
