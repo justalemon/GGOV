@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -117,8 +117,7 @@ namespace GGO.Common
         {
             get
             {
-                return new Point(PlayerIcon.X + CommonSpace.Width + SquaredBackground.Width,
-                                 PlayerIcon.Y + CommonSpace.Height + SquaredBackground.Height);
+                return new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpace.Width, PrimaryIcon.Y);
             }
         }
         /// <summary>
@@ -128,8 +127,7 @@ namespace GGO.Common
         {
             get
             {
-                return new Point(PlayerIcon.X + CommonSpace.Width + SquaredBackground.Width,
-                                 PlayerIcon.Y + (CommonSpace.Height * 2) + (SquaredBackground.Height * 2));
+                return new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpace.Width, SecondaryIcon.Y);
             }
         }
 
