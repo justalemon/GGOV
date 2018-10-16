@@ -10,220 +10,70 @@ namespace GGO.Common
         /// <summary>
         /// If the Debug window should be shown.
         /// </summary>
-        public bool Debug
-        {
-            get
-            {
-                return (bool)Raw["debug"] || Environment.GetEnvironmentVariable("LemonDev", EnvironmentVariableTarget.User) == "true";
-            }
-        }
+        public bool Debug => (bool)Raw["debug"] || Environment.GetEnvironmentVariable("LemonDev", EnvironmentVariableTarget.User) == "true";
         /// <summary>
         /// The name for the current player.
         /// </summary>
-        public string Name
-        {
-            get
-            {
-                return (string)Raw["name"];
-            }
-        }
+        public string Name => (string)Raw["name"];
         /// <summary>
         /// If the default Radar and Hud should be disabled.
         /// </summary>
-        public bool DisableHud
-        {
-            get
-            {
-                return (bool)Raw["disable_hud"];
-            }
-        }
+        public bool DisableHud => (bool)Raw["disable_hud"];
 
         /// <summary>
         /// Separation between the UI elements.
         /// </summary>
-        public Size CommonSpace
-        {
-            get
-            {
-                return CreateSize("elements_relative");
-            }
-        }
+        public Size CommonSpace => CreateSize("elements_relative");
         /// <summary>
         /// Size for the squared backgrounds.
         /// </summary>
-        public Size SquaredBackground
-        {
-            get
-            {
-                return CreateSize("icon_background_size");
-            }
-        }
+        public Size SquaredBackground => CreateSize("icon_background_size");
         /// <summary>
         /// Size for the dividers on the health bars.
         /// </summary>
-        public Size DividerSize
-        {
-            get
-            {
-                return CreateSize("divider_size");
-            }
-        }
+        public Size DividerSize => CreateSize("divider_size");
 
         /// <summary>
         /// The position of the player icon.
         /// </summary>
-        public Point PlayerIcon
-        {
-            get
-            {
-                return new Point(CreateSize("player_general_pos"));
-            }
-        }
+        public Point PlayerIcon => new Point(CreateSize("player_general_pos"));
         /// <summary>
         /// The position of the player information.
         /// </summary>
-        public Point PlayerInfo
-        {
-            get
-            {
-                return new Point(PlayerIcon.X + SquaredBackground.Width + CommonSpace.Width, PlayerIcon.Y);
-            }
-        }
+        public Point PlayerInfo => new Point(PlayerIcon.X + SquaredBackground.Width + CommonSpace.Width, PlayerIcon.Y);
 
         /// <summary>
         /// The position of the icon for the primary weapon.
         /// </summary>
-        public Point PrimaryIcon
-        {
-            get
-            {
-                return new Point(PlayerIcon.X, PlayerIcon.Y + CommonSpace.Height + SquaredBackground.Height);
-            }
-        }
+        public Point PrimaryIcon => new Point(PlayerIcon.X, PlayerIcon.Y + CommonSpace.Height + SquaredBackground.Height);
         /// <summary>
         /// The position of the icon for the primary weapon.
         /// </summary>
-        public Point SecondaryIcon
-        {
-            get
-            {
-                return new Point(PlayerIcon.X, PlayerIcon.Y + (CommonSpace.Height * 2) + (SquaredBackground.Height * 2));
-            }
-        }
+        public Point SecondaryIcon => new Point(PlayerIcon.X, PlayerIcon.Y + (CommonSpace.Height * 2) + (SquaredBackground.Height * 2));
         /// <summary>
         /// The position of the ammo for the primary weapon.
         /// </summary>
-        public Point PrimaryAmmo
-        {
-            get
-            {
-                return new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpace.Width, PrimaryIcon.Y);
-            }
-        }
+        public Point PrimaryAmmo => new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpace.Width, PrimaryIcon.Y);
         /// <summary>
         /// The position of the ammo for the secondary weapon.
         /// </summary>
-        public Point SecondaryAmmo
-        {
-            get
-            {
-                return new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpace.Width, SecondaryIcon.Y);
-            }
-        }
+        public Point SecondaryAmmo => new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpace.Width, SecondaryIcon.Y);
 
-        public Size DividerPosition
-        {
-            get
-            {
-                return CreateSize("divider_pos");
-            }
-        }
-        public Size NamePosition
-        {
-            get
-            {
-                return CreateSize("name_pos");
-            }
-        }
+        public Size DividerPosition => CreateSize("divider_pos");
+        public Size NamePosition => CreateSize("name_pos");
 
-        public Size IconImageSize
-        {
-            get
-            {
-                return CreateSize("icon_image_size");
-            }
-        }
-        public Size IconPosition
-        {
-            get
-            {
-                return CreateSize("icon_relative_pos");
-            }
-        }
+        public Size IconImageSize => CreateSize("icon_image_size");
+        public Size IconPosition => CreateSize("icon_relative_pos");
 
-        public Point SquadPosition
-        {
-            get
-            {
-                return new Point(CreateSize("squad_general_pos"));
-            }
-        }
-        public Size SquadInfoSize
-        {
-            get
-            {
-                return CreateSize("squad_info_size");
-            }
-        }
-        public Size SquadHealthSize
-        {
-            get
-            {
-                return CreateSize("squad_health_size");
-            }
-        }
-        public Size SquadHealthPos
-        {
-            get
-            {
-                return CreateSize("squad_health_pos");
-            }
-        }
-        public Size PlayerInfoSize
-        {
-            get
-            {
-                return CreateSize("player_info_size");
-            }
-        }
-        public Size PlayerHealthSize
-        {
-            get
-            {
-                return CreateSize("player_health_size");
-            }
-        }
-        public Size PlayerHealthPos
-        {
-            get
-            {
-                return CreateSize("player_health_pos");
-            }
-        }
-        public Size WeaponImageSize
-        {
-            get
-            {
-                return CreateSize("weapon_image_size");
-            }
-        }
-        public Point AmmoOffset
-        {
-            get
-            {
-                return new Point(CreateSize("ammo_offset_pos"));
-            }
-        }
+        public Point SquadPosition => new Point(CreateSize("squad_general_pos"));
+        public Size SquadInfoSize => CreateSize("squad_info_size");
+        public Size SquadHealthSize => CreateSize("squad_health_size");
+        public Size SquadHealthPos => CreateSize("squad_health_pos");
+        public Size PlayerInfoSize => CreateSize("player_info_size");
+        public Size PlayerHealthSize => CreateSize("player_health_size");
+        public Size PlayerHealthPos => CreateSize("player_health_pos");
+        public Size WeaponImageSize => CreateSize("weapon_image_size");
+        public Point AmmoOffset => new Point(CreateSize("ammo_offset_pos"));
 
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }
