@@ -14,7 +14,7 @@ namespace GGO.Common
         {
             get
             {
-                return (bool)Raw["debug"] || Environment.GetEnvironmentVariable("DevGTA", EnvironmentVariableTarget.User) == "true";
+                return (bool)Raw["debug"] || Environment.GetEnvironmentVariable("LemonDev", EnvironmentVariableTarget.User) == "true";
             }
         }
         /// <summary>
