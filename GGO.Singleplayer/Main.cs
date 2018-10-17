@@ -36,7 +36,7 @@ namespace GGO.Singleplayer
                 // If the debug mode is used, update the weapon hash
                 if (Config.Debug)
                 {
-                    DebugWindow.WeaponHash.Text = "Hash of your current weapon: " + Game.Player.Character.Weapons.Current.Model.Hash;
+                    DebugWindow.WeaponHash.Text = "Weapon Hash: " + Game.Player.Character.Weapons.Current.Model.Hash;
                 }
 
                 // Do not draw the UI elements if the game is loading, paused, player is dead or it cannot be controlled
