@@ -81,10 +81,12 @@ namespace GGO.Singleplayer
                 Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
                 Draw.PedInfo(Config, Game.Player.Character, true);
 
+                // Add the icons for the player weapon
                 Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
-                Draw.WeaponInfo(Config, false);
                 Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
-                Draw.WeaponInfo(Config, true);
+                // And the information of the weapons
+                Draw.WeaponInfo(Config, false, Game.Player.Character.Weapons.Current.AmmoInClip);
+                Draw.WeaponInfo(Config, true, Game.Player.Character.Weapons.Current.AmmoInClip);
             }
 
             public static void OnAbort(object Sender, EventArgs Args)

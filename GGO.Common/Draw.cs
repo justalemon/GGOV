@@ -146,14 +146,17 @@ namespace GGO.Common
         /// </summary>
         /// <param name="Config">The mod settings.</param>
         /// <param name="Sidearm">If the specified ammo is for the sidearm.</param>
-        public static void WeaponInfo(Configuration Config, bool Sidearm)
+        public static void WeaponInfo(Configuration Config, bool Sidearm, int Ammo)
         {
             // Start by selecting the correct location for the primary or secondary weapon
-            Point Location = Sidearm ? Config.SecondaryBackground : Config.PrimaryBackground;
+            Point BackgroundLocation = Sidearm ? Config.SecondaryBackground : Config.PrimaryBackground;
+            Point AmmoLocation = Sidearm ? Config.SecondaryAmmo : Config.PrimaryAmmo;
 
-            // Then, draw the background
-            UIRectangle Background = new UIRectangle(Location, Config.SquaredBackground, CBackground);
+            // Then, draw the background and the ammo
+            UIRectangle Background = new UIRectangle(BackgroundLocation, Config.SquaredBackground, CBackground);
             Background.Draw();
+            UIText AmmoCount = new UIText(Ammo.ToString(), AmmoLocation, .6f, Color.White, GTA.Font.Monospace, true);
+            AmmoCount.Draw();
         }
     }
 }
