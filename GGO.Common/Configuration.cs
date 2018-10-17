@@ -66,6 +66,18 @@ namespace GGO.Common
         /// The position of the secondary ammo counter.
         /// </summary>
         public Point SecondaryAmmo => new Point(SecondaryBackground.X + AmmoOffset.X, SecondaryBackground.Y + AmmoOffset.Y);
+        /// <summary>
+        /// The position of the primary weapon background.
+        /// </summary>
+        public Point PrimaryWeapon => new Point(PrimaryBackground.X + CommonSpace.Width + SquaredBackground.Width, PrimaryBackground.Y);
+        /// <summary>
+        /// The position of the secondary weapon background.
+        /// </summary>
+        public Point SecondaryWeapon => new Point(SecondaryBackground.X + CommonSpace.Width + SquaredBackground.Width, SecondaryBackground.Y);
+        /// <summary>
+        /// The size of the weapon background
+        /// </summary>
+        public Size WeaponBackground => new Size(PlayerInfoSize.Width - CommonSpace.Width - SquaredBackground.Width, PlayerInfoSize.Height);
 
         public Size DividerPosition => CreateSize("divider_pos");
         public Size NamePosition => CreateSize("name_pos");
