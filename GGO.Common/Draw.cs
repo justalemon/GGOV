@@ -149,7 +149,7 @@ namespace GGO.Common
         public static void WeaponInfo(Configuration Config, bool Sidearm)
         {
             // Start by selecting the correct location for the primary or secondary weapon
-            Point Location = Sidearm ? Config.SecondaryAmmo : Config.PrimaryAmmo;
+            Point Location = Sidearm ? Config.SecondaryBackground : Config.PrimaryBackground;
 
             // Then, draw the background
             UIRectangle Background = new UIRectangle(Location, Config.SquaredBackground, CBackground);

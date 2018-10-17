@@ -53,11 +53,11 @@ namespace GGO.Common
         /// <summary>
         /// The position of the ammo for the primary weapon.
         /// </summary>
-        public Point PrimaryAmmo => new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpace.Width, PrimaryIcon.Y);
+        public Point PrimaryBackground => new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpace.Width, PrimaryIcon.Y);
         /// <summary>
         /// The position of the ammo for the secondary weapon.
         /// </summary>
-        public Point SecondaryAmmo => new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpace.Width, SecondaryIcon.Y);
+        public Point SecondaryBackground => new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpace.Width, SecondaryIcon.Y);
 
         public Size DividerPosition => CreateSize("divider_pos");
         public Size NamePosition => CreateSize("name_pos");
