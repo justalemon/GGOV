@@ -56,7 +56,7 @@
     <Compile Include="Names.cs" />
     <Compile Include="Ped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Image.cs" />
+    <Compile Include="Images.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -91,39 +91,31 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\GunPistol.png" />
-    <None Include="Resources\GunPistol50.png" />
-    <None Include="Resources\GunPumpShotgun.png" />
-    <None Include="Resources\GunRevolver.png" />
-    <None Include="Resources\GunSawnOffShotgun.png" />
-    <None Include="Resources\GunSMG.png" />
-    <None Include="Resources\GunSniperRifle.png" />
-    <None Include="Resources\GunStunGun.png" />
-    <None Include="Resources\GunSwitchBlade.png" />
-    <None Include="Resources\GunAdvancedRifle.png" />
-    <None Include="Resources\GunAPPistol.png" />
-    <None Include="Resources\GunAssaultRifle.png" />
-    <None Include="Resources\GunAssaultShotgun.png" />
-    <None Include="Resources\GunAssaultSMG.png" />
-    <None Include="Resources\GunBat.png" />
-    <None Include="Resources\GunBullpupShotgun.png" />
-    <None Include="Resources\GunCarbineRifle.png" />
-    <None Include="Resources\GunCombatMG.png" />
-    <None Include="Resources\GunCombatPDW.png" />
-    <None Include="Resources\GunCombatPistol.png" />
-    <None Include="Resources\GunCompactRifle.png" />
-    <None Include="Resources\GunCrowbar.png" />
-    <None Include="Resources\GunDoubleBarrelShotgun.png" />
-    <None Include="Resources\GunFlareGun.png" />
-    <None Include="Resources\GunGolfClub.png" />
-    <None Include="Resources\GunHammer.png" />
-    <None Include="Resources\GunHeavySniper.png" />
-    <None Include="Resources\GunKnife.png" />
-    <None Include="Resources\GunMarksmanPistol.png" />
-    <None Include="Resources\GunMG.png" />
-    <None Include="Resources\GunMicroSMG.png" />
-    <None Include="Resources\GunMinigun.png" />
-    <None Include="Resources\GunNightstick.png" />
+    <None Include="Resources\GunWTT_PIST.png" />
+    <None Include="Resources\GunWTT_PIST_50.png" />
+    <None Include="Resources\GunWTT_SG_PMP.png" />
+    <None Include="Resources\GunWTT_REVOLVER.png" />
+    <None Include="Resources\GunWTT_SG_SOF.png" />
+    <None Include="Resources\GunWTT_SMG.png" />
+    <None Include="Resources\GunWTT_SNIP_RIF.png" />
+    <None Include="Resources\GunWTT_RIFLE_ADV.png" />
+    <None Include="Resources\GunWTT_PIST_AP.png" />
+    <None Include="Resources\GunWTT_RIFLE_ASL.png" />
+    <None Include="Resources\GunWTT_SG_ASL.png" />
+    <None Include="Resources\GunWTT_SMG_ASL.png" />
+    <None Include="Resources\GunWTT_SG_BLP.png" />
+    <None Include="Resources\GunWTT_RIFLE_CBN.png" />
+    <None Include="Resources\GunWTT_MG_CBT.png" />
+    <None Include="Resources\GunWTT_COMBATPDW.png" />
+    <None Include="Resources\GunWTT_PIST_CBT.png" />
+    <None Include="Resources\GunWTT_CMPRIFLE.png" />
+    <None Include="Resources\GunWTT_DBSHGN.png" />
+    <None Include="Resources\GunWTT_FLAREGUN.png" />
+    <None Include="Resources\GunWTT_SNIP_HVY.png" />
+    <None Include="Resources\GunWTT_MKPISTOL.png" />
+    <None Include="Resources\GunWTT_MG.png" />
+    <None Include="Resources\GunWTT_SMG_MCR.png" />
+    <None Include="Resources\GunWTT_MINIGUN.png" />
     <Content Include="Resources\NoWeapon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

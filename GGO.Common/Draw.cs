@@ -1,8 +1,6 @@
 using GTA;
 using System;
 using System.Drawing;
-using System.Collections.Generic;
-using GGO.Common.Properties;
 
 namespace GGO.Common
 {
@@ -30,26 +28,6 @@ namespace GGO.Common
             Point ImagePos = Position + Config.IconPosition;
             // And finally, add the image on top
             UI.DrawTexture(ImageFile, 0, 0, 100, ImagePos, Config.IconImageSize);
-        }
-
-        /// <summary>
-        /// Draws the icon and background for currently held weapon.
-        /// </summary>
-        /// <param name="Config"></param>
-        /// <param name="WeaponPosition"></param>
-        public static void Weapon(Configuration Config, Point WeaponPosition)
-        {
-            // Calculate the background width for the weapon size.
-            int width = Config.PlayerInfoSize.Width - Config.SquaredBackground.Width - Config.CommonSpace.Width;
-            // Draw the weapon icon background
-            UIRectangle WeaponBackground = new UIRectangle(WeaponPosition, new Size(width, Config.PlayerInfoSize.Height), CBackground);
-            WeaponBackground.Draw();
-
-            // Get the image for the current weapon
-            // string ImageFile = Image.ResourceToPNG(Weapons.CurrentWeaponResource, Weapons.CurrentWeaponName);
-            // Draw the weapon icon on top of the background
-            Point ImagePos = WeaponPosition + Config.IconPosition;
-            // UI.DrawTexture(ImageFile, 0, 0, 100, ImagePos, Config.WeaponImageSize);
         }
 
         /// <summary>
@@ -98,62 +76,40 @@ namespace GGO.Common
             UIText Name = new UIText(Character.Name(Config), InfoPosition + Config.NamePosition, TextSize);
             Name.Draw();
         }
-
-        /// <summary>
-        /// Draws the main hand weapon, or middle bar, to the HUD.
-        /// </summary>
-        /// <param name="Config">Config settings.</param>
-        /// <param name="HandPosition">Position for the ammo icon.</param>
-        /// <param name="AmmoPosition">Position for the ammo counter.</param>
-        /// <param name="WeaponPosition">Position for the weapon icon.</param>
-        /// <param name="isOffHand">Whether the Weapon is the off hand weapon or main hand weapon.</param>
-        public static void PlayerWeapon(Configuration Config, Point HandPosition, Point AmmoPosition, Point WeaponPosition, bool isOffHand = false)
-        {
-            //Setup for whether this is the main or off hand.
-            string hand = isOffHand ? "Off" : "Main";
-            List<Weapons.Type> NoDraw = new List<Weapons.Type>() { Weapons.Type.Banned, Weapons.Type.Melee };
-            NoDraw.Add(isOffHand ? Weapons.Type.Main : Weapons.Type.Sidearm);
-
-            // Do not display main hand weapons for these types.
-            if (NoDraw.Contains(Weapons.CurrentWeaponType))
-            {
-                Icon(Config, Image.ResourceToPNG(Resources.NoWeapon, "NoWeapon" + hand), HandPosition);
-                Icon(Config, Image.ResourceToPNG(Resources.NoWeapon, "NoAmmo" + hand), AmmoPosition);
-                // Only continue on to draw weapon if it is melee and this is the off hand.
-                if (!(Weapons.CurrentWeaponType == Weapons.Type.Melee && isOffHand))
-                {
-                    return;
-                }
-            }
-            else
-            {
-                // Draw the ammo icon
-                Icon(Config, Image.ResourceToPNG(Resources.ImageWeapon, "Weapon" + hand), HandPosition);
-                // Then draw the background for the ammo counter
-                UIRectangle AmmoBackground = new UIRectangle(AmmoPosition, Config.SquaredBackground, CBackground);
-                AmmoBackground.Draw();
-                // Finally, draw the ammo counter on top, adding offset so the text is always centered.
-                UIText Ammo = new UIText(Game.Player.Character.Weapons.Current.AmmoInClip.ToString(), new Point(AmmoPosition.X + Config.AmmoOffset.X, AmmoPosition.Y + Config.AmmoOffset.Y), .6f, Color.White, GTA.Font.Monospace, true);
-                Ammo.Draw();
-            }
-
-            // Draw the weapon
-            Weapon(Config, WeaponPosition);
-        }
         
         /// <summary>
         /// Draws the information about the player ammo.
         /// </summary>
         /// <param name="Config">The mod settings.</param>
         /// <param name="Sidearm">If the specified ammo is for the sidearm.</param>
-        public static void Ammo(Configuration Config, bool Sidearm)
+        public static void WeaponInfo(Configuration Config, bool Sidearm, int Ammo, string Weapon)
         {
             // Start by selecting the correct location for the primary or secondary weapon
-            Point Location = Sidearm ? Config.SecondaryAmmo : Config.PrimaryAmmo;
+            Point BackgroundLocation = Sidearm ? Config.SecondaryBackground : Config.PrimaryBackground;
+            Point AmmoLocation = Sidearm ? Config.SecondaryAmmo : Config.PrimaryAmmo;
+            Point WeaponLocation = Sidearm ? Config.PrimaryWeapon : Config.SecondaryWeapon;
+            string Name = Sidearm ? "Secondary" : "Primary";
 
-            // Then, draw the background
-            UIRectangle Background = new UIRectangle(Location, Config.SquaredBackground, CBackground);
-            Background.Draw();
+            // Then, draw the ammo information
+            UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, Config.SquaredBackground, CBackground);
+            AmmoBackground.Draw();
+            UIText AmmoCount = new UIText(Ammo.ToString(), AmmoLocation, .6f, Color.White, GTA.Font.Monospace, true);
+            AmmoCount.Draw();
+
+            // Request the weapon image, and return if is not valid
+            Bitmap WeaponBitmap = Images.GetBitmap(Weapon);
+
+            if (WeaponBitmap == null)
+            {
+                return;
+            }
+
+            // Draw the background
+            UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, Config.WeaponBackground, CBackground);
+            WeaponBackground.Draw();
+
+            // With the weapon image
+            UI.DrawTexture(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), 0, 0, 100, WeaponLocation, Config.WeaponBackground);
         }
     }
 }

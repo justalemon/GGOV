@@ -53,11 +53,31 @@ namespace GGO.Common
         /// <summary>
         /// The position of the ammo for the primary weapon.
         /// </summary>
-        public Point PrimaryAmmo => new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpace.Width, PrimaryIcon.Y);
+        public Point PrimaryBackground => new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpace.Width, PrimaryIcon.Y);
         /// <summary>
         /// The position of the ammo for the secondary weapon.
         /// </summary>
-        public Point SecondaryAmmo => new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpace.Width, SecondaryIcon.Y);
+        public Point SecondaryBackground => new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpace.Width, SecondaryIcon.Y);
+        /// <summary>
+        /// The position of the primary ammo counter.
+        /// </summary>
+        public Point PrimaryAmmo => new Point(PrimaryBackground.X + AmmoOffset.X, PrimaryBackground.Y + AmmoOffset.Y);
+        /// <summary>
+        /// The position of the secondary ammo counter.
+        /// </summary>
+        public Point SecondaryAmmo => new Point(SecondaryBackground.X + AmmoOffset.X, SecondaryBackground.Y + AmmoOffset.Y);
+        /// <summary>
+        /// The position of the primary weapon background.
+        /// </summary>
+        public Point PrimaryWeapon => new Point(PrimaryBackground.X + CommonSpace.Width + SquaredBackground.Width, PrimaryBackground.Y);
+        /// <summary>
+        /// The position of the secondary weapon background.
+        /// </summary>
+        public Point SecondaryWeapon => new Point(SecondaryBackground.X + CommonSpace.Width + SquaredBackground.Width, SecondaryBackground.Y);
+        /// <summary>
+        /// The size of the weapon background
+        /// </summary>
+        public Size WeaponBackground => new Size(PlayerInfoSize.Width - CommonSpace.Width - SquaredBackground.Width, PlayerInfoSize.Height);
 
         public Size DividerPosition => CreateSize("divider_pos");
         public Size NamePosition => CreateSize("name_pos");
