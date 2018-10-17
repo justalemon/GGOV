@@ -19,7 +19,7 @@ namespace GGO.Common
 
             if (Current == null)
             {
-                Current = Resources.GUN_Bat;
+                Current = new Bitmap(200, 200);
             }
 
             return ResourceToPNG(Current, Filename);

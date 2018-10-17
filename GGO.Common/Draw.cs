@@ -61,15 +61,14 @@ namespace GGO.Common
         /// <param name="InfoPosition">The position for the ped information.</param>
         /// <param name="Player">Whether this is the player HUD or squad HUD.</param>
         /// <param name="SquadCount">The number of the friendly within the squad.</param>
-        public static void PedInfo(Configuration Config, Ped Character, bool isPlayer, int SquadCount = 0)
+        public static void PedInfo(Configuration Config, Ped Character, bool Player, int SquadCount = 0)
         {
-            Size InfoSize = isPlayer ? Config.PlayerInfoSize : Config.SquadInfoSize;
-            Size HealthSize = isPlayer ? Config.PlayerHealthSize : Config.SquadHealthSize;
-            Size HealthPos = isPlayer ? Config.PlayerHealthPos : Config.SquadHealthPos;
-            string iconText = isPlayer ? "Player" : "Squad" + SquadCount;
-            float textScale = isPlayer ? 0.4f : 0.3f;
-
-            Point InfoPosition = isPlayer ? Config.PlayerInfo : Config.GetSquadPosition(SquadCount, true);
+            // Start by storing the correct information for either the player or squad member
+            Point InfoPosition = Player ? Config.PlayerInfo : Config.GetSquadPosition(SquadCount, true);
+            Size InfoSize = Player ? Config.PlayerInfoSize : Config.SquadInfoSize;
+            Size HealthSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;
+            Size HealthPosition = Player ? Config.PlayerHealthPos : Config.SquadHealthPos;
+            float TextSize = Player ? 0.4f : 0.3f;
 
             // First, draw the black background
             UIRectangle Background = new UIRectangle(InfoPosition, InfoSize, CBackground);
@@ -87,18 +86,18 @@ namespace GGO.Common
             for (int Count = 0; Count < 5; Count++)
             {
                 // Calculate the position of the separator
-                Point Pos = (InfoPosition + HealthPos) + new Size(HealthSep * Count, 0) + Config.DividerPosition;
+                Point Pos = (InfoPosition + HealthPosition) + new Size(HealthSep * Count, 0) + Config.DividerPosition;
                 // And draw it on screen
                 UIRectangle Divider = new UIRectangle(Pos, Config.DividerSize, CDivider);
                 Divider.Draw();
             }
 
             // After the separators are there, draw the health bar on the top
-            UIRectangle HealthBar = new UIRectangle(InfoPosition + HealthPos, NewHealthSize, Character.HealthColor());
+            UIRectangle HealthBar = new UIRectangle(InfoPosition + HealthPosition, NewHealthSize, Character.HealthColor());
             HealthBar.Draw();
 
             // And finally, draw the ped name
-            UIText Name = new UIText(Character.Name(Config), InfoPosition + Config.NamePosition, textScale);
+            UIText Name = new UIText(Character.Name(Config), InfoPosition + Config.NamePosition, TextSize);
             Name.Draw();
         }
 
@@ -143,7 +142,7 @@ namespace GGO.Common
             // Draw the weapon
             Weapon(Config, WeaponPosition);
         }
-      
+        
         /// <summary>
         /// Draws the information about the player ammo.
         /// </summary>
