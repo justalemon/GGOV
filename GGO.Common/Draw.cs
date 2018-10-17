@@ -90,18 +90,26 @@ namespace GGO.Common
             Point WeaponLocation = Sidearm ? Config.PrimaryWeapon : Config.SecondaryWeapon;
             string Name = Sidearm ? "Secondary" : "Primary";
 
-            // Then, draw the backgrounds
+            // Then, draw the ammo information
             UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, Config.SquaredBackground, CBackground);
             AmmoBackground.Draw();
+            UIText AmmoCount = new UIText(Ammo.ToString(), AmmoLocation, .6f, Color.White, GTA.Font.Monospace, true);
+            AmmoCount.Draw();
+
+            // Request the weapon image, and return if is not valid
+            Bitmap WeaponBitmap = Images.GetBitmap(Weapon);
+
+            if (WeaponBitmap == null)
+            {
+                return;
+            }
+
+            // Draw the background
             UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, Config.WeaponBackground, CBackground);
             WeaponBackground.Draw();
 
             // With the weapon image
-            UI.DrawTexture(Images.ResourceToPNG(Weapon, "Gun" + Weapon + Name), 0, 0, 100, WeaponLocation, Config.WeaponBackground);
-
-            // And finally, the ammo and weapon
-            UIText AmmoCount = new UIText(Ammo.ToString(), AmmoLocation, .6f, Color.White, GTA.Font.Monospace, true);
-            AmmoCount.Draw();
+            UI.DrawTexture(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), 0, 0, 100, WeaponLocation, Config.WeaponBackground);
         }
     }
 }

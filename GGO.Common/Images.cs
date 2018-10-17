@@ -8,21 +8,13 @@ namespace GGO.Common
     public class Images
     {
         /// <summary>
-        /// Creates a PNG file from a resource image.
+        /// Gets a Bitmap from the resources.
         /// </summary>
-        /// <param name="Origin">The name of the resource.</param>
-        /// <param name="Filename">The output filename.</param>
-        /// <returns>The absolute path of the output file.</returns>
-        public static string ResourceToPNG(string Origin, string Filename)
+        /// <param name="Name"></param>
+        /// <returns>The requested Bitmap.</returns>
+        public static Bitmap GetBitmap(string Name)
         {
-            Bitmap Current = (Bitmap)Resources.ResourceManager.GetObject("Gun" + Origin);
-
-            if (Current == null)
-            {
-                Current = Resources.GunWTT_PIST;
-            }
-
-            return ResourceToPNG(Current, Filename);
+            return (Bitmap)Resources.ResourceManager.GetObject("Gun" + Name);
         }
 
         /// <summary>
