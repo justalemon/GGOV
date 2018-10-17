@@ -69,7 +69,7 @@ namespace GGO.Singleplayer
                         Bitmap ImageType = NearbyPed.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
 
                         // Draw the icon and the ped info
-                        Draw.Icon(Config, Common.Image.ResourceToPNG(ImageType, ImageName + Count), Config.GetSquadPosition(Count));
+                        Draw.Icon(Config, Images.ResourceToPNG(ImageType, ImageName + Count), Config.GetSquadPosition(Count));
                         Draw.PedInfo(Config, NearbyPed, false, Count);
 
                         // To end this up, increase the count of peds "rendered"
@@ -78,12 +78,12 @@ namespace GGO.Singleplayer
                 }
 
                 // Then, start by drawing the player info
-                Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
+                Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
                 Draw.PedInfo(Config, Game.Player.Character, true);
 
                 // Add the icons for the player weapon
-                Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
-                Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
+                Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
+                Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
                 // And the information of the weapons
                 Draw.WeaponInfo(Config, false, Game.Player.Character.Weapons.Current.AmmoInClip);
                 Draw.WeaponInfo(Config, true, Game.Player.Character.Weapons.Current.AmmoInClip);
