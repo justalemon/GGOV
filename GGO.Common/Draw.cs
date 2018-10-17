@@ -66,7 +66,7 @@ namespace GGO.Common
             Size InfoSize = Player ? Config.PlayerInfoSize : Config.SquadInfoSize;
             Size HealthSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;
             Size HealthPosition = Player ? Config.PlayerHealthPos : Config.SquadHealthPos;
-            float TextSize = Player ? 0.4f : 0.3f;
+            float TextSize = Player ? 0.35f : 0.3f;
 
             // First, draw the black background
             UIRectangle Background = new UIRectangle(InfoPosition, InfoSize, CBackground);
