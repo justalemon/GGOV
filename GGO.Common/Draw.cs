@@ -57,18 +57,16 @@ namespace GGO.Common
         /// </summary>
         /// <param name="Config">Configuration settings.</param>
         /// <param name="Character">The ped to get the information.</param>
-        /// <param name="Position">The position for the ped icon.</param>
-        /// <param name="InfoPosition">The position for the ped information.</param>
         /// <param name="Player">Whether this is the player HUD or squad HUD.</param>
-        /// <param name="SquadCount">The number of the friendly within the squad.</param>
-        public static void PedInfo(Configuration Config, Ped Character, bool Player, int SquadCount = 0)
+        /// <param name="Count">The number of the friendly within the squad.</param>
+        public static void PedInfo(Configuration Config, Ped Character, bool Player, int Count = 0)
         {
             // Start by storing the correct information for either the player or squad member
-            Point InfoPosition = Player ? Config.PlayerInfo : Config.GetSquadPosition(SquadCount, true);
+            Point InfoPosition = Player ? Config.PlayerInfo : Config.GetSquadPosition(Count, true);
             Size InfoSize = Player ? Config.PlayerInfoSize : Config.SquadInfoSize;
             Size HealthSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;
             Size HealthPosition = Player ? Config.PlayerHealthPos : Config.SquadHealthPos;
-            float TextSize = Player ? 0.4f : 0.3f;
+            float TextSize = Player ? 0.35f : 0.3f;
 
             // First, draw the black background
             UIRectangle Background = new UIRectangle(InfoPosition, InfoSize, CBackground);
@@ -83,10 +81,10 @@ namespace GGO.Common
             int HealthSep = HealthSize.Width / 4;
 
             // Prior to drawing the health bar we need the separators
-            for (int Count = 0; Count < 5; Count++)
+            for (int Separator = 0; Separator < 5; Separator++)
             {
                 // Calculate the position of the separator
-                Point Pos = (InfoPosition + HealthPosition) + new Size(HealthSep * Count, 0) + Config.DividerPosition;
+                Point Pos = (InfoPosition + HealthPosition) + new Size(HealthSep * Separator, 0) + Config.DividerPosition;
                 // And draw it on screen
                 UIRectangle Divider = new UIRectangle(Pos, Config.DividerSize, CDivider);
                 Divider.Draw();
