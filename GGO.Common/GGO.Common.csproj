@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\DeadMarker.png" />
     <Content Include="Resources\NoWeapon.png" />
     <Content Include="Resources\WeaponTypes\GUN_Bat.png" />
     <Content Include="Resources\WeaponTypes\GUN_Crowbar.png" />
