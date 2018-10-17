@@ -1,4 +1,5 @@
 using GTA;
+using GTA.Math;
 using System;
 using System.Drawing;
 
@@ -110,6 +111,23 @@ namespace GGO.Common
 
             // With the weapon image
             UI.DrawTexture(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), 0, 0, 100, WeaponLocation, Config.WeaponBackground);
+        }
+
+        public static void DeadMarker(Configuration Config, Ped Character, int Count)
+        {
+            Vector3 HeadCoord = Character.Position + Character.GetBoneCoord(Bone.SKEL_Head);
+
+            Point MarkerPosition = UI.WorldToScreen(HeadCoord + Config.DeadMarkerOffset);
+
+            float Distance = Vector3.Distance(Game.Player.Character.Position, HeadCoord);
+
+            float HeightRatio = 2f * Distance;
+            float WidthRatio = 1f * Distance;
+
+            Size MarkerSize = new Size((int)(Config.DeadMarkerSize.Width / WidthRatio), (int)(Config.DeadMarkerSize.Height / HeightRatio));
+
+            UIText test = new UIText(MarkerPosition.ToString(), MarkerPosition, 1f);
+            //UI.DrawTexture(Image.ResourceToPNG(Resources.ImageDead, "DeadMarker" + Count), 0, 0, 100, MarkerPosition, MarkerSize);
         }
     }
 }
