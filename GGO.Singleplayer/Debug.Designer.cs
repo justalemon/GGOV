@@ -51,8 +51,10 @@
             this.DividerSize = new System.Windows.Forms.Label();
             this.ElementsRelative = new System.Windows.Forms.Label();
             this.InfoStrip = new System.Windows.Forms.StatusStrip();
+            this.WeaponHash = new System.Windows.Forms.ToolStripStatusLabel();
             this.GeneralGroup.SuspendLayout();
             this.SizesPositions.SuspendLayout();
+            this.InfoStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // GeneralGroup
@@ -277,10 +279,18 @@
             // InfoStrip
             // 
             this.InfoStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.InfoStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.WeaponHash});
             this.InfoStrip.Location = new System.Drawing.Point(0, 389);
             this.InfoStrip.Name = "InfoStrip";
             this.InfoStrip.Size = new System.Drawing.Size(309, 22);
             this.InfoStrip.TabIndex = 2;
+            // 
+            // WeaponHash
+            // 
+            this.WeaponHash.Name = "WeaponHash";
+            this.WeaponHash.Size = new System.Drawing.Size(34, 17);
+            this.WeaponHash.Text = "Hash";
             // 
             // Debug
             // 
@@ -300,6 +310,8 @@
             this.GeneralGroup.PerformLayout();
             this.SizesPositions.ResumeLayout(false);
             this.SizesPositions.PerformLayout();
+            this.InfoStrip.ResumeLayout(false);
+            this.InfoStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,5 +342,6 @@
         private System.Windows.Forms.Label PlayerHealthSize;
         private System.Windows.Forms.Label PlayerInfoSize;
         private System.Windows.Forms.Label PlayerPosition;
+        public System.Windows.Forms.ToolStripStatusLabel WeaponHash;
     }
 }
