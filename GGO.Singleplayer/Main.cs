@@ -33,6 +33,12 @@ namespace GGO.Singleplayer
 
             private void OnTick(object Sender, EventArgs Args)
             {
+                // If the debug mode is used, update the weapon hash
+                if (Config.Debug)
+                {
+                    DebugWindow.WeaponHash.Text = "Hash of your current weapon: " + Game.Player.Character.Weapons.Current.Model.Hash;
+                }
+
                 // Do not draw the UI elements if the game is loading, paused, player is dead or it cannot be controlled
                 if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive ||
                     !Function.Call<bool>(Hash.IS_PLAYER_CONTROL_ON, Game.Player))
