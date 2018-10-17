@@ -57,8 +57,6 @@ namespace GGO.Common
         /// </summary>
         /// <param name="Config">Configuration settings.</param>
         /// <param name="Character">The ped to get the information.</param>
-        /// <param name="Position">The position for the ped icon.</param>
-        /// <param name="InfoPosition">The position for the ped information.</param>
         /// <param name="Player">Whether this is the player HUD or squad HUD.</param>
         /// <param name="SquadCount">The number of the friendly within the squad.</param>
         public static void PedInfo(Configuration Config, Ped Character, bool Player, int SquadCount = 0)
