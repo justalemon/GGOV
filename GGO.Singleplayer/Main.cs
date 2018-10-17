@@ -82,9 +82,9 @@ namespace GGO.Singleplayer
                 Draw.PedInfo(Config, Game.Player.Character, true);
 
                 Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
-                Draw.Ammo(Config, false);
+                Draw.WeaponInfo(Config, false);
                 Draw.Icon(Config, Common.Image.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
-                Draw.Ammo(Config, true);
+                Draw.WeaponInfo(Config, true);
             }
 
             public static void OnAbort(object Sender, EventArgs Args)
