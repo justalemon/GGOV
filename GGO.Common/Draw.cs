@@ -82,15 +82,24 @@ namespace GGO.Common
         /// </summary>
         /// <param name="Config">The mod settings.</param>
         /// <param name="Sidearm">If the specified ammo is for the sidearm.</param>
-        public static void WeaponInfo(Configuration Config, bool Sidearm, int Ammo)
+        public static void WeaponInfo(Configuration Config, bool Sidearm, int Ammo, string Weapon)
         {
             // Start by selecting the correct location for the primary or secondary weapon
             Point BackgroundLocation = Sidearm ? Config.SecondaryBackground : Config.PrimaryBackground;
             Point AmmoLocation = Sidearm ? Config.SecondaryAmmo : Config.PrimaryAmmo;
+            Point WeaponLocation = Sidearm ? Config.PrimaryWeapon : Config.SecondaryWeapon;
+            string Name = Sidearm ? "Secondary" : "Primary";
 
-            // Then, draw the background and the ammo
-            UIRectangle Background = new UIRectangle(BackgroundLocation, Config.SquaredBackground, CBackground);
-            Background.Draw();
+            // Then, draw the backgrounds
+            UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, Config.SquaredBackground, CBackground);
+            AmmoBackground.Draw();
+            UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, Config.WeaponBackground, CBackground);
+            WeaponBackground.Draw();
+
+            // With the weapon image
+            UI.DrawTexture(Images.ResourceToPNG(Weapon, "Gun" + Weapon + Name), 0, 0, 100, WeaponLocation, Config.WeaponBackground);
+
+            // And finally, the ammo and weapon
             UIText AmmoCount = new UIText(Ammo.ToString(), AmmoLocation, .6f, Color.White, GTA.Font.Monospace, true);
             AmmoCount.Draw();
         }
