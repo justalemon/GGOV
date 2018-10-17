@@ -19,7 +19,7 @@ namespace GGO.Common
 
             if (Current == null)
             {
-                Current = new Bitmap(200, 200);
+                Current = Resources.GunWTT_PIST;
             }
 
             return ResourceToPNG(Current, Filename);
