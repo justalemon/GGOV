@@ -57,10 +57,6 @@ namespace GGO.Singleplayer
                 // First, create a list to start counting
                 int Count = 0;
 
-                // Draw the dead markers
-                // Create a counter to create unique marker file
-                int DeadCount = 0;
-
                 // Then, Run over the peds and draw them on the screen (up to 6 of them, including the player)
                 // NOTE: We order them by ped hash because the players have lower hash codes than the rest of entities
                 foreach (Ped NearbyPed in World.GetNearbyPeds(Game.Player.Character.Position, 50f).OrderBy(P => P.GetHashCode()))
@@ -84,10 +80,7 @@ namespace GGO.Singleplayer
                     if (NearbyPed.IsDead && NearbyPed.IsOnScreen)
                     {
                         // Draw marker
-                        Draw.DeadMarker(Config, NearbyPed, DeadCount);
-
-                        // Increase the count of dead peds "rendered"
-                        DeadCount++;
+                        Draw.DeadMarker(Config, NearbyPed);
                     }
                 }
 

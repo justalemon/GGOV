@@ -119,7 +119,7 @@ namespace GGO.Common
         /// <param name="Config">The mod settings.</param>
         /// <param name="Character">The ped to get the information.</param>
         /// <param name="Count">The dead ped count.</param>
-        public static void DeadMarker(Configuration Config, Ped Character, int Count)
+        public static void DeadMarker(Configuration Config, Ped Character)
         {
             // Get the coordinates for the head of the dead ped.
             Vector3 HeadCoord = Character.GetBoneCoord(Bone.SKEL_Head);
@@ -136,7 +136,7 @@ namespace GGO.Common
             MarkerPosition.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 
             // Finally, draw the dead marker.
-            UI.DrawTexture(Images.ResourceToPNG(Properties.Resources.DeadMarker, "DeadMarker" + Count), 0, 0, 100, MarkerPosition, MarkerSize);
+            UI.DrawTexture(Images.ResourceToPNG(Properties.Resources.DeadMarker, "DeadMarker" + Character.GetHashCode()), 0, 0, 100, MarkerPosition, MarkerSize);
         }
     }
 }
