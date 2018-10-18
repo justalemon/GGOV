@@ -147,5 +147,10 @@ namespace GGO.Common
         {
             return new Size((int)(Resolution.Width * (float)Raw[ConfigOption][0]), (int)(Resolution.Height * (float)Raw[ConfigOption][1]));
         }
+
+        private Vector3 CreateVector(string ConfigOption)
+        {
+            return new Vector3((int)Raw[ConfigOption][0], (int)Raw[ConfigOption][1], (int)Raw[ConfigOption][2]);
+        }
     }
 }
