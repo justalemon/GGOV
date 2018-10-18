@@ -58,7 +58,7 @@ namespace GGO.Singleplayer
                 int Count = 0;
 
                 // Draw the dead markers
-                // Create a counter to limit the screen clutter.
+                // Create a counter to create unique marker file
                 int DeadCount = 0;
 
                 // Then, Run over the peds and draw them on the screen (up to 6 of them, including the player)
