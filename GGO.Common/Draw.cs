@@ -113,21 +113,30 @@ namespace GGO.Common
             UI.DrawTexture(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), 0, 0, 100, WeaponLocation, Config.WeaponBackground);
         }
 
+        /// <summary>
+        /// Draws the dead marker on top of dead peds heads.
+        /// </summary>
+        /// <param name="Config">The mod settings.</param>
+        /// <param name="Character">The ped to get the information.</param>
+        /// <param name="Count">The dead ped count.</param>
         public static void DeadMarker(Configuration Config, Ped Character, int Count)
         {
-            Vector3 HeadCoord = Character.Position + Character.GetBoneCoord(Bone.SKEL_Head);
+            // Get the coordinates for the head of the dead ped.
+            Vector3 HeadCoord = Character.GetBoneCoord(Bone.SKEL_Head);
 
-            Point MarkerPosition = UI.WorldToScreen(HeadCoord + Config.DeadMarkerOffset);
-
+            // Calculate the distance between player and dead ped's head.
             float Distance = Vector3.Distance(Game.Player.Character.Position, HeadCoord);
 
-            float HeightRatio = 2f * Distance;
-            float WidthRatio = 1f * Distance;
+            // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
+            double Ratio = Math.Log(Distance + 1.65);
+            Size MarkerSize = new Size((int)(Config.DeadMarkerSize.Width / Ratio), (int)(Config.DeadMarkerSize.Height / Ratio));
 
-            Size MarkerSize = new Size((int)(Config.DeadMarkerSize.Width / WidthRatio), (int)(Config.DeadMarkerSize.Height / HeightRatio));
+            // Offset the marker by half width to center, and full height to put on top.
+            Point MarkerPosition = UI.WorldToScreen(HeadCoord);
+            MarkerPosition.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 
-            UIText test = new UIText(MarkerPosition.ToString(), MarkerPosition, 1f);
-            //UI.DrawTexture(Image.ResourceToPNG(Resources.ImageDead, "DeadMarker" + Count), 0, 0, 100, MarkerPosition, MarkerSize);
+            // Finally, draw the dead marker.
+            UI.DrawTexture(Images.ResourceToPNG(Properties.Resources.DeadMarker, "DeadMarker" + Count), 0, 0, 100, MarkerPosition, MarkerSize);
         }
     }
 }

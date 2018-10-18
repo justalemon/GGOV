@@ -49,7 +49,6 @@
     "weapon_image_size": [ 0.0875, 0.037 ],
     // The offset to center the ammo text 1/2 icon background width, 1/12 icon background height
     "ammo_offset_pos": [ 0.0135, 0.004 ],
-
-    "dead_marker_size": [ 0.028, 0.028 ],
-    "dead_marker_offset": [ 0, -5, 0 ]
+    // The size of the dead marker icon uses original size of 300x150
+    "dead_marker_size": [ 0.2344, 0.2083 ]
 }

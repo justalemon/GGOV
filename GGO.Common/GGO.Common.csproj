@@ -116,6 +116,7 @@
     <None Include="Resources\GunWTT_MG.png" />
     <None Include="Resources\GunWTT_SMG_MCR.png" />
     <None Include="Resources\GunWTT_MINIGUN.png" />
+    <Content Include="Resources\DeadMarker.png" />
     <Content Include="Resources\NoWeapon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

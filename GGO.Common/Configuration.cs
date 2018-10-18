@@ -95,6 +95,7 @@ namespace GGO.Common
         public Size PlayerHealthPos => CreateSize("player_health_pos");
         public Size WeaponImageSize => CreateSize("weapon_image_size");
         public Point AmmoOffset => new Point(CreateSize("ammo_offset_pos"));
+        public Size DeadMarkerSize => CreateSize("dead_marker_size");
 
         private Size Resolution { get; set; }
         private JObject Raw { get; set; }
@@ -145,11 +146,6 @@ namespace GGO.Common
         private Size CreateSize(string ConfigOption)
         {
             return new Size((int)(Resolution.Width * (float)Raw[ConfigOption][0]), (int)(Resolution.Height * (float)Raw[ConfigOption][1]));
-        }
-
-        private Vector3 CreateVector(string ConfigOption)
-        {
-            return new Vector3((int)Raw[ConfigOption][0], (int)Raw[ConfigOption][1], (int)Raw[ConfigOption][2]);
         }
     }
 }
