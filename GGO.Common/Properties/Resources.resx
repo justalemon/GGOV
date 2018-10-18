@@ -208,4 +208,94 @@
   <data name="DeadMarker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DeadMarker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="GunWTT_AUTOSHGN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_AUTOSHGN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_BULLRIFLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_BULLRIFLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_BULLRIFLE2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_BULLRIFLE2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_CMPGL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_CMPGL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_FWRKLNCHR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_FWRKLNCHR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_GL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_GL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_GUSENBERG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_GUSENBERG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_HMKRIFLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_HMKRIFLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_HOMLNCH" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_HOMLNCH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_HVYSHOT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_HVYSHOT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_MCHPIST" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_MCHPIST.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_MG_CBT2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_MG_CBT2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_MINISMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_MINISMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_MKRIFLE2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_MKRIFLE2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_MUSKET" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_MUSKET.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_PIST2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_PIST2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_RAILGUN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_RAILGUN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_REVOLVER2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_REVOLVER2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_REV_DA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_REV_DA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_RIFLE_ASL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_RIFLE_ASL2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_RIFLE_CBN2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_RIFLE_CBN2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_RPG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_RPG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_SG_PMP2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_SG_PMP2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_SMG2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_SMG2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_SNIP_HVY2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_SNIP_HVY2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_SNSPISTOL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_SNSPISTOL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_SNSPISTOL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_SNSPISTOL2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_SPCARBINE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_SPCARBINE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_SPCARBINE2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_SPCARBINE2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GunWTT_VPISTOL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GunWTT_VPISTOL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
