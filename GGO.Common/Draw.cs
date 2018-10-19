@@ -1,4 +1,5 @@
 using GTA;
+using GTA.Math;
 using System;
 using System.Drawing;
 
@@ -110,6 +111,32 @@ namespace GGO.Common
 
             // With the weapon image
             UI.DrawTexture(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), 0, 0, 100, WeaponLocation, Config.WeaponBackground);
+        }
+
+        /// <summary>
+        /// Draws the dead marker on top of dead peds heads.
+        /// </summary>
+        /// <param name="Config">The mod settings.</param>
+        /// <param name="Character">The ped to get the information.</param>
+        /// <param name="Count">The dead ped count.</param>
+        public static void DeadMarker(Configuration Config, Ped Character)
+        {
+            // Get the coordinates for the head of the dead ped.
+            Vector3 HeadCoord = Character.GetBoneCoord(Bone.SKEL_Head);
+
+            // Calculate the distance between player and dead ped's head.
+            float Distance = Vector3.Distance(Game.Player.Character.Position, HeadCoord);
+
+            // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
+            double Ratio = Math.Log(Distance + 1.65);
+            Size MarkerSize = new Size((int)(Config.DeadMarkerSize.Width / Ratio), (int)(Config.DeadMarkerSize.Height / Ratio));
+
+            // Offset the marker by half width to center, and full height to put on top.
+            Point MarkerPosition = UI.WorldToScreen(HeadCoord);
+            MarkerPosition.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
+
+            // Finally, draw the dead marker.
+            UI.DrawTexture(Images.ResourceToPNG(Properties.Resources.DeadMarker, "DeadMarker" + Character.GetHashCode()), 0, 0, 100, MarkerPosition, MarkerSize);
         }
     }
 }

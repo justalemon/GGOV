@@ -75,6 +75,13 @@ namespace GGO.Singleplayer
                         // To end this up, increase the count of peds "rendered"
                         Count++;
                     }
+
+                    // Check for on screen dead Peds to display dead markers, limit to 10 to not clutter the screen.
+                    if (NearbyPed.IsDead && NearbyPed.IsOnScreen)
+                    {
+                        // Draw marker
+                        Draw.DeadMarker(Config, NearbyPed);
+                    }
                 }
 
                 // Then, start by drawing the player info

@@ -116,6 +116,7 @@
     <None Include="Resources\GunWTT_MG.png" />
     <None Include="Resources\GunWTT_SMG_MCR.png" />
     <None Include="Resources\GunWTT_MINIGUN.png" />
+    <Content Include="Resources\DeadMarker.png" />
     <None Include="Resources\GunWTT_RAILGUN.png" />
     <None Include="Resources\GunWTT_REV_DA.png" />
     <None Include="Resources\GunWTT_REVOLVER2.png" />
