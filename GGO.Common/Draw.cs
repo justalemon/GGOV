@@ -88,7 +88,7 @@ namespace GGO.Common
             // Start by selecting the correct location for the primary or secondary weapon
             Point BackgroundLocation = Sidearm ? Config.SecondaryBackground : Config.PrimaryBackground;
             Point AmmoLocation = Sidearm ? Config.SecondaryAmmo : Config.PrimaryAmmo;
-            Point WeaponLocation = Sidearm ? Config.PrimaryWeapon : Config.SecondaryWeapon;
+            Point WeaponLocation = Sidearm ? Config.SecondaryWeapon : Config.PrimaryWeapon;
             string Name = Sidearm ? "Secondary" : "Primary";
 
             // Then, draw the ammo information
