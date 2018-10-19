@@ -56,16 +56,10 @@ namespace GGO.Common
             // Create a Size with the required size
             Size NewHealthSize = new Size(Convert.ToInt32(Width), HealthSize.Height);
 
-            // For the dividers, get the distance between each one of them
-            int HealthSep = HealthSize.Width / 4;
-
             // Prior to drawing the health bar we need the separators
-            for (int Separator = 0; Separator < 5; Separator++)
+            foreach (Point Position in Calculations.GetDividerPositions(Config, Player, Count))
             {
-                // Calculate the position of the separator
-                Point Pos = (InfoPosition + HealthPosition) + new Size(HealthSep * Separator, 0) + Config.DividerPosition;
-                // And draw it on screen
-                UIRectangle Divider = new UIRectangle(Pos, Config.DividerSize, CDivider);
+                UIRectangle Divider = new UIRectangle(Position, Config.DividerSize, CDivider);
                 Divider.Draw();
             }
 
