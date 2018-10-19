@@ -17,6 +17,7 @@ namespace GGO.Singleplayer
             /// </summary>
             public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT)); //Use UI HEIGHT & WIDTH, UI set to static 1280x720 and scaled up to resolution.
             public static Debug DebugWindow = new Debug(Config);
+            public static Logger Logger;
 
             public GGO()
             {
@@ -24,11 +25,15 @@ namespace GGO.Singleplayer
                 Tick += OnTick;
                 Aborted += OnAbort;
 
+                Logger = new Logger();
+
                 // Show the debug window if the user wants to
                 if (Config.Debug)
                 {
                     DebugWindow.Show();
                 }
+                
+                Logger.Log("HUD enabled.");
             }
 
             private void OnTick(object Sender, EventArgs Args)
@@ -113,6 +118,8 @@ namespace GGO.Singleplayer
 
             public static void OnAbort(object Sender, EventArgs Args)
             {
+                Logger.Log("HUD disabled.");
+
                 // Close the debug window
                 DebugWindow.Close();
             }

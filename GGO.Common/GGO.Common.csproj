@@ -54,6 +54,7 @@
     <Compile Include="Calculations.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Draw.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Names.cs" />
     <Compile Include="Ped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
