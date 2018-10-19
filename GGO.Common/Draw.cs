@@ -98,7 +98,7 @@ namespace GGO.Common
             AmmoCount.Draw();
 
             // Request the weapon image, and return if is not valid
-            Bitmap WeaponBitmap = Images.GetBitmap(Weapon);
+            Bitmap WeaponBitmap = Images.GetWeaponImages(Weapon);
 
             if (WeaponBitmap == null)
             {

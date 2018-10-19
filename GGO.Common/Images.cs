@@ -8,11 +8,11 @@ namespace GGO.Common
     public class Images
     {
         /// <summary>
-        /// Gets a Bitmap from the resources.
+        /// Gets a weapon image or Bitmap from the resources.
         /// </summary>
-        /// <param name="Name"></param>
+        /// <param name="Name">The name of the weapon.</param>
         /// <returns>The requested Bitmap.</returns>
-        public static Bitmap GetBitmap(string Name)
+        public static Bitmap GetWeaponImages(string Name)
         {
             return (Bitmap)Resources.ResourceManager.GetObject("Gun" + Name);
         }
