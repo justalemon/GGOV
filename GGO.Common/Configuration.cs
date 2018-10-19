@@ -32,6 +32,36 @@ namespace GGO.Common
         /// Size for the dividers on the health bars.
         /// </summary>
         public Size DividerSize => CreateSize("divider_size");
+        /// <summary>
+        /// Position of the name relative to the background.
+        /// </summary>
+        public Size NamePosition => CreateSize("name_pos");
+
+        /// <summary>
+        /// Size for the icons.
+        /// </summary>
+        public Size ImageSize => CreateSize("icon_image_size");
+        /// <summary>
+        /// Position of the image relative to the background.
+        /// </summary>
+        public Size IconPosition => CreateSize("icon_relative_pos");
+
+        /// <summary>
+        /// Position of the squad information.
+        /// </summary>
+        public Point SquadPosition => new Point(CreateSize("squad_general_pos"));
+        /// <summary>
+        /// Size for the squad information.
+        /// </summary>
+        public Size SquadInfoSize => CreateSize("squad_info_size");
+        /// <summary>
+        /// Size for the squad health bars.
+        /// </summary>
+        public Size SquadHealthSize => CreateSize("squad_health_size");
+        /// <summary>
+        /// Position of the squad health bar.
+        /// </summary>
+        public Size SquadHealthPos => CreateSize("squad_health_pos");
 
         /// <summary>
         /// The position of the player icon.
@@ -41,6 +71,18 @@ namespace GGO.Common
         /// The position of the player information.
         /// </summary>
         public Point PlayerInfo => new Point(PlayerIcon.X + SquaredBackground.Width + CommonSpace.Width, PlayerIcon.Y);
+        /// <summary>
+        /// Size of the player information.
+        /// </summary>
+        public Size PlayerInfoSize => CreateSize("player_info_size");
+        /// <summary>
+        /// Size of the player health bar.
+        /// </summary>
+        public Size PlayerHealthSize => CreateSize("player_health_size");
+        /// <summary>
+        /// Position of the player health bar.
+        /// </summary>
+        public Size PlayerHealthPos => CreateSize("player_health_pos");
 
         /// <summary>
         /// The position of the icon for the primary weapon.
@@ -74,26 +116,27 @@ namespace GGO.Common
         /// The position of the secondary weapon background.
         /// </summary>
         public Point SecondaryWeapon => new Point(SecondaryBackground.X + CommonSpace.Width + SquaredBackground.Width, SecondaryBackground.Y);
+
         /// <summary>
         /// The size of the weapon background
         /// </summary>
         public Size WeaponBackground => new Size(PlayerInfoSize.Width - CommonSpace.Width - SquaredBackground.Width, PlayerInfoSize.Height);
-
-        public Size DividerPosition => CreateSize("divider_pos");
-        public Size NamePosition => CreateSize("name_pos");
-
-        public Size IconImageSize => CreateSize("icon_image_size");
-        public Size IconPosition => CreateSize("icon_relative_pos");
-
-        public Point SquadPosition => new Point(CreateSize("squad_general_pos"));
-        public Size SquadInfoSize => CreateSize("squad_info_size");
-        public Size SquadHealthSize => CreateSize("squad_health_size");
-        public Size SquadHealthPos => CreateSize("squad_health_pos");
-        public Size PlayerInfoSize => CreateSize("player_info_size");
-        public Size PlayerHealthSize => CreateSize("player_health_size");
-        public Size PlayerHealthPos => CreateSize("player_health_pos");
-        public Size WeaponImageSize => CreateSize("weapon_image_size");
+        /// <summary>
+        /// Offset of the ammo.
+        /// </summary>
         public Point AmmoOffset => new Point(CreateSize("ammo_offset_pos"));
+        /// <summary>
+        /// Size for the weapon images.
+        /// </summary>
+        public Size WeaponImageSize => CreateSize("weapon_image_size");
+
+        /// <summary>
+        /// Position of the health dividers.
+        /// </summary>
+        public Size DividerPosition => CreateSize("divider_pos");
+        /// <summary>
+        /// Size for the health markers.
+        /// </summary>
         public Size DeadMarkerSize => CreateSize("dead_marker_size");
 
         private Size Resolution { get; set; }

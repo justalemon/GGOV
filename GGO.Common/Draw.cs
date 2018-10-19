@@ -28,7 +28,7 @@ namespace GGO.Common
             // Calculate the position of the image
             Point ImagePos = Position + Config.IconPosition;
             // And finally, add the image on top
-            UI.DrawTexture(ImageFile, 0, 0, 100, ImagePos, Config.IconImageSize);
+            UI.DrawTexture(ImageFile, 0, 0, 100, ImagePos, Config.ImageSize);
         }
 
         /// <summary>
