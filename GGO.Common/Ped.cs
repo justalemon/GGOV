@@ -1,4 +1,4 @@
-﻿using GTA;
+using GTA;
 using GTA.Native;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,21 +19,26 @@ namespace GGO.Common
         /// <returns>A color that match the current ped health.</returns>
         public static Color HealthColor(this Ped ThePed)
         {
+            // Get our health
+            float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, ThePed) - 100;
+            float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, ThePed) - 100;
+            float Percentage = (CurrentHealth / MaxHealth) * 100;
+
             // If the player is on normal levels
             // Return White
-            if (ThePed.HealthPercentage() >= 50 && ThePed.HealthPercentage() <= 100)
+            if (Percentage >= 50 && Percentage <= 100)
             {
                 return Colors.HealthNormal;
             }
             // If the player is under risky levels
             // Return Yellow
-            else if (ThePed.HealthPercentage() <= 50 && ThePed.HealthPercentage() >= 25)
+            else if (Percentage <= 50 && Percentage >= 25)
             {
                 return Colors.HealthDanger;
             }
             // If the player is about to die
             // Return Red
-            else if (ThePed.HealthPercentage() <= 25)
+            else if (Percentage <= 25)
             {
                 return Colors.HealthDying;
             }
@@ -76,30 +81,6 @@ namespace GGO.Common
             else
             {
                 return ThePed.Model.Hash.ToString();
-            }
-        }
-
-        /// <summary>
-        /// Gets the health percentage for the ped.
-        /// </summary>
-        /// <param name="ThePed">The ped to check.</param>
-        /// <returns>The health percentage.</returns>
-        public static float HealthPercentage(this Ped ThePed)
-        {
-            // Get the max and current health
-            // As someone said on the 5mods Discord, the use of natives is required
-            float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, ThePed) - 100;
-            float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, ThePed) - 100;
-
-            // If the ped is dead, return 0 to avoid integer overflows/underflows
-            if (ThePed.IsDead)
-            {
-                return 0f;
-            }
-            // If the ped is alive, return the percentage
-            else
-            {
-                return (CurrentHealth / MaxHealth) * 100;
             }
         }
 
