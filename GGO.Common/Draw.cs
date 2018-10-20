@@ -1,5 +1,6 @@
 using GTA;
 using GTA.Math;
+using GTA.Native;
 using System;
 using System.Drawing;
 
@@ -31,21 +32,20 @@ namespace GGO.Common
         /// <param name="Count">The number of the friendly within the squad.</param>
         public static void PedInfo(Configuration Config, Ped Character, bool Player, int Count = 0)
         {
-            // Start by storing the correct information for either the player or squad member
+            // Get our health
+            int CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Character) - 100;
+            int MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Character) - 100;
+
+            // Storing the correct information for either the player or squad member
             Point InfoPosition = Player ? Config.PlayerInfo : Calculations.GetSquadPosition(Config, Count, true);
             Size InfoSize = Player ? Config.PlayerInfoSize : Config.SquadInfoSize;
-            Size HealthSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;
+            Size HealthSize = Calculations.GetHealthSize(Config, Player, MaxHealth, CurrentHealth);
             Size HealthPosition = Player ? Config.PlayerHealthPos : Config.SquadHealthPos;
             float TextSize = Player ? 0.35f : 0.3f;
 
             // First, draw the black background
             UIRectangle Background = new UIRectangle(InfoPosition, InfoSize, Colors.Backgrounds);
             Background.Draw();
-
-            // Then, calculate the health bar: (Percentage / 100) * DefaultWidth
-            float Width = (Character.HealthPercentage() / 100) * HealthSize.Width;
-            // Create a Size with the required size
-            Size NewHealthSize = new Size(Convert.ToInt32(Width), HealthSize.Height);
 
             // Prior to drawing the health bar we need the separators
             foreach (Point Position in Calculations.GetDividerPositions(Config, Player, Count))
@@ -55,7 +55,7 @@ namespace GGO.Common
             }
 
             // After the separators are there, draw the health bar on the top
-            UIRectangle HealthBar = new UIRectangle(InfoPosition + HealthPosition, NewHealthSize, Character.HealthColor());
+            UIRectangle HealthBar = new UIRectangle(InfoPosition + HealthPosition, HealthSize, Character.HealthColor());
             HealthBar.Draw();
 
             // And finally, draw the ped name
@@ -111,10 +111,7 @@ namespace GGO.Common
 
             // Calculate the distance between player and dead ped's head.
             float Distance = Vector3.Distance(Game.Player.Character.Position, HeadCoord);
-
-            // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
-            double Ratio = Math.Log(Distance + 1.65);
-            Size MarkerSize = new Size((int)(Config.DeadMarkerSize.Width / Ratio), (int)(Config.DeadMarkerSize.Height / Ratio));
+            Size MarkerSize = Calculations.GetMarkerSize(Config, Distance);
 
             // Offset the marker by half width to center, and full height to put on top.
             Point MarkerPosition = UI.WorldToScreen(HeadCoord);

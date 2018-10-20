@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace GGO.Common
 {
@@ -54,6 +55,35 @@ namespace GGO.Common
             {
                 return new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
             }
+        }
+
+        /// <summary>
+        /// Calculates the size of the dead marked based on the player-to-ped distance.
+        /// </summary>
+        /// <param name="Config">The mod configuration.</param>
+        /// <param name="Distance">The distance between the player and the ped.</param>
+        /// <returns>The relative position.</returns>
+        public static Size GetMarkerSize(Configuration Config, float Distance)
+        {
+            // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
+            double Ratio = Math.Log(Distance + 1.65);
+            Size MarkerSize = new Size((int)(Config.DeadMarkerSize.Width / Ratio), (int)(Config.DeadMarkerSize.Height / Ratio));
+
+            // And finish by returning the new size
+            return MarkerSize;
+        }
+
+        public static Size GetHealthSize(Configuration Config, bool Player, int Max, int Current)
+        {
+            // Store the original size for the health bar
+            Size OriginalSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;
+
+            // Calculate the percentage of health and width
+            float HealthPercentage = (Current / Max) * 100;
+            float Width = (HealthPercentage / 100) * OriginalSize.Width;
+
+            // Finally, return the new size
+            return new Size((int)Width, OriginalSize.Height);
         }
     }
 }
