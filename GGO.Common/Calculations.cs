@@ -16,7 +16,7 @@ namespace GGO.Common
             Point[] Positions = new Point[5];
 
             // Store our positions for the player or squad members
-            Point InfoPosition = Player ? Config.PlayerInfo : Config.GetSquadPosition(Count, true);
+            Point InfoPosition = Player ? Config.PlayerInfo : GetSquadPosition(Config, Count, true);
             Size HealthSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;
             Size HealthPosition = Player ? Config.PlayerHealthPos : Config.SquadHealthPos;
 
@@ -32,6 +32,26 @@ namespace GGO.Common
 
             // Finally, return the divider positions
             return Positions;
+        }
+
+        /// <summary>
+        /// Gets the specific position for the squad member.
+        /// </summary>
+        /// <param name="Count">The index of the squad member (zero based).</param>
+        /// <param name="Info">If the location of the info should be returned.</param>
+        /// <returns>A Point with the on screen position.</returns>
+        public static Point GetSquadPosition(Configuration Config, int Count, bool Info = false)
+        {
+            Count++;
+
+            if (Info)
+            {
+                return new Point(Config.SquadPosition.X + Config.SquaredBackground.Width + Config.CommonSpace.Width, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
+            }
+            else
+            {
+                return new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
+            }
         }
     }
 }

@@ -69,7 +69,7 @@ namespace GGO.Singleplayer
                         Bitmap ImageType = NearbyPed.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
 
                         // Draw the icon and the ped info
-                        Draw.Icon(Config, Images.ResourceToPNG(ImageType, ImageName + Count), Config.GetSquadPosition(Count));
+                        Draw.Icon(Config, Images.ResourceToPNG(ImageType, ImageName + Count), Calculations.GetSquadPosition(Config, Count));
                         Draw.PedInfo(Config, NearbyPed, false, Count);
 
                         // To end this up, increase the count of peds "rendered"

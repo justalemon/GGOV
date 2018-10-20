@@ -41,7 +41,7 @@ namespace GGO.Common
         public static void PedInfo(Configuration Config, Ped Character, bool Player, int Count = 0)
         {
             // Start by storing the correct information for either the player or squad member
-            Point InfoPosition = Player ? Config.PlayerInfo : Config.GetSquadPosition(Count, true);
+            Point InfoPosition = Player ? Config.PlayerInfo : Calculations.GetSquadPosition(Config, Count, true);
             Size InfoSize = Player ? Config.PlayerInfoSize : Config.SquadInfoSize;
             Size HealthSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;
             Size HealthPosition = Player ? Config.PlayerHealthPos : Config.SquadHealthPos;

@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -165,26 +165,6 @@ namespace GGO.Common
             PedNames = new Names(Location +  "\\GGO.Names.json");
             // And store our current resolution
             Resolution = CurrentResolution;
-        }
-
-        /// <summary>
-        /// Gets the specific position for the squad member.
-        /// </summary>
-        /// <param name="Count">The index of the squad member (zero based).</param>
-        /// <param name="Info">If the location of the info should be returned.</param>
-        /// <returns>A Point with the on screen position.</returns>
-        public Point GetSquadPosition(int Count, bool Info = false)
-        {
-            Count++;
-
-            if (Info)
-            {
-                return new Point(SquadPosition.X + SquaredBackground.Width + CommonSpace.Width, (SquadPosition.Y + CommonSpace.Height) * Count);
-            }
-            else
-            {
-                return new Point(SquadPosition.X, (SquadPosition.Y + CommonSpace.Height) * Count);
-            }
         }
 
         /// <summary>
