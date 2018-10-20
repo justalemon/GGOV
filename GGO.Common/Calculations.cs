@@ -42,8 +42,10 @@ namespace GGO.Common
         /// <returns>A Point with the on screen position.</returns>
         public static Point GetSquadPosition(Configuration Config, int Count, bool Info = false)
         {
+            // Increase the count by one
             Count++;
 
+            // Return the correct position for the info or icon
             if (Info)
             {
                 return new Point(Config.SquadPosition.X + Config.SquaredBackground.Width + Config.CommonSpace.Width, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
