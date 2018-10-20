@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -139,7 +139,13 @@ namespace GGO.Common
         /// </summary>
         public Size DeadMarkerSize => CreateSize("dead_marker_size");
 
+        /// <summary>
+        /// The current screen resolution.
+        /// </summary>
         private Size Resolution { get; set; }
+        /// <summary>
+        /// The RAW Configuration.
+        /// </summary>
         private JObject Raw { get; set; }
         /// <summary>
         /// The list of Ped Names.
