@@ -162,7 +162,7 @@ namespace GGO.Common
             // Load it on the parser
             Raw = JObject.Parse(Content);
             // Dump our ped names
-            PedNames = new Names(Location +  "\\GGO.Names.json");
+            PedNames = new Names(Location + "\\GGO.Names.json");
             // And store our current resolution
             Resolution = CurrentResolution;
         }
