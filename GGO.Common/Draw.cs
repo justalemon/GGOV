@@ -8,21 +8,12 @@ namespace GGO.Common
     public class Draw
     {
         /// <summary>
-        /// Color for the backgrounds of the items.
-        /// </summary>
-        public static Color CBackground = Color.FromArgb(175, 0, 0, 0);
-        /// <summary>
-        /// Color for the dividers of the health bar.
-        /// </summary>
-        public static Color CDivider = Color.FromArgb(125, 230, 230, 230);
-
-        /// <summary>
         /// Draws an icon with it's respective background.
         /// </summary>
         public static void Icon(Configuration Config, string ImageFile, Point Position)
         {
             // Draw the rectangle on the background
-            UIRectangle Rect = new UIRectangle(Position, Config.SquaredBackground, CBackground);
+            UIRectangle Rect = new UIRectangle(Position, Config.SquaredBackground, Colors.Backgrounds);
             Rect.Draw();
 
             // Calculate the position of the image
@@ -48,7 +39,7 @@ namespace GGO.Common
             float TextSize = Player ? 0.35f : 0.3f;
 
             // First, draw the black background
-            UIRectangle Background = new UIRectangle(InfoPosition, InfoSize, CBackground);
+            UIRectangle Background = new UIRectangle(InfoPosition, InfoSize, Colors.Backgrounds);
             Background.Draw();
 
             // Then, calculate the health bar: (Percentage / 100) * DefaultWidth
@@ -59,7 +50,7 @@ namespace GGO.Common
             // Prior to drawing the health bar we need the separators
             foreach (Point Position in Calculations.GetDividerPositions(Config, Player, Count))
             {
-                UIRectangle Divider = new UIRectangle(Position, Config.DividerSize, CDivider);
+                UIRectangle Divider = new UIRectangle(Position, Config.DividerSize, Colors.Dividers);
                 Divider.Draw();
             }
 
@@ -86,7 +77,7 @@ namespace GGO.Common
             string Name = Sidearm ? "Secondary" : "Primary";
 
             // Then, draw the ammo information
-            UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, Config.SquaredBackground, CBackground);
+            UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, Config.SquaredBackground, Colors.Backgrounds);
             AmmoBackground.Draw();
             UIText AmmoCount = new UIText(Ammo.ToString(), AmmoLocation, .6f, Color.White, GTA.Font.Monospace, true);
             AmmoCount.Draw();
@@ -100,7 +91,7 @@ namespace GGO.Common
             }
 
             // Draw the background
-            UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, Config.WeaponBackground, CBackground);
+            UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, Config.WeaponBackground, Colors.Backgrounds);
             WeaponBackground.Draw();
 
             // With the weapon image

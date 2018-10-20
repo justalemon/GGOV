@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculations.cs" />
+    <Compile Include="Colors.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="Names.cs" />

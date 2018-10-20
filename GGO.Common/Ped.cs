@@ -11,22 +11,6 @@ namespace GGO.Common
         /// Relationships that are considered friendly.
         /// </summary>
         public static List<int> Relationships = new List<int> { 0, 1, 2 };
-        /// <summary>
-        /// Color for a ped with health over 100% (stupid but posible).
-        /// </summary>
-        public static Color HealthStupid = Color.FromArgb(255, 0, 191, 255);
-        /// <summary>
-        /// Color for a ped with health above 50% and under 100%.
-        /// </summary>
-        public static Color HealthNormal = Color.FromArgb(255, 230, 230, 230);
-        /// <summary>
-        /// Color for a ped with health under 49% and over 25%.
-        /// </summary>
-        public static Color HealthDanger = Color.FromArgb(255, 247, 227, 18);
-        /// <summary>
-        /// Color for a ped with health under 24%.
-        /// </summary>
-        public static Color HealthDying = Color.FromArgb(255, 200, 0, 0);
 
         /// <summary>
         /// Returns a color based on the player health.
@@ -39,25 +23,25 @@ namespace GGO.Common
             // Return White
             if (ThePed.HealthPercentage() >= 50 && ThePed.HealthPercentage() <= 100)
             {
-                return HealthNormal;
+                return Colors.HealthNormal;
             }
             // If the player is under risky levels
             // Return Yellow
             else if (ThePed.HealthPercentage() <= 50 && ThePed.HealthPercentage() >= 25)
             {
-                return HealthDanger;
+                return Colors.HealthDanger;
             }
             // If the player is about to die
             // Return Red
             else if (ThePed.HealthPercentage() <= 25)
             {
-                return HealthDying;
+                return Colors.HealthDying;
             }
             // If the player is under 0 or over 100
             // Return blue
             else
             {
-                return HealthStupid;
+                return Colors.HealthOverflow;
             }
         }
 
