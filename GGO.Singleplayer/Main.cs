@@ -62,7 +62,7 @@ namespace GGO.Singleplayer
                 foreach (Ped NearbyPed in World.GetNearbyPeds(Game.Player.Character.Position, 50f).OrderBy(P => P.GetHashCode()))
                 {
                     // Check that the ped is a mission entity and is friendly
-                    if (NearbyPed.IsMissionEntity() && NearbyPed.IsFriendly() && Count <= 6)
+                    if (Count <= 6 && NearbyPed.IsMissionEntity() && Checks.IsFriendly(Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, NearbyPed, Game.Player.Character)))
                     {
                         // Select the correct image and name for the file
                         string ImageName = NearbyPed.IsAlive ? "SquadAlive" : "SquadDead";

@@ -1,17 +1,11 @@
 using GTA;
 using GTA.Native;
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace GGO.Common
 {
     public static class PedExtension
     {
-        /// <summary>
-        /// Relationships that are considered friendly.
-        /// </summary>
-        public static List<int> Relationships = new List<int> { 0, 1, 2 };
-
         /// <summary>
         /// Returns a color based on the player health.
         /// </summary>
@@ -93,19 +87,6 @@ namespace GGO.Common
         {
             // Self explanatory
             return Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, ThePed);
-        }
-
-        /// <summary>
-        /// Checks if the ped is friendly against the player.
-        /// </summary>
-        /// <param name="ThePed">The ped to check.</param>
-        /// <returns>True if the ped likes or respect the player, False otherwise.</returns>
-        public static bool IsFriendly(this Ped ThePed)
-        {
-            // Get what the ped feels for the player
-            int Relation = Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, ThePed, Game.Player.Character);
-            // And return if it counts as friendly
-            return Relationships.Contains(Relation);
         }
     }
 }
