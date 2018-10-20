@@ -77,16 +77,5 @@ namespace GGO.Common
                 return ThePed.Model.Hash.ToString();
             }
         }
-
-        /// <summary>
-        /// Checks if a ped is a mission entity.
-        /// </summary>
-        /// <param name="ThePed">The ped to check.</param>
-        /// <returns>True if is a mission entity, False otherwise.</returns>
-        public static bool IsMissionEntity(this Ped ThePed)
-        {
-            // Self explanatory
-            return Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, ThePed);
-        }
     }
 }
