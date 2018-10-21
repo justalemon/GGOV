@@ -7,44 +7,6 @@ namespace GGO.Common
     public static class PedExtension
     {
         /// <summary>
-        /// Returns a color based on the player health.
-        /// </summary>
-        /// <param name="ThePed">The ped to check.</param>
-        /// <returns>A color that match the current ped health.</returns>
-        public static Color HealthColor(this Ped ThePed)
-        {
-            // Get our health
-            float CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, ThePed) - 100;
-            float MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, ThePed) - 100;
-            float Percentage = (CurrentHealth / MaxHealth) * 100;
-
-            // If the player is on normal levels
-            // Return White
-            if (Percentage >= 50 && Percentage <= 100)
-            {
-                return Colors.HealthNormal;
-            }
-            // If the player is under risky levels
-            // Return Yellow
-            else if (Percentage <= 50 && Percentage >= 25)
-            {
-                return Colors.HealthDanger;
-            }
-            // If the player is about to die
-            // Return Red
-            else if (Percentage <= 25)
-            {
-                return Colors.HealthDying;
-            }
-            // If the player is under 0 or over 100
-            // Return blue
-            else
-            {
-                return Colors.HealthOverflow;
-            }
-        }
-
-        /// <summary>
         /// Returns the name of a ped based on the model.
         /// </summary>
         /// <param name="ThePed">The ped to check.</param>

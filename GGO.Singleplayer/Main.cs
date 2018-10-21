@@ -15,16 +15,19 @@ namespace GGO.Singleplayer
             /// <summary>
             /// Our configuration parameters.
             /// </summary>
-            public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT)); //Use UI HEIGHT & WIDTH, UI set to static 1280x720 and scaled up to resolution.
+            public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT));
+            /// <summary>
+            /// The window with our debug information.
+            /// </summary>
             public static Debug DebugWindow = new Debug(Config);
 
             public GGO()
             {
-                // Add our OnTick event
+                // Add our Tick and Aborted events
                 Tick += OnTick;
                 Aborted += OnAbort;
 
-                // Show the debug window if the user wants to
+                // Show the debug window if the mode is enabled
                 if (Config.Debug)
                 {
                     DebugWindow.Show();
