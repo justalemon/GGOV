@@ -37,7 +37,7 @@ namespace GGO.Singleplayer
                 if (Config.Debug)
                 {
                     Weapon PlayerWeapon = Game.Player.Character.Weapons.Current;
-                    DebugWindow.WeaponHash.Text = string.Format("Weapon Hash: {0} ({1})", PlayerWeapon.Model.Hash, Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash));
+                    DebugWindow.WeaponHash.Text = "Weapon Hash: " + PlayerWeapon.Model.Hash + "/" + Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash);
                 }
 
                 // Do not draw the UI elements if the game is loading, paused, player is dead or it cannot be controlled
