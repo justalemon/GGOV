@@ -56,7 +56,6 @@
     <Compile Include="Colors.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Names.cs" />
-    <Compile Include="Ped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

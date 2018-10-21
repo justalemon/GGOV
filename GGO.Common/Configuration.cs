@@ -168,6 +168,41 @@ namespace GGO.Common
         }
 
         /// <summary>
+        /// Gets the name for the specified ped hash.
+        /// </summary>
+        /// <param name="Player">If the name is for the player.</param>
+        /// <param name="Hash">The hash for the ped model.</param>
+        /// <param name="DefaultName">The default name to be used.</param>
+        /// <returns>The ped name.</returns>
+        public string GetName(bool Player, int Hash, string DefaultName = "")
+        {
+            // If the ped is the player and the custom name has not been changed
+            // Return the Social Club username
+            if (Name == "default" && Player)
+            {
+                return DefaultName;
+            }
+            // If the ped is the player and a custom name has been added
+            // Return that custom name
+            else if (Player)
+            {
+                return Name;
+            }
+            // If is not the player but there is a custom name available
+            // Return that ped name
+            else if (PedNames.IsNameDefined(Hash))
+            {
+                return PedNames.GetName(Hash);
+            }
+            // If none of the previous ones work
+            // Return the hash as a string
+            else
+            {
+                return Hash.ToString();
+            }
+        }
+
+        /// <summary>
         /// Creates a Size from a JSON array.
         /// </summary>
         /// <returns>The working Size.</returns>
