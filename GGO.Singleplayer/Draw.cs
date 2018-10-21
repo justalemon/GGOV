@@ -60,7 +60,7 @@ namespace GGO.Singleplayer
             HealthBar.Draw();
 
             // And finally, draw the ped name
-            UIText Name = new UIText(Config.GetName(Player, Character.Model.Hash, Game.Player.Name), InfoPosition + Config.NamePosition, TextSize);
+            UIText Name = new UIText(Config.GetName(Character.IsPlayer, Character.Model.Hash, Game.Player.Name), InfoPosition + Config.NamePosition, TextSize);
             Name.Draw();
         }
         
