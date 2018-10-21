@@ -15,10 +15,10 @@ init:
       }
 
 before_build:
-  - cmd: nuget restore GGO.sln
+  - ps: Get-ChildItem -Filter *.sln -Name | Foreach-Object { nuget restore $_  }
 
 build_script:
-  - cmd: msbuild.exe GGO.sln /t:Build /p:Configuration=Release;Platform=x64
+  - ps: Get-ChildItem -Filter *.sln -Name | Foreach-Object { msbuild.exe $_ /t:Build /p:Configuration=Release`;Platform=x64 }
 
 after_build:
   - cmd: 7z a GGOCommon.7z %APPVEYOR_BUILD_FOLDER%\GGO.Common\bin\x64\Release\*
