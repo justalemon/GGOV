@@ -15,7 +15,7 @@ init:
       }
 
 before_build:
-  - cmd: nuget restore GGO.sln
+  - ps: Get-ChildItem -Filter *.sln -Name | Foreach-Object { nuget restore $_  }
 
 build_script:
   - cmd: msbuild.exe GGO.sln /t:Build /p:Configuration=Release;Platform=x64
