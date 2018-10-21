@@ -89,7 +89,11 @@ namespace GGO.Singleplayer
                 Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
                 Draw.PedInfo(Config, Game.Player.Character, true);
 
-                if (Weapons.CurrentWeaponType == Weapons.Type.Main)
+                // Get the current weapon style
+                Checks.WeaponStyle CurrentStyle = Checks.GetWeaponStyle((uint)Game.Player.Character.Weapons.Current.Group);
+
+                // And draw the required elements
+                if (CurrentStyle == Checks.WeaponStyle.Main)
                 {
                     Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
                     Draw.WeaponInfo(Config, false, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
@@ -100,7 +104,7 @@ namespace GGO.Singleplayer
                     Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
                 }
 
-                if (Weapons.CurrentWeaponType == Weapons.Type.Sidearm)
+                if (CurrentStyle == Checks.WeaponStyle.Sidearm)
                 {
                     Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
                     Draw.WeaponInfo(Config, true, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));

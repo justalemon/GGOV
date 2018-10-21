@@ -64,7 +64,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Weapons.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GGO.Common.json">
