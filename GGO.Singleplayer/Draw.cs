@@ -56,7 +56,7 @@ namespace GGO.Singleplayer
             }
 
             // After the separators are there, draw the health bar on the top
-            UIRectangle HealthBar = new UIRectangle(InfoPosition + HealthPosition, HealthSize, Character.HealthColor());
+            UIRectangle HealthBar = new UIRectangle(InfoPosition + HealthPosition, HealthSize, Colors.GetHealthColor(CurrentHealth, MaxHealth));
             HealthBar.Draw();
 
             // And finally, draw the ped name
