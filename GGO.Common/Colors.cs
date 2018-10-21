@@ -32,9 +32,10 @@ namespace GGO.Common
         /// <summary>
         /// Returns a color based on the player health.
         /// </summary>
-        /// <param name="ThePed">The ped to check.</param>
-        /// <returns>A color that match the current ped health.</returns>
-        public static Color HealthColor(int Current, int Max)
+        /// <param name="Current">The current ped health check.</param>
+        /// <param name="Max">The max ped health..</param>
+        /// <returns>A color that match the current health percentage.</returns>
+        public static Color GetHealthColor(int Current, int Max)
         {
             float Percentage = (Current / Max) * 100;
 
