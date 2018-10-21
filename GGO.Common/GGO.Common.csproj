@@ -35,10 +35,6 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ScriptHookVDotNet2, Version=2.10.6.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\ScriptHookVDotNet2.2.10.6\lib\net452\ScriptHookVDotNet2.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -52,10 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculations.cs" />
+    <Compile Include="Checks.cs" />
+    <Compile Include="Colors.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Draw.cs" />
     <Compile Include="Names.cs" />
-    <Compile Include="Ped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -63,7 +59,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Weapons.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GGO.Common.json">

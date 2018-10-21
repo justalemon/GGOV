@@ -57,6 +57,7 @@
     <Compile Include="Debug.Designer.cs">
       <DependentUpon>Debug.cs</DependentUpon>
     </Compile>
+    <Compile Include="Draw.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

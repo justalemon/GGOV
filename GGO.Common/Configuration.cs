@@ -139,7 +139,13 @@ namespace GGO.Common
         /// </summary>
         public Size DeadMarkerSize => CreateSize("dead_marker_size");
 
+        /// <summary>
+        /// The current screen resolution.
+        /// </summary>
         private Size Resolution { get; set; }
+        /// <summary>
+        /// The RAW Configuration.
+        /// </summary>
         private JObject Raw { get; set; }
         /// <summary>
         /// The list of Ped Names.
@@ -156,28 +162,43 @@ namespace GGO.Common
             // Load it on the parser
             Raw = JObject.Parse(Content);
             // Dump our ped names
-            PedNames = new Names(Location +  "\\GGO.Names.json");
+            PedNames = new Names(Location + "\\GGO.Names.json");
             // And store our current resolution
             Resolution = CurrentResolution;
         }
 
         /// <summary>
-        /// Gets the specific position for the squad member.
+        /// Gets the name for the specified ped hash.
         /// </summary>
-        /// <param name="Count">The index of the squad member (zero based).</param>
-        /// <param name="Info">If the location of the info should be returned.</param>
-        /// <returns>A Point with the on screen position.</returns>
-        public Point GetSquadPosition(int Count, bool Info = false)
+        /// <param name="Player">If the name is for the player.</param>
+        /// <param name="Hash">The hash for the ped model.</param>
+        /// <param name="DefaultName">The default name to be used.</param>
+        /// <returns>The ped name.</returns>
+        public string GetName(bool Player, int Hash, string DefaultName = "")
         {
-            Count++;
-
-            if (Info)
+            // If the ped is the player and the custom name has not been changed
+            // Return the Social Club username
+            if (Name == "default" && Player)
             {
-                return new Point(SquadPosition.X + SquaredBackground.Width + CommonSpace.Width, (SquadPosition.Y + CommonSpace.Height) * Count);
+                return DefaultName;
             }
+            // If the ped is the player and a custom name has been added
+            // Return that custom name
+            else if (Player)
+            {
+                return Name;
+            }
+            // If is not the player but there is a custom name available
+            // Return that ped name
+            else if (PedNames.IsNameDefined(Hash))
+            {
+                return PedNames.GetName(Hash);
+            }
+            // If none of the previous ones work
+            // Return the hash as a string
             else
             {
-                return new Point(SquadPosition.X, (SquadPosition.Y + CommonSpace.Height) * Count);
+                return Hash.ToString();
             }
         }
 

@@ -15,16 +15,19 @@ namespace GGO.Singleplayer
             /// <summary>
             /// Our configuration parameters.
             /// </summary>
-            public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT)); //Use UI HEIGHT & WIDTH, UI set to static 1280x720 and scaled up to resolution.
+            public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT));
+            /// <summary>
+            /// The window with our debug information.
+            /// </summary>
             public static Debug DebugWindow = new Debug(Config);
 
             public GGO()
             {
-                // Add our OnTick event
+                // Add our Tick and Aborted events
                 Tick += OnTick;
                 Aborted += OnAbort;
 
-                // Show the debug window if the user wants to
+                // Show the debug window if the mode is enabled
                 if (Config.Debug)
                 {
                     DebugWindow.Show();
@@ -37,7 +40,7 @@ namespace GGO.Singleplayer
                 if (Config.Debug)
                 {
                     Weapon PlayerWeapon = Game.Player.Character.Weapons.Current;
-                    DebugWindow.WeaponHash.Text = string.Format("Weapon Hash: {0} ({1})", PlayerWeapon.Model.Hash, Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash));
+                    DebugWindow.WeaponHash.Text = "Weapon Hash: " + PlayerWeapon.Model.Hash + "/" + Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash);
                 }
 
                 // Do not draw the UI elements if the game is loading, paused, player is dead or it cannot be controlled
@@ -62,14 +65,15 @@ namespace GGO.Singleplayer
                 foreach (Ped NearbyPed in World.GetNearbyPeds(Game.Player.Character.Position, 50f).OrderBy(P => P.GetHashCode()))
                 {
                     // Check that the ped is a mission entity and is friendly
-                    if (NearbyPed.IsMissionEntity() && NearbyPed.IsFriendly() && Count <= 6)
+                    if (Count <= 6 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, NearbyPed) &&
+                        Checks.IsFriendly(Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, NearbyPed, Game.Player.Character)))
                     {
                         // Select the correct image and name for the file
                         string ImageName = NearbyPed.IsAlive ? "SquadAlive" : "SquadDead";
                         Bitmap ImageType = NearbyPed.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
 
                         // Draw the icon and the ped info
-                        Draw.Icon(Config, Images.ResourceToPNG(ImageType, ImageName + Count), Config.GetSquadPosition(Count));
+                        Draw.Icon(Config, Images.ResourceToPNG(ImageType, ImageName + Count), Calculations.GetSquadPosition(Config, Count));
                         Draw.PedInfo(Config, NearbyPed, false, Count);
 
                         // To end this up, increase the count of peds "rendered"
@@ -88,7 +92,11 @@ namespace GGO.Singleplayer
                 Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
                 Draw.PedInfo(Config, Game.Player.Character, true);
 
-                if (Weapons.CurrentWeaponType == Weapons.Type.Main)
+                // Get the current weapon style
+                Checks.WeaponStyle CurrentStyle = Checks.GetWeaponStyle((uint)Game.Player.Character.Weapons.Current.Group);
+
+                // And draw the required elements
+                if (CurrentStyle == Checks.WeaponStyle.Main)
                 {
                     Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
                     Draw.WeaponInfo(Config, false, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
@@ -99,7 +107,7 @@ namespace GGO.Singleplayer
                     Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
                 }
 
-                if (Weapons.CurrentWeaponType == Weapons.Type.Sidearm)
+                if (CurrentStyle == Checks.WeaponStyle.Sidearm)
                 {
                     Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
                     Draw.WeaponInfo(Config, true, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
