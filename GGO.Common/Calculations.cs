@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 
 namespace GGO.Common
@@ -73,7 +73,7 @@ namespace GGO.Common
             return MarkerSize;
         }
 
-        public static Size GetHealthSize(Configuration Config, bool Player, int Max, int Current)
+        public static Size GetHealthSize(Configuration Config, bool Player, float Max, float Current)
         {
             // Store the original size for the health bar
             Size OriginalSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;

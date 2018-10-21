@@ -35,7 +35,7 @@ namespace GGO.Common
         /// <param name="Current">The current ped health check.</param>
         /// <param name="Max">The max ped health..</param>
         /// <returns>A color that match the current health percentage.</returns>
-        public static Color GetHealthColor(int Current, int Max)
+        public static Color GetHealthColor(float Current, float Max)
         {
             float Percentage = (Current / Max) * 100;
 
