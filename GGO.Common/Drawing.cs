@@ -25,17 +25,17 @@ namespace GGO.Common
             Image(File, Position + StoredConfig.IconPosition, StoredConfig.ImageSize);
         }
 
-        public void PedInfo(bool Player, string Name, int Hash, int CurrentHealth, int MaxHealth, int Count = 0)
+        public void PedInfo(bool Player, bool Squad, int Hash, int CurrentHealth, int MaxHealth, int Count = 0, string Name = "")
         {
-            Point InfoPosition = Player ? StoredConfig.PlayerInfo : Calculations.GetSquadPosition(StoredConfig, Count, true);
-            Size InfoSize = Player ? StoredConfig.PlayerInfoSize : StoredConfig.SquadInfoSize;
-            Size HealthPosition = Player ? StoredConfig.PlayerHealthPos : StoredConfig.SquadHealthPos;
-            Size HealthSize = Calculations.GetHealthSize(StoredConfig, Player, MaxHealth, CurrentHealth);
-            float TextSize = Player ? 0.35f : 0.3f;
+            Point InfoPosition = Squad ? StoredConfig.PlayerInfo : Calculations.GetSquadPosition(StoredConfig, Count, true);
+            Size InfoSize = Squad ? StoredConfig.PlayerInfoSize : StoredConfig.SquadInfoSize;
+            Size HealthPosition = Squad ? StoredConfig.PlayerHealthPos : StoredConfig.SquadHealthPos;
+            Size HealthSize = Calculations.GetHealthSize(StoredConfig, Squad, MaxHealth, CurrentHealth);
+            float TextSize = Squad ? 0.35f : 0.3f;
 
             Rectangle(InfoPosition, InfoSize, Colors.Backgrounds);
 
-            foreach (Point Position in Calculations.GetDividerPositions(StoredConfig, Player, Count))
+            foreach (Point Position in Calculations.GetDividerPositions(StoredConfig, Squad, Count))
             {
                 Rectangle(Position, StoredConfig.DividerSize, Colors.Dividers);
             }
