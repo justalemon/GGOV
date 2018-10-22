@@ -20,6 +20,10 @@ namespace GGO.Singleplayer
             /// The window with our debug information.
             /// </summary>
             public static Debug DebugWindow = new Debug(Config);
+            /// <summary>
+            /// Class with our new cleaner functions.
+            /// </summary>
+            public static Draw DrawFunctions = new Draw(Config);
 
             public GGO()
             {
@@ -68,13 +72,17 @@ namespace GGO.Singleplayer
                     if (Count <= 6 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, NearbyPed) &&
                         Checks.IsFriendly(Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, NearbyPed, Game.Player.Character)))
                     {
+                        // Get the ped current and max health
+                        int CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, NearbyPed) - 100;
+                        int MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, NearbyPed) - 100;
+
                         // Select the correct image and name for the file
                         string ImageName = NearbyPed.IsAlive ? "SquadAlive" : "SquadDead";
                         Bitmap ImageType = NearbyPed.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
 
                         // Draw the icon and the ped info
-                        OldDraw.Icon(Config, Images.ResourceToPNG(ImageType, ImageName + Count), Calculations.GetSquadPosition(Config, Count));
-                        OldDraw.PedInfo(Config, NearbyPed, false, Count);
+                        DrawFunctions.Icon(Images.ResourceToPNG(ImageType, ImageName + Count), Calculations.GetSquadPosition(Config, Count));
+                        DrawFunctions.PedInfo(NearbyPed.IsPlayer, false, NearbyPed.Model.Hash, CurrentHealth, MaxHealth, Count, Game.Player.Name);
 
                         // To end this up, increase the count of peds "rendered"
                         Count++;
