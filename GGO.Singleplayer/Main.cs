@@ -116,7 +116,7 @@ namespace GGO.Singleplayer
                 else
                 {
                     DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
-                    OldDraw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
+                    DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
                 }
 
                 if (CurrentStyle == Checks.WeaponStyle.Sidearm)
@@ -127,7 +127,7 @@ namespace GGO.Singleplayer
                 else
                 {
                     DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummySecondary"), Config.SecondaryIcon);
-                    OldDraw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoSecondary"), Config.SecondaryBackground);
+                    DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoSecondary"), Config.SecondaryBackground);
                 }
             }
 
