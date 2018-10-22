@@ -51,6 +51,7 @@
     <Compile Include="Checks.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Drawing.cs" />
     <Compile Include="Names.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Images.cs" />

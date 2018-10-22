@@ -1,6 +1,7 @@
 using GGO.Common;
 using GGO.Common.Properties;
 using GTA;
+using GTA.Math;
 using GTA.Native;
 using System;
 using System.Drawing;
@@ -20,6 +21,10 @@ namespace GGO.Singleplayer
             /// The window with our debug information.
             /// </summary>
             public static Debug DebugWindow = new Debug(Config);
+            /// <summary>
+            /// Class with our new cleaner functions.
+            /// </summary>
+            public static Draw DrawFunctions = new Draw(Config);
 
             public GGO()
             {
@@ -68,29 +73,39 @@ namespace GGO.Singleplayer
                     if (Count <= 6 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, NearbyPed) &&
                         Checks.IsFriendly(Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, NearbyPed, Game.Player.Character)))
                     {
+                        // Get the ped current and max health
+                        int CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, NearbyPed) - 100;
+                        int MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, NearbyPed) - 100;
+
                         // Select the correct image and name for the file
                         string ImageName = NearbyPed.IsAlive ? "SquadAlive" : "SquadDead";
                         Bitmap ImageType = NearbyPed.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
 
                         // Draw the icon and the ped info
-                        Draw.Icon(Config, Images.ResourceToPNG(ImageType, ImageName + Count), Calculations.GetSquadPosition(Config, Count));
-                        Draw.PedInfo(Config, NearbyPed, false, Count);
+                        DrawFunctions.Icon(Images.ResourceToPNG(ImageType, ImageName + Count), Calculations.GetSquadPosition(Config, Count));
+                        DrawFunctions.PedInfo(NearbyPed.IsPlayer, false, NearbyPed.Model.Hash, CurrentHealth, MaxHealth, Count, Game.Player.Name);
 
                         // To end this up, increase the count of peds "rendered"
                         Count++;
                     }
 
-                    // Check for on screen dead Peds to display dead markers, limit to 10 to not clutter the screen.
+                    // Check for on screen dead Peds to display dead markers
                     if (NearbyPed.IsDead && NearbyPed.IsOnScreen)
                     {
-                        // Draw marker
-                        Draw.DeadMarker(Config, NearbyPed);
+                        // Get the coordinates for the head of the dead ped
+                        Vector3 HeadCoord = NearbyPed.GetBoneCoord(Bone.SKEL_Head);
+                        // And draw the dead marker
+                        DrawFunctions.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), NearbyPed.GetHashCode());
                     }
                 }
 
+                // Get the player max and current health
+                int PlayerHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character) - 100;
+                int PlayerMaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;
+
                 // Then, start by drawing the player info
-                Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
-                Draw.PedInfo(Config, Game.Player.Character, true);
+                DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
+                DrawFunctions.PedInfo(true, true, Game.Player.Character.Model.Hash, PlayerHealth, PlayerMaxHealth, Name: Game.Player.Name);
 
                 // Get the current weapon style
                 Checks.WeaponStyle CurrentStyle = Checks.GetWeaponStyle((uint)Game.Player.Character.Weapons.Current.Group);
@@ -98,24 +113,24 @@ namespace GGO.Singleplayer
                 // And draw the required elements
                 if (CurrentStyle == Checks.WeaponStyle.Main)
                 {
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
-                    Draw.WeaponInfo(Config, false, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
+                    DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
+                    DrawFunctions.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
                 }
                 else
                 {
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
+                    DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
+                    DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
                 }
 
                 if (CurrentStyle == Checks.WeaponStyle.Sidearm)
                 {
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
-                    Draw.WeaponInfo(Config, true, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
+                    DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
+                    DrawFunctions.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
                 }
                 else
                 {
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "DummySecondary"), Config.SecondaryIcon);
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoSecondary"), Config.SecondaryBackground);
+                    DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummySecondary"), Config.SecondaryIcon);
+                    DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoSecondary"), Config.SecondaryBackground);
                 }
             }
 
