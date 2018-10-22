@@ -21,7 +21,7 @@ build_script:
   - ps: Get-ChildItem -Filter *.sln -Name | Foreach-Object { msbuild.exe $_ /t:Build /p:Configuration=Release`;Platform=x64 }
 
 after_build:
-  - cmd: 7z a GGOCommon.7z %APPVEYOR_BUILD_FOLDER%\GGO.Common\bin\x64\Release\*
+  - ps: Get-ChildItem -Directory -Name -Exclude "packages" | Foreach-Object { 7z a "$($_).7z" "$($env:APPVEYOR_BUILD_FOLDER)\$($_)\bin\x64\Release\*" }
   - cmd: 7z a GGOSingleplayer.7z %APPVEYOR_BUILD_FOLDER%\GGO.Singleplayer\bin\x64\Release\*
 
 artifacts:
