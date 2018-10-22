@@ -29,7 +29,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: "DkvKC8KRj8AipGu/oWW/J2e6jMWt2xXQfKU7oefFMsp0ZMfzz+OR9Y9XpML+ZmG4"
-  artifact: GGOSingleplayer.7z,GGOCommon.7z
+  artifact: /.*\.7z/
   draft: false
   prerelease: true
   on:
