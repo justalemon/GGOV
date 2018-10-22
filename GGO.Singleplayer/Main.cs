@@ -1,6 +1,7 @@
 using GGO.Common;
 using GGO.Common.Properties;
 using GTA;
+using GTA.Math;
 using GTA.Native;
 using System;
 using System.Drawing;
@@ -88,11 +89,13 @@ namespace GGO.Singleplayer
                         Count++;
                     }
 
-                    // Check for on screen dead Peds to display dead markers, limit to 10 to not clutter the screen.
+                    // Check for on screen dead Peds to display dead markers
                     if (NearbyPed.IsDead && NearbyPed.IsOnScreen)
                     {
-                        // Draw marker
-                        OldDraw.DeadMarker(Config, NearbyPed);
+                        // Get the coordinates for the head of the dead ped
+                        Vector3 HeadCoord = NearbyPed.GetBoneCoord(Bone.SKEL_Head);
+                        // And draw the dead marker
+                        DrawFunctions.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), NearbyPed.GetHashCode());
                     }
                 }
 

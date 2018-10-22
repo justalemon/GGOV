@@ -66,10 +66,16 @@ namespace GGO.Common
             Image(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), WeaponLocation, StoredConfig.WeaponBackground);
         }
 
-        public void DeadMarker(Point Position, Size Sizes, float Distance, int Hash)
+        public void DeadMarker(Point Position, float Distance, int Hash)
         {
-            Position.Offset(-Sizes.Width / 2, -Sizes.Height);
-            Image(Images.ResourceToPNG(Resources.DeadMarker, "DeadMarker" + Hash), Position, Sizes);
+            // Calculate the marker size based on the distance between player and dead ped
+            Size MarkerSize = Calculations.GetMarkerSize(StoredConfig, Distance);
+
+            // Offset the marker by half width to center, and full height to put on top.
+            Position.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
+
+            // Finally, draw the marker on screen
+            Image(Images.ResourceToPNG(Resources.DeadMarker, "DeadMarker" + Hash), Position, MarkerSize);
         }
     }
 }
