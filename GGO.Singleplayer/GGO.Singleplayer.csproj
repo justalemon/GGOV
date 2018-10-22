@@ -33,8 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ScriptHookVDotNet2, Version=2.10.6.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\ScriptHookVDotNet2.2.10.6\lib\net452\ScriptHookVDotNet2.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\ScriptHookVDotNet2.2.10.7\lib\net452\ScriptHookVDotNet2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,9 +58,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\GGO.Common\GGO.Common.csproj">
       <Project>{a5e55619-60c3-44d8-8e69-5cdb4370a875}</Project>
       <Name>GGO.Common</Name>
@@ -71,6 +67,9 @@
     <EmbeddedResource Include="Debug.resx">
       <DependentUpon>Debug.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
