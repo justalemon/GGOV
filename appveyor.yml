@@ -22,13 +22,7 @@ build_script:
 
 after_build:
   - ps: Get-ChildItem -Directory -Name -Exclude "packages" | Foreach-Object { 7z a "$($_).7z" "$($env:APPVEYOR_BUILD_FOLDER)\$($_)\bin\x64\Release\*" }
-  - cmd: 7z a GGOSingleplayer.7z %APPVEYOR_BUILD_FOLDER%\GGO.Singleplayer\bin\x64\Release\*
-
-artifacts:
-  - path: GGOCommon.7z
-    name: Common base for the mod
-  - path: GGOSingleplayer.7z
-    name: Singleplayer SHVDN mod
+  - ps: Get-ChildItem -Filter *.7z -Name | Foreach-Object { Push-AppveyorArtifact $_ }
 
 deploy:
   release: v$(appveyor_build_version)
