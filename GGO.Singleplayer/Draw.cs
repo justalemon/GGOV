@@ -111,8 +111,7 @@ namespace GGO.Singleplayer
             Vector3 HeadCoord = Character.GetBoneCoord(Bone.SKEL_Head);
 
             // Calculate the distance between player and dead ped's head.
-            float Distance = Vector3.Distance(Game.Player.Character.Position, HeadCoord);
-            Size MarkerSize = Calculations.GetMarkerSize(Config, Distance);
+            Size MarkerSize = Calculations.GetMarkerSize(Config, Vector3.Distance(Game.Player.Character.Position, HeadCoord));
 
             // Offset the marker by half width to center, and full height to put on top.
             Point MarkerPosition = UI.WorldToScreen(HeadCoord);
