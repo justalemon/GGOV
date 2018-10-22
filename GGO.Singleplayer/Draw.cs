@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace GGO.Singleplayer
 {
-    public class Draw
+    public class OldDraw
     {
         /// <summary>
         /// Draws an icon with it's respective background.

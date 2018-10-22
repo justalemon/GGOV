@@ -73,8 +73,8 @@ namespace GGO.Singleplayer
                         Bitmap ImageType = NearbyPed.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
 
                         // Draw the icon and the ped info
-                        Draw.Icon(Config, Images.ResourceToPNG(ImageType, ImageName + Count), Calculations.GetSquadPosition(Config, Count));
-                        Draw.PedInfo(Config, NearbyPed, false, Count);
+                        OldDraw.Icon(Config, Images.ResourceToPNG(ImageType, ImageName + Count), Calculations.GetSquadPosition(Config, Count));
+                        OldDraw.PedInfo(Config, NearbyPed, false, Count);
 
                         // To end this up, increase the count of peds "rendered"
                         Count++;
@@ -84,13 +84,13 @@ namespace GGO.Singleplayer
                     if (NearbyPed.IsDead && NearbyPed.IsOnScreen)
                     {
                         // Draw marker
-                        Draw.DeadMarker(Config, NearbyPed);
+                        OldDraw.DeadMarker(Config, NearbyPed);
                     }
                 }
 
                 // Then, start by drawing the player info
-                Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
-                Draw.PedInfo(Config, Game.Player.Character, true);
+                OldDraw.Icon(Config, Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
+                OldDraw.PedInfo(Config, Game.Player.Character, true);
 
                 // Get the current weapon style
                 Checks.WeaponStyle CurrentStyle = Checks.GetWeaponStyle((uint)Game.Player.Character.Weapons.Current.Group);
@@ -98,24 +98,24 @@ namespace GGO.Singleplayer
                 // And draw the required elements
                 if (CurrentStyle == Checks.WeaponStyle.Main)
                 {
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
-                    Draw.WeaponInfo(Config, false, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
+                    OldDraw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
+                    OldDraw.WeaponInfo(Config, false, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
                 }
                 else
                 {
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
+                    OldDraw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
+                    OldDraw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
                 }
 
                 if (CurrentStyle == Checks.WeaponStyle.Sidearm)
                 {
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
-                    Draw.WeaponInfo(Config, true, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
+                    OldDraw.Icon(Config, Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
+                    OldDraw.WeaponInfo(Config, true, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
                 }
                 else
                 {
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "DummySecondary"), Config.SecondaryIcon);
-                    Draw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoSecondary"), Config.SecondaryBackground);
+                    OldDraw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "DummySecondary"), Config.SecondaryIcon);
+                    OldDraw.Icon(Config, Images.ResourceToPNG(Resources.NoWeapon, "AmmoSecondary"), Config.SecondaryBackground);
                 }
             }
 
