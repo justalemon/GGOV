@@ -1,8 +1,5 @@
 using GGO.Common;
-using GGO.Common.Properties;
 using GTA;
-using GTA.Math;
-using GTA.Native;
 using System.Drawing;
 
 namespace GGO.Singleplayer
