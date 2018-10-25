@@ -147,10 +147,6 @@ namespace GGO.Common
         /// The RAW Configuration.
         /// </summary>
         private JObject Raw { get; set; }
-        /// <summary>
-        /// The list of Ped Names.
-        /// </summary>
-        public Names PedNames;
 
         /// <summary>
         /// Loads up the configuration from "GGO.Common.json"
@@ -161,10 +157,18 @@ namespace GGO.Common
             string Content = File.ReadAllText(Location + "\\GGO.Common.json");
             // Load it on the parser
             Raw = JObject.Parse(Content);
-            // Dump our ped names
-            PedNames = new Names(Location + "\\GGO.Names.json");
             // And store our current resolution
             Resolution = CurrentResolution;
+        }
+
+        /// <summary>
+        /// Checks if a ped hash exists on the name list.
+        /// </summary>
+        /// <param name="Hash">The Ped hash.</param>
+        /// <returns>True if the ped has a name defined, false otherwise.</returns>
+        public bool IsNameDefined(int Hash)
+        {
+            return new JObject(Raw["names"]).ContainsKey(Hash.ToString());
         }
 
         /// <summary>
@@ -190,15 +194,32 @@ namespace GGO.Common
             }
             // If is not the player but there is a custom name available
             // Return that ped name
-            else if (PedNames.IsNameDefined(Hash))
+            else if (IsNameDefined(Hash))
             {
-                return PedNames.GetName(Hash);
+                return GetName(Hash);
             }
             // If none of the previous ones work
             // Return the hash as a string
             else
             {
                 return Hash.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets the name of a ped from GGO.Names.json
+        /// </summary>
+        /// <param name="Hash">The Ped hash.</param>
+        /// <returns>The name of the ped, or "Unknown" if is not defined.</returns>
+        public string GetName(int Hash)
+        {
+            if (!IsNameDefined(Hash))
+            {
+                return "Unknown";
+            }
+            else
+            {
+                return (string)Raw["names"][Hash.ToString()];
             }
         }
 
