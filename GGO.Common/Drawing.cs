@@ -120,7 +120,7 @@ namespace GGO.Common
 
             // Finally, draw the weapon image with the respective background
             Rectangle(WeaponLocation, StoredConfig.WeaponBackground, Colors.Backgrounds);
-            Image(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), WeaponLocation, StoredConfig.WeaponBackground);
+            Image(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), WeaponLocation + StoredConfig.IconPosition, StoredConfig.WeaponImageSize);
         }
 
         /// <summary>
