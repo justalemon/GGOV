@@ -162,16 +162,6 @@ namespace GGO.Common
         }
 
         /// <summary>
-        /// Checks if a ped hash exists on the name list.
-        /// </summary>
-        /// <param name="Hash">The Ped hash.</param>
-        /// <returns>True if the ped has a name defined, false otherwise.</returns>
-        public bool IsNameDefined(int Hash)
-        {
-            return new JObject(Raw["names"]).ContainsKey(Hash.ToString());
-        }
-
-        /// <summary>
         /// Gets the name for the specified ped hash.
         /// </summary>
         /// <param name="Player">If the name is for the player.</param>
@@ -194,32 +184,15 @@ namespace GGO.Common
             }
             // If is not the player but there is a custom name available
             // Return that ped name
-            else if (IsNameDefined(Hash))
+            else if (Raw["names"][Hash.ToString()] != null)
             {
-                return GetName(Hash);
+                return (string)Raw["names"][Hash.ToString()];
             }
             // If none of the previous ones work
             // Return the hash as a string
             else
             {
                 return Hash.ToString();
-            }
-        }
-
-        /// <summary>
-        /// Gets the name of a ped from GGO.Names.json
-        /// </summary>
-        /// <param name="Hash">The Ped hash.</param>
-        /// <returns>The name of the ped, or "Unknown" if is not defined.</returns>
-        public string GetName(int Hash)
-        {
-            if (!IsNameDefined(Hash))
-            {
-                return "Unknown";
-            }
-            else
-            {
-                return (string)Raw["names"][Hash.ToString()];
             }
         }
 
