@@ -16,10 +16,6 @@ namespace GGO.Singleplayer
         /// </summary>
         public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT));
         /// <summary>
-        /// The window with our debug information.
-        /// </summary>
-        public static Debug DebugWindow = new Debug(Config);
-        /// <summary>
         /// Class with our new cleaner functions.
         /// </summary>
         public static Draw DrawFunctions = new Draw(Config);
@@ -29,12 +25,6 @@ namespace GGO.Singleplayer
             // Add our Tick and Aborted events
             Tick += OnTick;
             Aborted += OnAbort;
-
-            // Show the debug window if the mode is enabled
-            if (Config.Debug)
-            {
-                DebugWindow.Show();
-            }
         }
 
         private void OnTick(object Sender, EventArgs Args)
@@ -133,8 +123,7 @@ namespace GGO.Singleplayer
 
         public static void OnAbort(object Sender, EventArgs Args)
         {
-            // Close the debug window
-            DebugWindow.Close();
+
         }
     }
 }

@@ -48,12 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Debug.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Debug.Designer.cs">
-      <DependentUpon>Debug.cs</DependentUpon>
-    </Compile>
     <Compile Include="Draw.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,11 +57,6 @@
       <Project>{a5e55619-60c3-44d8-8e69-5cdb4370a875}</Project>
       <Name>GGO.Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Debug.resx">
-      <DependentUpon>Debug.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
