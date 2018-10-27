@@ -49,7 +49,13 @@ namespace GGO.Singleplayer
             // Disable the original game HUD and radar if is requested
             if (Config.DisableHud)
             {
-                Function.Call(Hash.HIDE_HUD_AND_RADAR_THIS_FRAME);
+                UI.HideHudComponentThisFrame(HudComponent.WeaponIcon);
+
+                UI.HideHudComponentThisFrame(HudComponent.AreaName);
+                UI.HideHudComponentThisFrame(HudComponent.StreetName);
+                UI.HideHudComponentThisFrame(HudComponent.VehicleName);
+
+                UI.HideHudComponentThisFrame(HudComponent.HelpText);
             }
 
             // Draw the squad information on the top left
