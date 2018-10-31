@@ -1,9 +1,9 @@
-﻿using GGO.Common.Properties;
+﻿using GGO.Shared.Properties;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace GGO.Common
+namespace GGO.Shared
 {
     public class Images
     {

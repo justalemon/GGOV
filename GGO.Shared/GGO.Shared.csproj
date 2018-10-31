@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A5E55619-60C3-44D8-8E69-5CDB4370A875}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GGO.Shared</RootNamespace>
+    <AssemblyName>GGO.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Calculations.cs" />
+    <Compile Include="Checks.cs" />
+    <Compile Include="Colors.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Drawing.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Images.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GGO.Shared.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImageCharacter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImageWeapon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImageDead.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\GunWTT_PIST.png" />
+    <None Include="Resources\GunWTT_PIST_50.png" />
+    <None Include="Resources\GunWTT_SG_PMP.png" />
+    <None Include="Resources\GunWTT_REVOLVER.png" />
+    <None Include="Resources\GunWTT_SG_SOF.png" />
+    <None Include="Resources\GunWTT_SMG.png" />
+    <None Include="Resources\GunWTT_SNIP_RIF.png" />
+    <None Include="Resources\GunWTT_RIFLE_ADV.png" />
+    <None Include="Resources\GunWTT_PIST_AP.png" />
+    <None Include="Resources\GunWTT_RIFLE_ASL.png" />
+    <None Include="Resources\GunWTT_SG_ASL.png" />
+    <None Include="Resources\GunWTT_SMG_ASL.png" />
+    <None Include="Resources\GunWTT_SG_BLP.png" />
+    <None Include="Resources\GunWTT_RIFLE_CBN.png" />
+    <None Include="Resources\GunWTT_MG_CBT.png" />
+    <None Include="Resources\GunWTT_COMBATPDW.png" />
+    <None Include="Resources\GunWTT_PIST_CBT.png" />
+    <None Include="Resources\GunWTT_CMPRIFLE.png" />
+    <None Include="Resources\GunWTT_DBSHGN.png" />
+    <None Include="Resources\GunWTT_FLAREGUN.png" />
+    <None Include="Resources\GunWTT_SNIP_HVY.png" />
+    <None Include="Resources\GunWTT_MKPISTOL.png" />
+    <None Include="Resources\GunWTT_MG.png" />
+    <None Include="Resources\GunWTT_SMG_MCR.png" />
+    <None Include="Resources\GunWTT_MINIGUN.png" />
+    <Content Include="Resources\DeadMarker.png" />
+    <None Include="Resources\GunWTT_RAILGUN.png" />
+    <None Include="Resources\GunWTT_REV_DA.png" />
+    <None Include="Resources\GunWTT_REVOLVER2.png" />
+    <None Include="Resources\GunWTT_RIFLE_ASL2.png" />
+    <None Include="Resources\GunWTT_RIFLE_CBN2.png" />
+    <None Include="Resources\GunWTT_RPG.png" />
+    <None Include="Resources\GunWTT_SG_PMP2.png" />
+    <None Include="Resources\GunWTT_SMG2.png" />
+    <None Include="Resources\GunWTT_SNIP_HVY2.png" />
+    <None Include="Resources\GunWTT_SNSPISTOL.png" />
+    <None Include="Resources\GunWTT_SNSPISTOL2.png" />
+    <None Include="Resources\GunWTT_SPCARBINE.png" />
+    <None Include="Resources\GunWTT_SPCARBINE2.png" />
+    <None Include="Resources\GunWTT_VPISTOL.png" />
+    <None Include="Resources\GunWTT_AUTOSHGN.png" />
+    <None Include="Resources\GunWTT_BULLRIFLE.png" />
+    <None Include="Resources\GunWTT_BULLRIFLE2.png" />
+    <None Include="Resources\GunWTT_CMPGL.png" />
+    <None Include="Resources\GunWTT_FWRKLNCHR.png" />
+    <None Include="Resources\GunWTT_GL.png" />
+    <None Include="Resources\GunWTT_GUSENBERG.png" />
+    <None Include="Resources\GunWTT_HMKRIFLE.png" />
+    <None Include="Resources\GunWTT_HOMLNCH.png" />
+    <None Include="Resources\GunWTT_HVYSHOT.png" />
+    <None Include="Resources\GunWTT_MCHPIST.png" />
+    <None Include="Resources\GunWTT_MG_CBT2.png" />
+    <None Include="Resources\GunWTT_MINISMG.png" />
+    <None Include="Resources\GunWTT_MKRIFLE2.png" />
+    <None Include="Resources\GunWTT_MUSKET.png" />
+    <None Include="Resources\GunWTT_PIST2.png" />
+    <Content Include="Resources\NoWeapon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

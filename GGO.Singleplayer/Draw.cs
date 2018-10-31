@@ -1,4 +1,4 @@
-using GGO.Common;
+using GGO.Shared;
 using GTA;
 using System.Drawing;
 

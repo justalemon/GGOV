@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GGO.Common
+namespace GGO.Shared
 {
     public class Colors
     {

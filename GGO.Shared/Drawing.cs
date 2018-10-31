@@ -1,7 +1,7 @@
-﻿using GGO.Common.Properties;
+﻿using GGO.Shared.Properties;
 using System.Drawing;
 
-namespace GGO.Common
+namespace GGO.Shared
 {
     /// <summary>
     /// Class that handles the drawing of UI elements.

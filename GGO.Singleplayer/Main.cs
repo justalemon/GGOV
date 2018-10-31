@@ -1,5 +1,5 @@
-using GGO.Common;
-using GGO.Common.Properties;
+using GGO.Shared;
+using GGO.Shared.Properties;
 using GTA;
 using GTA.Math;
 using GTA.Native;

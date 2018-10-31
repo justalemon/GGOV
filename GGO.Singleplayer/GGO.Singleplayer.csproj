@@ -53,9 +53,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GGO.Common\GGO.Common.csproj">
+    <ProjectReference Include="..\GGO.Shared\GGO.Shared.csproj">
       <Project>{a5e55619-60c3-44d8-8e69-5cdb4370a875}</Project>
-      <Name>GGO.Common</Name>
+      <Name>GGO.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
