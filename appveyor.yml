@@ -29,10 +29,10 @@ before_build:
   - ps: Get-ChildItem -Filter *.sln -Name | Foreach-Object { nuget restore $_  }
 
 build_script:
-  - ps: Get-ChildItem -Filter *.sln -Name | Foreach-Object { msbuild.exe $_ /t:Build /p:Configuration=Release`;Platform=x64 }
+  - ps: Get-ChildItem -Filter *.sln -Name | Foreach-Object { msbuild.exe $_ /t:Build /p:Configuration=Release /p:Platform="Any CPU" }
 
 after_build:
-  - ps: Get-ChildItem -Directory -Name -Exclude "packages","SDK" | Foreach-Object { 7z a "$($_).7z" "$($env:APPVEYOR_BUILD_FOLDER)\$($_)\bin\x64\Release\*" }
+  - ps: Get-ChildItem -Directory -Name -Exclude "packages","SDK" | Foreach-Object { 7z a "$($_).7z" "$($env:APPVEYOR_BUILD_FOLDER)\$($_)\bin\Release\*" }
   - ps: Get-ChildItem -Filter *.7z -Name | Foreach-Object { Push-AppveyorArtifact $_ }
 
 deploy:
