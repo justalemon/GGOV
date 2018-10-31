@@ -30,7 +30,7 @@ namespace GGO.Singleplayer
         private void OnTick(object Sender, EventArgs Args)
         {
             // Do not draw the UI elements if the game is loading, paused, player is dead or it cannot be controlled
-            if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive || Game.Player.CanControlCharacter)
+            if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive || !Game.Player.CanControlCharacter)
             {
                 return;
             }
