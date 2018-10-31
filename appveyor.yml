@@ -15,15 +15,7 @@ init:
   - ps: if ($env:APPVEYOR_REPO_TAG -eq "true") { Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))" }
 
 install:
-  - ps: Invoke-WebRequest "https://runtime.fivem.net/artifacts/fivem/build_client/master/$($env:FIVEM_CLIENT)/diff/fivereborn/citizen/clr2/lib/mono/4.5/CitizenFX.Core.dll.xz" -OutFile (Join-Path $env:TEMP "CitizenFX.Core.dll.xz")
-  - ps: Invoke-WebRequest "https://runtime.fivem.net/artifacts/fivem/build_client/master/$($env:FIVEM_CLIENT)/diff/fivereborn/citizen/clr2/lib/mono/4.5/CitizenFX.Core.pdb.xz" -OutFile (Join-Path $env:TEMP "CitizenFX.Core.pdb.xz")
-  - ps: Invoke-WebRequest "https://runtime.fivem.net/artifacts/fivem/build_client/master/$($env:FIVEM_CLIENT)/diff/fivereborn/citizen/clr2/lib/mono/4.5/CitizenFX.Core.xml.xz" -OutFile (Join-Path $env:TEMP "CitizenFX.Core.xml.xz")
-  - ps: 7z e (Join-Path $env:TEMP "CitizenFX.Core.dll.xz") -oSDK\FiveM_Client\
-  - ps: 7z e (Join-Path $env:TEMP "CitizenFX.Core.pdb.xz") -oSDK\FiveM_Client\
-  - ps: 7z e (Join-Path $env:TEMP "CitizenFX.Core.xml.xz") -oSDK\FiveM_Client\
-
-  - ps: Invoke-WebRequest "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/$($env:FIVEM_SERVER)/server.zip" -OutFile (Join-Path $env:TEMP "fivemserver.zip")
-  - ps: 7z e (Join-Path $env:TEMP "fivemserver.zip") -oSDK\FiveM_Server\ citizen\clr2\lib\mono\4.5\CitizenFX.Core.*
+  - ps: Invoke-WebRequest -useb "https://raw.githubusercontent.com/justalemon/FiveM-CI/master/fivem.ps1" | iex
 
 before_build:
   - ps: Get-ChildItem -Filter *.sln -Name | Foreach-Object { nuget restore $_  }
