@@ -52,7 +52,7 @@ namespace GGO.Common
             // Draw the background
             Rectangle(Position, StoredConfig.SquaredBackground, Colors.Backgrounds);
             // And the image over it
-            Image(File, Position + StoredConfig.IconPosition, StoredConfig.ImageSize);
+            Image(File, Position + StoredConfig.IconPosition, StoredConfig.IconSize);
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace GGO.Common
         public void PedInfo(bool Player, bool Squad, int Hash, int CurrentHealth, int MaxHealth, int Count = 0, string Name = "")
         {
             // Store the respective information for the player or squad
-            Point InfoPosition = Squad ? StoredConfig.PlayerInfo : Calculations.GetSquadPosition(StoredConfig, Count, true);
-            Size InfoSize = Squad ? StoredConfig.PlayerInfoSize : StoredConfig.SquadInfoSize;
+            Point InfoPosition = Squad ? StoredConfig.PlayerInformation : Calculations.GetSquadPosition(StoredConfig, Count, true);
+            Size InfoSize = Squad ? StoredConfig.PlayerSize : StoredConfig.SquadSize;
             Size HealthPosition = Squad ? StoredConfig.PlayerHealthPos : StoredConfig.SquadHealthPos;
             Size HealthSize = Calculations.GetHealthSize(StoredConfig, Squad, MaxHealth, CurrentHealth);
             float TextSize = Squad ? 0.35f : 0.3f;
@@ -120,7 +120,7 @@ namespace GGO.Common
 
             // Finally, draw the weapon image with the respective background
             Rectangle(WeaponLocation, StoredConfig.WeaponBackground, Colors.Backgrounds);
-            Image(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), WeaponLocation + StoredConfig.IconPosition, StoredConfig.WeaponImageSize);
+            Image(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), WeaponLocation + StoredConfig.IconPosition, StoredConfig.WeaponSize);
         }
 
         /// <summary>

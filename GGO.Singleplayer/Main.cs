@@ -90,7 +90,7 @@ namespace GGO.Singleplayer
             int PlayerMaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;
 
             // Then, start by drawing the player info
-            DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerIcon);
+            DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerPosition);
             DrawFunctions.PedInfo(true, true, Game.Player.Character.Model.Hash, PlayerHealth, PlayerMaxHealth, Name: Game.Player.Name);
 
             // Get the current weapon style

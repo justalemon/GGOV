@@ -20,86 +20,81 @@ namespace GGO.Common
         /// </summary>
         public bool DisableHud => (bool)Raw["disable_hud"];
 
+
         /// <summary>
         /// Separation between the UI elements.
         /// </summary>
-        public Size CommonSpace => CreateSize("elements_relative");
+        public Size CommonSpacing => CreateSize("common_spacing");
         /// <summary>
         /// Size for the squared backgrounds.
         /// </summary>
-        public Size SquaredBackground => CreateSize("icon_background_size");
-        /// <summary>
-        /// Size for the dividers on the health bars.
-        /// </summary>
-        public Size DividerSize => CreateSize("divider_size");
-        /// <summary>
-        /// Position of the name relative to the background.
-        /// </summary>
-        public Size NamePosition => CreateSize("name_pos");
+        public Size SquaredBackground => CreateSize("squared_background");
+
 
         /// <summary>
         /// Size for the icons.
         /// </summary>
-        public Size ImageSize => CreateSize("icon_image_size");
+        public Size IconSize => CreateSize("icon_size");
         /// <summary>
         /// Position of the image relative to the background.
         /// </summary>
-        public Size IconPosition => CreateSize("icon_relative_pos");
+        public Size IconPosition => CreateSize("icon_position");
+
 
         /// <summary>
         /// Position of the squad information.
         /// </summary>
-        public Point SquadPosition => new Point(CreateSize("squad_general_pos"));
+        public Point SquadPosition => new Point(CreateSize("squad_position"));
+        /// <summary>
+        /// Position of the name relative to the background.
+        /// </summary>
+        public Size NamePosition => CreateSize("name_position");
         /// <summary>
         /// Size for the squad information.
         /// </summary>
-        public Size SquadInfoSize => CreateSize("squad_info_size");
-        /// <summary>
-        /// Size for the squad health bars.
-        /// </summary>
-        public Size SquadHealthSize => CreateSize("squad_health_size");
-        /// <summary>
-        /// Position of the squad health bar.
-        /// </summary>
-        public Size SquadHealthPos => CreateSize("squad_health_pos");
+        public Size SquadSize => CreateSize("squad_size");
 
-        /// <summary>
-        /// The position of the player icon.
-        /// </summary>
-        public Point PlayerIcon => new Point(CreateSize("player_general_pos"));
+
         /// <summary>
         /// The position of the player information.
         /// </summary>
-        public Point PlayerInfo => new Point(PlayerIcon.X + SquaredBackground.Width + CommonSpace.Width, PlayerIcon.Y);
+        public Point PlayerPosition => new Point(CreateSize("player_position"));
         /// <summary>
         /// Size of the player information.
         /// </summary>
-        public Size PlayerInfoSize => CreateSize("player_info_size");
+        public Size PlayerSize => CreateSize("player_size");
         /// <summary>
-        /// Size of the player health bar.
+        /// Offset of the ammo.
         /// </summary>
-        public Size PlayerHealthSize => CreateSize("player_health_size");
+        public Point AmmoOffset => new Point(CreateSize("ammo_offset"));
         /// <summary>
-        /// Position of the player health bar.
+        /// Size for the weapon images.
         /// </summary>
-        public Size PlayerHealthPos => CreateSize("player_health_pos");
-
+        public Size WeaponSize => CreateSize("weapon_size");
+        /// <summary>
+        /// The size of the weapon background
+        /// </summary>
+        public Size WeaponBackground => new Size(PlayerSize.Width - CommonSpacing.Width - SquaredBackground.Width, PlayerSize.Height);
+        /// <summary>
+        /// The position of the player information.
+        /// </summary>
+        public Point PlayerInformation => new Point(PlayerPosition.X + SquaredBackground.Width + CommonSpacing.Width, PlayerPosition.Y);
         /// <summary>
         /// The position of the icon for the primary weapon.
         /// </summary>
-        public Point PrimaryIcon => new Point(PlayerIcon.X, PlayerIcon.Y + CommonSpace.Height + SquaredBackground.Height);
+        public Point PrimaryIcon => new Point(PlayerPosition.X, PlayerPosition.Y + CommonSpacing.Height + SquaredBackground.Height);
         /// <summary>
         /// The position of the icon for the primary weapon.
         /// </summary>
-        public Point SecondaryIcon => new Point(PlayerIcon.X, PlayerIcon.Y + (CommonSpace.Height * 2) + (SquaredBackground.Height * 2));
+        public Point SecondaryIcon => new Point(PlayerPosition.X, PlayerPosition.Y + (CommonSpacing.Height * 2) + (SquaredBackground.Height * 2));
         /// <summary>
         /// The position of the ammo for the primary weapon.
         /// </summary>
-        public Point PrimaryBackground => new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpace.Width, PrimaryIcon.Y);
+        public Point PrimaryBackground => new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpacing.Width, PrimaryIcon.Y);
         /// <summary>
         /// The position of the ammo for the secondary weapon.
         /// </summary>
-        public Point SecondaryBackground => new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpace.Width, SecondaryIcon.Y);
+        public Point SecondaryBackground => new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpacing.Width, SecondaryIcon.Y);
         /// <summary>
         /// The position of the primary ammo counter.
         /// </summary>
@@ -111,33 +106,42 @@ namespace GGO.Common
         /// <summary>
         /// The position of the primary weapon background.
         /// </summary>
-        public Point PrimaryWeapon => new Point(PrimaryBackground.X + CommonSpace.Width + SquaredBackground.Width, PrimaryBackground.Y);
+        public Point PrimaryWeapon => new Point(PrimaryBackground.X + CommonSpacing.Width + SquaredBackground.Width, PrimaryBackground.Y);
         /// <summary>
         /// The position of the secondary weapon background.
         /// </summary>
-        public Point SecondaryWeapon => new Point(SecondaryBackground.X + CommonSpace.Width + SquaredBackground.Width, SecondaryBackground.Y);
+        public Point SecondaryWeapon => new Point(SecondaryBackground.X + CommonSpacing.Width + SquaredBackground.Width, SecondaryBackground.Y);
+        
 
         /// <summary>
-        /// The size of the weapon background
+        /// Size for the dividers on the health bars.
         /// </summary>
-        public Size WeaponBackground => new Size(PlayerInfoSize.Width - CommonSpace.Width - SquaredBackground.Width, PlayerInfoSize.Height);
-        /// <summary>
-        /// Offset of the ammo.
-        /// </summary>
-        public Point AmmoOffset => new Point(CreateSize("ammo_offset_pos"));
-        /// <summary>
-        /// Size for the weapon images.
-        /// </summary>
-        public Size WeaponImageSize => CreateSize("weapon_image_size");
-
+        public Size DividerSize => CreateSize("divider_size");
         /// <summary>
         /// Position of the health dividers.
         /// </summary>
-        public Size DividerPosition => CreateSize("divider_pos");
+        public Size DividerPosition => CreateSize("divider_position");
+        /// <summary>
+        /// Size for the squad health bars.
+        /// </summary>
+        public Size SquadHealthSize => CreateSize("squad_health_size");
+        /// <summary>
+        /// Position of the squad health bar.
+        /// </summary>
+        public Size SquadHealthPos => CreateSize("squad_health_position");
+        /// <summary>
+        /// Size of the player health bar.
+        /// </summary>
+        public Size PlayerHealthSize => CreateSize("player_health_size");
+        /// <summary>
+        /// Position of the player health bar.
+        /// </summary>
+        public Size PlayerHealthPos => CreateSize("player_health_position");
+        
         /// <summary>
         /// Size for the health markers.
         /// </summary>
-        public Size DeadMarkerSize => CreateSize("dead_marker_size");
+        public Size DeadMarker => CreateSize("dead_marker");
 
         /// <summary>
         /// The current screen resolution.

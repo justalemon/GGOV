@@ -17,7 +17,7 @@ namespace GGO.Common
             Point[] Positions = new Point[5];
 
             // Store our positions for the player or squad members
-            Point InfoPosition = Player ? Config.PlayerInfo : GetSquadPosition(Config, Count, true);
+            Point InfoPosition = Player ? Config.PlayerInformation : GetSquadPosition(Config, Count, true);
             Size HealthSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;
             Size HealthPosition = Player ? Config.PlayerHealthPos : Config.SquadHealthPos;
 
@@ -49,11 +49,11 @@ namespace GGO.Common
             // Return the correct position for the info or icon
             if (Info)
             {
-                return new Point(Config.SquadPosition.X + Config.SquaredBackground.Width + Config.CommonSpace.Width, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
+                return new Point(Config.SquadPosition.X + Config.SquaredBackground.Width + Config.CommonSpacing.Width, (Config.SquadPosition.Y + Config.CommonSpacing.Height) * Count);
             }
             else
             {
-                return new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.CommonSpace.Height) * Count);
+                return new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.CommonSpacing.Height) * Count);
             }
         }
 
@@ -67,7 +67,7 @@ namespace GGO.Common
         {
             // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
             double Ratio = Math.Log(Distance + 1.65);
-            Size MarkerSize = new Size((int)(Config.DeadMarkerSize.Width / Ratio), (int)(Config.DeadMarkerSize.Height / Ratio));
+            Size MarkerSize = new Size((int)(Config.DeadMarker.Width / Ratio), (int)(Config.DeadMarker.Height / Ratio));
 
             // And finish by returning the new size
             return MarkerSize;
