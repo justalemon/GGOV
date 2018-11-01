@@ -19,12 +19,12 @@
 	// The size for the images of the icons
 	"icon_size": [ 0.0255, 0.045 ],
 	// The position of the image relative to the background
-	"icon_position": [ 0.00075, 0.001 ],
+	"icon_position": [ 0.0015, 0.0015 ],
 
 	// The position of the squad elements (usually top-left)
 	"squad_position": [ 0.0475, 0.045 ],
 	// Position of the names relative to the background
-	"name_position": [ 0.002, 0.001 ],
+	"name_position": [ 0.0025, 0.001 ],
 	// The size for the rectangles with squad information
 	"squad_size": [ 0.05908, 0.048 ],
 
@@ -33,7 +33,7 @@
 	// The size for the rectangles with the player information
 	"player_size": [ 0.1223, 0.048 ],
 	// The offset of the ammo relative to the background
-	"ammo_offset": [ 0.0135, 0.003 ],
+	"ammo_offset": [ 0.0135, 0.004 ],
 	// The size for the images of the weapons
 	"weapon_size": [ 0.0875, 0.037 ],
 
@@ -44,7 +44,7 @@
 	// Self explanatory: The size for the squad health bar
 	"squad_health_size": [ 0.0508, 0.004 ],
 	// The position of the health bar relative to the background
-	"squad_health_position": [ 0.004, 0.035 ],
+	"squad_health_position": [ 0.0045, 0.035 ],
 	// The size of the player health bar (slightly smaller than the rectanlge)
 	"player_health_size": [ 0.1133, 0.004 ],
 	// The position of the health bar relative to the background

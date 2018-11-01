@@ -24,125 +24,129 @@ namespace GGO.Shared
         /// <summary>
         /// Separation between the UI elements.
         /// </summary>
-        public SizeF CommonSpacing => new SizeF((float)Raw["common_spacing"][0], (float)Raw["common_spacing"][1]);
+        public Size CommonSpacing => CreateSize("common_spacing");
         /// <summary>
         /// Size for the squared backgrounds.
         /// </summary>
-        public SizeF SquaredBackground => new SizeF((float)Raw["squared_background"][0], (float)Raw["squared_background"][1]);
+        public Size SquaredBackground => CreateSize("squared_background");
 
 
         /// <summary>
         /// Size for the icons.
         /// </summary>
-        public SizeF IconSize => new SizeF((float)Raw["icon_size"][0], (float)Raw["icon_size"][1]);
+        public Size IconSize => CreateSize("icon_size");
         /// <summary>
         /// Position of the image relative to the background.
         /// </summary>
-        public SizeF IconPosition => new SizeF((float)Raw["icon_position"][0], (float)Raw["icon_position"][1]);
+        public Size IconPosition => CreateSize("icon_position");
 
 
         /// <summary>
         /// Position of the squad information.
         /// </summary>
-        public PointF SquadPosition => new PointF((float)Raw["squad_position"][0], (float)Raw["squad_position"][1]);
+        public Point SquadPosition => new Point(CreateSize("squad_position"));
         /// <summary>
         /// Position of the name relative to the background.
         /// </summary>
-        public SizeF NamePosition => new SizeF((float)Raw["name_position"][0], (float)Raw["name_position"][1]);
+        public Size NamePosition => CreateSize("name_position");
         /// <summary>
         /// Size for the squad information.
         /// </summary>
-        public SizeF SquadSize => new SizeF((float)Raw["squad_size"][0], (float)Raw["squad_size"][1]);
+        public Size SquadSize => CreateSize("squad_size");
 
 
         /// <summary>
         /// The position of the player information.
         /// </summary>
-        public PointF PlayerPosition => new PointF((float)Raw["player_position"][0], (float)Raw["player_position"][1]);
+        public Point PlayerPosition => new Point(CreateSize("player_position"));
         /// <summary>
         /// Size of the player information.
         /// </summary>
-        public SizeF PlayerSize => new SizeF((float)Raw["player_size"][0], (float)Raw["player_size"][1]);
+        public Size PlayerSize => CreateSize("player_size");
         /// <summary>
         /// Offset of the ammo.
         /// </summary>
-        public PointF AmmoOffset => new PointF((float)Raw["ammo_offset"][0], (float)Raw["ammo_offset"][1]);
+        public Point AmmoOffset => new Point(CreateSize("ammo_offset"));
         /// <summary>
         /// Size for the weapon images.
         /// </summary>
-        public SizeF WeaponSize => new SizeF((float)Raw["weapon_size"][0], (float)Raw["weapon_size"][1]);
+        public Size WeaponSize => CreateSize("weapon_size");
         /// <summary>
         /// The size of the weapon background
         /// </summary>
-        public SizeF WeaponBackground => new SizeF(PlayerSize.Width - CommonSpacing.Width - SquaredBackground.Width, PlayerSize.Height);
+        public Size WeaponBackground => new Size(PlayerSize.Width - CommonSpacing.Width - SquaredBackground.Width, PlayerSize.Height);
         /// <summary>
         /// The position of the player information.
         /// </summary>
-        public PointF PlayerInformation => new PointF(PlayerPosition.X + SquaredBackground.Width + CommonSpacing.Width, PlayerPosition.Y);
+        public Point PlayerInformation => new Point(PlayerPosition.X + SquaredBackground.Width + CommonSpacing.Width, PlayerPosition.Y);
         /// <summary>
         /// The position of the icon for the primary weapon.
         /// </summary>
-        public PointF PrimaryIcon => new PointF(PlayerPosition.X, PlayerPosition.Y + CommonSpacing.Height + SquaredBackground.Height);
+        public Point PrimaryIcon => new Point(PlayerPosition.X, PlayerPosition.Y + CommonSpacing.Height + SquaredBackground.Height);
         /// <summary>
         /// The position of the icon for the primary weapon.
         /// </summary>
-        public PointF SecondaryIcon => new PointF(PlayerPosition.X, PlayerPosition.Y + (CommonSpacing.Height * 2) + (SquaredBackground.Height * 2));
+        public Point SecondaryIcon => new Point(PlayerPosition.X, PlayerPosition.Y + (CommonSpacing.Height * 2) + (SquaredBackground.Height * 2));
         /// <summary>
         /// The position of the ammo for the primary weapon.
         /// </summary>
-        public PointF PrimaryBackground => new PointF(PrimaryIcon.X + SquaredBackground.Width + CommonSpacing.Width, PrimaryIcon.Y);
+        public Point PrimaryBackground => new Point(PrimaryIcon.X + SquaredBackground.Width + CommonSpacing.Width, PrimaryIcon.Y);
         /// <summary>
         /// The position of the ammo for the secondary weapon.
         /// </summary>
-        public PointF SecondaryBackground => new PointF(SecondaryIcon.X + SquaredBackground.Width + CommonSpacing.Width, SecondaryIcon.Y);
+        public Point SecondaryBackground => new Point(SecondaryIcon.X + SquaredBackground.Width + CommonSpacing.Width, SecondaryIcon.Y);
         /// <summary>
         /// The position of the primary ammo counter.
         /// </summary>
-        public PointF PrimaryAmmo => new PointF(PrimaryBackground.X + AmmoOffset.X, PrimaryBackground.Y + AmmoOffset.Y);
+        public Point PrimaryAmmo => new Point(PrimaryBackground.X + AmmoOffset.X, PrimaryBackground.Y + AmmoOffset.Y);
         /// <summary>
         /// The position of the secondary ammo counter.
         /// </summary>
-        public PointF SecondaryAmmo => new PointF(SecondaryBackground.X + AmmoOffset.X, SecondaryBackground.Y + AmmoOffset.Y);
+        public Point SecondaryAmmo => new Point(SecondaryBackground.X + AmmoOffset.X, SecondaryBackground.Y + AmmoOffset.Y);
         /// <summary>
         /// The position of the primary weapon background.
         /// </summary>
-        public PointF PrimaryWeapon => new PointF(PrimaryBackground.X + CommonSpacing.Width + SquaredBackground.Width, PrimaryBackground.Y);
+        public Point PrimaryWeapon => new Point(PrimaryBackground.X + CommonSpacing.Width + SquaredBackground.Width, PrimaryBackground.Y);
         /// <summary>
         /// The position of the secondary weapon background.
         /// </summary>
-        public PointF SecondaryWeapon => new PointF(SecondaryBackground.X + CommonSpacing.Width + SquaredBackground.Width, SecondaryBackground.Y);
+        public Point SecondaryWeapon => new Point(SecondaryBackground.X + CommonSpacing.Width + SquaredBackground.Width, SecondaryBackground.Y);
         
 
         /// <summary>
         /// Size for the dividers on the health bars.
         /// </summary>
-        public SizeF DividerSize => new SizeF((float)Raw["divider_size"][0], (float)Raw["divider_size"][1]);
+        public Size DividerSize => CreateSize("divider_size");
         /// <summary>
         /// Position of the health dividers.
         /// </summary>
-        public SizeF DividerPosition => new SizeF((float)Raw["divider_position"][0], (float)Raw["divider_position"][1]);
+        public Size DividerPosition => CreateSize("divider_position");
         /// <summary>
         /// Size for the squad health bars.
         /// </summary>
-        public SizeF SquadHealthSize => new SizeF((float)Raw["squad_health_size"][0], (float)Raw["squad_health_size"][1]);
+        public Size SquadHealthSize => CreateSize("squad_health_size");
         /// <summary>
         /// Position of the squad health bar.
         /// </summary>
-        public SizeF SquadHealthPos => new SizeF((float)Raw["squad_health_position"][0], (float)Raw["squad_health_position"][1]);
+        public Size SquadHealthPos => CreateSize("squad_health_position");
         /// <summary>
         /// Size of the player health bar.
         /// </summary>
-        public SizeF PlayerHealthSize => new SizeF((float)Raw["player_health_size"][0], (float)Raw["player_health_size"][1]);
+        public Size PlayerHealthSize => CreateSize("player_health_size");
         /// <summary>
         /// Position of the player health bar.
         /// </summary>
-        public SizeF PlayerHealthPos => new SizeF((float)Raw["player_health_position"][0], (float)Raw["player_health_position"][1]);
+        public Size PlayerHealthPos => CreateSize("player_health_position");
         
         /// <summary>
         /// Size for the health markers.
         /// </summary>
-        public SizeF DeadMarker => new SizeF((float)Raw["dead_marker"][0], (float)Raw["dead_marker"][1]);
+        public Size DeadMarker => CreateSize("dead_marker");
 
+        /// <summary>
+        /// The current screen resolution.
+        /// </summary>
+        private Size Resolution { get; set; }
         /// <summary>
         /// The RAW Configuration.
         /// </summary>
@@ -151,12 +155,14 @@ namespace GGO.Shared
         /// <summary>
         /// Loads up the configuration from "GGO.Shared.json"
         /// </summary>
-        public Configuration(string Location)
+        public Configuration(string Location, Size CurrentResolution)
         {
             // Read all of the text that is in the file
             string Content = File.ReadAllText(Location + "\\GGO.Shared.json");
             // Load it on the parser
             Raw = JObject.Parse(Content);
+            // And store our current resolution
+            Resolution = CurrentResolution;
         }
 
         /// <summary>
@@ -192,6 +198,15 @@ namespace GGO.Shared
             {
                 return Hash.ToString();
             }
+        }
+
+        /// <summary>
+        /// Creates a Size from a JSON array.
+        /// </summary>
+        /// <returns>The working Size.</returns>
+        private Size CreateSize(string ConfigOption)
+        {
+            return new Size((int)(Resolution.Width * (float)Raw[ConfigOption][0]), (int)(Resolution.Height * (float)Raw[ConfigOption][1]));
         }
     }
 }

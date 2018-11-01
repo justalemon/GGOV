@@ -24,14 +24,14 @@ namespace GGO.Shared
         /// <param name="Position">The position of the rectangle.</param>
         /// <param name="Sizes">The size of the rectangle.</param>
         /// <param name="Colour">The color of the rectangle.</param>
-        public abstract void Rectangle(PointF Position, SizeF Sizes, Color Colour);
+        public abstract void Rectangle(Point Position, Size Sizes, Color Colour);
         /// <summary>
         /// Draws an image.
         /// </summary>
         /// <param name="File">The file to draw.</param>
         /// <param name="Position">The on sceen position.</param>
         /// <param name="Sizes">The size of the image.</param>
-        public abstract void Image(string File, PointF Position, SizeF Sizes);
+        public abstract void Image(string File, Point Position, Size Sizes);
         /// <summary>
         /// Draws a text on screen.
         /// </summary>
@@ -40,14 +40,14 @@ namespace GGO.Shared
         /// <param name="Scale">The size of the text.</param>
         /// <param name="Font">The GTA font to use.</param>
         /// <param name="Center">If the text should be centered.</param>
-        public abstract void Text(string Text, PointF Position, float Scale, int Font = 0, bool Center = false);
+        public abstract void Text(string Text, Point Position, float Scale, int Font = 0, bool Center = false);
 
         /// <summary>
         /// Draws an icon with the respective background.
         /// </summary>
         /// <param name="File">The file to draw.</param>
         /// <param name="Position">The screen position.</param>
-        public void Icon(string File, PointF Position)
+        public void Icon(string File, Point Position)
         {
             // Draw the background
             Rectangle(Position, StoredConfig.SquaredBackground, Colors.Backgrounds);
@@ -68,17 +68,17 @@ namespace GGO.Shared
         public void PedInfo(bool Player, bool Squad, int Hash, int CurrentHealth, int MaxHealth, int Count = 0, string Name = "")
         {
             // Store the respective information for the player or squad
-            PointF InfoPosition = Squad ? StoredConfig.PlayerInformation : Calculations.GetSquadPosition(StoredConfig, Count, true);
-            SizeF InfoSize = Squad ? StoredConfig.PlayerSize : StoredConfig.SquadSize;
-            SizeF HealthPosition = Squad ? StoredConfig.PlayerHealthPos : StoredConfig.SquadHealthPos;
-            SizeF HealthSize = Calculations.GetHealthSize(StoredConfig, Squad, MaxHealth, CurrentHealth);
+            Point InfoPosition = Squad ? StoredConfig.PlayerInformation : Calculations.GetSquadPosition(StoredConfig, Count, true);
+            Size InfoSize = Squad ? StoredConfig.PlayerSize : StoredConfig.SquadSize;
+            Size HealthPosition = Squad ? StoredConfig.PlayerHealthPos : StoredConfig.SquadHealthPos;
+            Size HealthSize = Calculations.GetHealthSize(StoredConfig, Squad, MaxHealth, CurrentHealth);
             float TextSize = Squad ? 0.35f : 0.3f;
 
             // Draw the background rectangle
             Rectangle(InfoPosition, InfoSize, Colors.Backgrounds);
 
             // Draw the health dividers.
-            foreach (PointF Position in Calculations.GetDividerPositions(StoredConfig, Squad, Count))
+            foreach (Point Position in Calculations.GetDividerPositions(StoredConfig, Squad, Count))
             {
                 Rectangle(Position, StoredConfig.DividerSize, Colors.Dividers);
             }
@@ -101,9 +101,9 @@ namespace GGO.Shared
             bool Sidearm = Style == Checks.WeaponStyle.Sidearm;
 
             // Store the information for the primary or secondary weapon
-            PointF BackgroundLocation = Sidearm ? StoredConfig.SecondaryBackground : StoredConfig.PrimaryBackground;
-            PointF AmmoLocation = Sidearm ? StoredConfig.SecondaryAmmo : StoredConfig.PrimaryAmmo;
-            PointF WeaponLocation = Sidearm ? StoredConfig.SecondaryWeapon : StoredConfig.PrimaryWeapon;
+            Point BackgroundLocation = Sidearm ? StoredConfig.SecondaryBackground : StoredConfig.PrimaryBackground;
+            Point AmmoLocation = Sidearm ? StoredConfig.SecondaryAmmo : StoredConfig.PrimaryAmmo;
+            Point WeaponLocation = Sidearm ? StoredConfig.SecondaryWeapon : StoredConfig.PrimaryWeapon;
             string Name = Sidearm ? "Secondary" : "Primary";
 
             // Draw the background and ammo quantity
@@ -129,14 +129,13 @@ namespace GGO.Shared
         /// <param name="Position">The on-screen position of the ped health.</param>
         /// <param name="Distance">The distance from the player to the ped.</param>
         /// <param name="Hash">The ped hash (not the model hash).</param>
-        public void DeadMarker(PointF Position, float Distance, int Hash)
+        public void DeadMarker(Point Position, float Distance, int Hash)
         {
             // Calculate the marker size based on the distance between player and dead ped
-            SizeF MarkerSize = Calculations.GetMarkerSize(StoredConfig, Distance);
+            Size MarkerSize = Calculations.GetMarkerSize(StoredConfig, Distance);
 
             // Offset the marker by half width to center, and full height to put on top.
-            Position.X += -MarkerSize.Width / 2;
-            Position.Y += -MarkerSize.Height;
+            Position.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 
             // Finally, draw the marker on screen
             Image(Images.ResourceToPNG(Resources.DeadMarker, "DeadMarker" + Hash), Position, MarkerSize);
