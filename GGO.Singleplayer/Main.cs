@@ -15,7 +15,7 @@ namespace GGO.Singleplayer
         /// <summary>
         /// Our configuration parameters.
         /// </summary>
-        public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT));
+        public static Configuration Config = new Configuration("scripts");
         /// <summary>
         /// Class with our new cleaner functions.
         /// </summary>
@@ -100,8 +100,19 @@ namespace GGO.Singleplayer
                 {
                     // Get the coordinates for the head of the dead ped
                     Vector3 HeadCoord = NearbyPed.GetBoneCoord(Bone.SKEL_Head);
-                    // And draw the dead marker
-                    DrawFunctions.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), NearbyPed.GetHashCode());
+                    // Get the relative on screen coordinates for the ped
+                    OutputArgument X = new OutputArgument();
+                    OutputArgument Y = new OutputArgument();
+
+                    // _WORLD3D_TO_SCREEN2D is really GET_SCREEN_COORD_FROM_WORLD_COORD
+                    bool Result = Function.Call<bool>(Hash._WORLD3D_TO_SCREEN2D, HeadCoord.X, HeadCoord.Y, HeadCoord.Z, X, Y);
+
+                    // Finally, draw the dead marker if the Vector3 is visible on the current camera
+                    if (Result)
+                    {
+                        PointF Position = new PointF(X.GetResult<float>(), Y.GetResult<float>());
+                        DrawFunctions.DeadMarker(Position, Vector3.Distance(Game.Player.Character.Position, HeadCoord), NearbyPed.GetHashCode());
+                    }
                 }
             }
 
