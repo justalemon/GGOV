@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace GGO.Singleplayer
 {
-    public class Draw : Drawing
+    public class Draw : Toolkit
     {
         public Draw(Configuration Config) : base(Config) { }
 
