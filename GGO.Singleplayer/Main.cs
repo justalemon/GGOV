@@ -4,6 +4,7 @@ using GTA;
 using GTA.Math;
 using GTA.Native;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 
@@ -22,9 +23,28 @@ namespace GGO.Singleplayer
 
         public GGO()
         {
+            // Notify that we are starting the script
+            Logging.Info("===== GGOV for SHVDN is booting up... =====");
+
             // Add our Tick and Aborted events
             Tick += OnTick;
             Aborted += OnAbort;
+
+            // If the debug mode is enabled, print the value of the configuration values
+            if (Config.Debug)
+            {
+                Logging.CurrentLevel = Logging.Level.Debug;
+
+                Logging.Debug("Configuration Values:");
+
+                foreach (PropertyDescriptor Descriptor in TypeDescriptor.GetProperties(Config))
+                {
+                    Logging.Debug(Descriptor.Name + ": " + Descriptor.GetValue(Config).ToString());
+                }
+            }
+
+            // Notify that we are starting the script
+            Logging.Info("GGOV for SHVDN is up and running");
         }
 
         private void OnTick(object Sender, EventArgs Args)
