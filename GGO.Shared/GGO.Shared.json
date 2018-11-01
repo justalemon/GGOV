@@ -51,7 +51,7 @@
 	"player_health_position": [ 0.0045, 0.035 ],
 
 	// The size of the on-screen dead marker
-	"dead_marke": [ 0.2344, 0.2083 ],
+	"dead_marker": [ 0.2344, 0.2083 ],
 
 	// List of names being used on the squad section
 	// This does not have effect on FiveM!
