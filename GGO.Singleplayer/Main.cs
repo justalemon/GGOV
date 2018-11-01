@@ -30,16 +30,33 @@ namespace GGO.Singleplayer
             Tick += OnTick;
             Aborted += OnAbort;
 
-            // If the debug mode is enabled, print the value of the configuration values
             if (Config.Debug)
             {
+                // Set the logging level to debug
                 Logging.CurrentLevel = Logging.Level.Debug;
 
+                // Notify that the configuration values are coming
                 Logging.Debug("Configuration Values:");
 
+                // And start sending them
                 foreach (PropertyDescriptor Descriptor in TypeDescriptor.GetProperties(Config))
                 {
-                    Logging.Debug(Descriptor.Name + ": " + Descriptor.GetValue(Config).ToString());
+                    // Store the string representation of our option
+                    string ValueAsString = Descriptor.GetValue(Config).ToString();
+
+                    // If is a PointF. get the literall size of it
+                    if (Descriptor.GetValue(Config).GetType() == typeof(PointF))
+                    {
+                        ValueAsString +=  " - " + DrawFunctions.LiteralPoint((PointF)Descriptor.GetValue(Config)).ToString();
+                    }
+                    // The same for SizeF's
+                    else if (Descriptor.GetValue(Config).GetType() == typeof(SizeF))
+                    {
+                        ValueAsString += " - " + DrawFunctions.LiteralSize((SizeF)Descriptor.GetValue(Config)).ToString();
+                    }
+
+                    // Finally, log the value
+                    Logging.Debug(Descriptor.Name + ": " + ValueAsString);
                 }
             }
 
