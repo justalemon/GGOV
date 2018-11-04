@@ -107,6 +107,13 @@ namespace GGO.Singleplayer
             DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerPosition);
             DrawFunctions.PedInfo(true, true, Game.Player.Character.Model.Hash, PlayerHealth, PlayerMaxHealth, Name: Game.Player.Name);
 
+            // If the player is on a vehicle, also draw that information
+            if (Game.Player.Character.CurrentVehicle != null)
+            {
+                int VehicleHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character.CurrentVehicle);
+                DrawFunctions.VehicleInfo(VehicleHealth, 1000, Game.Player.Character.CurrentVehicle.FriendlyName);
+            }
+
             // Get the current weapon style
             Checks.WeaponStyle CurrentStyle = Checks.GetWeaponStyle((uint)Game.Player.Character.Weapons.Current.Group);
 

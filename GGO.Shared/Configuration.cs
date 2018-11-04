@@ -111,7 +111,14 @@ namespace GGO.Shared
         /// The position of the secondary weapon background.
         /// </summary>
         public Point SecondaryWeapon => new Point(SecondaryBackground.X + CommonSpacing.Width + SquaredBackground.Width, SecondaryBackground.Y);
-        
+        /// <summary>
+        /// The position of the vehicle information.
+        /// </summary>
+        public Point VehicleIcon => new Point(PlayerPosition.X, PlayerPosition.Y - SquaredBackground.Width - CommonSpacing.Width);
+        /// <summary>
+        /// The position of the vehicle information.
+        /// </summary>
+        public Point VehicleInformation => new Point(VehicleIcon.X + SquaredBackground.Width + CommonSpacing.Width, VehicleIcon.Y);
 
         /// <summary>
         /// Size for the dividers on the health bars.

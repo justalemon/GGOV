@@ -78,7 +78,7 @@ namespace GGO.Shared
             Rectangle(InfoPosition, InfoSize, Colors.Backgrounds);
 
             // Draw the health dividers.
-            foreach (Point Position in Calculations.GetDividerPositions(StoredConfig, Squad, Count))
+            foreach (Point Position in Calculations.GetDividerPositions(StoredConfig, InfoPosition, Squad, Count))
             {
                 Rectangle(Position, StoredConfig.DividerSize, Colors.Dividers);
             }
@@ -139,6 +139,30 @@ namespace GGO.Shared
 
             // Finally, draw the marker on screen
             Image(Images.ResourceToPNG(Resources.DeadMarker, "DeadMarker" + Hash), Position, MarkerSize);
+        }
+
+        public void VehicleInfo(float Health, float Max, string Name)
+        {
+            // Draw the vehicle icon
+            Icon(Images.ResourceToPNG(Resources.ImageCharacter, "Vehicle"), StoredConfig.VehicleIcon);
+
+            // And the information background
+            Rectangle(StoredConfig.VehicleInformation, StoredConfig.PlayerSize, Colors.Backgrounds);
+
+            // Store the size of our health bar
+            Size HealthSize = Calculations.GetHealthSize(StoredConfig, true, Max, Health);
+
+            // Draw the vehicle health
+            Rectangle(StoredConfig.VehicleInformation + StoredConfig.PlayerHealthPos, HealthSize, Colors.GetHealthColor(Health, Max));
+
+            // Draw the health dividers.
+            foreach (Point Position in Calculations.GetDividerPositions(StoredConfig, StoredConfig.VehicleInformation, true))
+            {
+                Rectangle(Position, StoredConfig.DividerSize, Colors.Dividers);
+            }
+
+            // Draw the vehicle name
+            Text(Name, StoredConfig.VehicleInformation + StoredConfig.NamePosition, .325f);
         }
     }
 }
