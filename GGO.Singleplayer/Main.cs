@@ -30,11 +30,12 @@ namespace GGO.Singleplayer
             Tick += OnTick;
             Aborted += OnAbort;
 
-            // If the debug mode is enabled, print the value of the configuration values
+            // If the debug mode is enabled
             if (Config.Debug)
             {
+                // Set the logging level to debug
                 Logging.CurrentLevel = Logging.Level.Debug;
-
+                // And print the configuration values
                 Logging.Debug("Configuration Values:");
 
                 foreach (PropertyDescriptor Descriptor in TypeDescriptor.GetProperties(Config))
@@ -43,13 +44,13 @@ namespace GGO.Singleplayer
                 }
             }
 
-            // Notify that we are starting the script
+            // Notify that the script has started
             Logging.Info("GGOV for SHVDN is up and running");
         }
 
         private void OnTick(object Sender, EventArgs Args)
         {
-            // Do not draw the UI elements if the game is loading, paused, player is dead or it cannot be controlled
+            // Don't draw the UI if the game is loading, paused, player is dead or it cannot be controlled
             if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive || !Game.Player.CanControlCharacter)
             {
                 return;
@@ -59,50 +60,43 @@ namespace GGO.Singleplayer
             if (Config.DisableHud)
             {
                 UI.HideHudComponentThisFrame(HudComponent.WeaponIcon);
-
                 UI.HideHudComponentThisFrame(HudComponent.AreaName);
                 UI.HideHudComponentThisFrame(HudComponent.StreetName);
                 UI.HideHudComponentThisFrame(HudComponent.VehicleName);
-
                 UI.HideHudComponentThisFrame(HudComponent.HelpText);
             }
 
+            // Get all of the peds and store separate the squad members from the dead ones
+            Ped[] NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
+            Ped[] FriendlyPeds = NearbyPeds.Where(P => Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, Game.Player.Character, P) <= 2 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, P)).ToArray();
+            Ped[] DeadPeds = NearbyPeds.Where(P => P.IsDead && P.IsOnScreen).ToArray();
+
             // Draw the squad information on the top left
-            // First, create a list to start counting
-            int Count = 0;
-
-            // Then, Run over the peds and draw them on the screen (up to 6 of them, including the player)
-            // NOTE: We order them by ped hash because the players have lower hash codes than the rest of entities
-            foreach (Ped NearbyPed in World.GetNearbyPeds(Game.Player.Character.Position, 50f).OrderBy(P => P.GetHashCode()))
+            foreach (Ped SquadMember in FriendlyPeds)
             {
-                // Check that the ped is a mission entity and is friendly
-                if (Count <= 6 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, NearbyPed) &&
-                    Checks.IsFriendly(Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, Game.Player.Character, NearbyPed)))
-                {
-                    // Get the ped current and max health
-                    int CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, NearbyPed) - 100;
-                    int MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, NearbyPed) - 100;
+                // Get the number of the ped
+                int Number = Array.IndexOf(FriendlyPeds, SquadMember);
 
-                    // Select the correct image and name for the file
-                    string ImageName = NearbyPed.IsAlive ? "SquadAlive" : "SquadDead";
-                    Bitmap ImageType = NearbyPed.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
+                // Get the current and max health
+                int CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, SquadMember) - 100;
+                int MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, SquadMember) - 100;
 
-                    // Draw the icon and the ped info
-                    DrawFunctions.Icon(Images.ResourceToPNG(ImageType, ImageName + Count), Calculations.GetSquadPosition(Config, Count));
-                    DrawFunctions.PedInfo(NearbyPed.IsPlayer, false, NearbyPed.Model.Hash, CurrentHealth, MaxHealth, Count, Game.Player.Name);
+                // Select the correct image and name for the file
+                string ImageName = SquadMember.IsAlive ? "SquadAlive" : "SquadDead";
+                Bitmap ImageType = SquadMember.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
 
-                    // To end this up, increase the count of peds "rendered"
-                    Count++;
-                }
+                // Draw the icon and the ped info
+                DrawFunctions.Icon(Images.ResourceToPNG(ImageType, ImageName + Number), Calculations.GetSquadPosition(Config, Number));
+                DrawFunctions.PedInfo(SquadMember.IsPlayer, false, SquadMember.Model.Hash, CurrentHealth, MaxHealth, Number, Game.Player.Name);
+            }
 
-                // Check for on screen dead Peds to display dead markers
-                if (NearbyPed.IsDead && NearbyPed.IsOnScreen)
-                {
-                    // Get the coordinates for the head of the dead ped
-                    Vector3 HeadCoord = NearbyPed.GetBoneCoord(Bone.SKEL_Head);
-                    // And draw the dead marker
-                    DrawFunctions.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), NearbyPed.GetHashCode());
-                }
+            // Draw the dead ped markers over their heads
+            foreach (Ped DeadPed in DeadPeds)
+            {
+                // Get the coordinates for the head
+                Vector3 HeadCoord = DeadPed.GetBoneCoord(Bone.SKEL_Head);
+                // And draw the dead marker
+                DrawFunctions.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), DeadPed.GetHashCode());
             }
 
             // Get the player max and current health
@@ -117,6 +111,7 @@ namespace GGO.Singleplayer
             Checks.WeaponStyle CurrentStyle = Checks.GetWeaponStyle((uint)Game.Player.Character.Weapons.Current.Group);
 
             // And draw the weapon information for both the primary and secondary
+            // If they are not available, draw dummies instead
             if (CurrentStyle == Checks.WeaponStyle.Main || CurrentStyle == Checks.WeaponStyle.Double)
             {
                 DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
@@ -127,7 +122,6 @@ namespace GGO.Singleplayer
                 DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
                 DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
             }
-
             if (CurrentStyle == Checks.WeaponStyle.Sidearm || CurrentStyle == Checks.WeaponStyle.Double)
             {
                 DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
