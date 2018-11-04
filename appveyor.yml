@@ -1,10 +1,6 @@
 version: "1.0.0.{build}"
 image: Visual Studio 2017
 
-environment:
-  FIVEM_CLIENT: "819-c026422393b41af81102dc3c95e5e4ebf3793477"
-  FIVEM_SERVER: "790-3909d11205eb157fb35625f312f1b7779352d70a"
-
 assembly_info:
   patch: true
   file: Properties\AssemblyInfo.cs
@@ -13,9 +9,6 @@ assembly_info:
 
 init:
   - ps: if ($env:APPVEYOR_REPO_TAG -eq "true") { Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))" }
-
-install:
-  - ps: Invoke-WebRequest -useb "https://raw.githubusercontent.com/justalemon/FiveM-CI/master/fivem.ps1" | iex
 
 before_build:
   - ps: Get-ChildItem -Filter *.sln -Name | Foreach-Object { nuget restore $_  }
