@@ -30,11 +30,12 @@ namespace GGO.Singleplayer
             Tick += OnTick;
             Aborted += OnAbort;
 
-            // If the debug mode is enabled, print the value of the configuration values
+            // If the debug mode is enabled
             if (Config.Debug)
             {
+                // Set the logging level to debug
                 Logging.CurrentLevel = Logging.Level.Debug;
-
+                // And print the configuration values
                 Logging.Debug("Configuration Values:");
 
                 foreach (PropertyDescriptor Descriptor in TypeDescriptor.GetProperties(Config))
@@ -43,13 +44,13 @@ namespace GGO.Singleplayer
                 }
             }
 
-            // Notify that we are starting the script
+            // Notify that the script has started
             Logging.Info("GGOV for SHVDN is up and running");
         }
 
         private void OnTick(object Sender, EventArgs Args)
         {
-            // Do not draw the UI elements if the game is loading, paused, player is dead or it cannot be controlled
+            // Don't draw the UI if the game is loading, paused, player is dead or it cannot be controlled
             if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive || !Game.Player.CanControlCharacter)
             {
                 return;
@@ -59,11 +60,9 @@ namespace GGO.Singleplayer
             if (Config.DisableHud)
             {
                 UI.HideHudComponentThisFrame(HudComponent.WeaponIcon);
-
                 UI.HideHudComponentThisFrame(HudComponent.AreaName);
                 UI.HideHudComponentThisFrame(HudComponent.StreetName);
                 UI.HideHudComponentThisFrame(HudComponent.VehicleName);
-
                 UI.HideHudComponentThisFrame(HudComponent.HelpText);
             }
 
@@ -117,6 +116,7 @@ namespace GGO.Singleplayer
             Checks.WeaponStyle CurrentStyle = Checks.GetWeaponStyle((uint)Game.Player.Character.Weapons.Current.Group);
 
             // And draw the weapon information for both the primary and secondary
+            // If they are not available, draw dummies instead
             if (CurrentStyle == Checks.WeaponStyle.Main || CurrentStyle == Checks.WeaponStyle.Double)
             {
                 DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
@@ -127,7 +127,6 @@ namespace GGO.Singleplayer
                 DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
                 DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
             }
-
             if (CurrentStyle == Checks.WeaponStyle.Sidearm || CurrentStyle == Checks.WeaponStyle.Double)
             {
                 DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
