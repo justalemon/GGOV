@@ -102,7 +102,7 @@ namespace GGO.Singleplayer
             Toolkit.EntityInfo(Game.Player.Character);
 
             // If the player is on a vehicle, also draw that information
-            if (Game.Player.Character.CurrentVehicle != null)
+            if (Game.Player.Character.CurrentVehicle != null && Config.VehicleInfo)
             {
                 Toolkit.Icon(Resources.IconVehicle, nameof(Resources.IconVehicle), Config.VehicleIcon);
                 Toolkit.EntityInfo(Game.Player.Character.CurrentVehicle);

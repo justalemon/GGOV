@@ -23,6 +23,10 @@ namespace GGO.Shared
         /// If the dead markers should be shown.
         /// </summary>
         public bool DeadMarkers => (bool)Raw["dead_markers"];
+        /// <summary>
+        /// If the vehicle information should be shown.
+        /// </summary>
+        public bool VehicleInfo => (bool)Raw["vehicle_info"];
 
 
         /// <summary>

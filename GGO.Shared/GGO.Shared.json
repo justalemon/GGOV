@@ -12,6 +12,8 @@
 	"disable_hud": true,
 	// If the dead markers should be shown.
 	"dead_markers": true,
+	// If the vehicle information should be shown.
+	"vehicle_info": true,
 
 	// The common space between the screen elements
 	"common_spacing": [ 0.0055, 0.01 ],
