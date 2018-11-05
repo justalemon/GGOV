@@ -113,7 +113,7 @@ namespace GGO.Singleplayer
             if (CurrentStyle == Checks.WeaponStyle.Main || CurrentStyle == Checks.WeaponStyle.Double)
             {
                 Toolkit.Icon(Resources.ImageWeapon, nameof(Resources.ImageWeapon), Config.PrimaryIcon);
-                Toolkit.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
+                Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
             {
@@ -123,7 +123,7 @@ namespace GGO.Singleplayer
             if (CurrentStyle == Checks.WeaponStyle.Sidearm || CurrentStyle == Checks.WeaponStyle.Double)
             {
                 Toolkit.Icon(Resources.ImageWeapon, nameof(Resources.ImageWeapon), Config.SecondaryIcon);
-                Toolkit.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
+                Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
             {

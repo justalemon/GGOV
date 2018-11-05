@@ -1,4 +1,4 @@
-using GGO.Shared;
+﻿using GGO.Shared;
 using GGO.Shared.Properties;
 using GTA;
 using GTA.Native;
@@ -160,28 +160,29 @@ namespace GGO.Singleplayer
         /// <summary>
         /// Draws the player weapon information.
         /// </summary>
+        /// <param name="Weapon">The player weapon.</param>
         /// <param name="Style">The weapon carry style.</param>
-        /// <param name="Ammo">The ammo on the current magazine.</param>
-        /// <param name="Weapon">The readable name of the weapon.</param>
-        public static void WeaponInfo(Checks.WeaponStyle Style, int Ammo, string Weapon)
+        public static void WeaponInfo(Weapon PlayerWeapon, Checks.WeaponStyle Style)
         {
             // Check if the player is using a secondary weapon
             bool Sidearm = Style == Checks.WeaponStyle.Sidearm;
+
+            // Store the weapon name
+            string Name = Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash).Replace("WTT_", string.Empty);
 
             // Store the information for the primary or secondary weapon
             Point BackgroundLocation = Sidearm ? GGO.Config.SecondaryBackground : GGO.Config.PrimaryBackground;
             Point AmmoLocation = Sidearm ? GGO.Config.SecondaryAmmo : GGO.Config.PrimaryAmmo;
             Point WeaponLocation = Sidearm ? GGO.Config.SecondaryWeapon : GGO.Config.PrimaryWeapon;
-            string Name = Sidearm ? "Secondary" : "Primary";
 
             // Draw the background and ammo quantity
             UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, GGO.Config.SquaredBackground, Colors.Backgrounds);
             AmmoBackground.Draw();
-            UIText Text = new UIText(Ammo.ToString(), AmmoLocation, .6f, Color.White, (GTA.Font)2, true);
+            UIText Text = new UIText(PlayerWeapon.AmmoInClip.ToString(), AmmoLocation, .6f, Color.White, (GTA.Font)2, true);
 
             // Get the weapon bitmap
             // If is not there, return
-            Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Gun" + Weapon);
+            Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
             if (WeaponBitmap == null)
             {
                 return;
@@ -190,7 +191,7 @@ namespace GGO.Singleplayer
             // Finally, draw the weapon image with the respective background
             UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, GGO.Config.WeaponBackground, Colors.Backgrounds);
             WeaponBackground.Draw();
-            Image(WeaponBitmap, "Gun" + Weapon, WeaponLocation + GGO.Config.IconPosition, GGO.Config.WeaponSize);
+            Image(WeaponBitmap, "Weapon" + Name, WeaponLocation + GGO.Config.IconPosition, GGO.Config.WeaponSize);
         }
 
         /// <summary>

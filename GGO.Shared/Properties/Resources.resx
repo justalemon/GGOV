@@ -130,172 +130,172 @@
   <data name="NoWeapon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NoWeapon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_RIFLE_ADV" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_RIFLE_ADV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponRIFLE_ADV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponRIFLE_ADV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_PIST_AP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_PIST_AP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponPIST_AP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponPIST_AP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_RIFLE_ASL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_RIFLE_ASL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponRIFLE_ASL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponRIFLE_ASL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SG_ASL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SG_ASL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSG_ASL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSG_ASL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SMG_ASL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SMG_ASL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSMG_ASL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSMG_ASL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SG_BLP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SG_BLP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSG_BLP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSG_BLP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_RIFLE_CBN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_RIFLE_CBN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponRIFLE_CBN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponRIFLE_CBN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_MG_CBT" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_MG_CBT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponMG_CBT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponMG_CBT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_COMBATPDW" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_COMBATPDW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponCOMBATPDW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponCOMBATPDW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_PIST_CBT" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_PIST_CBT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponPIST_CBT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponPIST_CBT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_CMPRIFLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_CMPRIFLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponCMPRIFLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponCMPRIFLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_DBSHGN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_DBSHGN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponDBSHGN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponDBSHGN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_FLAREGUN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_FLAREGUN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponFLAREGUN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponFLAREGUN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SNIP_HVY" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SNIP_HVY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSNIP_HVY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSNIP_HVY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_MKPISTOL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_MKPISTOL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponMKPISTOL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponMKPISTOL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_MG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_MG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SMG_MCR" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SMG_MCR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSMG_MCR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSMG_MCR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_MINIGUN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_MINIGUN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponMINIGUN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponMINIGUN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_PIST" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_PIST.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponPIST" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponPIST.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_PIST_50" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_PIST_50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponPIST_50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponPIST_50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SG_PMP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SG_PMP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSG_PMP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSG_PMP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_REVOLVER" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_REVOLVER.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponREVOLVER" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponREVOLVER.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SG_SOF" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SG_SOF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSG_SOF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSG_SOF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SNIP_RIF" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SNIP_RIF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSNIP_RIF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSNIP_RIF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DeadMarker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DeadMarker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_AUTOSHGN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_AUTOSHGN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponAUTOSHGN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponAUTOSHGN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_BULLRIFLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_BULLRIFLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponBULLRIFLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponBULLRIFLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_BULLRIFLE2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_BULLRIFLE2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponBULLRIFLE2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponBULLRIFLE2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_CMPGL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_CMPGL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponCMPGL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponCMPGL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_FWRKLNCHR" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_FWRKLNCHR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponFWRKLNCHR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponFWRKLNCHR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_GL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_GL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponGL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponGL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_GUSENBERG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_GUSENBERG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponGUSENBERG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponGUSENBERG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_HMKRIFLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_HMKRIFLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponHMKRIFLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponHMKRIFLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_HOMLNCH" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_HOMLNCH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponHOMLNCH" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponHOMLNCH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_HVYSHOT" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_HVYSHOT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponHVYSHOT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponHVYSHOT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_MCHPIST" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_MCHPIST.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponMCHPIST" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponMCHPIST.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_MG_CBT2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_MG_CBT2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponMG_CBT2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponMG_CBT2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_MINISMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_MINISMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponMINISMG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponMINISMG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_MKRIFLE2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_MKRIFLE2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponMKRIFLE2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponMKRIFLE2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_MUSKET" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_MUSKET.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponMUSKET" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponMUSKET.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_PIST2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_PIST2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponPIST2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponPIST2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_RAILGUN" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_RAILGUN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponRAILGUN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponRAILGUN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_REVOLVER2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_REVOLVER2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponREVOLVER2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponREVOLVER2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_REV_DA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_REV_DA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponREV_DA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponREV_DA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_RIFLE_ASL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_RIFLE_ASL2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponRIFLE_ASL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponRIFLE_ASL2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_RIFLE_CBN2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_RIFLE_CBN2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponRIFLE_CBN2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponRIFLE_CBN2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_RPG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_RPG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponRPG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponRPG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SG_PMP2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SG_PMP2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSG_PMP2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSG_PMP2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SMG2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SMG2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSMG2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSMG2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SNIP_HVY2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SNIP_HVY2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSNIP_HVY2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSNIP_HVY2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SNSPISTOL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SNSPISTOL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSNSPISTOL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSNSPISTOL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SNSPISTOL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SNSPISTOL2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSNSPISTOL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSNSPISTOL2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SPCARBINE" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SPCARBINE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSPCARBINE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSPCARBINE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_SPCARBINE2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_SPCARBINE2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponSPCARBINE2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponSPCARBINE2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GunWTT_VPISTOL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GunWTT_VPISTOL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="WeaponVPISTOL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WeaponVPISTOL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
