@@ -69,7 +69,7 @@ namespace GGO.Singleplayer
             UIRectangle Background = new UIRectangle(Position, GGO.Config.SquaredBackground, Colors.Backgrounds);
             Background.Draw();
             // And the image over it
-            Image(Original, Filename, Position, GGO.Config.IconSize);
+            Image(Original, Filename, Position + GGO.Config.IconPosition, GGO.Config.IconSize);
         }
 
         /// <summary>
