@@ -1,26 +1,75 @@
-﻿using GGO.Shared;
+using GGO.Shared;
 using GGO.Shared.Properties;
 using GTA;
 using GTA.Native;
 using System;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace GGO.Singleplayer
 {
     public static class Toolkit
     {
         /// <summary>
+        /// The indexes of the images.
+        /// </summary>
+        private static int Index = 0;
+        
+        /// <summary>
+        /// Draws an image based on a Bitmap.
+        /// </summary>
+        /// <param name="Resource">The Bitmap image to draw.</param>
+        /// <param name="Position">Where the image should be drawn.</param>
+        /// <param name="Sizes">The size of the image.</param>
+        public static void Image(Bitmap Resource, string Filename, Point Position, Size Sizes)
+        {
+            // This is going to be our image location
+            string OutputFile = Path.Combine(Path.GetTempPath(), "GGO", Filename + ".png");
+
+            // If the file already exists, return it and don't waste resources
+            if (!File.Exists(OutputFile))
+            {
+                // If our %TEMP%\GGO folder does not exist, create it
+                if (!Directory.Exists(Path.GetDirectoryName(OutputFile)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(OutputFile));
+                }
+
+                // Create a memory stream
+                MemoryStream ImageStream = new MemoryStream();
+                // Dump the image into it
+                Resource.Save(ImageStream, ImageFormat.Png);
+                // And close the stream
+                ImageStream.Close();
+                // Finally, write the stream into the disc
+                File.WriteAllBytes(OutputFile, ImageStream.ToArray());
+            }
+
+            UI.DrawTexture(OutputFile, Index, 0, 200, Position, Sizes);
+            Index++;
+        }
+
+        /// <summary>
+        /// Cleans up the existing index list.
+        /// </summary>
+        public static void ResetIndex()
+        {
+            Index = 0;
+        }
+
+        /// <summary>
         /// Draws an icon with the respective background.
         /// </summary>
         /// <param name="File">The file to draw.</param>
         /// <param name="Position">The on-screen position.</param>
-        public static void Icon(string File, Point Position)
+        public static void Icon(Bitmap Original, string Filename, Point Position)
         {
             // Draw the background
             UIRectangle Background = new UIRectangle(Position, GGO.Config.SquaredBackground, Colors.Backgrounds);
             Background.Draw();
             // And the image over it
-            UI.DrawTexture(File, 0, 0, 100, Position, GGO.Config.IconSize);
+            Image(Original, Filename, Position, GGO.Config.IconSize);
         }
 
         /// <summary>
@@ -132,7 +181,7 @@ namespace GGO.Singleplayer
 
             // Get the weapon bitmap
             // If is not there, return
-            Bitmap WeaponBitmap = Images.GetWeaponImages(Weapon);
+            Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Gun" + Weapon);
             if (WeaponBitmap == null)
             {
                 return;
@@ -141,7 +190,7 @@ namespace GGO.Singleplayer
             // Finally, draw the weapon image with the respective background
             UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, GGO.Config.WeaponBackground, Colors.Backgrounds);
             WeaponBackground.Draw();
-            UI.DrawTexture(Images.ResourceToPNG(WeaponBitmap, "Gun" + Weapon + Name), 0, 0, 100, WeaponLocation + GGO.Config.IconPosition, GGO.Config.WeaponSize);
+            Image(WeaponBitmap, "Gun" + Weapon, WeaponLocation + GGO.Config.IconPosition, GGO.Config.WeaponSize);
         }
 
         /// <summary>
@@ -159,7 +208,7 @@ namespace GGO.Singleplayer
             Position.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 
             // Finally, draw the marker on screen
-            UI.DrawTexture(Images.ResourceToPNG(Resources.DeadMarker, "DeadMarker" + Hash), 0, 0, 100, Position, MarkerSize);
+            Image(Resources.DeadMarker, nameof(Resources.DeadMarker), Position, MarkerSize);
         }
     }
 }

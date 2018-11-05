@@ -52,6 +52,9 @@ namespace GGO.Singleplayer
                 return;
             }
 
+            // Reset the index of the images
+            Toolkit.ResetIndex();
+
             // Disable the original game HUD and radar if is requested
             if (Config.DisableHud)
             {
@@ -74,11 +77,11 @@ namespace GGO.Singleplayer
                 int Number = Array.IndexOf(FriendlyPeds, SquadMember);
 
                 // Select the correct image and name for the file
-                string ImageName = SquadMember.IsAlive ? "SquadAlive" : "SquadDead";
                 Bitmap ImageType = SquadMember.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
+                string ImageName = SquadMember.IsAlive ? nameof(Resources.ImageCharacter) : nameof(Resources.ImageDead);
 
                 // Draw the icon and the ped info
-                Toolkit.Icon(Images.ResourceToPNG(ImageType, ImageName + Number), Calculations.GetSquadPosition(Config, Number));
+                Toolkit.Icon(ImageType, ImageName, Calculations.GetSquadPosition(Config, Number));
                 Toolkit.EntityInfo(SquadMember, true, Number);
             }
 
@@ -92,13 +95,13 @@ namespace GGO.Singleplayer
             }
 
             // Then, start by drawing the player info
-            Toolkit.Icon(Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerPosition);
+            Toolkit.Icon(Resources.ImageCharacter, nameof(Resources.ImageCharacter), Config.PlayerPosition);
             Toolkit.EntityInfo(Game.Player.Character);
 
             // If the player is on a vehicle, also draw that information
             if (Game.Player.Character.CurrentVehicle != null)
             {
-                Toolkit.Icon(Images.ResourceToPNG(Resources.ImageCharacter, "IconVehicle"), Config.VehicleIcon);
+                Toolkit.Icon(Resources.ImageCharacter, nameof(Resources.ImageCharacter), Config.VehicleIcon);
                 Toolkit.EntityInfo(Game.Player.Character.CurrentVehicle);
             }
 
@@ -109,23 +112,23 @@ namespace GGO.Singleplayer
             // If they are not available, draw dummies instead
             if (CurrentStyle == Checks.WeaponStyle.Main || CurrentStyle == Checks.WeaponStyle.Double)
             {
-                Toolkit.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
+                Toolkit.Icon(Resources.ImageWeapon, nameof(Resources.ImageWeapon), Config.PrimaryIcon);
                 Toolkit.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
             }
             else
             {
-                Toolkit.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
-                Toolkit.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
+                Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.PrimaryIcon);
+                Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.PrimaryBackground);
             }
             if (CurrentStyle == Checks.WeaponStyle.Sidearm || CurrentStyle == Checks.WeaponStyle.Double)
             {
-                Toolkit.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
+                Toolkit.Icon(Resources.ImageWeapon, nameof(Resources.ImageWeapon), Config.SecondaryIcon);
                 Toolkit.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
             }
             else
             {
-                Toolkit.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummySecondary"), Config.SecondaryIcon);
-                Toolkit.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoSecondary"), Config.SecondaryBackground);
+                Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.SecondaryIcon);
+                Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.SecondaryBackground);
             }
         }
 
