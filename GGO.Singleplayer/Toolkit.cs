@@ -23,6 +23,13 @@ namespace GGO.Singleplayer
             UI.DrawTexture(File, 0, 0, 100, Position, GGO.Config.IconSize);
         }
 
+        /// <summary>
+        /// Draws the information of a Game Entity.
+        /// This can be a Ped or a Vehicle.
+        /// </summary>
+        /// <param name="GameEntity">The game entity.</param>
+        /// <param name="Small">If a small information box should be drawn.</param>
+        /// <param name="Count">If drawing the small boxes, the number of it.</param>
         public static void EntityInfo(object GameEntity, bool Small = false, int Count = 0)
         {
             // Store general usage information
