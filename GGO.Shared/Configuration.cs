@@ -19,6 +19,10 @@ namespace GGO.Shared
         /// If the default Radar and Hud should be disabled.
         /// </summary>
         public bool DisableHud => (bool)Raw["disable_hud"];
+        /// <summary>
+        /// If the dead markers should be shown.
+        /// </summary>
+        public bool DeadMarkers => (bool)Raw["dead_markers"];
 
 
         /// <summary>

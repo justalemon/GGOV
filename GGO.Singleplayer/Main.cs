@@ -65,10 +65,9 @@ namespace GGO.Singleplayer
                 UI.HideHudComponentThisFrame(HudComponent.HelpText);
             }
 
-            // Get all of the peds and store separate the squad members from the dead ones
+            // Get all of the peds and store separate the squad members
             Ped[] NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
             Ped[] FriendlyPeds = NearbyPeds.Where(P => Function.Call<int>(Hash.GET_RELATIONSHIP_BETWEEN_PEDS, Game.Player.Character, P) <= 2 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, P)).ToArray();
-            Ped[] DeadPeds = NearbyPeds.Where(P => P.IsDead && P.IsOnScreen).ToArray();
 
             // Draw the squad information on the top left
             foreach (Ped SquadMember in FriendlyPeds)
@@ -85,13 +84,17 @@ namespace GGO.Singleplayer
                 Toolkit.EntityInfo(SquadMember, true, Number);
             }
 
-            // Draw the dead ped markers over their heads
-            foreach (Ped DeadPed in DeadPeds)
+            // Draw the dead ped markers over their heads, if the user wants to
+            if (Config.DeadMarkers)
             {
-                // Get the coordinates for the head
-                Vector3 HeadCoord = DeadPed.GetBoneCoord(Bone.SKEL_Head);
-                // And draw the dead marker
-                Toolkit.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), DeadPed.GetHashCode());
+                // Iterate over the dead peds
+                foreach (Ped DeadPed in NearbyPeds.Where(P => P.IsDead && P.IsOnScreen).ToArray())
+                {
+                    // Get the coordinates for the head
+                    Vector3 HeadCoord = DeadPed.GetBoneCoord(Bone.SKEL_Head);
+                    // And draw the dead marker
+                    Toolkit.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), DeadPed.GetHashCode());
+                }
             }
 
             // Then, start by drawing the player info
