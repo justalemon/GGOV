@@ -157,7 +157,7 @@ namespace GGO.Shared
         /// <summary>
         /// The RAW Configuration.
         /// </summary>
-        private JObject Raw { get; set; }
+        public JObject Raw { get; set; }
 
         /// <summary>
         /// Loads up the configuration from "GGO.Shared.json"
@@ -170,41 +170,6 @@ namespace GGO.Shared
             Raw = JObject.Parse(Content);
             // And store our current resolution
             Resolution = CurrentResolution;
-        }
-
-        /// <summary>
-        /// Gets the name for the specified ped hash.
-        /// </summary>
-        /// <param name="Player">If the name is for the player.</param>
-        /// <param name="Hash">The hash for the ped model.</param>
-        /// <param name="DefaultName">The default name to be used.</param>
-        /// <returns>The ped name.</returns>
-        public string GetName(bool Player, int Hash, string DefaultName = "")
-        {
-            // If the ped is the player and the custom name has not been changed
-            // Return the Social Club username
-            if (Name == "default" && Player)
-            {
-                return DefaultName;
-            }
-            // If the ped is the player and a custom name has been added
-            // Return that custom name
-            else if (Player)
-            {
-                return Name;
-            }
-            // If is not the player but there is a custom name available
-            // Return that ped name
-            else if (Raw["names"][Hash.ToString()] != null)
-            {
-                return (string)Raw["names"][Hash.ToString()];
-            }
-            // If none of the previous ones work
-            // Return the hash as a string
-            else
-            {
-                return Hash.ToString();
-            }
         }
 
         /// <summary>

@@ -16,10 +16,6 @@ namespace GGO.Singleplayer
         /// Our configuration parameters.
         /// </summary>
         public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT));
-        /// <summary>
-        /// Class with our new cleaner functions.
-        /// </summary>
-        public static Draw DrawFunctions = new Draw(Config);
 
         public GGO()
         {
@@ -77,17 +73,13 @@ namespace GGO.Singleplayer
                 // Get the number of the ped
                 int Number = Array.IndexOf(FriendlyPeds, SquadMember);
 
-                // Get the current and max health
-                int CurrentHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, SquadMember) - 100;
-                int MaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, SquadMember) - 100;
-
                 // Select the correct image and name for the file
                 string ImageName = SquadMember.IsAlive ? "SquadAlive" : "SquadDead";
                 Bitmap ImageType = SquadMember.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
 
                 // Draw the icon and the ped info
-                DrawFunctions.Icon(Images.ResourceToPNG(ImageType, ImageName + Number), Calculations.GetSquadPosition(Config, Number));
-                DrawFunctions.PedInfo(SquadMember.IsPlayer, false, SquadMember.Model.Hash, CurrentHealth, MaxHealth, Number, Game.Player.Name);
+                Toolkit.Icon(Images.ResourceToPNG(ImageType, ImageName + Number), Calculations.GetSquadPosition(Config, Number));
+                Toolkit.EntityInfo(SquadMember, true, Number);
             }
 
             // Draw the dead ped markers over their heads
@@ -96,22 +88,18 @@ namespace GGO.Singleplayer
                 // Get the coordinates for the head
                 Vector3 HeadCoord = DeadPed.GetBoneCoord(Bone.SKEL_Head);
                 // And draw the dead marker
-                DrawFunctions.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), DeadPed.GetHashCode());
+                Toolkit.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), DeadPed.GetHashCode());
             }
 
-            // Get the player max and current health
-            int PlayerHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character) - 100;
-            int PlayerMaxHealth = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;
-
             // Then, start by drawing the player info
-            DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerPosition);
-            DrawFunctions.PedInfo(true, true, Game.Player.Character.Model.Hash, PlayerHealth, PlayerMaxHealth, Name: Game.Player.Name);
+            Toolkit.Icon(Images.ResourceToPNG(Resources.ImageCharacter, "IconPlayer"), Config.PlayerPosition);
+            Toolkit.EntityInfo(Game.Player.Character);
 
             // If the player is on a vehicle, also draw that information
             if (Game.Player.Character.CurrentVehicle != null)
             {
-                int VehicleHealth = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character.CurrentVehicle);
-                DrawFunctions.VehicleInfo(VehicleHealth, 1000, Game.Player.Character.CurrentVehicle.FriendlyName);
+                Toolkit.Icon(Images.ResourceToPNG(Resources.ImageCharacter, "IconVehicle"), Config.VehicleIcon);
+                Toolkit.EntityInfo(Game.Player.Character.CurrentVehicle);
             }
 
             // Get the current weapon style
@@ -121,23 +109,23 @@ namespace GGO.Singleplayer
             // If they are not available, draw dummies instead
             if (CurrentStyle == Checks.WeaponStyle.Main || CurrentStyle == Checks.WeaponStyle.Double)
             {
-                DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
-                DrawFunctions.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
+                Toolkit.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponPrimary"), Config.PrimaryIcon);
+                Toolkit.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
             }
             else
             {
-                DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
-                DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
+                Toolkit.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummyPrimary"), Config.PrimaryIcon);
+                Toolkit.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoPrimary"), Config.PrimaryBackground);
             }
             if (CurrentStyle == Checks.WeaponStyle.Sidearm || CurrentStyle == Checks.WeaponStyle.Double)
             {
-                DrawFunctions.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
-                DrawFunctions.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
+                Toolkit.Icon(Images.ResourceToPNG(Resources.ImageWeapon, "WeaponSecondary"), Config.SecondaryIcon);
+                Toolkit.WeaponInfo(CurrentStyle, Game.Player.Character.Weapons.Current.AmmoInClip, Weapon.GetDisplayNameFromHash(Game.Player.Character.Weapons.Current.Hash));
             }
             else
             {
-                DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummySecondary"), Config.SecondaryIcon);
-                DrawFunctions.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoSecondary"), Config.SecondaryBackground);
+                Toolkit.Icon(Images.ResourceToPNG(Resources.NoWeapon, "DummySecondary"), Config.SecondaryIcon);
+                Toolkit.Icon(Images.ResourceToPNG(Resources.NoWeapon, "AmmoSecondary"), Config.SecondaryBackground);
             }
         }
 

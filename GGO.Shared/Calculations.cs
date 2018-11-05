@@ -71,18 +71,5 @@ namespace GGO.Shared
             // And finish by returning the new size
             return MarkerSize;
         }
-
-        public static Size GetHealthSize(Configuration Config, bool Player, float Max, float Current)
-        {
-            // Store the original size for the health bar
-            Size OriginalSize = Player ? Config.PlayerHealthSize : Config.SquadHealthSize;
-
-            // Calculate the percentage of health and width
-            float HealthPercentage = (Current / Max) * 100;
-            float Width = (HealthPercentage / 100) * OriginalSize.Width;
-
-            // Finally, return the new size
-            return new Size((int)Width, OriginalSize.Height);
-        }
     }
 }
