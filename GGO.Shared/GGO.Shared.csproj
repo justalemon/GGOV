@@ -72,17 +72,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ImageCharacter.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ImageWeapon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ImageDead.png" />
-  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Resources\IconAlive.png" />
+    <None Include="Resources\IconWeapon.png" />
+    <None Include="Resources\IconDead.png" />
     <None Include="Resources\WeaponPIST.png" />
     <None Include="Resources\WeaponPIST_50.png" />
     <None Include="Resources\WeaponSG_PMP.png" />

@@ -179,6 +179,7 @@ namespace GGO.Singleplayer
             UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, GGO.Config.SquaredBackground, Colors.Backgrounds);
             AmmoBackground.Draw();
             UIText Text = new UIText(PlayerWeapon.AmmoInClip.ToString(), AmmoLocation, .6f, Color.White, (GTA.Font)2, true);
+            Text.Draw();
 
             // Get the weapon bitmap
             // If is not there, return

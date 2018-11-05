@@ -623,9 +623,9 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap ImageCharacter {
+        public static System.Drawing.Bitmap IconAlive {
             get {
-                object obj = ResourceManager.GetObject("ImageCharacter", resourceCulture);
+                object obj = ResourceManager.GetObject("IconAlive", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -633,9 +633,9 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap ImageDead {
+        public static System.Drawing.Bitmap IconDead {
             get {
-                object obj = ResourceManager.GetObject("ImageDead", resourceCulture);
+                object obj = ResourceManager.GetObject("IconDead", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -643,9 +643,9 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap ImageWeapon {
+        public static System.Drawing.Bitmap IconWeapon {
             get {
-                object obj = ResourceManager.GetObject("ImageWeapon", resourceCulture);
+                object obj = ResourceManager.GetObject("IconWeapon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

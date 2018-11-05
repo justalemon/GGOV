@@ -77,8 +77,8 @@ namespace GGO.Singleplayer
                 int Number = Array.IndexOf(FriendlyPeds, SquadMember);
 
                 // Select the correct image and name for the file
-                Bitmap ImageType = SquadMember.IsAlive ? Resources.ImageCharacter : Resources.ImageDead;
-                string ImageName = SquadMember.IsAlive ? nameof(Resources.ImageCharacter) : nameof(Resources.ImageDead);
+                Bitmap ImageType = SquadMember.IsAlive ? Resources.IconAlive : Resources.IconDead;
+                string ImageName = SquadMember.IsAlive ? nameof(Resources.IconAlive) : nameof(Resources.IconDead);
 
                 // Draw the icon and the ped info
                 Toolkit.Icon(ImageType, ImageName, Calculations.GetSquadPosition(Config, Number));
@@ -95,13 +95,13 @@ namespace GGO.Singleplayer
             }
 
             // Then, start by drawing the player info
-            Toolkit.Icon(Resources.ImageCharacter, nameof(Resources.ImageCharacter), Config.PlayerPosition);
+            Toolkit.Icon(Resources.IconAlive, nameof(Resources.IconAlive), Config.PlayerPosition);
             Toolkit.EntityInfo(Game.Player.Character);
 
             // If the player is on a vehicle, also draw that information
             if (Game.Player.Character.CurrentVehicle != null)
             {
-                Toolkit.Icon(Resources.ImageCharacter, nameof(Resources.ImageCharacter), Config.VehicleIcon);
+                Toolkit.Icon(Resources.IconAlive, nameof(Resources.IconAlive), Config.VehicleIcon);
                 Toolkit.EntityInfo(Game.Player.Character.CurrentVehicle);
             }
 
@@ -112,7 +112,7 @@ namespace GGO.Singleplayer
             // If they are not available, draw dummies instead
             if (CurrentStyle == Checks.WeaponStyle.Main || CurrentStyle == Checks.WeaponStyle.Double)
             {
-                Toolkit.Icon(Resources.ImageWeapon, nameof(Resources.ImageWeapon), Config.PrimaryIcon);
+                Toolkit.Icon(Resources.IconWeapon, nameof(Resources.IconWeapon), Config.PrimaryIcon);
                 Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
@@ -122,7 +122,7 @@ namespace GGO.Singleplayer
             }
             if (CurrentStyle == Checks.WeaponStyle.Sidearm || CurrentStyle == Checks.WeaponStyle.Double)
             {
-                Toolkit.Icon(Resources.ImageWeapon, nameof(Resources.ImageWeapon), Config.SecondaryIcon);
+                Toolkit.Icon(Resources.IconWeapon, nameof(Resources.IconWeapon), Config.SecondaryIcon);
                 Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
