@@ -65,13 +65,16 @@ namespace GGO.Singleplayer
                 UI.HideHudComponentThisFrame(HudComponent.HelpText);
             }
 
-            // Get all of the peds and store separate the squad members
+            // Get all of the peds and store them during this tick
             Ped[] NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
-            Ped[] FriendlyPeds = NearbyPeds.Where(P => (int)Game.Player.Character.GetRelationshipWithPed(P) <= 2 && (int)P.GetRelationshipWithPed(Game.Player.Character) <= 2 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, P)).ToArray();
             
             // Draw the squad information on the top left if the user wants to
             if (Config.SquadMembers)
             {
+                // Store the peds that are friend of us
+                Ped[] FriendlyPeds = NearbyPeds.Where(P => (int)Game.Player.Character.GetRelationshipWithPed(P) <= 2 && (int)P.GetRelationshipWithPed(Game.Player.Character) <= 2 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, P)).ToArray();
+
+                // And iterate over them
                 foreach (Ped SquadMember in FriendlyPeds)
                 {
                     // Get the number of the ped
