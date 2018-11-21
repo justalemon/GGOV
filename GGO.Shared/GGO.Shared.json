@@ -10,10 +10,13 @@
 	"name": "default",
 	// If some parts of the vanilla HUD should be disabled
 	"disable_hud": true,
+
 	// If the dead markers should be shown.
 	"dead_markers": true,
 	// If the vehicle information should be shown.
 	"vehicle_info": true,
+	// If the squad members should be shown.
+	"squad_members": true,
 
 	// The common space between the screen elements
 	"common_spacing": [ 0.0055, 0.01 ],

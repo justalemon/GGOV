@@ -19,6 +19,8 @@ namespace GGO.Shared
         /// If the default Radar and Hud should be disabled.
         /// </summary>
         public bool DisableHud => (bool)Raw["disable_hud"];
+
+
         /// <summary>
         /// If the dead markers should be shown.
         /// </summary>
@@ -27,6 +29,10 @@ namespace GGO.Shared
         /// If the vehicle information should be shown.
         /// </summary>
         public bool VehicleInfo => (bool)Raw["vehicle_info"];
+        /// <summary>
+        /// If the squad members should be shown.
+        /// </summary>
+        public bool SquadMembers => (bool)Raw["squad_members"];
 
 
         /// <summary>

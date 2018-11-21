@@ -69,19 +69,22 @@ namespace GGO.Singleplayer
             Ped[] NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
             Ped[] FriendlyPeds = NearbyPeds.Where(P => (int)Game.Player.Character.GetRelationshipWithPed(P) <= 2 && (int)P.GetRelationshipWithPed(Game.Player.Character) <= 2 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, P)).ToArray();
             
-            // Draw the squad information on the top left
-            foreach (Ped SquadMember in FriendlyPeds)
+            // Draw the squad information on the top left if the user wants to
+            if (Config.SquadMembers)
             {
-                // Get the number of the ped
-                int Number = Array.IndexOf(FriendlyPeds, SquadMember);
+                foreach (Ped SquadMember in FriendlyPeds)
+                {
+                    // Get the number of the ped
+                    int Number = Array.IndexOf(FriendlyPeds, SquadMember);
 
-                // Select the correct image and name for the file
-                Bitmap ImageType = SquadMember.IsAlive ? Resources.IconAlive : Resources.IconDead;
-                string ImageName = SquadMember.IsAlive ? nameof(Resources.IconAlive) : nameof(Resources.IconDead);
+                    // Select the correct image and name for the file
+                    Bitmap ImageType = SquadMember.IsAlive ? Resources.IconAlive : Resources.IconDead;
+                    string ImageName = SquadMember.IsAlive ? nameof(Resources.IconAlive) : nameof(Resources.IconDead);
 
-                // Draw the icon and the ped info
-                Toolkit.Icon(ImageType, ImageName, Calculations.GetSquadPosition(Config, Number));
-                Toolkit.EntityInfo(SquadMember, true, Number);
+                    // Draw the icon and the ped info
+                    Toolkit.Icon(ImageType, ImageName, Calculations.GetSquadPosition(Config, Number));
+                    Toolkit.EntityInfo(SquadMember, true, Number);
+                }
             }
 
             // Draw the dead ped markers over their heads, if the user wants to
