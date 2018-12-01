@@ -65,6 +65,12 @@ namespace GGO.Singleplayer
                 UI.HideHudComponentThisFrame(HudComponent.HelpText);
             }
 
+            // If the user wants to disable the Radar and is not hidden, do it now
+            if (Config.DisableRadar && !Function.Call<bool>(Hash.IS_RADAR_HIDDEN))
+            {
+                Function.Call(Hash.DISPLAY_RADAR, false);
+            }
+
             // Get all of the peds and store them during this tick
             Ped[] NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
             
@@ -143,7 +149,8 @@ namespace GGO.Singleplayer
 
         public static void OnAbort(object Sender, EventArgs Args)
         {
-
+            // Reset the Radar state to enabled (just if the script is aborted but not started again)
+            Function.Call(Hash.DISPLAY_RADAR, true);
         }
     }
 }

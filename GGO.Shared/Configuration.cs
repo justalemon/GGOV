@@ -19,6 +19,10 @@ namespace GGO.Shared
         /// If the parts of the vanilla HUD that collide with GGO should be disabled.
         /// </summary>
         public bool DisableHud => (bool)Raw["disable_hud"];
+        /// <summary>
+        /// If the GTA Radar should be disabled/hidden
+        /// </summary>
+        public bool DisableRadar => (bool)Raw["disable_radar"];
 
 
         /// <summary>

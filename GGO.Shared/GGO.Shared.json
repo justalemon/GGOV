@@ -10,6 +10,8 @@
 	"name": "default",
 	// If the parts of the vanilla HUD that collide with GGO should be disabled
 	"disable_hud": true,
+	// If the GTA Radar should be disabled/hidden
+	"disable_radar": false,
 
 	// If the dead markers should be shown.
 	"dead_markers": true,
