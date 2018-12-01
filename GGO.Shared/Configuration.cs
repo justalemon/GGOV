@@ -16,7 +16,7 @@ namespace GGO.Shared
         /// </summary>
         public string Name => (string)Raw["name"];
         /// <summary>
-        /// If the default Radar and Hud should be disabled.
+        /// If the parts of the vanilla HUD that collide with GGO should be disabled.
         /// </summary>
         public bool DisableHud => (bool)Raw["disable_hud"];
 

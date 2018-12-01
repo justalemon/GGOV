@@ -8,7 +8,7 @@
 	"debug": false,
 	// A custom player name. This does not have effect on FiveM!
 	"name": "default",
-	// If some parts of the vanilla HUD should be disabled
+	// If the parts of the vanilla HUD that collide with GGO should be disabled
 	"disable_hud": true,
 
 	// If the dead markers should be shown.

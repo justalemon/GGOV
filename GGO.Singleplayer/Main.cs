@@ -55,7 +55,7 @@ namespace GGO.Singleplayer
             // Reset the index of the images
             Toolkit.ResetIndex();
 
-            // Disable the original game HUD and radar if is requested
+            // Disable the colliding HUD elements by default
             if (Config.DisableHud)
             {
                 UI.HideHudComponentThisFrame(HudComponent.WeaponIcon);
