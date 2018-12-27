@@ -183,7 +183,7 @@ namespace GGO
         public Configuration(string Location, Size CurrentResolution)
         {
             // Read all of the text that is in the file
-            string Content = File.ReadAllText(Location + "\\GGO.Shared.json");
+            string Content = File.ReadAllText(Location + "\\GGO.Hud.json");
             // Load it on the parser
             Raw = JObject.Parse(Content);
             // And store our current resolution
