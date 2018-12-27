@@ -44,9 +44,9 @@
 	// The offset of the ammo relative to the background
 	"ammo_offset": [ 0.0135, 0.004 ],
 	// Position of the weapon images relative to the background
-	"weapon_position": [ 0, 0.005 ],
+	"weapon_position": [ 0, 0.006 ],
 	// The size for the images of the weapons
-	"weapon_size": [ 0.0875, 0.037 ],
+	"weapon_size": [ 0.0875, 0.035 ],
 
 	// The size for the dividers on the health bar
 	"divider_size": [ 0.001, 0.012 ],
