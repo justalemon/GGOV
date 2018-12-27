@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.IO;
 
-namespace GGO.Shared
+namespace GGO
 {
     public class Configuration
     {

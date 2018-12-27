@@ -7,7 +7,7 @@
     <ProjectGuid>{8A7DD0EF-E686-46B3-8854-97ECA65D2BB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GGO.Singleplayer</RootNamespace>
+    <RootNamespace>GGO</RootNamespace>
     <AssemblyName>GGO.Singleplayer</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -32,7 +32,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="ScriptHookVDotNet2, Version=2.10.6.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\ScriptHookVDotNet2.2.10.7\lib\net452\ScriptHookVDotNet2.dll</HintPath>
       <Private>False</Private>
@@ -49,18 +51,94 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations.cs" />
+    <Compile Include="Checks.cs" />
+    <Compile Include="Colors.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Logging.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Toolkit.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GGO.Shared\GGO.Shared.csproj">
-      <Project>{a5e55619-60c3-44d8-8e69-5cdb4370a875}</Project>
-      <Name>GGO.Shared</Name>
-    </ProjectReference>
+    <None Include="GGO.Shared.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="Resources\IconVehicle.png" />
+    <None Include="Resources\IconAlive.png" />
+    <None Include="Resources\IconWeapon.png" />
+    <None Include="Resources\IconDead.png" />
+    <None Include="Resources\WeaponPIST.png" />
+    <None Include="Resources\WeaponPIST_50.png" />
+    <None Include="Resources\WeaponSG_PMP.png" />
+    <None Include="Resources\WeaponREVOLVER.png" />
+    <None Include="Resources\WeaponSG_SOF.png" />
+    <None Include="Resources\WeaponSMG.png" />
+    <None Include="Resources\WeaponSNIP_RIF.png" />
+    <None Include="Resources\WeaponRIFLE_ADV.png" />
+    <None Include="Resources\WeaponPIST_AP.png" />
+    <None Include="Resources\WeaponRIFLE_ASL.png" />
+    <None Include="Resources\WeaponSG_ASL.png" />
+    <None Include="Resources\WeaponSMG_ASL.png" />
+    <None Include="Resources\WeaponSG_BLP.png" />
+    <None Include="Resources\WeaponRIFLE_CBN.png" />
+    <None Include="Resources\WeaponMG_CBT.png" />
+    <None Include="Resources\WeaponCOMBATPDW.png" />
+    <None Include="Resources\WeaponPIST_CBT.png" />
+    <None Include="Resources\WeaponCMPRIFLE.png" />
+    <None Include="Resources\WeaponDBSHGN.png" />
+    <None Include="Resources\WeaponFLAREGUN.png" />
+    <None Include="Resources\WeaponSNIP_HVY.png" />
+    <None Include="Resources\WeaponMKPISTOL.png" />
+    <None Include="Resources\WeaponMG.png" />
+    <None Include="Resources\WeaponSMG_MCR.png" />
+    <None Include="Resources\WeaponMINIGUN.png" />
+    <None Include="Resources\DeadMarker.png" />
+    <None Include="Resources\WeaponRAILGUN.png" />
+    <None Include="Resources\WeaponREV_DA.png" />
+    <None Include="Resources\WeaponREVOLVER2.png" />
+    <None Include="Resources\WeaponRIFLE_ASL2.png" />
+    <None Include="Resources\WeaponRIFLE_CBN2.png" />
+    <None Include="Resources\WeaponRPG.png" />
+    <None Include="Resources\WeaponSG_PMP2.png" />
+    <None Include="Resources\WeaponSMG2.png" />
+    <None Include="Resources\WeaponSNIP_HVY2.png" />
+    <None Include="Resources\WeaponSNSPISTOL.png" />
+    <None Include="Resources\WeaponSNSPISTOL2.png" />
+    <None Include="Resources\WeaponSPCARBINE.png" />
+    <None Include="Resources\WeaponSPCARBINE2.png" />
+    <None Include="Resources\WeaponVPISTOL.png" />
+    <None Include="Resources\WeaponAUTOSHGN.png" />
+    <None Include="Resources\WeaponBULLRIFLE.png" />
+    <None Include="Resources\WeaponBULLRIFLE2.png" />
+    <None Include="Resources\WeaponCMPGL.png" />
+    <None Include="Resources\WeaponFWRKLNCHR.png" />
+    <None Include="Resources\WeaponGL.png" />
+    <None Include="Resources\WeaponGUSENBERG.png" />
+    <None Include="Resources\WeaponHMKRIFLE.png" />
+    <None Include="Resources\WeaponHOMLNCH.png" />
+    <None Include="Resources\WeaponHVYSHOT.png" />
+    <None Include="Resources\WeaponMCHPIST.png" />
+    <None Include="Resources\WeaponMG_CBT2.png" />
+    <None Include="Resources\WeaponMINISMG.png" />
+    <None Include="Resources\WeaponMKRIFLE2.png" />
+    <None Include="Resources\WeaponMUSKET.png" />
+    <None Include="Resources\WeaponPIST2.png" />
+    <None Include="Resources\NoWeapon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

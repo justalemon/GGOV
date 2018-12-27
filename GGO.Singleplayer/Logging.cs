@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace GGO.Shared
+namespace GGO
 {
     public class Logging
     {

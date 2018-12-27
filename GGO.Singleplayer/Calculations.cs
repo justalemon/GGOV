@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace GGO.Shared
+namespace GGO
 {
     public class Calculations
     {

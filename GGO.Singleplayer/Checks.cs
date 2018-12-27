@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace GGO.Shared
+namespace GGO
 {
     public class Checks
     {

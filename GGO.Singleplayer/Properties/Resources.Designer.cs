@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GGO.Shared.Properties {
+namespace GGO.Properties {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace GGO.Shared.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace GGO.Shared.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GGO.Shared.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GGO.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace GGO.Shared.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap DeadMarker {
+        internal static System.Drawing.Bitmap DeadMarker {
             get {
                 object obj = ResourceManager.GetObject("DeadMarker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap IconAlive {
+        internal static System.Drawing.Bitmap IconAlive {
             get {
                 object obj = ResourceManager.GetObject("IconAlive", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap IconDead {
+        internal static System.Drawing.Bitmap IconDead {
             get {
                 object obj = ResourceManager.GetObject("IconDead", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap IconVehicle {
+        internal static System.Drawing.Bitmap IconVehicle {
             get {
                 object obj = ResourceManager.GetObject("IconVehicle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap IconWeapon {
+        internal static System.Drawing.Bitmap IconWeapon {
             get {
                 object obj = ResourceManager.GetObject("IconWeapon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap NoWeapon {
+        internal static System.Drawing.Bitmap NoWeapon {
             get {
                 object obj = ResourceManager.GetObject("NoWeapon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponAUTOSHGN {
+        internal static System.Drawing.Bitmap WeaponAUTOSHGN {
             get {
                 object obj = ResourceManager.GetObject("WeaponAUTOSHGN", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +133,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponBULLRIFLE {
+        internal static System.Drawing.Bitmap WeaponBULLRIFLE {
             get {
                 object obj = ResourceManager.GetObject("WeaponBULLRIFLE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +143,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponBULLRIFLE2 {
+        internal static System.Drawing.Bitmap WeaponBULLRIFLE2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponBULLRIFLE2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +153,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponCMPGL {
+        internal static System.Drawing.Bitmap WeaponCMPGL {
             get {
                 object obj = ResourceManager.GetObject("WeaponCMPGL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +163,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponCMPRIFLE {
+        internal static System.Drawing.Bitmap WeaponCMPRIFLE {
             get {
                 object obj = ResourceManager.GetObject("WeaponCMPRIFLE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +173,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponCOMBATPDW {
+        internal static System.Drawing.Bitmap WeaponCOMBATPDW {
             get {
                 object obj = ResourceManager.GetObject("WeaponCOMBATPDW", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +183,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponDBSHGN {
+        internal static System.Drawing.Bitmap WeaponDBSHGN {
             get {
                 object obj = ResourceManager.GetObject("WeaponDBSHGN", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +193,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponFLAREGUN {
+        internal static System.Drawing.Bitmap WeaponFLAREGUN {
             get {
                 object obj = ResourceManager.GetObject("WeaponFLAREGUN", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -203,7 +203,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponFWRKLNCHR {
+        internal static System.Drawing.Bitmap WeaponFWRKLNCHR {
             get {
                 object obj = ResourceManager.GetObject("WeaponFWRKLNCHR", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -213,7 +213,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponGL {
+        internal static System.Drawing.Bitmap WeaponGL {
             get {
                 object obj = ResourceManager.GetObject("WeaponGL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -223,7 +223,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponGUSENBERG {
+        internal static System.Drawing.Bitmap WeaponGUSENBERG {
             get {
                 object obj = ResourceManager.GetObject("WeaponGUSENBERG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -233,7 +233,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponHMKRIFLE {
+        internal static System.Drawing.Bitmap WeaponHMKRIFLE {
             get {
                 object obj = ResourceManager.GetObject("WeaponHMKRIFLE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -243,7 +243,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponHOMLNCH {
+        internal static System.Drawing.Bitmap WeaponHOMLNCH {
             get {
                 object obj = ResourceManager.GetObject("WeaponHOMLNCH", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -253,7 +253,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponHVYSHOT {
+        internal static System.Drawing.Bitmap WeaponHVYSHOT {
             get {
                 object obj = ResourceManager.GetObject("WeaponHVYSHOT", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -263,7 +263,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponMCHPIST {
+        internal static System.Drawing.Bitmap WeaponMCHPIST {
             get {
                 object obj = ResourceManager.GetObject("WeaponMCHPIST", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -273,7 +273,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponMG {
+        internal static System.Drawing.Bitmap WeaponMG {
             get {
                 object obj = ResourceManager.GetObject("WeaponMG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -283,7 +283,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponMG_CBT {
+        internal static System.Drawing.Bitmap WeaponMG_CBT {
             get {
                 object obj = ResourceManager.GetObject("WeaponMG_CBT", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -293,7 +293,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponMG_CBT2 {
+        internal static System.Drawing.Bitmap WeaponMG_CBT2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponMG_CBT2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -303,7 +303,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponMINIGUN {
+        internal static System.Drawing.Bitmap WeaponMINIGUN {
             get {
                 object obj = ResourceManager.GetObject("WeaponMINIGUN", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -313,7 +313,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponMINISMG {
+        internal static System.Drawing.Bitmap WeaponMINISMG {
             get {
                 object obj = ResourceManager.GetObject("WeaponMINISMG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -323,7 +323,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponMKPISTOL {
+        internal static System.Drawing.Bitmap WeaponMKPISTOL {
             get {
                 object obj = ResourceManager.GetObject("WeaponMKPISTOL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -333,7 +333,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponMKRIFLE2 {
+        internal static System.Drawing.Bitmap WeaponMKRIFLE2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponMKRIFLE2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -343,7 +343,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponMUSKET {
+        internal static System.Drawing.Bitmap WeaponMUSKET {
             get {
                 object obj = ResourceManager.GetObject("WeaponMUSKET", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -353,7 +353,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponPIST {
+        internal static System.Drawing.Bitmap WeaponPIST {
             get {
                 object obj = ResourceManager.GetObject("WeaponPIST", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -363,7 +363,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponPIST_50 {
+        internal static System.Drawing.Bitmap WeaponPIST_50 {
             get {
                 object obj = ResourceManager.GetObject("WeaponPIST_50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -373,7 +373,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponPIST_AP {
+        internal static System.Drawing.Bitmap WeaponPIST_AP {
             get {
                 object obj = ResourceManager.GetObject("WeaponPIST_AP", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -383,7 +383,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponPIST_CBT {
+        internal static System.Drawing.Bitmap WeaponPIST_CBT {
             get {
                 object obj = ResourceManager.GetObject("WeaponPIST_CBT", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -393,7 +393,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponPIST2 {
+        internal static System.Drawing.Bitmap WeaponPIST2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponPIST2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -403,7 +403,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponRAILGUN {
+        internal static System.Drawing.Bitmap WeaponRAILGUN {
             get {
                 object obj = ResourceManager.GetObject("WeaponRAILGUN", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -413,7 +413,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponREV_DA {
+        internal static System.Drawing.Bitmap WeaponREV_DA {
             get {
                 object obj = ResourceManager.GetObject("WeaponREV_DA", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -423,7 +423,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponREVOLVER {
+        internal static System.Drawing.Bitmap WeaponREVOLVER {
             get {
                 object obj = ResourceManager.GetObject("WeaponREVOLVER", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -433,7 +433,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponREVOLVER2 {
+        internal static System.Drawing.Bitmap WeaponREVOLVER2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponREVOLVER2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -443,7 +443,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponRIFLE_ADV {
+        internal static System.Drawing.Bitmap WeaponRIFLE_ADV {
             get {
                 object obj = ResourceManager.GetObject("WeaponRIFLE_ADV", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -453,7 +453,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponRIFLE_ASL {
+        internal static System.Drawing.Bitmap WeaponRIFLE_ASL {
             get {
                 object obj = ResourceManager.GetObject("WeaponRIFLE_ASL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -463,7 +463,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponRIFLE_ASL2 {
+        internal static System.Drawing.Bitmap WeaponRIFLE_ASL2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponRIFLE_ASL2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -473,7 +473,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponRIFLE_CBN {
+        internal static System.Drawing.Bitmap WeaponRIFLE_CBN {
             get {
                 object obj = ResourceManager.GetObject("WeaponRIFLE_CBN", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -483,7 +483,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponRIFLE_CBN2 {
+        internal static System.Drawing.Bitmap WeaponRIFLE_CBN2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponRIFLE_CBN2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -493,7 +493,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponRPG {
+        internal static System.Drawing.Bitmap WeaponRPG {
             get {
                 object obj = ResourceManager.GetObject("WeaponRPG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -503,7 +503,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSG_ASL {
+        internal static System.Drawing.Bitmap WeaponSG_ASL {
             get {
                 object obj = ResourceManager.GetObject("WeaponSG_ASL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -513,7 +513,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSG_BLP {
+        internal static System.Drawing.Bitmap WeaponSG_BLP {
             get {
                 object obj = ResourceManager.GetObject("WeaponSG_BLP", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -523,7 +523,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSG_PMP {
+        internal static System.Drawing.Bitmap WeaponSG_PMP {
             get {
                 object obj = ResourceManager.GetObject("WeaponSG_PMP", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -533,7 +533,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSG_PMP2 {
+        internal static System.Drawing.Bitmap WeaponSG_PMP2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponSG_PMP2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -543,7 +543,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSG_SOF {
+        internal static System.Drawing.Bitmap WeaponSG_SOF {
             get {
                 object obj = ResourceManager.GetObject("WeaponSG_SOF", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -553,7 +553,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSMG {
+        internal static System.Drawing.Bitmap WeaponSMG {
             get {
                 object obj = ResourceManager.GetObject("WeaponSMG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -563,7 +563,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSMG_ASL {
+        internal static System.Drawing.Bitmap WeaponSMG_ASL {
             get {
                 object obj = ResourceManager.GetObject("WeaponSMG_ASL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -573,7 +573,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSMG_MCR {
+        internal static System.Drawing.Bitmap WeaponSMG_MCR {
             get {
                 object obj = ResourceManager.GetObject("WeaponSMG_MCR", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -583,7 +583,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSMG2 {
+        internal static System.Drawing.Bitmap WeaponSMG2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponSMG2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -593,7 +593,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSNIP_HVY {
+        internal static System.Drawing.Bitmap WeaponSNIP_HVY {
             get {
                 object obj = ResourceManager.GetObject("WeaponSNIP_HVY", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -603,7 +603,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSNIP_HVY2 {
+        internal static System.Drawing.Bitmap WeaponSNIP_HVY2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponSNIP_HVY2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -613,7 +613,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSNIP_RIF {
+        internal static System.Drawing.Bitmap WeaponSNIP_RIF {
             get {
                 object obj = ResourceManager.GetObject("WeaponSNIP_RIF", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -623,7 +623,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSNSPISTOL {
+        internal static System.Drawing.Bitmap WeaponSNSPISTOL {
             get {
                 object obj = ResourceManager.GetObject("WeaponSNSPISTOL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -633,7 +633,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSNSPISTOL2 {
+        internal static System.Drawing.Bitmap WeaponSNSPISTOL2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponSNSPISTOL2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -643,7 +643,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSPCARBINE {
+        internal static System.Drawing.Bitmap WeaponSPCARBINE {
             get {
                 object obj = ResourceManager.GetObject("WeaponSPCARBINE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -653,7 +653,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponSPCARBINE2 {
+        internal static System.Drawing.Bitmap WeaponSPCARBINE2 {
             get {
                 object obj = ResourceManager.GetObject("WeaponSPCARBINE2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -663,7 +663,7 @@ namespace GGO.Shared.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap WeaponVPISTOL {
+        internal static System.Drawing.Bitmap WeaponVPISTOL {
             get {
                 object obj = ResourceManager.GetObject("WeaponVPISTOL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
