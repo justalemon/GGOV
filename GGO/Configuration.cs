@@ -86,6 +86,10 @@ namespace GGO
         /// </summary>
         public Point AmmoOffset => new Point(CreateSize("ammo_offset"));
         /// <summary>
+        /// Position of the weapon images relative to the background.
+        /// </summary>
+        public Size WeaponPosition => CreateSize("weapon_position");
+        /// <summary>
         /// Size for the weapon images.
         /// </summary>
         public Size WeaponSize => CreateSize("weapon_size");

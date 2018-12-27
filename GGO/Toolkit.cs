@@ -191,7 +191,7 @@ namespace GGO.Singleplayer
             // Finally, draw the weapon image with the respective background
             UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, GGO.Config.WeaponBackground, Colors.Backgrounds);
             WeaponBackground.Draw();
-            Image(WeaponBitmap, "Weapon" + Name, WeaponLocation + GGO.Config.IconPosition, GGO.Config.WeaponSize);
+            Image(WeaponBitmap, "Weapon" + Name, WeaponLocation + GGO.Config.WeaponPosition, GGO.Config.WeaponSize);
         }
 
         /// <summary>
