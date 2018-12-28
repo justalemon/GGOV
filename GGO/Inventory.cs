@@ -38,6 +38,8 @@ namespace GGO
                 Draw();
                 // And show the cursor during this frame
                 Function.Call(Hash._SHOW_CURSOR_THIS_FRAME);
+                // And check the user clicks
+                CheckClick();
             }
         }
 
@@ -80,6 +82,26 @@ namespace GGO
                 if (WeaponBitmap != null)
                 {
                     Toolkit.Image(WeaponBitmap, "InventoryBackup", GGO.Config.InventoryWeaponBackup, GGO.Config.InventoryWeaponSize);
+                }
+            }
+        }
+
+        private static void CheckClick()
+        {
+            if (!Game.IsControlJustPressed(0, Control.PhoneSelect))
+            {
+                return;
+            }
+
+            if (Primary != null && Primary != 0 && GGO.Config.InventoryWeaponPrimary.IsClicked(GGO.Config.InventoryWeaponSize))
+            {
+                if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Primary))
+                {
+                    Game.Player.Character.Weapons.Give((WeaponHash)Primary, 100, true, false);
+                }
+                else
+                {
+                    Game.Player.Character.Weapons.Select((WeaponHash)Primary, true);
                 }
             }
         }
