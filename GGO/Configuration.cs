@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -205,16 +205,22 @@ namespace GGO
         /// The RAW Configuration.
         /// </summary>
         public JObject Raw { get; set; }
+        /// <summary>
+        /// The inventory configuration.
+        /// </summary>
+        public JObject Inventory { get; set; }
 
         /// <summary>
         /// Loads up the configuration from "GGO.Shared.json"
         /// </summary>
         public Configuration(string Location, Size CurrentResolution)
         {
-            // Read all of the text that is in the file
-            string Content = File.ReadAllText(Location + "\\GGO.Hud.json");
-            // Load it on the parser
-            Raw = JObject.Parse(Content);
+            // Read all of the text that is on the files
+            string HudConfig = File.ReadAllText(Location + "\\GGO.Hud.json");
+            string InvConfig = File.ReadAllText(Location + "\\GGO.Inventory.json");
+            // Load it on the parsers
+            Raw = JObject.Parse(HudConfig);
+            Inventory = JObject.Parse(InvConfig);
             // And store our current resolution
             Resolution = CurrentResolution;
         }
