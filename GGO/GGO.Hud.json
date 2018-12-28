@@ -49,6 +49,12 @@
 	"inv_info_size": [ 0.35, 0.13 ],
 	// The size for the colour space
 	"inv_coloured_size": [ 0.17, 0.06 ],
+	// The size of the weapon rectangles,
+	"inv_weapon_size": [ 0.0875, 0.035 ],
+	// Position of the primary, secondary and backup weapons
+	"inv_primary_position": [ 0.58, 0.4 ],
+	"inv_secondary_position": [ 0.58, 0.5 ],
+	"inv_backup_position": [ 0.58, 0.6 ],
 
 	// The position of the player information (usually bottom-right)
 	"player_position": [ 0.7825, 0.7805 ],

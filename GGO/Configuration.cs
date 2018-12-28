@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -96,6 +96,22 @@ namespace GGO
         /// The size for the colour space
         /// </summary>
         public Size InventoryColourSize => CreateSize("inv_coloured_size");
+        /// <summary>
+        /// The size of the inventory weapons.
+        /// </summary>
+        public Size InventoryWeaponSize => CreateSize("inv_weapon_size");
+        /// <summary>
+        /// The inventory position of the primary weapon.
+        /// </summary>
+        public Point InventoryWeaponPrimary => new Point(CreateSize("inv_primary_position"));
+        /// <summary>
+        /// The inventory position of the secondary weapon.
+        /// </summary>
+        public Point InventoryWeaponSecondary => new Point(CreateSize("inv_secondary_position"));
+        /// <summary>
+        /// The inventory position of the backup weapon.
+        /// </summary>
+        public Point InventoryWeaponBackup => new Point(CreateSize("inv_backup_position"));
 
 
         /// <summary>
