@@ -56,6 +56,7 @@ namespace GGO
             if (Game.IsDisabledControlPressed(0, Control.SelectWeapon))
             {
                 Inventory.Draw();
+                Function.Call(Hash._SHOW_CURSOR_THIS_FRAME);
             }
 
             // Reset the index of the images
