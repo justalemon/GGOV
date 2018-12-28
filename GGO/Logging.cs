@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GTA;
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -53,6 +54,10 @@ namespace GGO
                 // Create a beautiful message to log
                 string LogMessage = string.Format("[{0}] [{1}] {2}", DateTime.Now.ToString(), LoggingLevel.ToString(), Message);
 
+                // Show it on screen
+                UI.Notify($"{LoggingLevel}: {LogMessage}");
+
+                // And write it to a file
                 StreamWriter OpenFile = File.AppendText(Path.Combine(Folder, Filename));
                 OpenFile.WriteLine(LogMessage);
                 OpenFile.Close();
