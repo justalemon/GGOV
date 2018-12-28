@@ -108,6 +108,28 @@ namespace GGO
                     Game.Player.Character.Weapons.Select((WeaponHash)Primary, true);
                 }
             }
+            else if (Secondary != null && Secondary != 0 && GGO.Config.InventoryWeaponSecondary.IsClicked(GGO.Config.InventoryWeaponSize))
+            {
+                if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Secondary))
+                {
+                    Game.Player.Character.Weapons.Give((WeaponHash)Secondary, 100, true, false);
+                }
+                else
+                {
+                    Game.Player.Character.Weapons.Select((WeaponHash)Secondary, true);
+                }
+            }
+            else if (Backup != null && Backup != 0 && GGO.Config.InventoryWeaponBackup.IsClicked(GGO.Config.InventoryWeaponSize))
+            {
+                if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Backup))
+                {
+                    Game.Player.Character.Weapons.Give((WeaponHash)Backup, 100, true, false);
+                }
+                else
+                {
+                    Game.Player.Character.Weapons.Select((WeaponHash)Backup, true);
+                }
+            }
         }
     }
 }
