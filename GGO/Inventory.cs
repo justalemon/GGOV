@@ -1,4 +1,4 @@
-using GGO.Properties;
+﻿using GGO.Properties;
 using GTA;
 using GTA.Native;
 using System;
@@ -36,8 +36,12 @@ namespace GGO
             {
                 // Draw the inventory
                 Draw();
-                // And show the cursor during this frame
+                // Show the cursor during this frame
                 Function.Call(Hash._SHOW_CURSOR_THIS_FRAME);
+                // Disable the fire/aim controls
+                Game.DisableControlThisFrame(0, Control.Attack);
+                Game.DisableControlThisFrame(0, Control.Attack2);
+                Game.DisableControlThisFrame(0, Control.Aim);
                 // And check the user clicks
                 CheckClick();
             }
