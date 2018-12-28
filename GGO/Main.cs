@@ -1,6 +1,5 @@
 using GGO.Properties;
 using GTA;
-using GTA.Math;
 using GTA.Native;
 using System;
 using System.ComponentModel;
