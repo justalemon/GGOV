@@ -50,6 +50,14 @@ namespace GGO
                 return;
             }
 
+            // Disable the weapons menu
+            Game.DisableControlThisFrame(0, Control.SelectWeapon);
+            // Draw the inventory if the player tried to open the weapon selector
+            if (Game.IsDisabledControlJustPressed(0, Control.SelectWeapon))
+            {
+                Inventory.Draw();
+            }
+
             // Reset the index of the images
             Toolkit.ResetIndex();
 
