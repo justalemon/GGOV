@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 
-namespace GGO.Singleplayer
+namespace GGO
 {
     public class GGO : Script
     {

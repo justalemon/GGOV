@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace GGO.Singleplayer
+namespace GGO
 {
     public static class Toolkit
     {
