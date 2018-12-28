@@ -1,5 +1,6 @@
 ﻿using GGO.Properties;
 using GTA;
+using GTA.Math;
 using GTA.Native;
 using System;
 using System.Drawing;
@@ -197,19 +198,23 @@ namespace GGO
         /// <summary>
         /// Draws a dead marker over the ped head.
         /// </summary>
-        /// <param name="Position">The on-screen position of the ped health.</param>
-        /// <param name="Distance">The distance from the player to the ped.</param>
-        /// <param name="Hash">The ped hash (not the model hash).</param>
-        public static void DeadMarker(Point Position, float Distance, int Hash)
+        /// <param name="GamePed">The ped where the dead marker should be drawn.</param>
+        public static void DeadMarker(Ped GamePed)
         {
-            // Calculate the marker size based on the distance between player and dead ped
-            Size MarkerSize = Calculations.GetMarkerSize(GGO.Config, Distance);
+            // Get the coordinates for the head
+            Vector3 HeadCoord = GamePed.GetBoneCoord(Bone.SKEL_Head);
+            // Get the On Screen position for the head
+            Point ScreenPos = UI.WorldToScreen(HeadCoord);
 
+            // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
+            double Ratio = Math.Log(Vector3.Distance(Game.Player.Character.Position, HeadCoord) + 1.65);
+            // Calculate the marker size based on the distance between player and dead ped
+            Size MarkerSize = new Size((int)(GGO.Config.DeadMarker.Width / Ratio), (int)(GGO.Config.DeadMarker.Height / Ratio));
             // Offset the marker by half width to center, and full height to put on top.
-            Position.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
+            ScreenPos.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 
             // Finally, draw the marker on screen
-            Image(Resources.DeadMarker, nameof(Resources.DeadMarker), Position, MarkerSize);
+            Image(Resources.DeadMarker, nameof(Resources.DeadMarker), ScreenPos, MarkerSize);
         }
     }
 }

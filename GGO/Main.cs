@@ -101,10 +101,8 @@ namespace GGO
                 // Iterate over the dead peds
                 foreach (Ped DeadPed in NearbyPeds.Where(P => P.IsDead && P.IsOnScreen).ToArray())
                 {
-                    // Get the coordinates for the head
-                    Vector3 HeadCoord = DeadPed.GetBoneCoord(Bone.SKEL_Head);
                     // And draw the dead marker
-                    Toolkit.DeadMarker(UI.WorldToScreen(HeadCoord), Vector3.Distance(Game.Player.Character.Position, HeadCoord), DeadPed.GetHashCode());
+                    Toolkit.DeadMarker(DeadPed);
                 }
             }
 

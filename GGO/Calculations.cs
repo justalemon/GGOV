@@ -55,21 +55,5 @@ namespace GGO
                 return new Point(Config.SquadPosition.X, (Config.SquadPosition.Y + Config.CommonSpacing.Height) * Count);
             }
         }
-
-        /// <summary>
-        /// Calculates the size of the dead marked based on the player-to-ped distance.
-        /// </summary>
-        /// <param name="Config">The mod configuration.</param>
-        /// <param name="Distance">The distance between the player and the ped.</param>
-        /// <returns>The relative position.</returns>
-        public static Size GetMarkerSize(Configuration Config, float Distance)
-        {
-            // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
-            double Ratio = Math.Log(Distance + 1.65);
-            Size MarkerSize = new Size((int)(Config.DeadMarker.Width / Ratio), (int)(Config.DeadMarker.Height / Ratio));
-
-            // And finish by returning the new size
-            return MarkerSize;
-        }
     }
 }
