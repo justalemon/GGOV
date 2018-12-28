@@ -64,6 +64,24 @@ namespace GGO
                     Toolkit.Image(WeaponBitmap, "InventoryPrimary", GGO.Config.InventoryWeaponPrimary, GGO.Config.InventoryWeaponSize);
                 }
             }
+            if (Secondary != null && Secondary != 0)
+            {
+                string Name = Weapon.GetDisplayNameFromHash((WeaponHash)Secondary).Replace("WTT_", string.Empty);
+                Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
+                if (WeaponBitmap != null)
+                {
+                    Toolkit.Image(WeaponBitmap, "InventorySecondary", GGO.Config.InventoryWeaponSecondary, GGO.Config.InventoryWeaponSize);
+                }
+            }
+            if (Backup != null && Backup != 0)
+            {
+                string Name = Weapon.GetDisplayNameFromHash((WeaponHash)Backup).Replace("WTT_", string.Empty);
+                Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
+                if (WeaponBitmap != null)
+                {
+                    Toolkit.Image(WeaponBitmap, "InventoryBackup", GGO.Config.InventoryWeaponBackup, GGO.Config.InventoryWeaponSize);
+                }
+            }
         }
     }
 }
