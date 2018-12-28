@@ -79,7 +79,7 @@ namespace GGO
         /// <summary>
         /// The position of the coloured tag
         /// </summary>
-        public Point InventoryColourPosition => new Point(CreateSize("inv_coloured_position"));
+        public Point InventoryColourPosition => new Point(CreateSize("inv_colour_position"));
         /// <summary>
         /// The position of the player name on the inventory
         /// </summary>
