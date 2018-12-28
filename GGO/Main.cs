@@ -53,7 +53,7 @@ namespace GGO
             // Disable the weapons menu
             Game.DisableControlThisFrame(0, Control.SelectWeapon);
             // Draw the inventory if the player tried to open the weapon selector
-            if (Game.IsDisabledControlJustPressed(0, Control.SelectWeapon))
+            if (Game.IsDisabledControlPressed(0, Control.SelectWeapon))
             {
                 Inventory.Draw();
             }
