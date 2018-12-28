@@ -1,4 +1,4 @@
-﻿using GGO.Properties;
+using GGO.Properties;
 using GTA;
 using GTA.Native;
 using System;
@@ -8,6 +8,10 @@ namespace GGO
 {
     public static class Inventory
     {
+        private static uint? Primary => (uint)GGO.Config.Inventory["weapons"]["primary"];
+        private static uint? Secondary => (uint)GGO.Config.Inventory["weapons"]["secondary"];
+        private static uint? Backup => (uint)GGO.Config.Inventory["weapons"]["backup"];
+
         /// <summary>
         /// Tick that handles the 
         /// </summary>
@@ -50,10 +54,6 @@ namespace GGO
             NameBackground.Draw();
             UIText PlayerName = new UIText(Game.Player.Name, GGO.Config.InventoryPlayerName, 0.7f, Color.White, GTA.Font.Monospace, false, false, false);
             PlayerName.Draw();
-
-            uint? Primary = (uint)GGO.Config.Inventory["weapons"]["primary"];
-            uint? Secondary = (uint)GGO.Config.Inventory["weapons"]["secondary"];
-            uint? Backup = (uint)GGO.Config.Inventory["weapons"]["backup"];
 
             if (Primary != null && Primary != 0)
             {
