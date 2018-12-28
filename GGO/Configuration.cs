@@ -72,6 +72,31 @@ namespace GGO
         /// </summary>
         public Size SquadSize => CreateSize("squad_size");
 
+        /// <summary>
+        /// The position of the inventory background
+        /// </summary>
+        public Point InventoryBackgroundPosition => new Point(CreateSize("inv_background_position"));
+        /// <summary>
+        /// The position of the coloured tag
+        /// </summary>
+        public Point InventoryColourPosition => new Point(CreateSize("inv_coloured_position"));
+        /// <summary>
+        /// The position of the player name on the inventory
+        /// </summary>
+        public Point InventoryPlayerName => new Point(CreateSize("inv_playername_position"));
+        /// <summary>
+        /// The size of the inventory background
+        /// </summary>
+        public Size InventoryBackgroundSize => CreateSize("inv_background_size");
+        /// <summary>
+        /// The size for the information space
+        /// </summary>
+        public Size InventoryInfoSize => CreateSize("inv_info_size");
+        /// <summary>
+        /// The size for the colour space
+        /// </summary>
+        public Size InventoryColourSize => CreateSize("inv_coloured_size");
+
 
         /// <summary>
         /// The position of the player information.

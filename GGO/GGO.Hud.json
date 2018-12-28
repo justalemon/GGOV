@@ -37,6 +37,19 @@
 	// The size for the rectangles with squad information
 	"squad_size": [ 0.05908, 0.048 ],
 
+	// The position of the inventory background
+	"inv_background_position": [ 0.325, 0.25 ],
+	// The position of the coloured tag
+	"inv_colour_position": [ 0.3, 0.27 ],
+	// The position of the player name on the inventory
+	"inv_playername_position": [ 0.37, 0.275 ],
+	// The size of the inventory background
+	"inv_background_size": [ 0.35, 0.6 ],
+	// The size for the information space
+	"inv_info_size": [ 0.35, 0.13 ],
+	// The size for the colour space
+	"inv_coloured_size": [ 0.17, 0.06 ],
+
 	// The position of the player information (usually bottom-right)
 	"player_position": [ 0.7825, 0.7805 ],
 	// The size for the rectangles with the player information
