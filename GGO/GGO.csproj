@@ -55,6 +55,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
