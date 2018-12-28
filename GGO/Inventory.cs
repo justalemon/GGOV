@@ -67,7 +67,7 @@ namespace GGO
                 Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
                 if (WeaponBitmap != null)
                 {
-                    Toolkit.Image(WeaponBitmap, "InventoryPrimary", GGO.Config.InventoryWeaponPrimary, GGO.Config.InventoryWeaponSize);
+                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponPrimary, GGO.Config.InventoryWeaponSize);
                 }
             }
             if (Secondary != null && Secondary != 0)
@@ -76,7 +76,7 @@ namespace GGO
                 Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
                 if (WeaponBitmap != null)
                 {
-                    Toolkit.Image(WeaponBitmap, "InventorySecondary", GGO.Config.InventoryWeaponSecondary, GGO.Config.InventoryWeaponSize);
+                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponSecondary, GGO.Config.InventoryWeaponSize);
                 }
             }
             if (Backup != null && Backup != 0)
@@ -85,7 +85,7 @@ namespace GGO
                 Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
                 if (WeaponBitmap != null)
                 {
-                    Toolkit.Image(WeaponBitmap, "InventoryBackup", GGO.Config.InventoryWeaponBackup, GGO.Config.InventoryWeaponSize);
+                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponBackup, GGO.Config.InventoryWeaponSize);
                 }
             }
         }
