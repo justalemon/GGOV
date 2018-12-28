@@ -22,6 +22,7 @@ namespace GGO
 
             // Add our Tick and Aborted events
             Tick += OnTick;
+            Tick += Inventory.Tick;
             Aborted += OnAbort;
 
             // If the debug mode is enabled
@@ -48,24 +49,6 @@ namespace GGO
             if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive || !Game.Player.CanControlCharacter)
             {
                 return;
-            }
-
-            // Disable the weapons menu
-            Game.DisableControlThisFrame(0, Control.SelectWeapon);
-            // If the user just pressed TAB/L1/LB, center the cursor
-            if (Game.IsDisabledControlJustPressed(0, Control.SelectWeapon))
-            {
-                bool OK = Function.Call<bool>(Hash._0xFC695459D4D0E219, 0.5f, 0.5f); // _SET_CURSOR_POSTION
-                if (!OK)
-                {
-                    Logging.Error("Unable to set the cursor on the center of the screen.");
-                }
-            }
-            // Draw the inventory if the player tried to open the weapon selector
-            if (Game.IsDisabledControlPressed(0, Control.SelectWeapon))
-            {
-                Inventory.Draw();
-                Function.Call(Hash._SHOW_CURSOR_THIS_FRAME);
             }
 
             // Reset the index of the images
