@@ -1,0 +1,8 @@
+{
+    // The weapons to show on the inventory
+    "weapons": {
+        "primary": 4024951519, // Assault SMG
+        "secondary": 4208062921, // Carbine MK2
+        "backup": 584646201 // AP Pistol
+    }
+}
