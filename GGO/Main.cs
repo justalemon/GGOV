@@ -77,7 +77,7 @@ namespace GGO.Singleplayer
             if (Config.SquadMembers)
             {
                 // Store the peds that are friend of us
-                Ped[] FriendlyPeds = NearbyPeds.Where(P => (int)Game.Player.Character.GetRelationshipWithPed(P) <= 2 && (int)P.GetRelationshipWithPed(Game.Player.Character) <= 2 && Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, P)).ToArray();
+                Ped[] FriendlyPeds = NearbyPeds.Where(P => P.IsFriendly() && P.IsMissionEntity()).ToArray();
 
                 // And iterate over them
                 foreach (Ped SquadMember in FriendlyPeds)
@@ -120,11 +120,11 @@ namespace GGO.Singleplayer
             }
 
             // Get the current weapon style
-            Checks.WeaponStyle CurrentStyle = Checks.GetWeaponStyle((uint)Game.Player.Character.Weapons.Current.Group);
+            WeaponStyle CurrentStyle = Game.Player.Character.Weapons.GetStyle();
 
             // And draw the weapon information for both the primary and secondary
             // If they are not available, draw dummies instead
-            if (CurrentStyle == Checks.WeaponStyle.Main || CurrentStyle == Checks.WeaponStyle.Double)
+            if (CurrentStyle == WeaponStyle.Main || CurrentStyle == WeaponStyle.Double)
             {
                 Toolkit.Icon(Resources.IconWeapon, nameof(Resources.IconWeapon), Config.PrimaryIcon);
                 Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
@@ -134,7 +134,7 @@ namespace GGO.Singleplayer
                 Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.PrimaryIcon);
                 Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.PrimaryBackground);
             }
-            if (CurrentStyle == Checks.WeaponStyle.Sidearm || CurrentStyle == Checks.WeaponStyle.Double)
+            if (CurrentStyle == WeaponStyle.Sidearm || CurrentStyle == WeaponStyle.Double)
             {
                 Toolkit.Icon(Resources.IconWeapon, nameof(Resources.IconWeapon), Config.SecondaryIcon);
                 Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);

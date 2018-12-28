@@ -161,10 +161,10 @@ namespace GGO.Singleplayer
         /// </summary>
         /// <param name="Weapon">The player weapon.</param>
         /// <param name="Style">The weapon carry style.</param>
-        public static void WeaponInfo(Weapon PlayerWeapon, Checks.WeaponStyle Style)
+        public static void WeaponInfo(Weapon PlayerWeapon, WeaponStyle Style)
         {
             // Check if the player is using a secondary weapon
-            bool Sidearm = Style == Checks.WeaponStyle.Sidearm;
+            bool Sidearm = Style == WeaponStyle.Sidearm;
 
             // Store the weapon name
             string Name = Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash).Replace("WTT_", string.Empty);

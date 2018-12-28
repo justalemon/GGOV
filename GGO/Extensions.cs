@@ -1,24 +1,26 @@
-﻿using System.Linq;
+﻿using GTA;
+using GTA.Native;
+using System.Linq;
 
 namespace GGO
 {
-    public class Checks
+    /// <summary>
+    /// The style of the weapon that the player currently has.
+    /// </summary>
+    public enum WeaponStyle
     {
-        /// <summary>
-        /// Relationships that are considered friendly.
-        /// </summary>
-        public static int[] Relationships = new int[] { 0, 1, 2 };
-        /// <summary>
-        /// The style of the weapon that the player currently has.
-        /// </summary>
-        public enum WeaponStyle
-        {
-            Banned = -1,
-            Main = 0,
-            Sidearm = 1,
-            Melee = 2,
-            Double = 3
-        }
+        Banned = -1,
+        Main = 0,
+        Sidearm = 1,
+        Melee = 2,
+        Double = 3
+    }
+
+    /// <summary>
+    /// Extensions used to get more features from existing classes.
+    /// </summary>
+    public static class Extensions
+    {
         /// <summary>
         /// Types of weapons that are not going to be shown on the HUD.
         /// In order: Gas Can (Type), Throwables, Fists (Type), None/Phone (Type).
@@ -36,13 +38,22 @@ namespace GGO
         public static uint[] MeleeWeapons = new uint[] { 3566412244u };
 
         /// <summary>
+        /// If the entity is part of the mission.
+        /// </summary>
+        /// <returns>True if the entity is part of the mission, False otherwise.</returns>
+        public static bool IsMissionEntity(this Entity GameEntity)
+        {
+            return Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, GameEntity);
+        }
+
+        /// <summary>
         /// Checks if the specified relationship ID is for a friendly ped.
         /// </summary>
         /// <param name="Relationship">The relationship ID.</param>
         /// <returns>True if the ped is friendly, False otherwise.</returns>
-        public static bool IsFriendly(int Relationship)
+        public static bool IsFriendly(this Ped GamePed)
         {
-            return Relationships.Contains(Relationship);
+            return (int)Game.Player.Character.GetRelationshipWithPed(GamePed) <= 2 && (int)GamePed.GetRelationshipWithPed(Game.Player.Character) <= 2;
         }
 
         /// <summary>
@@ -50,15 +61,15 @@ namespace GGO
         /// </summary>
         /// <param name="ID">The Weapon Type ID.</param>
         /// <returns>The style of weapon.</returns>
-        public static WeaponStyle GetWeaponStyle(uint ID)
+        public static WeaponStyle GetStyle(this WeaponCollection Collection)
         {
             // Return the first match, in order
             // From dangerous to normal
-            if (BannedWeapons.Contains(ID))
+            if (BannedWeapons.Contains((uint)Collection.Current.Group))
                 return WeaponStyle.Banned;
-            else if (MeleeWeapons.Contains(ID))
+            else if (MeleeWeapons.Contains((uint)Collection.Current.Group))
                 return WeaponStyle.Melee;
-            else if (SecondaryWeapons.Contains(ID))
+            else if (SecondaryWeapons.Contains((uint)Collection.Current.Group))
                 return WeaponStyle.Sidearm;
             else
                 return WeaponStyle.Main;
