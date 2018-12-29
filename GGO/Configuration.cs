@@ -112,6 +112,10 @@ namespace GGO
         /// The inventory position of the backup weapon.
         /// </summary>
         public Point InventoryWeaponBackup => new Point(CreateSize("inv_backup_position"));
+        /// <summary>
+        /// The inventory position of the gender icon.
+        /// </summary>
+        public Point InventoryGender => new Point(CreateSize("inv_gender_position"));
 
 
         /// <summary>

@@ -1,8 +1,10 @@
 {
-    // The weapons to show on the inventory
+	// The weapons to show on the inventory
 	"weapons": {
 		"primary": 177293209, // Heavy Sniper MK2
 		"secondary": 4024951519, // Assault SMG
 		"backup": 584646201 // AP Pistol
-	}
+	},
+	// The gender to show
+	"gender": 0
 }
