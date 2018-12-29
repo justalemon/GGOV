@@ -2,15 +2,26 @@ using GGO.Properties;
 using GTA;
 using GTA.Native;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace GGO
 {
     public static class Inventory
     {
-        private static uint? Primary => (uint)GGO.Config.Inventory["weapons"]["first"];
-        private static uint? Secondary => (uint)GGO.Config.Inventory["weapons"]["second"];
-        private static uint? Backup => (uint)GGO.Config.Inventory["weapons"]["third"];
+        private static List<uint> Weapons => GGO.Config.Inventory["weapons"].ToObject<List<uint>>();
+        private static Point[] Positions = new Point[5];
+
+        /// <summary>
+        /// Stores the positions of the weapons once the configuration has been loaded.
+        /// </summary>
+        public static void StorePositions()
+        {
+            for (int Index = 0; Index < 5; Index++)
+            {
+                Positions[Index] = new Point(GGO.Config.InventoryWeaponPosition.X, GGO.Config.InventoryWeaponPosition.Y + (GGO.Config.InventoryWeaponSeparation.Height * Index));
+            }
+        }
 
         /// <summary>
         /// Tick that handles the 
@@ -53,48 +64,31 @@ namespace GGO
         public static void Draw()
         {
             UIRectangle GeneralBackground = new UIRectangle(GGO.Config.InventoryBackgroundPosition, GGO.Config.InventoryBackgroundSize, Colors.Inventory);
-            GeneralBackground.Draw();
             UIRectangle InfoBackground = new UIRectangle(GGO.Config.InventoryBackgroundPosition, GGO.Config.InventoryInfoSize, Colors.Backgrounds);
-            InfoBackground.Draw();
             UIRectangle NameBackground = new UIRectangle(GGO.Config.InventoryColourPosition, GGO.Config.InventoryColourSize, Colors.Details);
-            NameBackground.Draw();
             UIText PlayerName = new UIText(Game.Player.Name, GGO.Config.InventoryPlayerName, 0.7f, Color.White, GTA.Font.Monospace, false, false, false);
+            GeneralBackground.Draw();
             PlayerName.Draw();
+            InfoBackground.Draw();
+            NameBackground.Draw();
 
             Bitmap GenderPicture = (Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? Resources.GenderMale : Resources.GenderFemale;
             string GenderFilename = (Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? nameof(Resources.GenderMale) : nameof(Resources.GenderFemale);
 
             Toolkit.Image(GenderPicture, GenderFilename, GGO.Config.InventoryGender, GGO.Config.IconSize);
 
-            Toolkit.Image(Resources.InventoryItem, nameof(Resources.InventoryItem), GGO.Config.InventoryWeaponFirst + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
-            Toolkit.Image(Resources.InventoryItem, nameof(Resources.InventoryItem), GGO.Config.InventoryWeaponSecond + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
-            Toolkit.Image(Resources.InventoryItem, nameof(Resources.InventoryItem), GGO.Config.InventoryWeaponThird + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
+            foreach (Point Position in Positions)
+            {
+                Toolkit.Image(Resources.InventoryItem, nameof(Resources.InventoryItem), Position + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
+            }
 
-            if (Primary != null && Primary != 0)
+            for (int Index = 0; Index < Weapons.Count; Index++)
             {
-                string Name = Weapon.GetDisplayNameFromHash((WeaponHash)Primary).Replace("WTT_", string.Empty);
+                string Name = Weapon.GetDisplayNameFromHash((WeaponHash)Weapons[Index]).Replace("WTT_", string.Empty);
                 Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
                 if (WeaponBitmap != null)
                 {
-                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponFirst, GGO.Config.InventoryWeaponSize);
-                }
-            }
-            if (Secondary != null && Secondary != 0)
-            {
-                string Name = Weapon.GetDisplayNameFromHash((WeaponHash)Secondary).Replace("WTT_", string.Empty);
-                Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
-                if (WeaponBitmap != null)
-                {
-                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponSecond, GGO.Config.InventoryWeaponSize);
-                }
-            }
-            if (Backup != null && Backup != 0)
-            {
-                string Name = Weapon.GetDisplayNameFromHash((WeaponHash)Backup).Replace("WTT_", string.Empty);
-                Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
-                if (WeaponBitmap != null)
-                {
-                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponThird, GGO.Config.InventoryWeaponSize);
+                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, Positions[Index], GGO.Config.InventoryWeaponSize);
                 }
             }
         }
@@ -106,37 +100,18 @@ namespace GGO
                 return;
             }
 
-            if (Primary != null && Primary != 0 && GGO.Config.InventoryWeaponFirst.IsClicked(GGO.Config.InventoryWeaponSize))
+            for (int Index = 0; Index < Weapons.Count; Index++)
             {
-                if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Primary))
+                if (Positions[Index].IsClicked(GGO.Config.InventoryWeaponSize))
                 {
-                    Game.Player.Character.Weapons.Give((WeaponHash)Primary, 100, true, false);
-                }
-                else
-                {
-                    Game.Player.Character.Weapons.Select((WeaponHash)Primary, true);
-                }
-            }
-            else if (Secondary != null && Secondary != 0 && GGO.Config.InventoryWeaponSecond.IsClicked(GGO.Config.InventoryWeaponSize))
-            {
-                if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Secondary))
-                {
-                    Game.Player.Character.Weapons.Give((WeaponHash)Secondary, 100, true, false);
-                }
-                else
-                {
-                    Game.Player.Character.Weapons.Select((WeaponHash)Secondary, true);
-                }
-            }
-            else if (Backup != null && Backup != 0 && GGO.Config.InventoryWeaponThird.IsClicked(GGO.Config.InventoryWeaponSize))
-            {
-                if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Backup))
-                {
-                    Game.Player.Character.Weapons.Give((WeaponHash)Backup, 100, true, false);
-                }
-                else
-                {
-                    Game.Player.Character.Weapons.Select((WeaponHash)Backup, true);
+                    if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Weapons[Index]))
+                    {
+                        Game.Player.Character.Weapons.Give((WeaponHash)Weapons[Index], 100, true, false);
+                    }
+                    else
+                    {
+                        Game.Player.Character.Weapons.Select((WeaponHash)Weapons[Index], true);
+                    }
                 }
             }
         }

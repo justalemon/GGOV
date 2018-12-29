@@ -51,10 +51,10 @@
 	"inv_coloured_size": [ 0.17, 0.06 ],
 	// The size of the weapon rectangles.
 	"inv_weapon_size": [ 0.0875, 0.035 ],
-	// Position of the primary, secondary and backup weapons
-	"inv_first_position": [ 0.58, 0.5 ],
-	"inv_second_position": [ 0.58, 0.57 ],
-	"inv_third_position": [ 0.58, 0.64 ],
+	// Position of the inventory weapons
+	"inv_weapon_position": [ 0.58, 0.5 ],
+	// The separation between weapon icons
+	"inv_weapon_separation": [ 0, 0.07 ],
 	// The position of the gender image
 	"inv_gender_position": [ 0.325, 0.275 ],
 	// The offset of the inventory rectangles.

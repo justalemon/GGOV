@@ -20,6 +20,9 @@ namespace GGO
             // Notify that we are starting the script
             Logging.Info("===== GGOV for SHVDN is booting up... =====");
 
+            // Create the inventory positions
+            Inventory.StorePositions();
+
             // Add our Tick and Aborted events
             Tick += OnTick;
             Tick += Inventory.Tick;

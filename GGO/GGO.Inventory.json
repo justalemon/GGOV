@@ -1,10 +1,10 @@
 {
 	// The weapons to show on the inventory
-	"weapons": {
-		"first": 177293209, // Heavy Sniper MK2
-		"second": 4024951519, // Assault SMG
-		"third": 584646201 // AP Pistol
-	},
+	"weapons": [
+		177293209, // Heavy Sniper MK2
+		4024951519, // Assault SMG
+		584646201 // AP Pistol
+	],
 	// The gender to show
 	"gender": 0
 }

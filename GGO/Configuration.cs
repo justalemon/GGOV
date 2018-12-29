@@ -101,17 +101,13 @@ namespace GGO
         /// </summary>
         public Size InventoryWeaponSize => CreateSize("inv_weapon_size");
         /// <summary>
-        /// The inventory position of the primary weapon.
+        /// The inventory position of the weapons.
         /// </summary>
-        public Point InventoryWeaponFirst => new Point(CreateSize("inv_first_position"));
+        public Point InventoryWeaponPosition => new Point(CreateSize("inv_weapon_position"));
         /// <summary>
-        /// The inventory position of the secondary weapon.
+        /// The separation between inventory icons.
         /// </summary>
-        public Point InventoryWeaponSecond => new Point(CreateSize("inv_second_position"));
-        /// <summary>
-        /// The inventory position of the backup weapon.
-        /// </summary>
-        public Point InventoryWeaponThird => new Point(CreateSize("inv_third_position"));
+        public Size InventoryWeaponSeparation => CreateSize("inv_weapon_separation");
         /// <summary>
         /// The inventory position of the gender icon.
         /// </summary>
