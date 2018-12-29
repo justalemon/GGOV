@@ -58,10 +58,12 @@ namespace GGO
                 Draw();
                 // Show the cursor during this frame
                 Function.Call(Hash._SHOW_CURSOR_THIS_FRAME);
-                // Disable the fire and aim controls
+                // Disable the fire, aim and camera controls
                 Game.DisableControlThisFrame(0, Control.Attack);
                 Game.DisableControlThisFrame(0, Control.Attack2);
                 Game.DisableControlThisFrame(0, Control.Aim);
+                Game.DisableControlThisFrame(0, Control.LookUpDown);
+                Game.DisableControlThisFrame(0, Control.LookLeftRight);
                 // And check the user clicked something
                 CheckClick();
             }
