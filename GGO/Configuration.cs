@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -116,6 +116,14 @@ namespace GGO
         /// The inventory position of the gender icon.
         /// </summary>
         public Point InventoryGender => new Point(CreateSize("inv_gender_position"));
+        /// <summary>
+        /// The offset of the inventory rectangles.
+        /// </summary>
+        public Size InventoryRectangleOffset => CreateSize("inv_rectangle_offset");
+        /// <summary>
+        /// The size of the inventory rectangles.
+        /// </summary>
+        public Size InventoryRectangleSize => CreateSize("inv_rectangle_size");
 
 
         /// <summary>

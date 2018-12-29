@@ -66,6 +66,10 @@ namespace GGO
 
             Toolkit.Image(GenderPicture, GenderFilename, GGO.Config.InventoryGender, GGO.Config.IconSize);
 
+            Toolkit.Image(Resources.InventoryItem, nameof(Resources.InventoryItem), GGO.Config.InventoryWeaponFirst + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
+            Toolkit.Image(Resources.InventoryItem, nameof(Resources.InventoryItem), GGO.Config.InventoryWeaponSecond + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
+            Toolkit.Image(Resources.InventoryItem, nameof(Resources.InventoryItem), GGO.Config.InventoryWeaponThird + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
+
             if (Primary != null && Primary != 0)
             {
                 string Name = Weapon.GetDisplayNameFromHash((WeaponHash)Primary).Replace("WTT_", string.Empty);
