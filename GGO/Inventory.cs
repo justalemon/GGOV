@@ -1,4 +1,4 @@
-﻿using GGO.Properties;
+using GGO.Properties;
 using GTA;
 using GTA.Native;
 using System;
@@ -60,6 +60,11 @@ namespace GGO
             NameBackground.Draw();
             UIText PlayerName = new UIText(Game.Player.Name, GGO.Config.InventoryPlayerName, 0.7f, Color.White, GTA.Font.Monospace, false, false, false);
             PlayerName.Draw();
+
+            Bitmap GenderPicture = (Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? Resources.GenderMale : Resources.GenderFemale;
+            string GenderFilename = (Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? nameof(Resources.GenderMale) : nameof(Resources.GenderFemale);
+
+            Toolkit.Image(GenderPicture, GenderFilename, GGO.Config.InventoryGender, GGO.Config.IconSize);
 
             if (Primary != null && Primary != 0)
             {

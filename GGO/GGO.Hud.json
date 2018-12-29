@@ -55,6 +55,8 @@
 	"inv_primary_position": [ 0.58, 0.5 ],
 	"inv_secondary_position": [ 0.58, 0.57 ],
 	"inv_backup_position": [ 0.58, 0.64 ],
+	// The position of the gender image
+	"inv_gender_position": [ 0.325, 0.275 ],
 
 	// The position of the player information (usually bottom-right)
 	"player_position": [ 0.7825, 0.7805 ],
