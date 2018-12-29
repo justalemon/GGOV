@@ -120,6 +120,18 @@ namespace GGO
         /// The size of the inventory rectangles.
         /// </summary>
         public Size InventoryRectangleSize => CreateSize("inv_rectangle_size");
+        /// <summary>
+        /// The position of the "Life" text.
+        /// </summary>
+        public Point InventoryLifePosition => new Point(CreateSize("inv_life_position"));
+        /// <summary>
+        /// The position of the health bar on the inventory.
+        /// </summary>
+        public Point InventoryHealthPosition => new Point(CreateSize("inv_health_position"));
+        /// <summary>
+        /// The size of the health bar on the inventory.
+        /// </summary>
+        public Size InventoryHealthSize => CreateSize("inv_health_size");
 
 
         /// <summary>

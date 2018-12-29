@@ -74,16 +74,28 @@ namespace GGO
         /// </summary>
         public static void Draw()
         {
+            // Get the current and max health and calculate the size of the health bar
+            float HealthMaxN = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;
+            float HealthCurrentN = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character) - 100;
+            float HealthWidth = HealthCurrentN / HealthMaxN * 100 / 100 * GGO.Config.InventoryHealthSize.Width;
+            Size HealthSize = new Size((int)HealthWidth, GGO.Config.InventoryHealthSize.Height);
+
             // Generate the information for the Rectangles and Texts
             UIRectangle GeneralBackground = new UIRectangle(GGO.Config.InventoryBackgroundPosition, GGO.Config.InventoryBackgroundSize, Colors.Inventory);
             UIRectangle InfoBackground = new UIRectangle(GGO.Config.InventoryBackgroundPosition, GGO.Config.InventoryInfoSize, Colors.Backgrounds);
             UIRectangle NameBackground = new UIRectangle(GGO.Config.InventoryColourPosition, GGO.Config.InventoryColourSize, Colors.Details);
+            UIRectangle HealthMax = new UIRectangle(GGO.Config.InventoryHealthPosition, GGO.Config.InventoryHealthSize, Color.Gray);
+            UIRectangle HealthCurrent = new UIRectangle(GGO.Config.InventoryHealthPosition, HealthSize, Color.White);
             UIText PlayerName = new UIText(Game.Player.Name, GGO.Config.InventoryPlayerName, 0.7f, Color.White, GTA.Font.Monospace, false, false, false);
+            UIText LifeText = new UIText("Life", GGO.Config.InventoryLifePosition, 0.3f, Color.White, GTA.Font.ChaletLondon, false, false, false);
             // Then, draw them on screen
             GeneralBackground.Draw();
             PlayerName.Draw();
             InfoBackground.Draw();
             NameBackground.Draw();
+            HealthMax.Draw();
+            HealthCurrent.Draw();
+            LifeText.Draw();
 
             // Get the image and filename for the player gender
             Bitmap GenderPicture = (Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? Resources.GenderMale : Resources.GenderFemale;

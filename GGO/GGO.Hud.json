@@ -61,6 +61,12 @@
 	"inv_rectangle_offset": [ -0.0035, -0.0075 ],
 	// The size of the inventory rectangles.
 	"inv_rectangle_size": [ 0.0925, 0.05 ],
+	// Position of the "Life" text
+	"inv_life_position": [ 0.49, 0.278 ],
+	// Position of the inventory health bar
+	"inv_health_position": [ 0.51, 0.281 ],
+	// Size of the inventory health bar
+	"inv_health_size": [ 0.15, 0.02 ],
 
 	// The position of the player information (usually bottom-right)
 	"player_position": [ 0.7825, 0.7805 ],
