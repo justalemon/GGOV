@@ -133,6 +133,16 @@ namespace GGO.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap InventoryItem {
+            get {
+                object obj = ResourceManager.GetObject("InventoryItem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NoWeapon {
             get {
                 object obj = ResourceManager.GetObject("NoWeapon", resourceCulture);
