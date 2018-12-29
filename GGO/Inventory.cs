@@ -8,9 +8,9 @@ namespace GGO
 {
     public static class Inventory
     {
-        private static uint? Primary => (uint)GGO.Config.Inventory["weapons"]["primary"];
-        private static uint? Secondary => (uint)GGO.Config.Inventory["weapons"]["secondary"];
-        private static uint? Backup => (uint)GGO.Config.Inventory["weapons"]["backup"];
+        private static uint? Primary => (uint)GGO.Config.Inventory["weapons"]["first"];
+        private static uint? Secondary => (uint)GGO.Config.Inventory["weapons"]["second"];
+        private static uint? Backup => (uint)GGO.Config.Inventory["weapons"]["third"];
 
         /// <summary>
         /// Tick that handles the 
@@ -72,7 +72,7 @@ namespace GGO
                 Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
                 if (WeaponBitmap != null)
                 {
-                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponPrimary, GGO.Config.InventoryWeaponSize);
+                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponFirst, GGO.Config.InventoryWeaponSize);
                 }
             }
             if (Secondary != null && Secondary != 0)
@@ -81,7 +81,7 @@ namespace GGO
                 Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
                 if (WeaponBitmap != null)
                 {
-                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponSecondary, GGO.Config.InventoryWeaponSize);
+                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponSecond, GGO.Config.InventoryWeaponSize);
                 }
             }
             if (Backup != null && Backup != 0)
@@ -90,7 +90,7 @@ namespace GGO
                 Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
                 if (WeaponBitmap != null)
                 {
-                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponBackup, GGO.Config.InventoryWeaponSize);
+                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, GGO.Config.InventoryWeaponThird, GGO.Config.InventoryWeaponSize);
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace GGO
                 return;
             }
 
-            if (Primary != null && Primary != 0 && GGO.Config.InventoryWeaponPrimary.IsClicked(GGO.Config.InventoryWeaponSize))
+            if (Primary != null && Primary != 0 && GGO.Config.InventoryWeaponFirst.IsClicked(GGO.Config.InventoryWeaponSize))
             {
                 if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Primary))
                 {
@@ -113,7 +113,7 @@ namespace GGO
                     Game.Player.Character.Weapons.Select((WeaponHash)Primary, true);
                 }
             }
-            else if (Secondary != null && Secondary != 0 && GGO.Config.InventoryWeaponSecondary.IsClicked(GGO.Config.InventoryWeaponSize))
+            else if (Secondary != null && Secondary != 0 && GGO.Config.InventoryWeaponSecond.IsClicked(GGO.Config.InventoryWeaponSize))
             {
                 if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Secondary))
                 {
@@ -124,7 +124,7 @@ namespace GGO
                     Game.Player.Character.Weapons.Select((WeaponHash)Secondary, true);
                 }
             }
-            else if (Backup != null && Backup != 0 && GGO.Config.InventoryWeaponBackup.IsClicked(GGO.Config.InventoryWeaponSize))
+            else if (Backup != null && Backup != 0 && GGO.Config.InventoryWeaponThird.IsClicked(GGO.Config.InventoryWeaponSize))
             {
                 if (!Game.Player.Character.Weapons.HasWeapon((WeaponHash)Backup))
                 {

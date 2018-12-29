@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.IO;
@@ -103,15 +103,15 @@ namespace GGO
         /// <summary>
         /// The inventory position of the primary weapon.
         /// </summary>
-        public Point InventoryWeaponPrimary => new Point(CreateSize("inv_primary_position"));
+        public Point InventoryWeaponFirst => new Point(CreateSize("inv_first_position"));
         /// <summary>
         /// The inventory position of the secondary weapon.
         /// </summary>
-        public Point InventoryWeaponSecondary => new Point(CreateSize("inv_secondary_position"));
+        public Point InventoryWeaponSecond => new Point(CreateSize("inv_second_position"));
         /// <summary>
         /// The inventory position of the backup weapon.
         /// </summary>
-        public Point InventoryWeaponBackup => new Point(CreateSize("inv_backup_position"));
+        public Point InventoryWeaponThird => new Point(CreateSize("inv_third_position"));
         /// <summary>
         /// The inventory position of the gender icon.
         /// </summary>

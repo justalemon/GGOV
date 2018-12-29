@@ -52,9 +52,9 @@
 	// The size of the weapon rectangles,
 	"inv_weapon_size": [ 0.0875, 0.035 ],
 	// Position of the primary, secondary and backup weapons
-	"inv_primary_position": [ 0.58, 0.5 ],
-	"inv_secondary_position": [ 0.58, 0.57 ],
-	"inv_backup_position": [ 0.58, 0.64 ],
+	"inv_first_position": [ 0.58, 0.5 ],
+	"inv_second_position": [ 0.58, 0.57 ],
+	"inv_third_position": [ 0.58, 0.64 ],
 	// The position of the gender image
 	"inv_gender_position": [ 0.325, 0.275 ],
 
