@@ -54,7 +54,7 @@
 	// Position of the inventory weapons
 	"inv_weapon_position": [ 0.58, 0.5 ],
 	// The separation between weapon icons
-	"inv_weapon_separation": [ 0, 0.07 ],
+	"inv_weapon_separation": [ 0, 0.058 ],
 	// The position of the gender image
 	"inv_gender_position": [ 0.325, 0.275 ],
 	// The offset of the inventory rectangles.
