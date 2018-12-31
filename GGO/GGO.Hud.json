@@ -46,7 +46,7 @@
 	// The size of the inventory background
 	"inv_background_size": [ 0.35, 0.6 ],
 	// The size for the information space
-	"inv_info_size": [ 0.35, 0.13 ],
+	"inv_info_size": [ 0.35, 0.14 ],
 	// The size for the colour space
 	"inv_coloured_size": [ 0.17, 0.06 ],
 	// The size of the weapon rectangles.
