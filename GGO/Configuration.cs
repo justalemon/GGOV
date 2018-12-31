@@ -132,6 +132,10 @@ namespace GGO
         /// The size of the health bar on the inventory.
         /// </summary>
         public Size InventoryHealthSize => CreateSize("inv_health_size");
+        /// <summary>
+        /// The position of the "Arms" text.
+        /// </summary>
+        public Point InventoryArmsPosition => new Point(CreateSize("inv_arms_position"));
 
 
         /// <summary>

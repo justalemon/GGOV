@@ -88,6 +88,7 @@ namespace GGO
             UIRectangle HealthCurrent = new UIRectangle(GGO.Config.InventoryHealthPosition, HealthSize, Color.White);
             UIText PlayerName = new UIText(Game.Player.Name, GGO.Config.InventoryPlayerName, 0.7f, Color.White, GTA.Font.Monospace, false, false, false);
             UIText LifeText = new UIText("Life", GGO.Config.InventoryLifePosition, 0.3f, Color.White, GTA.Font.ChaletLondon, false, false, false);
+            UIText ArmsText = new UIText("Arms", GGO.Config.InventoryArmsPosition, 0.3f, Color.White, GTA.Font.ChaletLondon, false);
             // Then, draw them on screen
             GeneralBackground.Draw();
             PlayerName.Draw();
@@ -96,6 +97,7 @@ namespace GGO
             HealthMax.Draw();
             HealthCurrent.Draw();
             LifeText.Draw();
+            ArmsText.Draw();
 
             // Get the image and filename for the player gender
             Bitmap GenderPicture = (Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? Resources.GenderMale : Resources.GenderFemale;
