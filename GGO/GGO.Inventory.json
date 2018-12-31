@@ -1,0 +1,12 @@
+{
+	// The weapons to show on the inventory
+	"weapons": [
+		177293209, // Heavy Sniper MK2
+		4024951519, // Assault SMG
+		584646201, // AP Pistol
+		2982836145, // RPG
+		2726580491 // Grenade Launcher
+	],
+	// The gender to show
+	"gender": 0
+}

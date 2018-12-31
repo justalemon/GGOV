@@ -93,36 +93,36 @@ namespace GGO
             Size HealthPosition = Small ? GGO.Config.SquadHealthPos : GGO.Config.PlayerHealthPos;
 
             // Check what type of game entity has been sent and set the appropiate parameters
-            if (GameEntity.GetType() == typeof(Ped))
+            if (GameEntity is Ped GamePed)
             {
-                HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, (Ped)GameEntity) - 100;
-                HealthMax = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, (Ped)GameEntity) - 100;
+                HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, GamePed) - 100;
+                HealthMax = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, GamePed) - 100;
                 
                 BackgroundPosition = Small ? Calculations.GetSquadPosition(GGO.Config, Count, true) : GGO.Config.PlayerInformation;
 
                 // Set the correct ped name
-                if (GGO.Config.Name == "default" && ((Ped)GameEntity).IsPlayer)
+                if (GGO.Config.Name == "default" && GamePed.IsPlayer)
                 {
                     EntityName = Game.Player.Name;
                 }
-                else if (((Ped)GameEntity).IsPlayer)
+                else if (GamePed.IsPlayer)
                 {
                     EntityName = GGO.Config.Name;
                 }
-                else if (GGO.Config.Raw["names"][((Ped)GameEntity).Model.Hash.ToString()] != null)
+                else if (GGO.Config.Raw["names"][GamePed.Model.Hash.ToString()] != null)
                 {
-                    EntityName = (string)GGO.Config.Raw["names"][((Ped)GameEntity).Model.Hash.ToString()];
+                    EntityName = (string)GGO.Config.Raw["names"][GamePed.Model.Hash.ToString()];
                 }
                 else
                 {
-                    EntityName = ((Ped)GameEntity).Model.Hash.ToString();
+                    EntityName = GamePed.Model.Hash.ToString();
                 }
             }
-            else if (GameEntity.GetType() == typeof(Vehicle))
+            else if (GameEntity is Vehicle Car)
             {
-                HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, (Vehicle)GameEntity);
+                HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Car);
                 HealthMax = 1000;
-                EntityName = ((Vehicle)GameEntity).FriendlyName;
+                EntityName = Car.FriendlyName;
                 BackgroundPosition = GGO.Config.VehicleInformation;
             }
             else

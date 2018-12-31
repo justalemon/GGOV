@@ -9,6 +9,14 @@ namespace GGO
         /// </summary>
         public static Color Backgrounds = Color.FromArgb(175, 0, 0, 0);
         /// <summary>
+        /// Color for the inventory background.
+        /// </summary>
+        public static Color Inventory = Color.FromArgb(100, 0, 0, 0);
+        /// <summary>
+        /// Color for the inventory name.
+        /// </summary>
+        public static Color Details = Color.FromArgb(255, 42, 156, 204);
+        /// <summary>
         /// Color for the dividers of the health bars.
         /// </summary>
         public static Color Dividers = Color.FromArgb(125, 230, 230, 230);
