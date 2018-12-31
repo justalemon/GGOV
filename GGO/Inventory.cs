@@ -7,7 +7,10 @@ using System.Drawing;
 
 namespace GGO
 {
-    public static class Inventory
+    /// <summary>
+    /// Script that handles the inventory actions.
+    /// </summary>
+    public class Inventory : Script
     {
         /// <summary>
         /// The weapons that the Player wants on the inventory.
@@ -17,11 +20,8 @@ namespace GGO
         /// Positions of the weapons inside of the inventory.
         /// </summary>
         private static Point[] Positions = new Point[5];
-
-        /// <summary>
-        /// Stores the positions of the weapons once the configuration has been loaded.
-        /// </summary>
-        public static void StorePositions()
+        
+        public Inventory()
         {
             // Iterate between 0-4 (1-5)
             for (int Index = 0; Index < 5; Index++)
@@ -30,12 +30,15 @@ namespace GGO
                 // Formula for Y: VerticalPosition + (SeparationBetweenWeapons * WeaponNumber)
                 Positions[Index] = new Point(GGO.Config.InventoryWeaponPosition.X, GGO.Config.InventoryWeaponPosition.Y + (GGO.Config.InventoryWeaponSeparation.Height * Index));
             }
+
+            // Add the events
+            Tick += OnTick;
         }
 
         /// <summary>
-        /// Tick that handles the drawing of UI stuff.
+        /// Tick that handles the drawing and actions of the inventory.
         /// </summary>
-        public static void Tick(object Sender, EventArgs Args)
+        public static void OnTick(object Sender, EventArgs Args)
         {
             // Disable the weapon wheel
             Game.DisableControlThisFrame(0, Control.SelectWeapon);
