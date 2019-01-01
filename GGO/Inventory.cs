@@ -16,13 +16,13 @@ namespace GGO
     public class Inventory : Script
     {
         /// <summary>
-        /// Positions of the weapons inside of the inventory.
-        /// </summary>
-        private static Point[] Positions = new Point[5];
-        /// <summary>
         /// Configuration for the inventory script.
         /// </summary>
         private InventoryConfig Config;
+        /// <summary>
+        /// Positions of the weapons inside of the inventory.
+        /// </summary>
+        private static Point[] Positions = new Point[5];
         
         public Inventory()
         {
