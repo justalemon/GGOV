@@ -8,14 +8,14 @@ using System.Linq;
 
 namespace GGO
 {
-    public class GGO : Script
+    public class Hud : Script
     {
         /// <summary>
         /// Our configuration parameters.
         /// </summary>
         public static Configuration Config = new Configuration("scripts", new Size(UI.WIDTH, UI.HEIGHT));
 
-        public GGO()
+        public Hud()
         {
             // Notify that we are starting the script
             Logging.Info("===== GGOV for SHVDN is booting up... =====");
