@@ -72,71 +72,6 @@ namespace GGO
         /// </summary>
         public Size SquadSize => CreateSize("squad_size");
 
-        /// <summary>
-        /// The position of the inventory background
-        /// </summary>
-        public Point InventoryBackgroundPosition => new Point(CreateSize("inv_background_position"));
-        /// <summary>
-        /// The position of the coloured tag
-        /// </summary>
-        public Point InventoryColourPosition => new Point(CreateSize("inv_colour_position"));
-        /// <summary>
-        /// The position of the player name on the inventory
-        /// </summary>
-        public Point InventoryPlayerName => new Point(CreateSize("inv_playername_position"));
-        /// <summary>
-        /// The size of the inventory background
-        /// </summary>
-        public Size InventoryBackgroundSize => CreateSize("inv_background_size");
-        /// <summary>
-        /// The size for the information space
-        /// </summary>
-        public Size InventoryInfoSize => CreateSize("inv_info_size");
-        /// <summary>
-        /// The size for the colour space
-        /// </summary>
-        public Size InventoryColourSize => CreateSize("inv_coloured_size");
-        /// <summary>
-        /// The size of the inventory weapons.
-        /// </summary>
-        public Size InventoryWeaponSize => CreateSize("inv_weapon_size");
-        /// <summary>
-        /// The inventory position of the weapons.
-        /// </summary>
-        public Point InventoryWeaponPosition => new Point(CreateSize("inv_weapon_position"));
-        /// <summary>
-        /// The separation between inventory icons.
-        /// </summary>
-        public Size InventoryWeaponSeparation => CreateSize("inv_weapon_separation");
-        /// <summary>
-        /// The inventory position of the gender icon.
-        /// </summary>
-        public Point InventoryGender => new Point(CreateSize("inv_gender_position"));
-        /// <summary>
-        /// The offset of the inventory rectangles.
-        /// </summary>
-        public Size InventoryRectangleOffset => CreateSize("inv_rectangle_offset");
-        /// <summary>
-        /// The size of the inventory rectangles.
-        /// </summary>
-        public Size InventoryRectangleSize => CreateSize("inv_rectangle_size");
-        /// <summary>
-        /// The position of the "Life" text.
-        /// </summary>
-        public Point InventoryLifePosition => new Point(CreateSize("inv_life_position"));
-        /// <summary>
-        /// The position of the health bar on the inventory.
-        /// </summary>
-        public Point InventoryHealthPosition => new Point(CreateSize("inv_health_position"));
-        /// <summary>
-        /// The size of the health bar on the inventory.
-        /// </summary>
-        public Size InventoryHealthSize => CreateSize("inv_health_size");
-        /// <summary>
-        /// The position of the "Arms" text.
-        /// </summary>
-        public Point InventoryArmsPosition => new Point(CreateSize("inv_arms_position"));
-
 
         /// <summary>
         /// The position of the player information.
@@ -245,10 +180,6 @@ namespace GGO
         /// The RAW Configuration.
         /// </summary>
         public JObject Raw { get; set; }
-        /// <summary>
-        /// The inventory configuration.
-        /// </summary>
-        public JObject Inventory { get; set; }
 
         /// <summary>
         /// Loads up the configuration from "GGO.Shared.json"
@@ -257,10 +188,8 @@ namespace GGO
         {
             // Read all of the text that is on the files
             string HudConfig = File.ReadAllText(Location + "\\GGO.Hud.json");
-            string InvConfig = File.ReadAllText(Location + "\\GGO.Inventory.json");
             // Load it on the parsers
             Raw = JObject.Parse(HudConfig);
-            Inventory = JObject.Parse(InvConfig);
             // And store our current resolution
             Resolution = CurrentResolution;
         }

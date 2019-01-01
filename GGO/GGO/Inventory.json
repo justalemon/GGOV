@@ -1,0 +1,46 @@
+{
+    "enabled": true,
+    "weapons": [
+        177293209,
+        4024951519,
+        584646201,
+        2982836145,
+        2726580491
+    ],
+    "gender": 0,
+
+    "background_x": 0.325,
+    "background_y": 0.25,
+    "background_width": 0.35,
+    "background_height": 0.6,
+    "info_width": 0.35,
+    "info_height": 0.14,
+
+    "player_x": 0.3,
+    "player_y": 0.27,
+    "player_width": 0.17,
+    "player_height": 0.06,
+    "gender_x": 0.325,
+    "gender_y": 0.275,
+    "name_x": 0.36,
+    "name_y": 0.275,
+
+    "health_x" : 0.51,
+    "health_y" : 0.281,
+    "health_width": 0.15,
+    "health_height": 0.02,
+    "life_x": 0.49,
+    "life_y": 0.278,
+
+    "arms_x": 0.58,
+    "arms_y": 0.465,
+    "weapon_x" : 0.58,
+    "weapon_y" : 0.5,
+    "weapon_width": 0.0875,
+    "weapon_height": 0.035,
+    "weapon_spacing": 0.058,
+    "weapon_rectangle_x": -0.0035,
+    "weapon_rectangle_y": -0.0075,
+    "weapon_rectangle_width": 0.0925,
+    "weapon_rectangle_height": 0.05
+}
