@@ -87,6 +87,16 @@ namespace GGO.UserData
         [JsonProperty("gender_y")]
         public float GenderY { get; set; }
         /// <summary>
+        /// Width of the gender icon.
+        /// </summary>
+        [JsonProperty("gender_width")]
+        public float GenderWidth { get; set; }
+        /// <summary>
+        /// Height of the gender icon.
+        /// </summary>
+        [JsonProperty("gender_height")]
+        public float GenderHeight { get; set; }
+        /// <summary>
         /// X position of the player name.
         /// </summary>
         [JsonProperty("name_x")]
