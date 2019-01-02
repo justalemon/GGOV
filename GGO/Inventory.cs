@@ -118,12 +118,12 @@ namespace GGO
             Bitmap GenderPicture = Config.PlayerGender == Gender.Male ? Resources.GenderMale : Resources.GenderFemale;
             string GenderFilename = Config.PlayerGender == Gender.Male ? nameof(Resources.GenderMale) : nameof(Resources.GenderFemale);
             // Draw the gender image
-            Toolkit.Image(GenderPicture, GenderFilename, LiteralPoint(Config.GenderX, Config.GenderY), LiteralSize(Config.GenderWidth, Config.GenderHeight));
+            DrawImage(GenderPicture, GenderFilename, LiteralPoint(Config.GenderX, Config.GenderY), LiteralSize(Config.GenderWidth, Config.GenderHeight));
 
             // For each one of the positions, draw a background rectangle
             foreach (Point Position in Positions)
             {
-                Toolkit.Image(Resources.InventoryItem, nameof(Resources.InventoryItem), Position + LiteralSize(Config.WeaponRectangleX, Config.WeaponRectangleY), LiteralSize(Config.WeaponRectangleWidth, Config.WeaponRectangleHeight));
+                DrawImage(Resources.InventoryItem, nameof(Resources.InventoryItem), Position + LiteralSize(Config.WeaponRectangleX, Config.WeaponRectangleY), LiteralSize(Config.WeaponRectangleWidth, Config.WeaponRectangleHeight));
             }
 
             // Iterate over the number of player weapons
@@ -136,7 +136,7 @@ namespace GGO
                 // If the bitmap is valid, draw it
                 if (WeaponBitmap != null)
                 {
-                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, Positions[Index], LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
+                    DrawImage(WeaponBitmap, "Weapon" + Name, Positions[Index], LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
                 }
             }
         }
