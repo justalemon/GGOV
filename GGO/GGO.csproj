@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Toolkit.cs" />
     <Compile Include="Tools.cs" />
+    <Compile Include="UserData\HudConfig.cs" />
     <Compile Include="UserData\InventoryConfig.cs" />
   </ItemGroup>
   <ItemGroup>
