@@ -74,6 +74,9 @@
     <None Include="GGO.Hud.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="GGO\Hud.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="GGO\Inventory.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
