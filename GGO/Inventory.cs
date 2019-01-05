@@ -1,4 +1,3 @@
-using GGO.Properties;
 using GTA;
 using GTA.Native;
 using System;
@@ -37,8 +36,12 @@ namespace GGO
         /// </summary>
         public static void Tick(object Sender, EventArgs Args)
         {
+            // Don't process when using a controller and in a vehicle
+            if (Game.CurrentInputMode == InputMode.GamePad && Game.Player.Character.IsInVehicle()) return;
+
             // Disable the weapon wheel
             Game.DisableControlThisFrame(0, Control.SelectWeapon);
+
             // If the user just pressed TAB/L1/LB
             if (Game.IsDisabledControlJustPressed(0, Control.SelectWeapon))
             {
@@ -100,15 +103,14 @@ namespace GGO
             ArmsText.Draw();
 
             // Get the image and filename for the player gender
-            Bitmap GenderPicture = (Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? Resources.GenderMale : Resources.GenderFemale;
-            string GenderFilename = (Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? nameof(Resources.GenderMale) : nameof(Resources.GenderFemale);
+            string GenderFilename = "scripts\\GGO\\" + ((Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? "GenderMale.png" : "GenderFemale.png");
             // Draw the gender image
-            Toolkit.Image(GenderPicture, GenderFilename, GGO.Config.InventoryGender, GGO.Config.IconSize);
+            Toolkit.Image(GenderFilename, GGO.Config.InventoryGender, GGO.Config.IconSize);
 
             // For each one of the positions, draw a background rectangle
             foreach (Point Position in Positions)
             {
-                Toolkit.Image(Resources.InventoryItem, nameof(Resources.InventoryItem), Position + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
+                Toolkit.Image("scripts\\GGO\\InventoryItem.png", Position + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
             }
 
             // Iterate over the number of player weapons
@@ -116,13 +118,7 @@ namespace GGO
             {
                 // Get the weapon internal name
                 string Name = Weapon.GetDisplayNameFromHash((WeaponHash)Weapons[Index]).Replace("WTT_", string.Empty);
-                // Get the bitmap
-                Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
-                // If the bitmap is valid, draw it
-                if (WeaponBitmap != null)
-                {
-                    Toolkit.Image(WeaponBitmap, "Weapon" + Name, Positions[Index], GGO.Config.InventoryWeaponSize);
-                }
+                Toolkit.Image($"scripts\\GGO\\Weapon{Name}.png", Positions[Index], GGO.Config.InventoryWeaponSize);
             }
         }
 

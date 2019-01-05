@@ -1,11 +1,8 @@
-﻿using GGO.Properties;
-using GTA;
+﻿using GTA;
 using GTA.Math;
 using GTA.Native;
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 
 namespace GGO
 {
@@ -17,36 +14,14 @@ namespace GGO
         private static int Index = 0;
         
         /// <summary>
-        /// Draws an image based on a Bitmap.
+        /// Draws an image from filename.
         /// </summary>
-        /// <param name="Resource">The Bitmap image to draw.</param>
+        /// <param name="Filename">The path to the image to draw.</param>
         /// <param name="Position">Where the image should be drawn.</param>
         /// <param name="Sizes">The size of the image.</param>
-        public static void Image(Bitmap Resource, string Filename, Point Position, Size Sizes)
+        public static void Image(string Filename, Point Position, Size Sizes)
         {
-            // This is going to be our image location
-            string OutputFile = Path.Combine(Path.GetTempPath(), "GGO", Filename + ".png");
-
-            // If the file already exists, return it and don't waste resources
-            if (!File.Exists(OutputFile))
-            {
-                // If our %TEMP%\GGO folder does not exist, create it
-                if (!Directory.Exists(Path.GetDirectoryName(OutputFile)))
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(OutputFile));
-                }
-
-                // Create a memory stream
-                MemoryStream ImageStream = new MemoryStream();
-                // Dump the image into it
-                Resource.Save(ImageStream, ImageFormat.Png);
-                // And close the stream
-                ImageStream.Close();
-                // Finally, write the stream into the disc
-                File.WriteAllBytes(OutputFile, ImageStream.ToArray());
-            }
-
-            UI.DrawTexture(OutputFile, Index, 0, 200, Position, Sizes);
+            UI.DrawTexture(Filename, Index, 0, 200, Position, Sizes);
             Index++;
         }
 
@@ -63,13 +38,13 @@ namespace GGO
         /// </summary>
         /// <param name="File">The file to draw.</param>
         /// <param name="Position">The on-screen position.</param>
-        public static void Icon(Bitmap Original, string Filename, Point Position)
+        public static void Icon(string Filename, Point Position)
         {
             // Draw the background
             UIRectangle Background = new UIRectangle(Position, GGO.Config.SquaredBackground, Colors.Backgrounds);
             Background.Draw();
             // And the image over it
-            Image(Original, Filename, Position + GGO.Config.IconPosition, GGO.Config.IconSize);
+            Image(Filename, Position + GGO.Config.IconPosition, GGO.Config.IconSize);
         }
 
         /// <summary>
@@ -93,8 +68,12 @@ namespace GGO
             Size HealthPosition = Small ? GGO.Config.SquadHealthPos : GGO.Config.PlayerHealthPos;
 
             // Check what type of game entity has been sent and set the appropiate parameters
-            if (GameEntity is Ped GamePed)
+            if (GameEntity is Ped)
             {
+                //change back
+                Ped GamePed = (Ped)GameEntity;
+
+
                 HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, GamePed) - 100;
                 HealthMax = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, GamePed) - 100;
                 
@@ -118,8 +97,13 @@ namespace GGO
                     EntityName = GamePed.Model.Hash.ToString();
                 }
             }
-            else if (GameEntity is Vehicle Car)
+            else if (GameEntity is Vehicle)
             {
+                //change back
+                Vehicle Car = (Vehicle)GameEntity;
+
+
+
                 HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Car);
                 HealthMax = 1000;
                 EntityName = Car.FriendlyName;
@@ -180,19 +164,11 @@ namespace GGO
             AmmoBackground.Draw();
             UIText Text = new UIText(PlayerWeapon.AmmoInClip.ToString(), AmmoLocation, .6f, Color.White, (GTA.Font)2, true);
             Text.Draw();
-
-            // Get the weapon bitmap
-            // If is not there, return
-            Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
-            if (WeaponBitmap == null)
-            {
-                return;
-            }
-
+            
             // Finally, draw the weapon image with the respective background
             UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, GGO.Config.WeaponBackground, Colors.Backgrounds);
             WeaponBackground.Draw();
-            Image(WeaponBitmap, "Weapon" + Name, WeaponLocation + GGO.Config.WeaponPosition, GGO.Config.WeaponSize);
+            Image($"scripts\\GGO\\Weapon{Name}.png", WeaponLocation + GGO.Config.WeaponPosition, GGO.Config.WeaponSize);
         }
 
         /// <summary>
@@ -214,7 +190,7 @@ namespace GGO
             ScreenPos.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 
             // Finally, draw the marker on screen
-            Image(Resources.DeadMarker, nameof(Resources.DeadMarker), ScreenPos, MarkerSize);
+            Image("scripts\\GGO\\DeadMarker.png", ScreenPos, MarkerSize);
         }
     }
 }

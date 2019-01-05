@@ -77,82 +77,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\IconVehicle.png" />
-    <None Include="Resources\IconAlive.png" />
-    <None Include="Resources\IconWeapon.png" />
-    <None Include="Resources\IconDead.png" />
-    <None Include="Resources\WeaponPIST.png" />
-    <None Include="Resources\WeaponPIST_50.png" />
-    <None Include="Resources\WeaponSG_PMP.png" />
-    <None Include="Resources\WeaponREVOLVER.png" />
-    <None Include="Resources\WeaponSG_SOF.png" />
-    <None Include="Resources\WeaponSMG.png" />
-    <None Include="Resources\WeaponSNIP_RIF.png" />
-    <None Include="Resources\WeaponRIFLE_ADV.png" />
-    <None Include="Resources\WeaponPIST_AP.png" />
-    <None Include="Resources\WeaponRIFLE_ASL.png" />
-    <None Include="Resources\WeaponSG_ASL.png" />
-    <None Include="Resources\WeaponSMG_ASL.png" />
-    <None Include="Resources\WeaponSG_BLP.png" />
-    <None Include="Resources\WeaponRIFLE_CBN.png" />
-    <None Include="Resources\WeaponMG_CBT.png" />
-    <None Include="Resources\WeaponCOMBATPDW.png" />
-    <None Include="Resources\WeaponPIST_CBT.png" />
-    <None Include="Resources\WeaponCMPRIFLE.png" />
-    <None Include="Resources\WeaponDBSHGN.png" />
-    <None Include="Resources\WeaponFLAREGUN.png" />
-    <None Include="Resources\WeaponSNIP_HVY.png" />
-    <None Include="Resources\WeaponMKPISTOL.png" />
-    <None Include="Resources\WeaponMG.png" />
-    <None Include="Resources\WeaponSMG_MCR.png" />
-    <None Include="Resources\WeaponMINIGUN.png" />
-    <None Include="Resources\DeadMarker.png" />
-    <None Include="Resources\WeaponRAILGUN.png" />
-    <None Include="Resources\WeaponREV_DA.png" />
-    <None Include="Resources\WeaponREVOLVER2.png" />
-    <None Include="Resources\WeaponRIFLE_ASL2.png" />
-    <None Include="Resources\WeaponRIFLE_CBN2.png" />
-    <None Include="Resources\WeaponRPG.png" />
-    <None Include="Resources\WeaponSG_PMP2.png" />
-    <None Include="Resources\WeaponSMG2.png" />
-    <None Include="Resources\WeaponSNIP_HVY2.png" />
-    <None Include="Resources\WeaponSNSPISTOL.png" />
-    <None Include="Resources\WeaponSNSPISTOL2.png" />
-    <None Include="Resources\WeaponSPCARBINE.png" />
-    <None Include="Resources\WeaponSPCARBINE2.png" />
-    <None Include="Resources\WeaponVPISTOL.png" />
-    <None Include="Resources\WeaponAUTOSHGN.png" />
-    <None Include="Resources\WeaponBULLRIFLE.png" />
-    <None Include="Resources\WeaponBULLRIFLE2.png" />
-    <None Include="Resources\WeaponCMPGL.png" />
-    <None Include="Resources\WeaponFWRKLNCHR.png" />
-    <None Include="Resources\WeaponGL.png" />
-    <None Include="Resources\WeaponGUSENBERG.png" />
-    <None Include="Resources\WeaponHMKRIFLE.png" />
-    <None Include="Resources\WeaponHOMLNCH.png" />
-    <None Include="Resources\WeaponHVYSHOT.png" />
-    <None Include="Resources\WeaponMCHPIST.png" />
-    <None Include="Resources\WeaponMG_CBT2.png" />
-    <None Include="Resources\WeaponMINISMG.png" />
-    <None Include="Resources\WeaponMKRIFLE2.png" />
-    <None Include="Resources\WeaponMUSKET.png" />
-    <None Include="Resources\WeaponPIST2.png" />
-    <None Include="Resources\NoWeapon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\GenderFemale.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\GenderMale.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\InventoryItem.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

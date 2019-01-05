@@ -1,4 +1,3 @@
-using GGO.Properties;
 using GTA;
 using GTA.Native;
 using System;
@@ -46,6 +45,57 @@ namespace GGO
             Logging.Info("GGOV for SHVDN is up and running");
         }
 
+        Ped[] NearbyPeds = new Ped[0], FriendlyPeds = new Ped[0];
+        int nextGetPeds = 0;
+
+        private void NearbyPedsLogic()
+        {
+            // Only do logic if a relevant configuration is enabled
+            if (Config.SquadMembers || Config.DeadMarkers)
+            {
+                // Get all of the peds and store them, if it has been a second a more since we last did
+                if (Game.GameTime >= nextGetPeds)
+                {
+                    NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
+                    FriendlyPeds = NearbyPeds.Where(P => P.IsFriendly() && P.IsMissionEntity()).ToArray();
+
+                    nextGetPeds = Game.GameTime + 1000;
+                }
+
+                if (Config.SquadMembers)
+                {
+                    foreach (Ped ped in FriendlyPeds)
+                    {
+                        // Skip non-existant peds
+                        if (ped == null || !ped.Exists()) continue;
+
+                        // Get the number of the ped
+                        int Number = Array.IndexOf(FriendlyPeds, ped);
+
+                        // Select the correct image and name for the file
+                        Bitmap ImageType = ped.IsAlive ? Resources.IconAlive : Resources.IconDead;
+                        string ImageName = ped.IsAlive ? nameof(Resources.IconAlive) : nameof(Resources.IconDead);
+
+                        // Draw the icon and the ped info
+                        Toolkit.Icon(ImageType, ImageName, Calculations.GetSquadPosition(Config, Number));
+                        Toolkit.EntityInfo(ped, true, Number);
+                    }
+                }
+
+                if (Config.DeadMarkers)
+                {
+                    foreach (Ped ped in NearbyPeds)
+                    {
+                        // Only existing dead on-screen peds
+                        if (ped == null || !ped.Exists() || ped.IsAlive || !ped.IsOnScreen) continue;
+
+                        // And draw the dead marker
+                        Toolkit.DeadMarker(ped);
+                    }
+                }
+            }
+        }
+
         private void OnTick(object Sender, EventArgs Args)
         {
             // Don't draw the UI if the game is loading, paused, player is dead or it cannot be controlled
@@ -73,6 +123,10 @@ namespace GGO
                 Function.Call(Hash.DISPLAY_RADAR, false);
             }
 
+<<<<<<< HEAD
+            // Do stuff on nearby peds
+            NearbyPedsLogic();
+=======
             // Get all of the peds and store them during this tick
             Ped[] NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
             
@@ -89,11 +143,10 @@ namespace GGO
                     int Number = Array.IndexOf(FriendlyPeds, SquadMember);
 
                     // Select the correct image and name for the file
-                    Bitmap ImageType = SquadMember.IsAlive ? Resources.IconAlive : Resources.IconDead;
-                    string ImageName = SquadMember.IsAlive ? nameof(Resources.IconAlive) : nameof(Resources.IconDead);
+                    string ImageName = SquadMember.IsAlive ? "scripts\\GGO\\IconAlive.png" : "scripts\\GGO\\IconDead.png";
 
                     // Draw the icon and the ped info
-                    Toolkit.Icon(ImageType, ImageName, Calculations.GetSquadPosition(Config, Number));
+                    Toolkit.Icon(ImageName, Calculations.GetSquadPosition(Config, Number));
                     Toolkit.EntityInfo(SquadMember, true, Number);
                 }
             }
@@ -108,15 +161,16 @@ namespace GGO
                     Toolkit.DeadMarker(DeadPed);
                 }
             }
+>>>>>>> master
 
             // Then, start by drawing the player info
-            Toolkit.Icon(Resources.IconAlive, nameof(Resources.IconAlive), Config.PlayerPosition);
+            Toolkit.Icon("scripts\\GGO\\IconAlive.png", Config.PlayerPosition);
             Toolkit.EntityInfo(Game.Player.Character);
 
             // If the player is on a vehicle, also draw that information
             if (Game.Player.Character.CurrentVehicle != null && Config.VehicleInfo)
             {
-                Toolkit.Icon(Resources.IconVehicle, nameof(Resources.IconVehicle), Config.VehicleIcon);
+                Toolkit.Icon("scripts\\GGO\\IconVehicle.png", Config.VehicleIcon);
                 Toolkit.EntityInfo(Game.Player.Character.CurrentVehicle);
             }
 
@@ -127,23 +181,24 @@ namespace GGO
             // If they are not available, draw dummies instead
             if (CurrentStyle == WeaponStyle.Main || CurrentStyle == WeaponStyle.Double)
             {
-                Toolkit.Icon(Resources.IconWeapon, nameof(Resources.IconWeapon), Config.PrimaryIcon);
+                Toolkit.Icon("scripts\\GGO\\IconWeapon.png", Config.PrimaryIcon);
                 Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
             {
-                Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.PrimaryIcon);
-                Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.PrimaryBackground);
+                Toolkit.Icon("scripts\\GGO\\NoWeapon.png", Config.PrimaryIcon);
+                Toolkit.Icon("scripts\\GGO\\NoWeapon.png", Config.PrimaryBackground);
             }
+
             if (CurrentStyle == WeaponStyle.Sidearm || CurrentStyle == WeaponStyle.Double)
             {
-                Toolkit.Icon(Resources.IconWeapon, nameof(Resources.IconWeapon), Config.SecondaryIcon);
+                Toolkit.Icon("scripts\\GGO\\IconWeapon.png", Config.SecondaryIcon);
                 Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
             {
-                Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.SecondaryIcon);
-                Toolkit.Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), Config.SecondaryBackground);
+                Toolkit.Icon("scripts\\GGO\\NoWeapon.png", Config.SecondaryIcon);
+                Toolkit.Icon("scripts\\GGO\\NoWeapon.png", Config.SecondaryBackground);
             }
         }
 
