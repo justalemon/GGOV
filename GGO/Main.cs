@@ -48,8 +48,34 @@ namespace GGO
         Ped[] NearbyPeds = new Ped[0], FriendlyPeds = new Ped[0];
         int nextGetPeds = 0;
 
-        private void NearbyPedsLogic()
+        private void OnTick(object Sender, EventArgs Args)
         {
+            // Don't draw the UI if the game is loading, paused, player is dead or it cannot be controlled
+            if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive || !Game.Player.CanControlCharacter)
+            {
+                return;
+            }
+
+            // Reset the index of the images
+            Toolkit.ResetIndex();
+
+            // Disable the colliding HUD elements by default
+            if (Config.DisableHud)
+            {
+                UI.HideHudComponentThisFrame(HudComponent.WeaponIcon);
+                UI.HideHudComponentThisFrame(HudComponent.AreaName);
+                UI.HideHudComponentThisFrame(HudComponent.StreetName);
+                UI.HideHudComponentThisFrame(HudComponent.VehicleName);
+                UI.HideHudComponentThisFrame(HudComponent.HelpText);
+            }
+
+            // If the user wants to disable the Radar and is not hidden, do it now
+            if (Config.DisableRadar && !Function.Call<bool>(Hash.IS_RADAR_HIDDEN))
+            {
+                Function.Call(Hash.DISPLAY_RADAR, false);
+            }
+
+            // Do stuff on nearby peds
             // Only do logic if a relevant configuration is enabled
             if (Config.SquadMembers || Config.DeadMarkers)
             {
@@ -93,37 +119,6 @@ namespace GGO
                     }
                 }
             }
-        }
-
-        private void OnTick(object Sender, EventArgs Args)
-        {
-            // Don't draw the UI if the game is loading, paused, player is dead or it cannot be controlled
-            if (Game.IsLoading || Game.IsPaused || !Game.Player.Character.IsAlive || !Game.Player.CanControlCharacter)
-            {
-                return;
-            }
-
-            // Reset the index of the images
-            Toolkit.ResetIndex();
-
-            // Disable the colliding HUD elements by default
-            if (Config.DisableHud)
-            {
-                UI.HideHudComponentThisFrame(HudComponent.WeaponIcon);
-                UI.HideHudComponentThisFrame(HudComponent.AreaName);
-                UI.HideHudComponentThisFrame(HudComponent.StreetName);
-                UI.HideHudComponentThisFrame(HudComponent.VehicleName);
-                UI.HideHudComponentThisFrame(HudComponent.HelpText);
-            }
-
-            // If the user wants to disable the Radar and is not hidden, do it now
-            if (Config.DisableRadar && !Function.Call<bool>(Hash.IS_RADAR_HIDDEN))
-            {
-                Function.Call(Hash.DISPLAY_RADAR, false);
-            }
-
-            // Do stuff on nearby peds
-            NearbyPedsLogic();
 
             // Then, start by drawing the player info
             Toolkit.Icon("IconAlive.png", Config.PlayerPosition);
