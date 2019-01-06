@@ -62,7 +62,11 @@ namespace GGO
                     DefaultPosition = LiteralPoint(Config.PlayerX, Config.PlayerY);
                     break;
                 case Position.PlayerInfo:
+                case Position.PlayerAmmo:
                     DefaultPosition = LiteralPoint(Config.PlayerX, Config.PlayerY) + LiteralSize(Config.SquareWidth, 0) + LiteralSize(Config.CommonX, 0);
+                    break;
+                case Position.PlayerWeapon:
+                    DefaultPosition = LiteralPoint(Config.PlayerX, Config.PlayerY) + LiteralSize(Config.SquareWidth, 0) + LiteralSize(Config.SquareWidth, 0) + LiteralSize(Config.CommonX, 0) + LiteralSize(Config.CommonX, 0);
                     break;
                 default:
                     throw new NotSupportedException("You can't calculate the position for this Screen location.");

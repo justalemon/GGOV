@@ -29,6 +29,14 @@
         /// <summary>
         /// Information related to the player.
         /// </summary>
-        PlayerInfo = 3
+        PlayerInfo = 3,
+        /// <summary>
+        /// Ammo count for the current weapon.
+        /// </summary>
+        PlayerAmmo = 4,
+        /// <summary>
+        /// Weapon image.
+        /// </summary>
+        PlayerWeapon = 5
     }
 }
