@@ -72,12 +72,11 @@ namespace GGO
                         // Get the number of the ped
                         int Number = Array.IndexOf(FriendlyPeds, ped);
 
-                        // Select the correct image and name for the file
-                        Bitmap ImageType = ped.IsAlive ? Resources.IconAlive : Resources.IconDead;
-                        string ImageName = ped.IsAlive ? nameof(Resources.IconAlive) : nameof(Resources.IconDead);
+                        // Select the correct image
+                        string ImagePath = ped.IsAlive ? "scripts\\GGO\\IconAlive.png" : "scripts\\GGO\\IconDead.png";
 
                         // Draw the icon and the ped info
-                        Toolkit.Icon(ImageType, ImageName, Calculations.GetSquadPosition(Config, Number));
+                        Toolkit.Icon(ImageName, Calculations.GetSquadPosition(Config, Number));
                         Toolkit.EntityInfo(ped, true, Number);
                     }
                 }
@@ -123,45 +122,8 @@ namespace GGO
                 Function.Call(Hash.DISPLAY_RADAR, false);
             }
 
-<<<<<<< HEAD
             // Do stuff on nearby peds
             NearbyPedsLogic();
-=======
-            // Get all of the peds and store them during this tick
-            Ped[] NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
-            
-            // Draw the squad information on the top left if the user wants to
-            if (Config.SquadMembers)
-            {
-                // Store the peds that are friend of us
-                Ped[] FriendlyPeds = NearbyPeds.Where(P => P.IsFriendly() && P.IsMissionEntity()).ToArray();
-
-                // And iterate over them
-                foreach (Ped SquadMember in FriendlyPeds)
-                {
-                    // Get the number of the ped
-                    int Number = Array.IndexOf(FriendlyPeds, SquadMember);
-
-                    // Select the correct image and name for the file
-                    string ImageName = SquadMember.IsAlive ? "scripts\\GGO\\IconAlive.png" : "scripts\\GGO\\IconDead.png";
-
-                    // Draw the icon and the ped info
-                    Toolkit.Icon(ImageName, Calculations.GetSquadPosition(Config, Number));
-                    Toolkit.EntityInfo(SquadMember, true, Number);
-                }
-            }
-
-            // Draw the dead ped markers over their heads, if the user wants to
-            if (Config.DeadMarkers)
-            {
-                // Iterate over the dead peds
-                foreach (Ped DeadPed in NearbyPeds.Where(P => P.IsDead && P.IsOnScreen).ToArray())
-                {
-                    // And draw the dead marker
-                    Toolkit.DeadMarker(DeadPed);
-                }
-            }
->>>>>>> master
 
             // Then, start by drawing the player info
             Toolkit.Icon("scripts\\GGO\\IconAlive.png", Config.PlayerPosition);

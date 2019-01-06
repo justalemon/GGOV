@@ -68,12 +68,8 @@ namespace GGO
             Size HealthPosition = Small ? GGO.Config.SquadHealthPos : GGO.Config.PlayerHealthPos;
 
             // Check what type of game entity has been sent and set the appropiate parameters
-            if (GameEntity is Ped)
+            if (GameEntity is Ped GamePed)
             {
-                //change back
-                Ped GamePed = (Ped)GameEntity;
-
-
                 HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, GamePed) - 100;
                 HealthMax = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, GamePed) - 100;
                 
@@ -97,13 +93,8 @@ namespace GGO
                     EntityName = GamePed.Model.Hash.ToString();
                 }
             }
-            else if (GameEntity is Vehicle)
+            else if (GameEntity is Vehicle Car)
             {
-                //change back
-                Vehicle Car = (Vehicle)GameEntity;
-
-
-
                 HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Car);
                 HealthMax = 1000;
                 EntityName = Car.FriendlyName;
