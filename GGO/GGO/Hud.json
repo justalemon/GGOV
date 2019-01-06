@@ -27,8 +27,8 @@
     "squad_health_width": 0.0508,
     "squad_health_height": 0.004,
 
-    "player_x": 0.7825,
-    "player_y": 0.7805,
+    "player_x": 0.8,
+    "player_y": 0.74,
     "player_width": 0.1223,
     "player_height": 0.048,
     "player_health_x": 0.0045,
