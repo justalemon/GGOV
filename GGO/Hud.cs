@@ -17,13 +17,10 @@ namespace GGO
         /// <summary>
         /// Configuration for the HUD elements.
         /// </summary>
-        private HudConfig Config;
+        private HudConfig Config = JsonConvert.DeserializeObject<HudConfig>(File.ReadAllText("scripts\\GGO\\Hud.json"));
 
         public Hud()
         {
-            // Start by parsing the config
-            Config = JsonConvert.DeserializeObject<HudConfig>(File.ReadAllText("scripts\\GGO\\Hud.json"));
-
             // Don't do nothing if the user requested the menu to be disabled
             if (!Config.Enabled)
             {
