@@ -5,6 +5,7 @@ using GTA.Math;
 using GTA.Native;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,10 @@ namespace GGO
         /// Configuration for the HUD elements.
         /// </summary>
         private HudConfig Config = JsonConvert.DeserializeObject<HudConfig>(File.ReadAllText("scripts\\GGO\\Hud.json"));
+        /// <summary>
+        /// Names for the peds on the squad section.
+        /// </summary>
+        private Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
 
         public Hud()
         {
@@ -191,6 +196,10 @@ namespace GGO
                 if (GamePed.IsPlayer)
                 {
                     EntityName = Game.Player.Name;
+                }
+                else if (Names.ContainsKey(GamePed.Model.GetHashCode().ToString()))
+                {
+                    EntityName = Names[GamePed.Model.GetHashCode().ToString()];
                 }
                 else
                 {
