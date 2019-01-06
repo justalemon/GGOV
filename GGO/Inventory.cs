@@ -103,14 +103,14 @@ namespace GGO
             ArmsText.Draw();
 
             // Get the image and filename for the player gender
-            string GenderFilename = "scripts\\GGO\\" + ((Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male ? "GenderMale.png" : "GenderFemale.png");
+            string GenderFilename = ((Gender)(int)GGO.Config.Inventory["gender"] == Gender.Male) ? "GenderMale.png" : "GenderFemale.png";
             // Draw the gender image
             Toolkit.Image(GenderFilename, GGO.Config.InventoryGender, GGO.Config.IconSize);
 
             // For each one of the positions, draw a background rectangle
             foreach (Point Position in Positions)
             {
-                Toolkit.Image("scripts\\GGO\\InventoryItem.png", Position + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
+                Toolkit.Image("InventoryItem.png", Position + GGO.Config.InventoryRectangleOffset, GGO.Config.InventoryRectangleSize);
             }
 
             // Iterate over the number of player weapons
@@ -118,7 +118,7 @@ namespace GGO
             {
                 // Get the weapon internal name
                 string Name = Weapon.GetDisplayNameFromHash((WeaponHash)Weapons[Index]).Replace("WTT_", string.Empty);
-                Toolkit.Image($"scripts\\GGO\\Weapon{Name}.png", Positions[Index], GGO.Config.InventoryWeaponSize);
+                Toolkit.Image($"Weapon{Name}.png", Positions[Index], GGO.Config.InventoryWeaponSize);
             }
         }
 

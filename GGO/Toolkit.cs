@@ -21,7 +21,7 @@ namespace GGO
         /// <param name="Sizes">The size of the image.</param>
         public static void Image(string Filename, Point Position, Size Sizes)
         {
-            UI.DrawTexture(Filename, Index, 0, 200, Position, Sizes);
+            UI.DrawTexture("scripts\\GGO\\Images\\" + Filename, Index, 0, 200, Position, Sizes);
             Index++;
         }
 
@@ -159,7 +159,7 @@ namespace GGO
             // Finally, draw the weapon image with the respective background
             UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, GGO.Config.WeaponBackground, Colors.Backgrounds);
             WeaponBackground.Draw();
-            Image($"scripts\\GGO\\Weapon{Name}.png", WeaponLocation + GGO.Config.WeaponPosition, GGO.Config.WeaponSize);
+            Image($"Weapon{Name}.png", WeaponLocation + GGO.Config.WeaponPosition, GGO.Config.WeaponSize);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace GGO
             ScreenPos.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 
             // Finally, draw the marker on screen
-            Image("scripts\\GGO\\DeadMarker.png", ScreenPos, MarkerSize);
+            Image("DeadMarker.png", ScreenPos, MarkerSize);
         }
     }
 }

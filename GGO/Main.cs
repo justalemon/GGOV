@@ -73,7 +73,7 @@ namespace GGO
                         int Number = Array.IndexOf(FriendlyPeds, ped);
 
                         // Select the correct image
-                        string ImagePath = ped.IsAlive ? "scripts\\GGO\\IconAlive.png" : "scripts\\GGO\\IconDead.png";
+                        string ImagePath = ped.IsAlive ? "IconAlive.png" : "IconDead.png";
 
                         // Draw the icon and the ped info
                         Toolkit.Icon(ImageName, Calculations.GetSquadPosition(Config, Number));
@@ -126,13 +126,13 @@ namespace GGO
             NearbyPedsLogic();
 
             // Then, start by drawing the player info
-            Toolkit.Icon("scripts\\GGO\\IconAlive.png", Config.PlayerPosition);
+            Toolkit.Icon("IconAlive.png", Config.PlayerPosition);
             Toolkit.EntityInfo(Game.Player.Character);
 
             // If the player is on a vehicle, also draw that information
             if (Game.Player.Character.CurrentVehicle != null && Config.VehicleInfo)
             {
-                Toolkit.Icon("scripts\\GGO\\IconVehicle.png", Config.VehicleIcon);
+                Toolkit.Icon("IconVehicle.png", Config.VehicleIcon);
                 Toolkit.EntityInfo(Game.Player.Character.CurrentVehicle);
             }
 
@@ -143,24 +143,24 @@ namespace GGO
             // If they are not available, draw dummies instead
             if (CurrentStyle == WeaponStyle.Main || CurrentStyle == WeaponStyle.Double)
             {
-                Toolkit.Icon("scripts\\GGO\\IconWeapon.png", Config.PrimaryIcon);
+                Toolkit.Icon("IconWeapon.png", Config.PrimaryIcon);
                 Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
             {
-                Toolkit.Icon("scripts\\GGO\\NoWeapon.png", Config.PrimaryIcon);
-                Toolkit.Icon("scripts\\GGO\\NoWeapon.png", Config.PrimaryBackground);
+                Toolkit.Icon("NoWeapon.png", Config.PrimaryIcon);
+                Toolkit.Icon("NoWeapon.png", Config.PrimaryBackground);
             }
 
             if (CurrentStyle == WeaponStyle.Sidearm || CurrentStyle == WeaponStyle.Double)
             {
-                Toolkit.Icon("scripts\\GGO\\IconWeapon.png", Config.SecondaryIcon);
+                Toolkit.Icon("IconWeapon.png", Config.SecondaryIcon);
                 Toolkit.WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
             {
-                Toolkit.Icon("scripts\\GGO\\NoWeapon.png", Config.SecondaryIcon);
-                Toolkit.Icon("scripts\\GGO\\NoWeapon.png", Config.SecondaryBackground);
+                Toolkit.Icon("NoWeapon.png", Config.SecondaryIcon);
+                Toolkit.Icon("NoWeapon.png", Config.SecondaryBackground);
             }
         }
 
