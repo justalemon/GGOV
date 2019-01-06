@@ -102,7 +102,7 @@ namespace GGO
                         string ImagePath = ped.IsAlive ? "IconAlive.png" : "IconDead.png";
 
                         // Draw the icon and the ped info
-                        Toolkit.Icon(ImageName, Calculations.GetSquadPosition(Config, Number));
+                        Toolkit.Icon(ImagePath, Calculations.GetSquadPosition(Config, Number));
                         Toolkit.EntityInfo(ped, true, Number);
                     }
                 }
