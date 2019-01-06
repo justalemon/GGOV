@@ -75,7 +75,7 @@ namespace GGO
                 File.WriteAllBytes(OutputFile, ImageStream.ToArray());
             }
 
-            UI.DrawTexture(OutputFile, Index, 0, 200, Position, Sizes);
+            UI.DrawTexture(OutputFile, Index, 0, 150, Position, Sizes);
             Index++;
         }
     }
