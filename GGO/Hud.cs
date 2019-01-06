@@ -82,7 +82,7 @@ namespace GGO
                     string ImageName = SquadMember.IsAlive ? nameof(Resources.IconAlive) : nameof(Resources.IconDead);
 
                     // Draw the icon and the ped info
-                    Icon(ImageType, ImageName, Calculations.GetSquadPosition(Config, Number));
+                    Icon(ImageType, ImageName, Calculations.GetSpecificPosition(Config, Position.SquadIcon, Number));
                     EntityInfo(SquadMember, true, Number);
                 }
             }
@@ -189,7 +189,7 @@ namespace GGO
                 HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, GamePed) - 100;
                 HealthMax = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, GamePed) - 100;
 
-                BackgroundPosition = Small ? Calculations.GetSquadPosition(Config, Count, true) : new Point((int)(UI.WIDTH * Config.PlayerX) + (int)(UI.WIDTH * Config.SquareWidth) + (int)(UI.WIDTH * Config.CommonX), (int)(UI.HEIGHT * Config.PlayerY));
+                BackgroundPosition = Small ? Calculations.GetSpecificPosition(Config, Position.SquadInfo, Count) : Calculations.GetSpecificPosition(Config, Position.PlayerInfo, 2);
 
                 // Set the correct ped name
                 if (GamePed.IsPlayer)

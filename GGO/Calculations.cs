@@ -1,5 +1,6 @@
 using GGO.UserData;
 using GTA;
+using System;
 using System.Drawing;
 using static GGO.Tools;
 
@@ -39,25 +40,36 @@ namespace GGO
         /// <summary>
         /// Gets the specific position for the squad member.
         /// </summary>
-        /// <param name="Count">The index of the squad member (zero based).</param>
-        /// <param name="Info">If the location of the info should be returned.</param>
+        /// <param name="Config">The current HUD configuration.</param>
+        /// <param name="HudPos">Position of the screen calculations.</param>
+        /// <param name="Index">Multiplier for the position.</param>
         /// <returns>A Point with the on screen position.</returns>
-        public static Point GetSquadPosition(HudConfig Config, int Count, bool Info = false)
+        public static Point GetSpecificPosition(HudConfig Config, Position HudPos, int Index)
         {
-            // Increase the count by one
-            Count++;
+            // Set a dummy position to change later
+            Point DefaultPosition = Point.Empty;
 
-            // Return the correct position for the info or icon
-            if (Info)
+            // Get the correct position
+            switch (HudPos)
             {
-                return new Point((int)(UI.WIDTH * Config.SquadX) + (int)(UI.WIDTH * Config.SquareWidth) + (int)(UI.WIDTH * Config.CommonX),
-                                ((int)(UI.HEIGHT * Config.SquadY) + (int)(UI.HEIGHT * Config.CommonY)) * Count);
+                case Position.SquadIcon:
+                    DefaultPosition = LiteralPoint(Config.SquadX, Config.SquadY);
+                    break;
+                case Position.SquadInfo:
+                    DefaultPosition = LiteralPoint(Config.SquadX, Config.SquadY) + LiteralSize(Config.SquareWidth, 0) + LiteralSize(Config.CommonX, 0);
+                    break;
+                case Position.PlayerIcon:
+                    DefaultPosition = LiteralPoint(Config.PlayerX, Config.PlayerY);
+                    break;
+                case Position.PlayerInfo:
+                    DefaultPosition = LiteralPoint(Config.PlayerX, Config.PlayerY) + LiteralSize(Config.SquareWidth, 0) + LiteralSize(Config.CommonX, 0);
+                    break;
+                default:
+                    throw new NotSupportedException("You can't calculate the position for this Screen location.");
             }
-            else
-            {
-                return new Point((int)(UI.WIDTH * Config.SquadX),
-                                ((int)(UI.HEIGHT * Config.SquadY) + (int)(UI.HEIGHT * Config.CommonY)) * Count);
-            }
+
+            // Finally, return the correct position
+            return new Point(DefaultPosition.X, DefaultPosition.Y + (LiteralPoint(Config.CommonX, 0).X + LiteralPoint(Config.SquareWidth, 0).X) * Index);
         }
     }
 }
