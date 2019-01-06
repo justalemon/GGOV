@@ -1,6 +1,7 @@
-﻿using GTA.Native;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Drawing;
+using static GGO.Tools;
 
 namespace GGO.UserData
 {
@@ -236,5 +237,73 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("dead_height")]
         public float DeadMarkerHeight { get; set; }
+
+
+        /// <summary>
+        /// Gets the position of the dividers either for the player or the squad members.
+        /// </summary>
+        /// <param name="Player">If the divider positions are for the player.</param>
+        /// <param name="Count">The number for the squad member.</param>
+        /// <returns>An array with the 5 positions.</returns>
+        public Point[] GetDividerPositions(Point Position, bool Player, int Count = 0)
+        {
+            // Create a list of dividers
+            Point[] Positions = new Point[5];
+
+            // Store our positions for the player or squad members
+            Size HealthSize = Player ? LiteralSize(PlayerHealthWidth, PlayerHealthHeight) : LiteralSize(SquadHealthWidth, SquadHealthHeight);
+            Size HealthPosition = Player ? LiteralSize(PlayerHealthX, PlayerHealthY) : LiteralSize(SquadHealthX, SquadHealthY);
+
+            // For the dividers, get the distance between each one of them
+            int HealthSep = HealthSize.Width / 4;
+
+            // Itterate from 0 to 4 to create our separators
+            for (int Separator = 0; Separator < 5; Separator++)
+            {
+                // Calculate the position of the separator and add it in the array
+                Positions[Separator] = (Position + HealthPosition) + new Size(HealthSep * Separator, 0) + LiteralSize(DividerX, DividerY);
+            }
+
+            // Finally, return the divider positions
+            return Positions;
+        }
+
+        /// <summary>
+        /// Gets the specific position for the squad member.
+        /// </summary>
+        /// <param name="HudPos">Position of the screen calculations.</param>
+        /// <param name="Index">Multiplier for the position.</param>
+        /// <returns>A Point with the on screen position.</returns>
+        public Point GetSpecificPosition(Position HudPos, int Index)
+        {
+            // Set a dummy position to change later
+            Point DefaultPosition = Point.Empty;
+
+            // Get the correct position
+            switch (HudPos)
+            {
+                case Position.SquadIcon:
+                    DefaultPosition = LiteralPoint(SquadX, SquadY);
+                    break;
+                case Position.SquadInfo:
+                    DefaultPosition = LiteralPoint(SquadX, SquadY) + LiteralSize(SquareWidth, 0) + LiteralSize(CommonX, 0);
+                    break;
+                case Position.PlayerIcon:
+                    DefaultPosition = LiteralPoint(PlayerX, PlayerY);
+                    break;
+                case Position.PlayerInfo:
+                case Position.PlayerAmmo:
+                    DefaultPosition = LiteralPoint(PlayerX, PlayerY) + LiteralSize(SquareWidth, 0) + LiteralSize(CommonX, 0);
+                    break;
+                case Position.PlayerWeapon:
+                    DefaultPosition = LiteralPoint(PlayerX, PlayerY) + LiteralSize(SquareWidth, 0) + LiteralSize(SquareWidth, 0) + LiteralSize(CommonX, 0) + LiteralSize(CommonX, 0);
+                    break;
+                default:
+                    throw new NotSupportedException("You can't calculate the position for this Screen location.");
+            }
+
+            // Finally, return the correct position
+            return new Point(DefaultPosition.X, DefaultPosition.Y + (LiteralPoint(CommonX, 0).X + LiteralPoint(SquareWidth, 0).X) * Index);
+        }
     }
 }

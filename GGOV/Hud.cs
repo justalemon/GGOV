@@ -79,7 +79,7 @@ namespace GGO
                     string ImageName = SquadMember.IsAlive ? nameof(Resources.IconAlive) : nameof(Resources.IconDead);
 
                     // Draw the icon and the ped info
-                    Icon(ImageType, ImageName, Calculations.GetSpecificPosition(Config, Position.SquadIcon, Number));
+                    Icon(ImageType, ImageName, Config.GetSpecificPosition(Position.SquadIcon, Number));
                     EntityInfo(SquadMember, true, Number);
                 }
             }
@@ -96,13 +96,13 @@ namespace GGO
             }
 
             // Then, start by drawing the player info
-            Icon(Resources.IconAlive, nameof(Resources.IconAlive), Calculations.GetSpecificPosition(Config, Position.PlayerIcon, 1));
+            Icon(Resources.IconAlive, nameof(Resources.IconAlive), Config.GetSpecificPosition(Position.PlayerIcon, 1));
             EntityInfo(Game.Player.Character);
 
             // If the player is on a vehicle, also draw that information
             if (Game.Player.Character.CurrentVehicle != null && Config.VehicleInfo)
             {
-                Icon(Resources.IconVehicle, nameof(Resources.IconVehicle), Calculations.GetSpecificPosition(Config, Position.PlayerIcon, 0));
+                Icon(Resources.IconVehicle, nameof(Resources.IconVehicle), Config.GetSpecificPosition(Position.PlayerIcon, 0));
                 EntityInfo(Game.Player.Character.CurrentVehicle);
             }
 
@@ -110,10 +110,10 @@ namespace GGO
             WeaponStyle CurrentStyle = Game.Player.Character.Weapons.GetStyle();
 
             // Calculate and store the position of the primary and secondary icons
-            Point PrimaryIcon = Calculations.GetSpecificPosition(Config, Position.PlayerIcon, 2);
-            Point PrimaryBackground = Calculations.GetSpecificPosition(Config, Position.PlayerAmmo, 2);
-            Point SecondaryIcon = Calculations.GetSpecificPosition(Config, Position.PlayerIcon, 3);
-            Point SecondaryBackground = Calculations.GetSpecificPosition(Config, Position.PlayerAmmo, 3);
+            Point PrimaryIcon = Config.GetSpecificPosition(Position.PlayerIcon, 2);
+            Point PrimaryBackground = Config.GetSpecificPosition(Position.PlayerAmmo, 2);
+            Point SecondaryIcon = Config.GetSpecificPosition(Position.PlayerIcon, 3);
+            Point SecondaryBackground = Config.GetSpecificPosition(Position.PlayerAmmo, 3);
 
             // And draw the weapon information for both the primary and secondary
             // If they are not available, draw dummies instead
@@ -185,7 +185,7 @@ namespace GGO
                 HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, GamePed) - 100;
                 HealthMax = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, GamePed) - 100;
 
-                BackgroundPosition = Small ? Calculations.GetSpecificPosition(Config, Position.SquadInfo, Count) : Calculations.GetSpecificPosition(Config, Position.PlayerInfo, 1);
+                BackgroundPosition = Small ? Config.GetSpecificPosition(Position.SquadInfo, Count) : Config.GetSpecificPosition(Position.PlayerInfo, 1);
 
                 // Set the correct ped name
                 if (GamePed.IsPlayer)
@@ -225,7 +225,7 @@ namespace GGO
             Health.Draw();
 
             // Draw the health dividers
-            foreach (Point Position in Calculations.GetDividerPositions(Config, BackgroundPosition, !Small))
+            foreach (Point Position in Config.GetDividerPositions(BackgroundPosition, !Small))
             {
                 UIRectangle Divider = new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers);
                 Divider.Draw();
@@ -250,8 +250,8 @@ namespace GGO
             string Name = Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash).Replace("WTT_", string.Empty);
 
             // Store the information for the primary or secondary weapon
-            Point BackgroundLocation = Sidearm ? Calculations.GetSpecificPosition(Config, Position.PlayerInfo, 3) : Calculations.GetSpecificPosition(Config, Position.PlayerInfo, 2);
-            Point WeaponLocation = Sidearm ? Calculations.GetSpecificPosition(Config, Position.PlayerWeapon, 3) : Calculations.GetSpecificPosition(Config, Position.PlayerWeapon, 2);
+            Point BackgroundLocation = Sidearm ? Config.GetSpecificPosition(Position.PlayerInfo, 3) : Config.GetSpecificPosition(Position.PlayerInfo, 2);
+            Point WeaponLocation = Sidearm ? Config.GetSpecificPosition(Position.PlayerWeapon, 3) : Config.GetSpecificPosition(Position.PlayerWeapon, 2);
 
             // Draw the background and ammo quantity
             UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds);
