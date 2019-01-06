@@ -96,14 +96,13 @@ namespace GGO
             }
 
             // Then, start by drawing the player info
-            Icon(Resources.IconAlive, nameof(Resources.IconAlive), LiteralPoint(Config.PlayerX, Config.PlayerY));
+            Icon(Resources.IconAlive, nameof(Resources.IconAlive), Calculations.GetSpecificPosition(Config, Position.PlayerIcon, 1));
             EntityInfo(Game.Player.Character);
 
             // If the player is on a vehicle, also draw that information
             if (Game.Player.Character.CurrentVehicle != null && Config.VehicleInfo)
             {
-                Point VehicleIcon = new Point((int)(UI.WIDTH * Config.PlayerX), (int)(UI.WIDTH * Config.PlayerY) - (int)(UI.WIDTH * Config.SquareWidth) - (int)(UI.WIDTH * Config.CommonY));
-                Icon(Resources.IconVehicle, nameof(Resources.IconVehicle), VehicleIcon);
+                Icon(Resources.IconVehicle, nameof(Resources.IconVehicle), Calculations.GetSpecificPosition(Config, Position.PlayerIcon, 0));
                 EntityInfo(Game.Player.Character.CurrentVehicle);
             }
 
@@ -186,7 +185,7 @@ namespace GGO
                 HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, GamePed) - 100;
                 HealthMax = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, GamePed) - 100;
 
-                BackgroundPosition = Small ? Calculations.GetSpecificPosition(Config, Position.SquadInfo, Count) : Calculations.GetSpecificPosition(Config, Position.PlayerInfo, 2);
+                BackgroundPosition = Small ? Calculations.GetSpecificPosition(Config, Position.SquadInfo, Count) : Calculations.GetSpecificPosition(Config, Position.PlayerInfo, 1);
 
                 // Set the correct ped name
                 if (GamePed.IsPlayer)
