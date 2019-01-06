@@ -1,0 +1,52 @@
+{
+    "enabled": true,
+    "collisions": false,
+    "radar": true,
+    "squad": true,
+    "vehicle_info": true,
+    "dead_markers": true,
+
+    "common_x": 0.0055,
+    "common_y": 0.01,
+    "square_width": 0.027,
+    "square_height": 0.048,
+
+    "icon_x": 0.0015,
+    "icon_y": 0.0015,
+    "icon_width": 0.0255,
+    "icon_height": 0.045,
+
+    "squad_x": 0.0475,
+    "squad_y": 0.045,
+    "squad_width": 0.05908,
+    "squad_height": 0.048,
+    "squad_name_x": 0.0025,
+    "squad_name_y": 0.001,
+    "squad_health_x": 0.0045,
+    "squad_health_y": 0.035,
+    "squad_health_width": 0.0508,
+    "squad_health_height": 0.004,
+
+    "player_x": 0.8,
+    "player_y": 0.74,
+    "player_width": 0.1223,
+    "player_height": 0.048,
+    "player_health_x": 0.0045,
+    "player_health_y": 0.035,
+    "player_health_width": 0.1133,
+    "player_health_height": 0.004,
+    "ammo_x": 0.0135,
+    "ammo_y": 0.004,
+    "weapon_x": 0,
+    "weapon_y": 0.006,
+    "weapon_width": 0.0875,
+    "weapon_height": 0.035,
+
+    "divider_x": 0,
+    "divider_y": -0.00417,
+    "divider_width": 0.001,
+    "divider_height": 0.012,
+
+    "dead_width": 0.2344,
+    "dead_height": 0.2083
+}
