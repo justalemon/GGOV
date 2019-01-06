@@ -110,10 +110,10 @@ namespace GGO
             WeaponStyle CurrentStyle = Game.Player.Character.Weapons.GetStyle();
 
             // Calculate and store the position of the primary and secondary icons
-            Point PrimaryIcon = new Point((int)(UI.WIDTH * Config.PlayerX), (int)(UI.WIDTH * Config.PlayerY) + (int)(UI.WIDTH * Config.CommonY) + (int)(UI.WIDTH * Config.SquareWidth));
-            Point PrimaryBackground = new Point(PrimaryIcon.X + (int)(UI.WIDTH * Config.SquareWidth) + (int)(UI.WIDTH * Config.CommonX), PrimaryIcon.Y);
-            Point SecondaryIcon = new Point((int)(UI.WIDTH * Config.PlayerX), (int)(UI.WIDTH * Config.PlayerY) + ((int)(UI.WIDTH * Config.CommonY) * 2) + ((int)(UI.WIDTH * Config.SquareWidth) * 2));
-            Point SecondaryBackground = new Point(SecondaryIcon.X + (int)(UI.WIDTH * Config.SquareWidth) + (int)(UI.WIDTH * Config.CommonX), SecondaryIcon.Y);
+            Point PrimaryIcon = Calculations.GetSpecificPosition(Config, Position.PlayerIcon, 2);
+            Point PrimaryBackground = Calculations.GetSpecificPosition(Config, Position.PlayerAmmo, 2);
+            Point SecondaryIcon = Calculations.GetSpecificPosition(Config, Position.PlayerIcon, 3);
+            Point SecondaryBackground = Calculations.GetSpecificPosition(Config, Position.PlayerAmmo, 3);
 
             // And draw the weapon information for both the primary and secondary
             // If they are not available, draw dummies instead
@@ -243,7 +243,6 @@ namespace GGO
         /// <param name="Style">The weapon carry style.</param>
         public void WeaponInfo(Weapon PlayerWeapon, WeaponStyle Style)
         {
-            /*
             // Check if the player is using a secondary weapon
             bool Sidearm = Style == WeaponStyle.Sidearm;
 
@@ -251,14 +250,13 @@ namespace GGO
             string Name = Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash).Replace("WTT_", string.Empty);
 
             // Store the information for the primary or secondary weapon
-            Point BackgroundLocation = Sidearm ? GGO.Config.SecondaryBackground : GGO.Config.PrimaryBackground;
-            Point AmmoLocation = Sidearm ? GGO.Config.SecondaryAmmo : GGO.Config.PrimaryAmmo;
-            Point WeaponLocation = Sidearm ? GGO.Config.SecondaryWeapon : GGO.Config.PrimaryWeapon;
+            Point BackgroundLocation = Sidearm ? Calculations.GetSpecificPosition(Config, Position.PlayerInfo, 3) : Calculations.GetSpecificPosition(Config, Position.PlayerInfo, 2);
+            Point WeaponLocation = Sidearm ? Calculations.GetSpecificPosition(Config, Position.PlayerWeapon, 3) : Calculations.GetSpecificPosition(Config, Position.PlayerWeapon, 2);
 
             // Draw the background and ammo quantity
             UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds);
             AmmoBackground.Draw();
-            UIText Text = new UIText(PlayerWeapon.AmmoInClip.ToString(), AmmoLocation, .6f, Color.White, (GTA.Font)2, true);
+            UIText Text = new UIText(PlayerWeapon.AmmoInClip.ToString(), BackgroundLocation + LiteralSize(Config.AmmoX, Config.AmmoY), .6f, Color.White, (GTA.Font)2, true);
             Text.Draw();
 
             // Get the weapon bitmap
@@ -270,10 +268,9 @@ namespace GGO
             }
 
             // Finally, draw the weapon image with the respective background
-            UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, new Size((int)(UI.WIDTH * Config.PlayerWidth) - (int)(UI.WIDTH * Config.CommonX) - (int)(UI.WIDTH * Config.SquareWidth), (int)(UI.WIDTH * Config.PlayerHeight)), Colors.Backgrounds);
+            UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, LiteralSize(Config.PlayerWidth, Config.PlayerHeight) - LiteralSize(Config.SquareWidth, 0) - LiteralSize(Config.CommonX, 0), Colors.Backgrounds);
             WeaponBackground.Draw();
             DrawImage(WeaponBitmap, "Weapon" + Name, WeaponLocation + LiteralSize(Config.WeaponX, Config.WeaponY), LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
-            */
         }
 
         /// <summary>
