@@ -52,6 +52,12 @@ namespace GGO
         /// </summary>
         public void OnTick(object Sender, EventArgs Args)
         {
+            // Don't process the inventory when using a controller and in a vehicle
+            if (Game.CurrentInputMode == InputMode.GamePad && Game.Player.Character.IsInVehicle())
+            {
+                return;
+            }
+
             // Disable the weapon wheel
             Game.DisableControlThisFrame(0, Control.SelectWeapon);
             // If the user just pressed TAB/L1/LB
