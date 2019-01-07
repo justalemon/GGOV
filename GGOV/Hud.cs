@@ -323,7 +323,8 @@ namespace GGO
             // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
             double Ratio = Math.Log(Vector3.Distance(Game.Player.Character.Position, HeadCoord) + 1.65);
             // Calculate the marker size based on the distance between player and dead ped
-            Size MarkerSize = LiteralSize(Config.DeadMarkerWidth, Config.DeadMarkerHeight);
+            Size LiteralMarker = LiteralSize(Config.DeadMarkerWidth, Config.DeadMarkerHeight);
+            Size MarkerSize = new Size((int)(LiteralMarker.Width / Ratio), (int)(LiteralMarker.Height / Ratio));
             // Offset the marker by half width to center, and full height to put on top.
             ScreenPos.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 
