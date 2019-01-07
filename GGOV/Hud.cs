@@ -85,7 +85,7 @@ namespace GGO
 
                     // Draw the icon and the ped info
                     Icon(ImageType, ImageName, Config.GetSpecificPosition(Position.SquadIcon, Number));
-                    EntityInfo(SquadMember, true, Number);
+                    EntityInfo(SquadMember, InfoSize.Small, Number);
                 }
             }
 
@@ -102,13 +102,13 @@ namespace GGO
 
             // Then, start by drawing the player info
             Icon(Resources.IconAlive, nameof(Resources.IconAlive), Config.GetSpecificPosition(Position.PlayerIcon, 1));
-            EntityInfo(Game.Player.Character);
+            EntityInfo(Game.Player.Character, InfoSize.Normal);
 
             // If the player is on a vehicle, also draw that information
             if (Game.Player.Character.CurrentVehicle != null && Config.VehicleInfo)
             {
                 Icon(Resources.IconVehicle, nameof(Resources.IconVehicle), Config.GetSpecificPosition(Position.PlayerIcon, 0));
-                EntityInfo(Game.Player.Character.CurrentVehicle);
+                EntityInfo(Game.Player.Character.CurrentVehicle, InfoSize.Normal);
             }
 
             // Get the current weapon style
@@ -169,9 +169,9 @@ namespace GGO
         /// This can be a Ped or a Vehicle.
         /// </summary>
         /// <param name="GameEntity">The game entity.</param>
-        /// <param name="Small">If a small information box should be drawn.</param>
+        /// <param name="EntitySize">Size of the information.</param>
         /// <param name="Count">If drawing the small boxes, the number of it.</param>
-        public void EntityInfo(object GameEntity, bool Small = false, int Count = 0)
+        public void EntityInfo(object GameEntity, InfoSize EntitySize, int Count = 0)
         {
             // Store general usage information
             float HealthNow = 0;
@@ -179,10 +179,10 @@ namespace GGO
             string EntityName = string.Empty;
             Point BackgroundPosition = Point.Empty;
             // And use single line if's for the rest
-            float TextSize = Small ? .3f : .325f;
-            Size InformationSize = Small ? LiteralSize(Config.SquadWidth, Config.SquadHeight) : LiteralSize(Config.PlayerWidth, Config.PlayerHeight);
-            Size HealthSize = Small ? LiteralSize(Config.SquadHealthWidth, Config.SquadHealthHeight) : LiteralSize(Config.PlayerHealthWidth, Config.PlayerHealthHeight);
-            Size HealthPosition = Small ? LiteralSize(Config.SquadHealthX, Config.SquadHealthY) : LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY);
+            float TextSize = EntitySize == InfoSize.Small ? .3f : .325f;
+            Size InformationSize = EntitySize == InfoSize.Small ? LiteralSize(Config.SquadWidth, Config.SquadHeight) : LiteralSize(Config.PlayerWidth, Config.PlayerHeight);
+            Size HealthSize = EntitySize == InfoSize.Small ? LiteralSize(Config.SquadHealthWidth, Config.SquadHealthHeight) : LiteralSize(Config.PlayerHealthWidth, Config.PlayerHealthHeight);
+            Size HealthPosition = EntitySize == InfoSize.Small ? LiteralSize(Config.SquadHealthX, Config.SquadHealthY) : LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY);
 
             // Check what type of game entity has been sent and set the appropiate parameters
             if (GameEntity is Ped GamePed)
@@ -190,7 +190,7 @@ namespace GGO
                 HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, GamePed) - 100;
                 HealthMax = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, GamePed) - 100;
 
-                BackgroundPosition = Small ? Config.GetSpecificPosition(Position.SquadInfo, Count) : Config.GetSpecificPosition(Position.PlayerInfo, 1);
+                BackgroundPosition = EntitySize == InfoSize.Small ? Config.GetSpecificPosition(Position.SquadInfo, Count) : Config.GetSpecificPosition(Position.PlayerInfo, 1);
 
                 // Set the correct ped name
                 if (GamePed.IsPlayer)
@@ -234,7 +234,7 @@ namespace GGO
             Health.Draw();
 
             // Draw the health dividers
-            foreach (Point Position in Config.GetDividerPositions(BackgroundPosition, !Small))
+            foreach (Point Position in Config.GetDividerPositions(BackgroundPosition, !(EntitySize == InfoSize.Small)))
             {
                 UIRectangle Divider = new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers);
                 Divider.Draw();
@@ -296,7 +296,7 @@ namespace GGO
             // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
             double Ratio = Math.Log(Vector3.Distance(Game.Player.Character.Position, HeadCoord) + 1.65);
             // Calculate the marker size based on the distance between player and dead ped
-            Size MarkerSize = new Size((int)((int)(UI.WIDTH * Config.DeadMarkerWidth) / Ratio), (int)((int)(UI.WIDTH * Config.DeadMarkerHeight) / Ratio));
+            Size MarkerSize = LiteralSize(Config.DeadMarkerWidth, Config.DeadMarkerHeight);
             // Offset the marker by half width to center, and full height to put on top.
             ScreenPos.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 

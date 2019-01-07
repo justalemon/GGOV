@@ -39,4 +39,13 @@
         /// </summary>
         PlayerWeapon = 5
     }
+
+    /// <summary>
+    /// The size of the entity information.
+    /// </summary>
+    public enum InfoSize
+    {
+        Small = 0,
+        Normal = 1
+    }
 }
