@@ -23,6 +23,18 @@ namespace GGO
         /// Names for the peds on the squad section.
         /// </summary>
         private Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
+        /// <summary>
+        /// List of peds that are near the player.
+        /// </summary>
+        private Ped[] NearbyPeds = new Ped[0];
+        /// <summary>
+        /// List of peds that are friendly and part of the squad.
+        /// </summary>
+        private Ped[] FriendlyPeds = new Ped[0];
+        /// <summary>
+        /// Next game time that we should update the lists of peds.
+        /// </summary>
+        private int NextFetch = 0;
 
         public Hud()
         {
@@ -64,35 +76,62 @@ namespace GGO
                 Function.Call(Hash.DISPLAY_RADAR, false);
             }
 
-            // Get all of the peds and store them during this tick
-            Ped[] NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
-
-            // Draw the squad information on the top left if the user wants to
-            if (Config.Squad)
+            // Draw get the ped information only if the squad members or dead markers have been enabled
+            if (Config.Squad || Config.DeadMarkers)
             {
-                // Store the peds that are friend of us
-                Ped[] FriendlyPeds = NearbyPeds.Where(P => P.IsFriendly() && P.IsMissionEntity()).ToArray();
-
-                // And iterate over them
-                foreach (Ped SquadMember in FriendlyPeds)
+                // If the current time is higher or equal than the next fetch time
+                if (Game.GameTime >= NextFetch)
                 {
-                    // Get the number of the ped
-                    int Number = Array.IndexOf(FriendlyPeds, SquadMember);
+                    // Get all of the peds and order them by hash
+                    NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
+                    // THen, filter the friendly squad peds
+                    FriendlyPeds = NearbyPeds.Where(P => P.IsFriendly() && P.IsMissionEntity()).ToArray();
 
-                    // Draw the icon and the ped info
-                    Icon(SquadMember.IsAlive ? "IconAlive" : "IconDead", Config.GetSpecificPosition(Position.SquadIcon, Number));
-                    EntityInfo(SquadMember, InfoSize.Small, Number);
+                    // Finally, set the next fetch time to one second in the future
+                    NextFetch = Game.GameTime + 1000;
                 }
-            }
 
-            // Draw the dead ped markers over their heads, if the user wants to
-            if (Config.DeadMarkers)
-            {
-                // Iterate over the dead peds
-                foreach (Ped DeadPed in NearbyPeds.Where(P => P.IsDead && P.IsOnScreen).ToArray())
+                // If the squad members are enabled
+                if (Config.Squad)
                 {
-                    // And draw the dead marker
-                    DeadMarker(DeadPed);
+                    // Store a number of the invalid peds
+                    int InvalidPeds = 0;
+
+                    // Iterate over the squad members
+                    foreach (Ped SquadMember in FriendlyPeds)
+                    {
+                        // Skip non-existant peds and increase the count of invalid
+                        if (SquadMember == null || !SquadMember.Exists())
+                        {
+                            InvalidPeds += 1;
+                            continue;
+                        }
+
+                        // Get the number of the ped minus the invalid ones
+                        int Number = Array.IndexOf(FriendlyPeds, SquadMember) - InvalidPeds;
+
+                        // Draw the icon and the ped info for it
+                        Icon(SquadMember.IsAlive ? "IconAlive" : "IconDead", Config.GetSpecificPosition(Position.SquadIcon, Number));
+                        EntityInfo(SquadMember, InfoSize.Small, Number);
+                    }
+                }
+
+
+                // If the user wants to, draw the dead markers
+                if (Config.DeadMarkers)
+                {
+                    // Iterate over all the peds
+                    foreach (Ped DeadPed in NearbyPeds)
+                    {
+                        // If the ped is null, does not exists, is alive or is not on screen, skip it
+                        if (DeadPed == null || !DeadPed.Exists() || DeadPed.IsAlive || !DeadPed.IsOnScreen)
+                        {
+                            continue;
+                        }
+
+                        // And draw the dead marker
+                        DeadMarker(DeadPed);
+                    }
                 }
             }
 
