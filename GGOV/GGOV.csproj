@@ -80,67 +80,189 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\IconVehicle.png" />
-    <None Include="Resources\IconAlive.png" />
-    <None Include="Resources\IconWeapon.png" />
-    <None Include="Resources\IconDead.png" />
-    <None Include="Resources\WeaponPIST.png" />
-    <None Include="Resources\WeaponPIST_50.png" />
-    <None Include="Resources\WeaponSG_PMP.png" />
-    <None Include="Resources\WeaponREVOLVER.png" />
-    <None Include="Resources\WeaponSG_SOF.png" />
-    <None Include="Resources\WeaponSMG.png" />
-    <None Include="Resources\WeaponSNIP_RIF.png" />
-    <None Include="Resources\WeaponRIFLE_ADV.png" />
-    <None Include="Resources\WeaponPIST_AP.png" />
-    <None Include="Resources\WeaponRIFLE_ASL.png" />
-    <None Include="Resources\WeaponSG_ASL.png" />
-    <None Include="Resources\WeaponSMG_ASL.png" />
-    <None Include="Resources\WeaponSG_BLP.png" />
-    <None Include="Resources\WeaponRIFLE_CBN.png" />
-    <None Include="Resources\WeaponMG_CBT.png" />
-    <None Include="Resources\WeaponCOMBATPDW.png" />
-    <None Include="Resources\WeaponPIST_CBT.png" />
-    <None Include="Resources\WeaponCMPRIFLE.png" />
-    <None Include="Resources\WeaponDBSHGN.png" />
-    <None Include="Resources\WeaponFLAREGUN.png" />
-    <None Include="Resources\WeaponSNIP_HVY.png" />
-    <None Include="Resources\WeaponMKPISTOL.png" />
-    <None Include="Resources\WeaponMG.png" />
-    <None Include="Resources\WeaponSMG_MCR.png" />
-    <None Include="Resources\WeaponMINIGUN.png" />
-    <None Include="Resources\DeadMarker.png" />
-    <None Include="Resources\WeaponRAILGUN.png" />
-    <None Include="Resources\WeaponREV_DA.png" />
-    <None Include="Resources\WeaponREVOLVER2.png" />
-    <None Include="Resources\WeaponRIFLE_ASL2.png" />
-    <None Include="Resources\WeaponRIFLE_CBN2.png" />
-    <None Include="Resources\WeaponRPG.png" />
-    <None Include="Resources\WeaponSG_PMP2.png" />
-    <None Include="Resources\WeaponSMG2.png" />
-    <None Include="Resources\WeaponSNIP_HVY2.png" />
-    <None Include="Resources\WeaponSNSPISTOL.png" />
-    <None Include="Resources\WeaponSNSPISTOL2.png" />
-    <None Include="Resources\WeaponSPCARBINE.png" />
-    <None Include="Resources\WeaponSPCARBINE2.png" />
-    <None Include="Resources\WeaponVPISTOL.png" />
-    <None Include="Resources\WeaponAUTOSHGN.png" />
-    <None Include="Resources\WeaponBULLRIFLE.png" />
-    <None Include="Resources\WeaponBULLRIFLE2.png" />
-    <None Include="Resources\WeaponCMPGL.png" />
-    <None Include="Resources\WeaponFWRKLNCHR.png" />
-    <None Include="Resources\WeaponGL.png" />
-    <None Include="Resources\WeaponGUSENBERG.png" />
-    <None Include="Resources\WeaponHMKRIFLE.png" />
-    <None Include="Resources\WeaponHOMLNCH.png" />
-    <None Include="Resources\WeaponHVYSHOT.png" />
-    <None Include="Resources\WeaponMCHPIST.png" />
-    <None Include="Resources\WeaponMG_CBT2.png" />
-    <None Include="Resources\WeaponMINISMG.png" />
-    <None Include="Resources\WeaponMKRIFLE2.png" />
-    <None Include="Resources\WeaponMUSKET.png" />
-    <None Include="Resources\WeaponPIST2.png" />
-    <None Include="Resources\NoWeapon.png" />
+    <None Include="GGO\Images\IconVehicle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\IconAlive.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\IconWeapon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\IconDead.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponPIST.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponPIST_50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSG_PMP.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponREVOLVER.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSG_SOF.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSMG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSNIP_RIF.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponRIFLE_ADV.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponPIST_AP.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponRIFLE_ASL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSG_ASL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSMG_ASL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSG_BLP.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponRIFLE_CBN.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponMG_CBT.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponCOMBATPDW.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponPIST_CBT.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponCMPRIFLE.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponDBSHGN.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponFLAREGUN.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSNIP_HVY.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponMKPISTOL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponMG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSMG_MCR.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponMINIGUN.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\DeadMarker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponRAILGUN.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponREV_DA.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponREVOLVER2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponRIFLE_ASL2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponRIFLE_CBN2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponRPG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSG_PMP2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSMG2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSNIP_HVY2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSNSPISTOL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSNSPISTOL2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSPCARBINE.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponSPCARBINE2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponVPISTOL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponAUTOSHGN.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponBULLRIFLE.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponBULLRIFLE2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponCMPGL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponFWRKLNCHR.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponGL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponGUSENBERG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponHMKRIFLE.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponHOMLNCH.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponHVYSHOT.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponMCHPIST.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponMG_CBT2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponMINISMG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponMKRIFLE2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponMUSKET.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\WeaponPIST2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GGO\Images\NoWeapon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -149,13 +271,19 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\GenderFemale.png" />
+    <None Include="GGO\Images\GenderFemale.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\GenderMale.png" />
+    <None Include="GGO\Images\GenderMale.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\InventoryItem.png" />
+    <None Include="GGO\Images\InventoryItem.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

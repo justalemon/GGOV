@@ -113,17 +113,14 @@ namespace GGO
             HealthCurrent.Draw();
             LifeText.Draw();
             ArmsText.Draw();
-
-            // Get the image and filename for the player gender
-            Bitmap GenderPicture = Config.PlayerGender == Gender.Male ? Resources.GenderMale : Resources.GenderFemale;
-            string GenderFilename = Config.PlayerGender == Gender.Male ? nameof(Resources.GenderMale) : nameof(Resources.GenderFemale);
+            
             // Draw the gender image
-            DrawImage(GenderPicture, GenderFilename, LiteralPoint(Config.GenderX, Config.GenderY), LiteralSize(Config.GenderWidth, Config.GenderHeight));
+            DrawImage(Config.PlayerGender == Gender.Male ? "GenderMale" : "GenderFemale", LiteralPoint(Config.GenderX, Config.GenderY), LiteralSize(Config.GenderWidth, Config.GenderHeight));
 
             // For each one of the positions, draw a background rectangle
             foreach (Point Position in Positions)
             {
-                DrawImage(Resources.InventoryItem, nameof(Resources.InventoryItem), Position + LiteralSize(Config.WeaponRectangleX, Config.WeaponRectangleY), LiteralSize(Config.WeaponRectangleWidth, Config.WeaponRectangleHeight));
+                DrawImage("InventoryItem", Position + LiteralSize(Config.WeaponRectangleX, Config.WeaponRectangleY), LiteralSize(Config.WeaponRectangleWidth, Config.WeaponRectangleHeight));
             }
 
             // Iterate over the number of player weapons
@@ -131,13 +128,8 @@ namespace GGO
             {
                 // Get the weapon internal name
                 string Name = Weapon.GetDisplayNameFromHash(Config.Weapons[Index]).Replace("WTT_", string.Empty);
-                // Get the bitmap
-                Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
-                // If the bitmap is valid, draw it
-                if (WeaponBitmap != null)
-                {
-                    DrawImage(WeaponBitmap, "Weapon" + Name, Positions[Index], LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
-                }
+                // 
+                DrawImage($"Weapon{Name}", Positions[Index], LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
             }
         }
 

@@ -48,34 +48,23 @@ namespace GGO
         /// <summary>
         /// Draws an image based on a Bitmap.
         /// </summary>
-        /// <param name="Resource">The Bitmap image to draw.</param>
+        /// <param name="FileName">The name of the file to draw.</param>
         /// <param name="Position">Where the image should be drawn.</param>
         /// <param name="Sizes">The size of the image.</param>
-        public static void DrawImage(Bitmap Resource, string Filename, Point Position, Size Sizes)
+        public static void DrawImage(string FileName, Point Position, Size Sizes)
         {
-            // This is going to be our image location
-            string OutputFile = Path.Combine(Path.GetTempPath(), "GGO", Filename + ".png");
+            // Create the path of the image
+            string ImagePath = $"scripts\\GGO\\Images\\{FileName}.png";
 
-            // If the file already exists, return it and don't waste resources
-            if (!File.Exists(OutputFile))
+            // If the image does not exists, notify the user and return
+            if (!File.Exists(ImagePath))
             {
-                // If our %TEMP%\GGO folder does not exist, create it
-                if (!Directory.Exists(Path.GetDirectoryName(OutputFile)))
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(OutputFile));
-                }
-
-                // Create a memory stream
-                MemoryStream ImageStream = new MemoryStream();
-                // Dump the image into it
-                Resource.Save(ImageStream, ImageFormat.Png);
-                // And close the stream
-                ImageStream.Close();
-                // Finally, write the stream into the disc
-                File.WriteAllBytes(OutputFile, ImageStream.ToArray());
+                UI.Notify($"Warning: '{ImagePath}' does not exists!");
+                return;
             }
 
-            UI.DrawTexture(OutputFile, Index, 0, 150, Position, Sizes);
+            // Finally, if the file exists draw it
+            UI.DrawTexture(ImagePath, Index, 0, 150, Position, Sizes);
             Index++;
         }
     }

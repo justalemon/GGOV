@@ -79,12 +79,8 @@ namespace GGO
                     // Get the number of the ped
                     int Number = Array.IndexOf(FriendlyPeds, SquadMember);
 
-                    // Select the correct image and name for the file
-                    Bitmap ImageType = SquadMember.IsAlive ? Resources.IconAlive : Resources.IconDead;
-                    string ImageName = SquadMember.IsAlive ? nameof(Resources.IconAlive) : nameof(Resources.IconDead);
-
                     // Draw the icon and the ped info
-                    Icon(ImageType, ImageName, Config.GetSpecificPosition(Position.SquadIcon, Number));
+                    Icon(SquadMember.IsAlive ? "IconAlive" : "IconDead", Config.GetSpecificPosition(Position.SquadIcon, Number));
                     EntityInfo(SquadMember, InfoSize.Small, Number);
                 }
             }
@@ -101,13 +97,13 @@ namespace GGO
             }
 
             // Then, start by drawing the player info
-            Icon(Resources.IconAlive, nameof(Resources.IconAlive), Config.GetSpecificPosition(Position.PlayerIcon, 1));
+            Icon("IconAlive", Config.GetSpecificPosition(Position.PlayerIcon, 1));
             EntityInfo(Game.Player.Character, InfoSize.Normal);
 
             // If the player is on a vehicle, also draw that information
             if (Game.Player.Character.CurrentVehicle != null && Config.VehicleInfo)
             {
-                Icon(Resources.IconVehicle, nameof(Resources.IconVehicle), Config.GetSpecificPosition(Position.PlayerIcon, 0));
+                Icon("IconVehicle", Config.GetSpecificPosition(Position.PlayerIcon, 0));
                 EntityInfo(Game.Player.Character.CurrentVehicle, InfoSize.Normal);
             }
 
@@ -124,23 +120,23 @@ namespace GGO
             // If they are not available, draw dummies instead
             if (CurrentStyle == WeaponStyle.Main || CurrentStyle == WeaponStyle.Double)
             {
-                Icon(Resources.IconWeapon, nameof(Resources.IconWeapon), PrimaryIcon);
+                Icon("IconWeapon", PrimaryIcon);
                 WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
             {
-                Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), PrimaryIcon);
-                Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), PrimaryBackground);
+                Icon("NoWeapon", PrimaryIcon);
+                Icon("NoWeapon", PrimaryBackground);
             }
             if (CurrentStyle == WeaponStyle.Sidearm || CurrentStyle == WeaponStyle.Double)
             {
-                Icon(Resources.IconWeapon, nameof(Resources.IconWeapon), SecondaryIcon);
+                Icon("IconWeapon", SecondaryIcon);
                 WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
             }
             else
             {
-                Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), SecondaryIcon);
-                Icon(Resources.NoWeapon, nameof(Resources.NoWeapon), SecondaryBackground);
+                Icon("NoWeapon", SecondaryIcon);
+                Icon("NoWeapon", SecondaryBackground);
             }
         }
 
@@ -153,15 +149,15 @@ namespace GGO
         /// <summary>
         /// Draws an icon with the respective background.
         /// </summary>
-        /// <param name="File">The file to draw.</param>
+        /// <param name="Filename">The file to draw.</param>
         /// <param name="Position">The on-screen position.</param>
-        public void Icon(Bitmap Original, string Filename, Point Position)
+        public void Icon(string Filename, Point Position)
         {
             // Draw the background
             UIRectangle Background = new UIRectangle(Position, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds);
             Background.Draw();
             // And the image over it
-            DrawImage(Original, Filename, Position + LiteralSize(Config.IconX, Config.IconY), LiteralSize(Config.IconWidth, Config.IconHeight));
+            DrawImage(Filename, Position + LiteralSize(Config.IconX, Config.IconY), LiteralSize(Config.IconWidth, Config.IconHeight));
         }
 
         /// <summary>
@@ -279,7 +275,7 @@ namespace GGO
             // Finally, draw the weapon image with the respective background
             UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, LiteralSize(Config.PlayerWidth, Config.PlayerHeight) - LiteralSize(Config.SquareWidth, 0) - LiteralSize(Config.CommonX, 0), Colors.Backgrounds);
             WeaponBackground.Draw();
-            DrawImage(WeaponBitmap, "Weapon" + Name, WeaponLocation + LiteralSize(Config.WeaponX, Config.WeaponY), LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
+            DrawImage($"Weapon{Name}", WeaponLocation + LiteralSize(Config.WeaponX, Config.WeaponY), LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
         }
 
         /// <summary>
@@ -301,7 +297,7 @@ namespace GGO
             ScreenPos.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
 
             // Finally, draw the marker on screen
-            DrawImage(Resources.DeadMarker, nameof(Resources.DeadMarker), ScreenPos, MarkerSize);
+            DrawImage("DeadMarker", ScreenPos, MarkerSize);
         }
     }
 }
