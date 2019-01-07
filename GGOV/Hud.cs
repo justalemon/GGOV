@@ -303,14 +303,6 @@ namespace GGO
             UIText Text = new UIText(PlayerWeapon.AmmoInClip.ToString(), BackgroundLocation + LiteralSize(Config.AmmoX, Config.AmmoY), .6f, Color.White, (GTA.Font)2, true);
             Text.Draw();
 
-            // Get the weapon bitmap
-            // If is not there, return
-            Bitmap WeaponBitmap = (Bitmap)Resources.ResourceManager.GetObject("Weapon" + Name);
-            if (WeaponBitmap == null)
-            {
-                return;
-            }
-
             // Finally, draw the weapon image with the respective background
             UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, LiteralSize(Config.PlayerWidth, Config.PlayerHeight) - LiteralSize(Config.SquareWidth, 0) - LiteralSize(Config.CommonX, 0), Colors.Backgrounds);
             WeaponBackground.Draw();
