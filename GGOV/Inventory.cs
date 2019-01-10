@@ -134,7 +134,7 @@ namespace GGO
             {
                 // Get the weapon internal name
                 string Name = Weapon.GetDisplayNameFromHash(Config.Weapons[Index]).Replace("WTT_", string.Empty);
-                // 
+                // Draw the weapon image
                 DrawImage($"Weapon{Name}", Positions[Index], LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
             }
         }
