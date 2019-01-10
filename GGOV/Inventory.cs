@@ -47,7 +47,7 @@ namespace GGO
                 for (int Y = 0; Y < 5; Y++)
                 {
                     // And generate the item positions
-                    ItemsPosition.Add(new Point((int)(UI.WIDTH * Config.ItemsX) + ((int)(UI.HEIGHT * Config.SpacingX) * X) + ((int)(UI.HEIGHT * Config.ItemsRectangleWidth) * X),
+                    ItemsPosition.Add(new Point((int)(UI.WIDTH * Config.ItemsX) + ((int)(UI.HEIGHT * Config.SpacingX) * X) + ((int)(UI.HEIGHT * Config.ItemsWidth) * X),
                                                 (int)(UI.HEIGHT * Config.ItemsY) + ((int)(UI.HEIGHT * Config.SpacingY) * Y)));
                 }
             }
@@ -142,7 +142,7 @@ namespace GGO
             // Draw the item backgrounds
             foreach (Point Position in ItemsPosition)
             {
-                DrawImage("InventoryItem", Position, LiteralSize(Config.ItemsRectangleWidth, Config.ItemsRectangleHeight));
+                DrawImage("InventoryItem", Position, LiteralSize(Config.ItemsWidth, Config.ItemsHeight));
             }
 
             // For each one of the positions, draw a background rectangle

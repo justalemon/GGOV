@@ -162,13 +162,13 @@ namespace GGO.UserData
         /// <summary>
         /// Width of the item rectangles.
         /// </summary>
-        [JsonProperty("items_rectangle_width")]
-        public float ItemsRectangleWidth { get; set; }
+        [JsonProperty("items_width")]
+        public float ItemsWidth { get; set; }
         /// <summary>
         /// Height of the item rectangles.
         /// </summary>
-        [JsonProperty("items_rectangle_height")]
-        public float ItemsRectangleHeight { get; set; }
+        [JsonProperty("items_height")]
+        public float ItemsHeight { get; set; }
 
         /// <summary>
         /// X position of the "Arms" text.
