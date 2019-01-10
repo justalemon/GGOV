@@ -40,16 +40,16 @@
     "items_x" : 0.33,
     "items_y" : 0.494,
     "items_width": 0.075,
-    "items_height": 0.0525,
+    "items_height": 0.053,
 
     "arms_x": 0.5825,
     "arms_y": 0.468,
     "weapon_x" : 0.58,
     "weapon_y" : 0.494,
     "weapon_width": 0.0925,
-    "weapon_height": 0.05,
+    "weapon_height": 0.053,
     "weapon_image_x": 0.0035,
-    "weapon_image_y": 0.0075,
+    "weapon_image_y": 0.008,
     "weapon_image_width": 0.0875,
     "weapon_image_height": 0.035
 }
