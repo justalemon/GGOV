@@ -4,8 +4,10 @@ using GTA;
 using GTA.Native;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using static GGO.Tools;
 
 namespace GGO
@@ -20,9 +22,13 @@ namespace GGO
         /// </summary>
         private InventoryConfig Config;
         /// <summary>
+        /// Positions of the items inside of the inventory.
+        /// </summary>
+        private static List<Point> ItemsPosition = new List<Point>();
+        /// <summary>
         /// Positions of the weapons inside of the inventory.
         /// </summary>
-        private static Point[] Positions = new Point[5];
+        private static List<Point> WeaponPositions = new List<Point>();
         
         public Inventory()
         {
@@ -35,12 +41,22 @@ namespace GGO
                 return;
             }
 
-            // Iterate between 0-4 (1-5)
+            // Itterate between 0-2 (1-3) and 0-4 (1-5) and create the item positions
+            for (int X = 0; X < 3; X++)
+            {
+                for (int Y = 0; Y < 5; Y++)
+                {
+                    // And generate the item positions
+                    ItemsPosition.Add(new Point((int)(UI.WIDTH * Config.ItemsX) + ((int)(UI.HEIGHT * Config.SpacingX) * X) + ((int)(UI.HEIGHT * Config.ItemsRectangleWidth) * X),
+                                                (int)(UI.HEIGHT * Config.ItemsY) + ((int)(UI.HEIGHT * Config.SpacingY) * Y)));
+                }
+            }
+            // Iterate between 0-4 (1-5) and create the weapon positions
             for (int Index = 0; Index < 5; Index++)
             {
                 // And add a weapon on that position
                 // Formula for Y: VerticalPosition + (SeparationBetweenWeapons * WeaponNumber)
-                Positions[Index] = new Point((int)(UI.WIDTH * Config.WeaponX), (int)(UI.HEIGHT * Config.WeaponY) + ((int)(UI.HEIGHT * Config.WeaponSpacing) * Index));
+                WeaponPositions.Add(new Point((int)(UI.WIDTH * Config.WeaponX), (int)(UI.HEIGHT * Config.WeaponY) + ((int)(UI.HEIGHT * Config.SpacingY) * Index)));
             }
 
             // Add the events
@@ -123,8 +139,14 @@ namespace GGO
             // Draw the gender image
             DrawImage(Config.PlayerGender == Gender.Male ? "GenderMale" : "GenderFemale", LiteralPoint(Config.GenderX, Config.GenderY), LiteralSize(Config.GenderWidth, Config.GenderHeight));
 
+            // Draw the item backgrounds
+            foreach (Point Position in ItemsPosition)
+            {
+                DrawImage("InventoryItem", Position, LiteralSize(Config.ItemsRectangleWidth, Config.ItemsRectangleHeight));
+            }
+
             // For each one of the positions, draw a background rectangle
-            foreach (Point Position in Positions)
+            foreach (Point Position in WeaponPositions)
             {
                 DrawImage("InventoryItem", Position + LiteralSize(Config.WeaponRectangleX, Config.WeaponRectangleY), LiteralSize(Config.WeaponRectangleWidth, Config.WeaponRectangleHeight));
             }
@@ -135,7 +157,7 @@ namespace GGO
                 // Get the weapon internal name
                 string Name = Weapon.GetDisplayNameFromHash(Config.Weapons[Index]).Replace("WTT_", string.Empty);
                 // Draw the weapon image
-                DrawImage($"Weapon{Name}", Positions[Index], LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
+                DrawImage($"Weapon{Name}", WeaponPositions[Index], LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
             }
         }
 
@@ -151,7 +173,7 @@ namespace GGO
             for (int Index = 0; Index < Config.Weapons.Count; Index++)
             {
                 // If the player clicked on the weapon position
-                if (Positions[Index].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
+                if (WeaponPositions[Index].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
                 {
                     // Check if the player does not has the weapon on the inventory
                     if (!Game.Player.Character.Weapons.HasWeapon(Config.Weapons[Index]))

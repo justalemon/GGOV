@@ -137,7 +137,39 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("life_y")]
         public float LifeY { get; set; }
-        
+
+        /// <summary>
+        /// X Separation between inventory elements.
+        /// </summary>
+        [JsonProperty("spacing_x")]
+        public float SpacingX { get; set; }
+        /// <summary>
+        /// Y Separation between inventory elements.
+        /// </summary>
+        [JsonProperty("spacing_y")]
+        public float SpacingY { get; set; }
+
+        /// <summary>
+        /// X position of the items.
+        /// </summary>
+        [JsonProperty("items_x")]
+        public float ItemsX { get; set; }
+        /// <summary>
+        /// Y position of the items.
+        /// </summary>
+        [JsonProperty("items_y")]
+        public float ItemsY { get; set; }
+        /// <summary>
+        /// Width of the item rectangles.
+        /// </summary>
+        [JsonProperty("items_rectangle_width")]
+        public float ItemsRectangleWidth { get; set; }
+        /// <summary>
+        /// Height of the item rectangles.
+        /// </summary>
+        [JsonProperty("items_rectangle_height")]
+        public float ItemsRectangleHeight { get; set; }
+
         /// <summary>
         /// X position of the "Arms" text.
         /// </summary>
@@ -168,11 +200,6 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("weapon_height")]
         public float WeaponHeight { get; set; }
-        /// <summary>
-        /// Separation between inventory weapons.
-        /// </summary>
-        [JsonProperty("weapon_spacing")]
-        public float WeaponSpacing { get; set; }
         /// <summary>
         /// X offset of the weapon rectangles.
         /// </summary>
