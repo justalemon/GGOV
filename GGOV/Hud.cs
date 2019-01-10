@@ -71,7 +71,7 @@ namespace GGO
             }
 
             // If the user wants to disable the Radar and is not hidden, do it now
-            if (Config.Radar && !Function.Call<bool>(Hash.IS_RADAR_HIDDEN))
+            if (!Config.Radar && !Function.Call<bool>(Hash.IS_RADAR_HIDDEN))
             {
                 Function.Call(Hash.DISPLAY_RADAR, false);
             }
