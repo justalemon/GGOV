@@ -45,11 +45,11 @@
     "arms_x": 0.58,
     "arms_y": 0.465,
     "weapon_x" : 0.58,
-    "weapon_y" : 0.5,
-    "weapon_width": 0.0875,
-    "weapon_height": 0.035,
-    "weapon_rectangle_x": -0.0035,
-    "weapon_rectangle_y": -0.0075,
-    "weapon_rectangle_width": 0.0925,
-    "weapon_rectangle_height": 0.05
+    "weapon_y" : 0.494,
+    "weapon_width": 0.0925,
+    "weapon_height": 0.05,
+    "weapon_image_x": 0.0035,
+    "weapon_image_y": 0.0075,
+    "weapon_image_width": 0.0875,
+    "weapon_image_height": 0.035
 }

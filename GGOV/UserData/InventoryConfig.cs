@@ -201,24 +201,24 @@ namespace GGO.UserData
         [JsonProperty("weapon_height")]
         public float WeaponHeight { get; set; }
         /// <summary>
-        /// X offset of the weapon rectangles.
+        /// X offset of the weapon images.
         /// </summary>
-        [JsonProperty("weapon_rectangle_x")]
-        public float WeaponRectangleX { get; set; }
+        [JsonProperty("weapon_image_x")]
+        public float WeaponImageX { get; set; }
         /// <summary>
-        /// Y offset of the weapon rectangles.
+        /// Y offset of the weapon images.
         /// </summary>
-        [JsonProperty("weapon_rectangle_y")]
-        public float WeaponRectangleY { get; set; }
+        [JsonProperty("weapon_image_y")]
+        public float WeaponImageY { get; set; }
         /// <summary>
-        /// Width of the weapon rectangles.
+        /// Width of the weapon images.
         /// </summary>
-        [JsonProperty("weapon_rectangle_width")]
-        public float WeaponRectangleWidth { get; set; }
+        [JsonProperty("weapon_image_width")]
+        public float WeaponImageWidth { get; set; }
         /// <summary>
-        /// Height of the weapon rectangles.
+        /// Height of the weapon images.
         /// </summary>
-        [JsonProperty("weapon_rectangle_height")]
-        public float WeaponRectangleHeight { get; set; }
+        [JsonProperty("weapon_image_height")]
+        public float WeaponImageHeight { get; set; }
     }
 }

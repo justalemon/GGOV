@@ -148,7 +148,7 @@ namespace GGO
             // For each one of the positions, draw a background rectangle
             foreach (Point Position in WeaponPositions)
             {
-                DrawImage("InventoryItem", Position + LiteralSize(Config.WeaponRectangleX, Config.WeaponRectangleY), LiteralSize(Config.WeaponRectangleWidth, Config.WeaponRectangleHeight));
+                DrawImage("InventoryItem", Position, LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
             }
 
             // Iterate over the number of player weapons
@@ -157,7 +157,7 @@ namespace GGO
                 // Get the weapon internal name
                 string Name = Weapon.GetDisplayNameFromHash(Config.Weapons[Index]).Replace("WTT_", string.Empty);
                 // Draw the weapon image
-                DrawImage($"Weapon{Name}", WeaponPositions[Index], LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
+                DrawImage($"Weapon{Name}", WeaponPositions[Index] + LiteralSize(Config.WeaponImageX, Config.WeaponImageY), LiteralSize(Config.WeaponImageWidth, Config.WeaponImageHeight));
             }
         }
 
