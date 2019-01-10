@@ -125,7 +125,8 @@ namespace GGO
             UIRectangle HealthCurrent = new UIRectangle(LiteralPoint(Config.HealthX, Config.HealthY), HealthSize, Color.White);
             UIText PlayerName = new UIText(Game.Player.Name, LiteralPoint(Config.NameX, Config.NameY), 0.7f, Color.White, GTA.Font.Monospace, false, false, false);
             UIText LifeText = new UIText("Life", LiteralPoint(Config.LifeX, Config.LifeY), 0.3f, Color.White, GTA.Font.ChaletLondon, false, false, false);
-            UIText ArmsText = new UIText("Arms", LiteralPoint(Config.ArmsX, Config.ArmsY), 0.3f, Color.White, GTA.Font.ChaletLondon, false);
+            UIText ItemsText = new UIText("Items", LiteralPoint(Config.ItemsTextX, Config.ItemsTextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false);
+            UIText ArmsText = new UIText("Arms", LiteralPoint(Config.WeaponTextX, Config.WeaponTextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false);
             // Then, draw them on screen
             GeneralBackground.Draw();
             PlayerName.Draw();
@@ -134,6 +135,7 @@ namespace GGO
             HealthMax.Draw();
             HealthCurrent.Draw();
             LifeText.Draw();
+            ItemsText.Draw();
             ArmsText.Draw();
             
             // Draw the gender image

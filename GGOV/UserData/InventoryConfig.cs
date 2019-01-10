@@ -169,17 +169,17 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("items_height")]
         public float ItemsHeight { get; set; }
+        /// <summary>
+        /// X position of the "Items" text.
+        /// </summary>
+        [JsonProperty("items_text_x")]
+        public float ItemsTextX { get; set; }
+        /// <summary>
+        /// Y position of the "Items" text.
+        /// </summary>
+        [JsonProperty("items_text_y")]
+        public float ItemsTextY { get; set; }
 
-        /// <summary>
-        /// X position of the "Arms" text.
-        /// </summary>
-        [JsonProperty("arms_x")]
-        public float ArmsX { get; set; }
-        /// <summary>
-        /// Y position of the "Arms" text.
-        /// </summary>
-        [JsonProperty("arms_y")]
-        public float ArmsY { get; set; }
         /// <summary>
         /// X position of the weapons.
         /// </summary>
@@ -200,6 +200,16 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("weapon_height")]
         public float WeaponHeight { get; set; }
+        /// <summary>
+        /// X position of the "Arms" text.
+        /// </summary>
+        [JsonProperty("weapon_text_x")]
+        public float WeaponTextX { get; set; }
+        /// <summary>
+        /// Y position of the "Arms" text.
+        /// </summary>
+        [JsonProperty("weapon_text_y")]
+        public float WeaponTextY { get; set; }
         /// <summary>
         /// X offset of the weapon images.
         /// </summary>
