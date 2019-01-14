@@ -161,6 +161,9 @@ namespace GGO
                 // Draw the weapon image
                 DrawImage($"Weapon{Name}", WeaponPositions[Index] + LiteralSize(Config.WeaponImageX, Config.WeaponImageY), LiteralSize(Config.WeaponImageWidth, Config.WeaponImageHeight));
             }
+
+            // Draw the ammo icon on the first slot
+            DrawImage(Game.Player.Character.Weapons.Current.GetAmmoImage(), ItemsPosition[0] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
         }
 
         private void CheckClick()

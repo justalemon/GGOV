@@ -43,6 +43,10 @@
     "items_height": 0.053,
     "items_text_x": 0.332,
     "items_text_y": 0.468,
+    "items_image_x": 0.003,
+    "items_image_y": 0.003,
+    "items_image_width": 0.0255,
+    "items_image_height": 0.045,
 
     "weapon_x" : 0.58,
     "weapon_y" : 0.494,

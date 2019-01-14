@@ -179,6 +179,26 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("items_text_y")]
         public float ItemsTextY { get; set; }
+        /// <summary>
+        /// X offset of the item images.
+        /// </summary>
+        [JsonProperty("items_image_x")]
+        public float ItemsImageX { get; set; }
+        /// <summary>
+        /// Y offset of the item images.
+        /// </summary>
+        [JsonProperty("items_image_y")]
+        public float ItemsImageY { get; set; }
+        /// <summary>
+        /// Height of the item images.
+        /// </summary>
+        [JsonProperty("items_image_width")]
+        public float ItemsImageWidth { get; set; }
+        /// <summary>
+        /// Height of the item images.
+        /// </summary>
+        [JsonProperty("items_image_height")]
+        public float ItemsImageHeight { get; set; }
 
         /// <summary>
         /// X position of the weapons.
