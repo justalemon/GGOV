@@ -1,4 +1,4 @@
-using GTA.Native;
+﻿using GTA.Native;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -199,6 +199,26 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("items_image_height")]
         public float ItemsImageHeight { get; set; }
+        /// <summary>
+        /// X offset of the item separator.
+        /// </summary>
+        [JsonProperty("items_sep_x")]
+        public float ItemsSeparatorX { get; set; }
+        /// <summary>
+        /// Y offset of the item separator.
+        /// </summary>
+        [JsonProperty("items_sep_y")]
+        public float ItemsSeparatorY { get; set; }
+        /// <summary>
+        /// Width of the item separator.
+        /// </summary>
+        [JsonProperty("items_sep_width")]
+        public float ItemsSeparatorWidth { get; set; }
+        /// <summary>
+        /// Height of the item separator.
+        /// </summary>
+        [JsonProperty("items_sep_height")]
+        public float ItemsSeparatorHeight { get; set; }
         /// <summary>
         /// X offset of the quantity of that item.
         /// </summary>

@@ -47,6 +47,10 @@
     "items_image_y": 0.003,
     "items_image_width": 0.0255,
     "items_image_height": 0.045,
+    "items_sep_x": 0.0335,
+    "items_sep_y": 0.01,
+    "items_sep_width": 0.002,
+    "items_sep_height": 0.035,
     "items_quantity_x": 0.05,
     "items_quantity_y": 0.008,
 

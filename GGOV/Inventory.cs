@@ -145,6 +145,7 @@ namespace GGO
             foreach (Point Position in ItemsPosition)
             {
                 DrawImage("InventoryItem", Position, LiteralSize(Config.ItemsWidth, Config.ItemsHeight));
+                new UIRectangle(Position + LiteralSize(Config.ItemsSeparatorX, Config.ItemsSeparatorY), LiteralSize(Config.ItemsSeparatorWidth, Config.ItemsSeparatorHeight), Colors.Dividers).Draw();
             }
 
             // For each one of the positions, draw a background rectangle
