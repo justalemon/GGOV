@@ -165,7 +165,7 @@ namespace GGO
 
             // Draw the ammo icon and count on the first slot
             DrawImage(Game.Player.Character.Weapons.Current.GetAmmoImage(), ItemsPosition[0] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
-            new UIText(Game.Player.Character.Weapons.Current.MaxAmmo.ToString(), ItemsPosition[0] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+            new UIText(Game.Player.Character.Weapons.Current.Ammo.ToString(), ItemsPosition[0] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
         }
 
         private void CheckClick()
