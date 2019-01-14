@@ -42,9 +42,9 @@ namespace GGO
             }
 
             // Itterate between 0-2 (1-3) and 0-4 (1-5) and create the item positions
-            for (int X = 0; X < 3; X++)
+            for (int Y = 0; Y < 5; Y++)
             {
-                for (int Y = 0; Y < 5; Y++)
+                for (int X = 0; X < 3; X++)
                 {
                     // And generate the item positions
                     ItemsPosition.Add(new Point((int)(UI.WIDTH * Config.ItemsX) + ((int)(UI.HEIGHT * Config.SpacingX) * X) + ((int)(UI.HEIGHT * Config.ItemsWidth) * X),
