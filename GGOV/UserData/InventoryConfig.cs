@@ -1,4 +1,4 @@
-﻿using GTA.Native;
+using GTA.Native;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -199,6 +199,16 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("items_image_height")]
         public float ItemsImageHeight { get; set; }
+        /// <summary>
+        /// X offset of the quantity of that item.
+        /// </summary>
+        [JsonProperty("items_quantity_x")]
+        public float ItemsQuantityX { get; set; }
+        /// <summary>
+        /// Y offset of the quantity of that item.
+        /// </summary>
+        [JsonProperty("items_quantity_y")]
+        public float ItemsQuantityY { get; set; }
 
         /// <summary>
         /// X position of the weapons.

@@ -47,6 +47,8 @@
     "items_image_y": 0.003,
     "items_image_width": 0.0255,
     "items_image_height": 0.045,
+    "items_quantity_x": 0.05,
+    "items_quantity_y": 0.008,
 
     "weapon_x" : 0.58,
     "weapon_y" : 0.494,
