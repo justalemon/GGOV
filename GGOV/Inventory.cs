@@ -1,4 +1,3 @@
-using GGO.Properties;
 using GGO.UserData;
 using GTA;
 using GTA.Native;
@@ -7,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using static GGO.Tools;
 
 namespace GGO
