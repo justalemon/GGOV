@@ -165,7 +165,11 @@ namespace GGO
             // If the user wants the mags to be shown
             if (Config.AmmoMags)
             {
-                float MagsLeft = Game.Player.Character.Weapons.Current.Ammo / Game.Player.Character.Weapons.Current.MaxAmmoInClip;
+                float MagsLeft = 0;
+                if (Game.Player.Character.Weapons.Current.Ammo != 0 && Game.Player.Character.Weapons.Current.MaxAmmoInClip != 0)
+                {
+                    MagsLeft = Game.Player.Character.Weapons.Current.Ammo / Game.Player.Character.Weapons.Current.MaxAmmoInClip;
+                }
                 DrawImage(Game.Player.Character.Weapons.Current.GetMagazineImage(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
                 new UIText(MagsLeft.ToString("0"), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
                 ItemIndex++;
