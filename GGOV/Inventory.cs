@@ -123,8 +123,8 @@ namespace GGO
             new UIRectangle(LiteralPoint(Config.HealthX, Config.HealthY), HealthSize, Color.White).Draw();
             new UIText(Game.Player.Name, LiteralPoint(Config.NameX, Config.NameY), 0.7f, Color.White, GTA.Font.Monospace, false, false, false).Draw();
             new UIText("Life", LiteralPoint(Config.LifeX, Config.LifeY), 0.3f, Color.White, GTA.Font.ChaletLondon, false, false, false).Draw();
-            new UIText("Items", LiteralPoint(Config.ItemsTextX, Config.ItemsTextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
-            new UIText("Arms", LiteralPoint(Config.WeaponTextX, Config.WeaponTextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
+            new UIText("Items", LiteralPoint(Config.ItemsX, Config.ItemsY) + LiteralSize(Config.TextX, Config.TextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
+            new UIText("Arms", LiteralPoint(Config.WeaponX, Config.WeaponY) + LiteralSize(Config.TextX, Config.TextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
             
             // Draw the gender image
             DrawImage(Config.PlayerGender == Gender.Male ? "GenderMale" : "GenderFemale", LiteralPoint(Config.GenderX, Config.GenderY), LiteralSize(Config.GenderWidth, Config.GenderHeight));
