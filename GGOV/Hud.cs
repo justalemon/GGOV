@@ -193,8 +193,7 @@ namespace GGO
         public void Icon(string Filename, Point Position)
         {
             // Draw the background
-            UIRectangle Background = new UIRectangle(Position, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds);
-            Background.Draw();
+            new UIRectangle(Position, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();
             // And the image over it
             DrawImage(Filename, Position + LiteralSize(Config.IconX, Config.IconY), LiteralSize(Config.IconWidth, Config.IconHeight));
         }
@@ -254,8 +253,7 @@ namespace GGO
             }
 
             // Draw the general background
-            UIRectangle Background = new UIRectangle(BackgroundPosition, InformationSize, Colors.Backgrounds);
-            Background.Draw();
+            new UIRectangle(BackgroundPosition, InformationSize, Colors.Backgrounds).Draw();
 
             // Calculate the percentage of health and width
             float Percentage = (HealthNow / HealthMax) * 100;
@@ -265,19 +263,16 @@ namespace GGO
             HealthSize = new Size((int)Width, HealthSize.Height);
 
             // Draw the entity health
-            UIRectangle Health = new UIRectangle(BackgroundPosition + LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY), HealthSize, Colors.GetHealthColor(HealthNow, HealthMax));
-            Health.Draw();
+            new UIRectangle(BackgroundPosition + LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY), HealthSize, Colors.GetHealthColor(HealthNow, HealthMax)).Draw();
 
             // Draw the health dividers
             foreach (Point Position in Config.GetDividerPositions(BackgroundPosition, !(EntitySize == InfoSize.Small)))
             {
-                UIRectangle Divider = new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers);
-                Divider.Draw();
+                new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers).Draw();
             }
 
             // Draw the entity name
-            UIText Name = new UIText(EntityName, BackgroundPosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), TextSize);
-            Name.Draw();
+            new UIText(EntityName, BackgroundPosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), TextSize).Draw();
         }
 
         /// <summary>
@@ -298,14 +293,11 @@ namespace GGO
             Point WeaponLocation = Sidearm ? Config.GetSpecificPosition(Position.PlayerWeapon, 3) : Config.GetSpecificPosition(Position.PlayerWeapon, 2);
 
             // Draw the background and ammo quantity
-            UIRectangle AmmoBackground = new UIRectangle(BackgroundLocation, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds);
-            AmmoBackground.Draw();
-            UIText Text = new UIText(PlayerWeapon.AmmoInClip.ToString(), BackgroundLocation + LiteralSize(Config.AmmoX, Config.AmmoY), .6f, Color.White, (GTA.Font)2, true);
-            Text.Draw();
+            new UIRectangle(BackgroundLocation, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();
+            new UIText(PlayerWeapon.AmmoInClip.ToString(), BackgroundLocation + LiteralSize(Config.AmmoX, Config.AmmoY), .6f, Color.White, (GTA.Font)2, true).Draw();
 
             // Finally, draw the weapon image with the respective background
-            UIRectangle WeaponBackground = new UIRectangle(WeaponLocation, LiteralSize(Config.PlayerWidth, Config.PlayerHeight) - LiteralSize(Config.SquareWidth, 0) - LiteralSize(Config.CommonX, 0), Colors.Backgrounds);
-            WeaponBackground.Draw();
+            new UIRectangle(WeaponLocation, LiteralSize(Config.PlayerWidth, Config.PlayerHeight) - LiteralSize(Config.SquareWidth, 0) - LiteralSize(Config.CommonX, 0), Colors.Backgrounds).Draw();
             DrawImage($"Weapon{Name}", WeaponLocation + LiteralSize(Config.WeaponX, Config.WeaponY), LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
         }
 

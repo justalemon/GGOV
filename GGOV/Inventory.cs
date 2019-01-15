@@ -115,26 +115,16 @@ namespace GGO
             float HealthWidth = HealthCurrentN / HealthMaxN * 100 / 100 * (UI.WIDTH * Config.HealthWidth);
             Size HealthSize = new Size((int)HealthWidth, (int)(UI.HEIGHT * Config.HealthHeight));
 
-            // Generate the information for the Rectangles and Texts
-            UIRectangle GeneralBackground = new UIRectangle(LiteralPoint(Config.BackgroundX, Config.BackgroundY), LiteralSize(Config.BackgroundWidth, Config.BackgroundHeight), Colors.Inventory);
-            UIRectangle InfoBackground = new UIRectangle(LiteralPoint(Config.BackgroundX, Config.BackgroundY), LiteralSize(Config.InfoWidth, Config.InfoHeight), Colors.Backgrounds);
-            UIRectangle NameBackground = new UIRectangle(LiteralPoint(Config.PlayerX, Config.PlayerY), LiteralSize(Config.PlayerWidth, Config.PlayerHeight), Colors.Details);
-            UIRectangle HealthMax = new UIRectangle(LiteralPoint(Config.HealthX, Config.HealthY), LiteralSize(Config.HealthWidth, Config.HealthHeight), Color.Gray);
-            UIRectangle HealthCurrent = new UIRectangle(LiteralPoint(Config.HealthX, Config.HealthY), HealthSize, Color.White);
-            UIText PlayerName = new UIText(Game.Player.Name, LiteralPoint(Config.NameX, Config.NameY), 0.7f, Color.White, GTA.Font.Monospace, false, false, false);
-            UIText LifeText = new UIText("Life", LiteralPoint(Config.LifeX, Config.LifeY), 0.3f, Color.White, GTA.Font.ChaletLondon, false, false, false);
-            UIText ItemsText = new UIText("Items", LiteralPoint(Config.ItemsTextX, Config.ItemsTextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false);
-            UIText ArmsText = new UIText("Arms", LiteralPoint(Config.WeaponTextX, Config.WeaponTextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false);
-            // Then, draw them on screen
-            GeneralBackground.Draw();
-            PlayerName.Draw();
-            InfoBackground.Draw();
-            NameBackground.Draw();
-            HealthMax.Draw();
-            HealthCurrent.Draw();
-            LifeText.Draw();
-            ItemsText.Draw();
-            ArmsText.Draw();
+            // Generate the information for the Rectangles and Texts and draw them on the screen
+            new UIRectangle(LiteralPoint(Config.BackgroundX, Config.BackgroundY), LiteralSize(Config.BackgroundWidth, Config.BackgroundHeight), Colors.Inventory).Draw();
+            new UIRectangle(LiteralPoint(Config.BackgroundX, Config.BackgroundY), LiteralSize(Config.InfoWidth, Config.InfoHeight), Colors.Backgrounds).Draw();
+            new UIRectangle(LiteralPoint(Config.PlayerX, Config.PlayerY), LiteralSize(Config.PlayerWidth, Config.PlayerHeight), Colors.Details).Draw();
+            new UIRectangle(LiteralPoint(Config.HealthX, Config.HealthY), LiteralSize(Config.HealthWidth, Config.HealthHeight), Color.Gray).Draw();
+            new UIRectangle(LiteralPoint(Config.HealthX, Config.HealthY), HealthSize, Color.White).Draw();
+            new UIText(Game.Player.Name, LiteralPoint(Config.NameX, Config.NameY), 0.7f, Color.White, GTA.Font.Monospace, false, false, false).Draw();
+            new UIText("Life", LiteralPoint(Config.LifeX, Config.LifeY), 0.3f, Color.White, GTA.Font.ChaletLondon, false, false, false).Draw();
+            new UIText("Items", LiteralPoint(Config.ItemsTextX, Config.ItemsTextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
+            new UIText("Arms", LiteralPoint(Config.WeaponTextX, Config.WeaponTextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
             
             // Draw the gender image
             DrawImage(Config.PlayerGender == Gender.Male ? "GenderMale" : "GenderFemale", LiteralPoint(Config.GenderX, Config.GenderY), LiteralSize(Config.GenderWidth, Config.GenderHeight));
