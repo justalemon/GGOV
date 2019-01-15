@@ -161,14 +161,40 @@ namespace GGO
                 DrawImage($"Weapon{Name}", WeaponPositions[Index] + LiteralSize(Config.WeaponImageX, Config.WeaponImageY), LiteralSize(Config.WeaponImageWidth, Config.WeaponImageHeight));
             }
 
-            // Draw the ammo icon and count on the first slot
-            DrawImage(Game.Player.Character.Weapons.Current.GetAmmoImage(), ItemsPosition[0] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
-            new UIText(Game.Player.Character.Weapons.Current.Ammo.ToString(), ItemsPosition[0] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+            // Start an index to count how many items we have in total
+            int ItemIndex = 0;
 
-            // Draw the ammo icon and count on the first slot
-            float MagsLeft = Game.Player.Character.Weapons.Current.Ammo / Game.Player.Character.Weapons.Current.MaxAmmoInClip;
-            DrawImage(Game.Player.Character.Weapons.Current.GetMagazineImage(), ItemsPosition[1] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
-            new UIText(MagsLeft.ToString("0"), ItemsPosition[1] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+            // Show the total ammo count if the user wants
+            if (Config.AmmoTotal)
+            {
+                DrawImage(Game.Player.Character.Weapons.Current.GetAmmoImage(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
+                new UIText(Game.Player.Character.Weapons.Current.Ammo.ToString(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+                ItemIndex++;
+            }
+
+            // If the user wants the mags to be shown
+            if (Config.AmmoMags)
+            {
+                float MagsLeft = Game.Player.Character.Weapons.Current.Ammo / Game.Player.Character.Weapons.Current.MaxAmmoInClip;
+                DrawImage(Game.Player.Character.Weapons.Current.GetMagazineImage(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
+                new UIText(MagsLeft.ToString("0"), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+                ItemIndex++;
+            }
+
+            // Iterate over the maximum count of items
+            for (int Index = 0; Index < Config.Items.Count; Index++)
+            {
+                // If the current index + the total index is higher than the max
+                if (Index + ItemIndex > 15)
+                {
+                    // Break the for
+                    break;
+                }
+
+                // Draw the item
+                DrawImage("NoWeapon", ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
+                new UIText(Game.Player.Character.Weapons[Config.Items[Index]].Ammo.ToString(), ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+            }
         }
 
         private void CheckClick()

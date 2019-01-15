@@ -20,10 +20,25 @@ namespace GGO.UserData
         [JsonProperty("weapons")]
         public List<WeaponHash> Weapons { get; set; }
         /// <summary>
+        /// Items used to populate the inventory.
+        /// </summary>
+        [JsonProperty("items")]
+        public List<WeaponHash> Items { get; set; }
+        /// <summary>
         /// The player gender.
         /// </summary>
         [JsonProperty("gender")]
         public Gender PlayerGender { get; set; }
+        /// <summary>
+        /// If the total count of ammo should be shown.
+        /// </summary>
+        [JsonProperty("ammo_total")]
+        public bool AmmoTotal { get; set; }
+        /// <summary>
+        /// If the count of magazines left should be shown.
+        /// </summary>
+        [JsonProperty("ammo_mags")]
+        public bool AmmoMags { get; set; }
 
         /// <summary>
         /// X position of the inventory background.

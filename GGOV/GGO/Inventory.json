@@ -7,7 +7,15 @@
         2982836145,
         2726580491
     ],
+    "items": [
+        741814745,
+        2481070269,
+        615608432,
+        911657153
+    ],
     "gender": 0,
+    "ammo_total": true,
+    "ammo_mags": true,
 
     "background_x": 0.325,
     "background_y": 0.25,
