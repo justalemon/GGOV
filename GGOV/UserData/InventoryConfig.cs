@@ -165,6 +165,22 @@ namespace GGO.UserData
         public float SpacingY { get; set; }
 
         /// <summary>
+        /// X position of the "Status" text.
+        /// </summary>
+        [JsonProperty("status_base_x")]
+        public float StatusBaseX { get; set; }
+        /// <summary>
+        /// X position of the current player status.
+        /// </summary>
+        [JsonProperty("status_current_x")]
+        public float StatusCurrentX { get; set; }
+        /// <summary>
+        /// Y position of the status related text.
+        /// </summary>
+        [JsonProperty("status_y")]
+        public float StatusY { get; set; }
+
+        /// <summary>
         /// X position of the items.
         /// </summary>
         [JsonProperty("items_x")]

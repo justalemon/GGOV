@@ -129,6 +129,10 @@ namespace GGO
             // Draw the gender image
             DrawImage(Config.PlayerGender == Gender.Male ? "GenderMale" : "GenderFemale", LiteralPoint(Config.GenderX, Config.GenderY), LiteralSize(Config.GenderWidth, Config.GenderHeight));
 
+            // Draw the player status
+            new UIText("Status", LiteralPoint(Config.StatusBaseX, Config.StatusY), 0.38f, Color.White, GTA.Font.ChaletLondon, false).Draw();
+            new UIText(Game.Player.GetState(), LiteralPoint(Config.StatusCurrentX, Config.StatusY), 0.38f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+
             // Draw the item backgrounds
             foreach (Point Position in ItemsPosition)
             {

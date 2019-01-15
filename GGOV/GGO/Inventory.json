@@ -45,6 +45,10 @@
     "spacing_x": 0.06,
     "spacing_y": 0.058,
 
+    "status_base_x": 0.425,
+    "status_current_x": 0.57,
+    "status_y": 0.41,
+
     "items_x" : 0.33,
     "items_y" : 0.494,
     "items_width": 0.07,
