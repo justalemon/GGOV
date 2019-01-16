@@ -7,6 +7,12 @@ version: "1.2.1.{build}"
 # The AppVeyor image to use, usually the most up-to-date
 image: Visual Studio 2017
 
+# Send a Discord notification to notify the build progress
+notifications:
+  - provider: Webhook
+    url:
+      secure: RQOjbD0a6023xZNVZ7zzk7PjRpoF448yAGSM8koDLhmkmzUM5yPCgmaad8aJqIs8RUNIyviWWVKgyVoHDnXu54LGOTNVOCWgVLopKG8FA/Ofnc/R3wb8e0Y1VLME2TDc4OyE8nUxd78/lJY7qiz0pR1OZDgDregNYwczlizdDJNHSumbS17VNKQygVqdwoqd
+
 # Assembly patching: Change the Product Version and File Version
 assembly_info:
   patch: true
