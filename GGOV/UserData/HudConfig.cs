@@ -46,7 +46,6 @@ namespace GGO.UserData
         [JsonProperty("club_fix")]
         public bool ClubFix { get; set; }
 
-
         /// <summary>
         /// X spacing between UI elements.
         /// </summary>
@@ -242,7 +241,6 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("dead_height")]
         public float DeadMarkerHeight { get; set; }
-
 
         /// <summary>
         /// Gets the position of the dividers either for the player or the squad members.
