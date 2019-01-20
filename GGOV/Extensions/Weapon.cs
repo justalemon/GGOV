@@ -1,27 +1,10 @@
 ﻿using GTA;
 using GTA.Native;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 
-namespace GGO
+namespace GGO.Extensions
 {
-    /// <summary>
-    /// The usage for the selected weapon.
-    /// </summary>
-    public enum Usage
-    {
-        Banned = -1,
-        Main = 0,
-        Sidearm = 1,
-        Item = 2,
-        Double = 3
-    }
-
-    /// <summary>
-    /// Extensions used to get more features from existing classes.
-    /// </summary>
-    public static class Extensions
+    public static class WeaponExtensions
     {
         /// <summary>
         /// Specific weapons that are going to be counted as items.
@@ -48,68 +31,6 @@ namespace GGO
             WeaponGroup.Pistol,
             WeaponGroup.SMG
         };
-
-        /// <summary>
-        /// Checks if the position is being clicked by the user.
-        /// </summary>
-        /// <param name="Position">The starting position.</param>
-        /// <param name="Area">The size of the area being clicked.</param>
-        /// <returns>True if the area is being clicked, false otherwise.</returns>
-        public static bool IsClicked(this Point Position, Size Area)
-        {
-            int MouseX = (int)Math.Round(Function.Call<float>(Hash.GET_CONTROL_NORMAL, 0, (int)Control.CursorX) * UI.WIDTH);
-            int MouseY = (int)Math.Round(Function.Call<float>(Hash.GET_CONTROL_NORMAL, 0, (int)Control.CursorY) * UI.HEIGHT);
-
-            return (MouseX >= Position.X && MouseX <= Position.X + Area.Width) &&
-                      (MouseY > Position.Y && MouseY < Position.Y + Area.Height);
-        }
-
-        /// <summary>
-        /// If the entity is part of the mission.
-        /// </summary>
-        /// <returns>True if the entity is part of the mission, False otherwise.</returns>
-        public static bool IsMissionEntity(this Entity GameEntity)
-        {
-            return Function.Call<bool>(Hash.IS_ENTITY_A_MISSION_ENTITY, GameEntity);
-        }
-
-        /// <summary>
-        /// Checks if the specified relationship ID is for a friendly ped.
-        /// </summary>
-        /// <param name="Relationship">The relationship ID.</param>
-        /// <returns>True if the ped is friendly, False otherwise.</returns>
-        public static bool IsFriendly(this Ped GamePed)
-        {
-            return (int)Game.Player.Character.GetRelationshipWithPed(GamePed) <= 2 && (int)GamePed.GetRelationshipWithPed(Game.Player.Character) <= 2;
-        }
-
-        /// <summary>
-        /// Gets the player state based on what is doing currently.
-        /// </summary>
-        /// <returns>A string with the current player state.</returns>
-        public static string GetState(this Player GamePlayer)
-        {
-            // Wanted Higher or Equal to 3: Strage (see Psycho LLENN)
-            if (Game.Player.WantedLevel >= 3)
-            {
-                return "Strage";
-            }
-            // Lower than 3: Raising (Is being chased by a reason)
-            else if (Game.Player.WantedLevel < 3 && Game.Player.WantedLevel != 0)
-            {
-                return "Raising";
-            }
-            // On Mission: Concentrated (Most people )
-            else if (Game.MissionFlag)
-            {
-                return "Concentrated";
-            }
-            // Otherwise: Neutral (Player is not really doing something)
-            else
-            {
-                return "Neutral";
-            }
-        }
 
         /// <summary>
         /// Gets the correct ammo as an string representation.

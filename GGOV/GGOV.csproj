@@ -52,8 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Colors.cs" />
+    <Compile Include="Extensions\Entity.cs" />
+    <Compile Include="Extensions\Ped.cs" />
+    <Compile Include="Extensions\Player.cs" />
+    <Compile Include="Extensions\Point.cs" />
+    <Compile Include="Extensions\Weapon.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Hud.cs" />

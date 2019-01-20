@@ -1,3 +1,4 @@
+using GGO.Extensions;
 using GGO.UserData;
 using GTA;
 using GTA.Native;

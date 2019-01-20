@@ -1,6 +1,18 @@
 ﻿namespace GGO
 {
     /// <summary>
+    /// The usage for the selected weapon.
+    /// </summary>
+    public enum Usage
+    {
+        Banned = -1,
+        Main = 0,
+        Sidearm = 1,
+        Item = 2,
+        Double = 3
+    }
+
+    /// <summary>
     /// Gender to be shown on the inventory.
     /// </summary>
     public enum Gender
