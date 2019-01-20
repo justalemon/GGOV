@@ -5,6 +5,7 @@
     "squad": true,
     "vehicle_info": true,
     "dead_markers": true,
+    "club_fix": true,
 
     "common_x": 0.0055,
     "common_y": 0.01,

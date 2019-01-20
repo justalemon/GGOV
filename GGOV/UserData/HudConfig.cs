@@ -40,6 +40,11 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("dead_markers")]
         public bool DeadMarkers { get; set; }
+        /// <summary>
+        /// If we should skip some peds when the user is in the After Hours Night Club.
+        /// </summary>
+        [JsonProperty("club_fix")]
+        public bool ClubFix { get; set; }
 
 
         /// <summary>

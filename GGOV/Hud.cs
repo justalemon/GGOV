@@ -76,6 +76,9 @@ namespace GGO
                 Function.Call(Hash.DISPLAY_RADAR, false);
             }
 
+            // Get the interior where the player is
+            int Interior = Function.Call<int>(Hash.GET_INTERIOR_FROM_ENTITY, Game.Player.Character);
+
             // Draw get the ped information only if the squad members or dead markers have been enabled
             if (Config.Squad || Config.DeadMarkers)
             {
@@ -99,9 +102,9 @@ namespace GGO
 
                     // Iterate over the squad members
                     foreach (Ped SquadMember in FriendlyPeds)
-                    {
-                        // Skip non-existant peds and increase the count of invalid
-                        if (SquadMember == null || !SquadMember.Exists())
+                    {                        
+                        // Skip non-existant peds and those inside of the night club (if enabled) and increase the count of invalid
+                        if (SquadMember == null || !SquadMember.Exists() || (Config.ClubFix && Interior == 271617 && !SquadMember.IsPlayer))
                         {
                             InvalidPeds += 1;
                             continue;
