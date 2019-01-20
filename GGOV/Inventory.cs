@@ -199,7 +199,7 @@ namespace GGO
                 }
 
                 // Draw the item
-                DrawImage("NoWeapon", ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
+                DrawImage("Placeholder", ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
                 new UIText(Ammo.ToString(), ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
             }
         }

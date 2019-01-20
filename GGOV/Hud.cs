@@ -167,8 +167,8 @@ namespace GGO
             }
             else
             {
-                Icon("NoWeapon", PrimaryIcon);
-                Icon("NoWeapon", PrimaryBackground);
+                Icon("Placeholder", PrimaryIcon);
+                Icon("Placeholder", PrimaryBackground);
             }
             if (CurrentStyle == WeaponStyle.Sidearm || CurrentStyle == WeaponStyle.Double)
             {
@@ -177,8 +177,8 @@ namespace GGO
             }
             else
             {
-                Icon("NoWeapon", SecondaryIcon);
-                Icon("NoWeapon", SecondaryBackground);
+                Icon("Placeholder", SecondaryIcon);
+                Icon("Placeholder", SecondaryBackground);
             }
         }
 

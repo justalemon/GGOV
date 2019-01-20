@@ -260,7 +260,7 @@
     <None Include="GGO\Images\WeaponPIST2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="GGO\Images\NoWeapon.png">
+    <None Include="GGO\Images\Placeholder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
