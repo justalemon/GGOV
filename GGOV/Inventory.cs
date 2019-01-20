@@ -198,7 +198,7 @@ namespace GGO
             if (Config.AmmoTotal && IsAmmoAvailable)
             {
                 DrawImage(Game.Player.Character.Weapons.Current.GetAmmoImage(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
-                new UIText(Game.Player.Character.Weapons.Current.Ammo.ToString(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+                new UIText(Game.Player.Character.Weapons.Current.GetCorrectAmmo(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
                 ItemIndex++;
             }
 
@@ -226,17 +226,17 @@ namespace GGO
                 }
 
                 // Set a dummy in case of the weapon does not exists
-                int Ammo = 0;
+                string Ammo = "";
                 // If the weapon is on the player inventory
                 if (Game.Player.Character.Weapons.HasWeapon(Config.Items[Index]))
                 {
                     // Set the correct ammo count
-                    Ammo = Game.Player.Character.Weapons[Config.Items[Index]].Ammo;
+                    Ammo = Game.Player.Character.Weapons[Config.Items[Index]].GetCorrectAmmo();
                 }
 
                 // Draw the item
                 DrawImage("Placeholder", ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
-                new UIText(Ammo.ToString(), ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+                new UIText(Ammo, ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
             }
         }
 

@@ -112,6 +112,22 @@ namespace GGO
         }
 
         /// <summary>
+        /// Gets the correct ammo as an string representation.
+        /// </summary>
+        /// <returns>The correct ammo as a string.</returns>
+        public static string GetCorrectAmmo(this Weapon PlayerWeapon)
+        {
+            if (PlayerWeapon.Hash == WeaponHash.StunGun)
+            {
+                return "∞";
+            }
+            else
+            {
+                return PlayerWeapon.Ammo.ToString();
+            }
+        }
+
+        /// <summary>
         /// Gets the type for the current player weapon.
         /// </summary>
         /// <returns>The usage of the weapon.</returns>
