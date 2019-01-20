@@ -289,8 +289,8 @@ namespace GGO
             // Check if the player is using a secondary weapon
             bool Sidearm = Style == Usage.Sidearm;
 
-            // Store the weapon name
-            string Name = Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash).Replace("WTT_", string.Empty);
+            // Store the weapon name based on the WeaponHash enum value
+            string Name = Enum.GetName(typeof(WeaponHash), Game.Player.Character.Weapons.Current.Hash);
 
             // Store the information for the primary or secondary weapon
             Point BackgroundLocation = Sidearm ? Config.GetSpecificPosition(Position.PlayerInfo, 3) : Config.GetSpecificPosition(Position.PlayerInfo, 2);

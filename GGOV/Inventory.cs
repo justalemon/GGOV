@@ -187,7 +187,7 @@ namespace GGO
             for (int Index = 0; Index < Config.Weapons.Count; Index++)
             {
                 // Get the weapon internal name
-                string Name = Weapon.GetDisplayNameFromHash(Config.Weapons[Index]).Replace("WTT_", string.Empty);
+                string Name = Enum.GetName(typeof(WeaponHash), Config.Weapons[Index]);
                 // Draw the weapon image
                 DrawImage($"Weapon{Name}", WeaponPositions[Index] + LiteralSize(Config.WeaponImageX, Config.WeaponImageY), LiteralSize(Config.WeaponImageWidth, Config.WeaponImageHeight));
             }
