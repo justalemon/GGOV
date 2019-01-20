@@ -24,6 +24,13 @@ namespace GGO
     public static class Extensions
     {
         /// <summary>
+        /// Specific weapons that are going to be counted as items.
+        /// </summary>
+        public static List<WeaponHash> ItemWeapons = new List<WeaponHash>
+        {
+            WeaponHash.StunGun
+        };
+        /// <summary>
         /// Types of weapons that are going to be counted as items.
         /// </summary>
         public static List<WeaponGroup> ItemGroups = new List<WeaponGroup>
@@ -110,7 +117,7 @@ namespace GGO
         /// <returns>The usage of the weapon.</returns>
         public static Usage GetStyle(this Weapon PlayerWeapon)
         {
-            if (ItemGroups.Contains(PlayerWeapon.Group))
+            if (ItemGroups.Contains(PlayerWeapon.Group) || ItemWeapons.Contains(PlayerWeapon.Hash))
                 return Usage.Item;
             else if (SecondaryGroups.Contains(PlayerWeapon.Group))
                 return Usage.Sidearm;
