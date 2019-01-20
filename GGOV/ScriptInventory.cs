@@ -28,7 +28,8 @@ namespace GGO
         /// Positions of the weapons inside of the inventory.
         /// </summary>
         private static List<Point> WeaponPositions = new List<Point>();
-        
+        private int Offset = 0;
+
         /// <summary>
         /// If the ammo count should be available for the current weapon.
         /// </summary>
@@ -81,24 +82,6 @@ namespace GGO
         }
 
         /// <summary>
-        /// Gets the Item Index offset for the player Index Listing.
-        /// </summary>
-        /// <returns></returns>
-        public int GetItemOffset()
-        {
-            int Offset = 0;
-            if (IsAmmoAvailable && Config.AmmoTotal)
-            {
-                Offset += 1;
-            }
-            if (IsAmmoAvailable && Config.AmmoMags)
-            {
-                Offset += 1;
-            }
-            return Offset;
-        }
-
-        /// <summary>
         /// Tick that handles the drawing and actions of the inventory.
         /// </summary>
         public void OnTick(object Sender, EventArgs Args)
@@ -107,6 +90,17 @@ namespace GGO
             if (Game.CurrentInputMode == InputMode.GamePad && Game.Player.Character.IsInVehicle())
             {
                 return;
+            }
+
+            // Update the item offset
+            Offset = 0;
+            if (IsAmmoAvailable && Config.AmmoTotal)
+            {
+                Offset += 1;
+            }
+            if (IsAmmoAvailable && Config.AmmoMags)
+            {
+                Offset += 1;
             }
 
             // Disable the weapon wheel
@@ -236,7 +230,7 @@ namespace GGO
                 }
 
                 // Draw the item
-                DrawImage("Placeholder", ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
+                DrawImage("Item" + Enum.GetName(typeof(WeaponHash), Config.Items[Index]), ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
                 new UIText(Ammo, ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
             }
         }
@@ -253,7 +247,7 @@ namespace GGO
             for (int Index = 0; Index < Config.Items.Count; Index++)
             {
                 // If the player clicked on the weapon position
-                if (ItemsPosition[Index + GetItemOffset()].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
+                if (ItemsPosition[Index + Offset].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
                 {
                     SelectOrGive(Config.Items[Index]);
                 }
