@@ -27,6 +27,10 @@ namespace GGO
         /// Positions of the weapons inside of the inventory.
         /// </summary>
         private static List<Point> WeaponPositions = new List<Point>();
+        /// <summary>
+        /// The startup index for the inventory items.
+        /// </summary>
+        private static int StartIndex = 0;
         
         public Inventory()
         {
@@ -37,6 +41,16 @@ namespace GGO
             if (!Config.Enabled)
             {
                 return;
+            }
+
+            // See if we need to increase the startup index because of the features requested
+            if (Config.AmmoTotal)
+            {
+                StartIndex += 1;
+            }
+            if (Config.AmmoMags)
+            {
+                StartIndex += 1;
             }
 
             // Itterate between 0-2 (1-3) and 0-4 (1-5) and create the item positions
@@ -210,6 +224,26 @@ namespace GGO
             if (!Game.IsControlJustPressed(0, Control.PhoneSelect))
             {
                 return;
+            }
+
+            // Iterate over the item count
+            for (int Index = 0; Index < Config.Items.Count; Index++)
+            {
+                // If the player clicked on the weapon position
+                if (ItemsPosition[Index + StartIndex].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
+                {
+                    // Check if the player does not has the weapon on the inventory
+                    if (!Game.Player.Character.Weapons.HasWeapon(Config.Items[Index]))
+                    {
+                        // If not, give them the requested weapon with 100 of ammo
+                        Game.Player.Character.Weapons.Give(Config.Items[Index], 100, true, false);
+                    }
+                    else
+                    {
+                        // If the user has it, change the weapon to it
+                        Game.Player.Character.Weapons.Select(Config.Items[Index], true);
+                    }
+                }
             }
 
             // Iterate over the weapon count
