@@ -255,17 +255,7 @@ namespace GGO
                 // If the player clicked on the weapon position
                 if (ItemsPosition[Index + GetItemOffset()].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
                 {
-                    // Check if the player does not has the weapon on the inventory
-                    if (!Game.Player.Character.Weapons.HasWeapon(Config.Items[Index]))
-                    {
-                        // If not, give them the requested weapon with 100 of ammo
-                        Game.Player.Character.Weapons.Give(Config.Items[Index], 100, true, false);
-                    }
-                    else
-                    {
-                        // If the user has it, change the weapon to it
-                        Game.Player.Character.Weapons.Select(Config.Items[Index], true);
-                    }
+                    SelectOrGive(Config.Items[Index]);
                 }
             }
 
@@ -275,18 +265,23 @@ namespace GGO
                 // If the player clicked on the weapon position
                 if (WeaponPositions[Index].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
                 {
-                    // Check if the player does not has the weapon on the inventory
-                    if (!Game.Player.Character.Weapons.HasWeapon(Config.Weapons[Index]))
-                    {
-                        // If not, give them the requested weapon with 100 of ammo
-                        Game.Player.Character.Weapons.Give(Config.Weapons[Index], 100, true, false);
-                    }
-                    else
-                    {
-                        // If the user has it, change the weapon to it
-                        Game.Player.Character.Weapons.Select(Config.Weapons[Index], true);
-                    }
+                    SelectOrGive(Config.Weapons[Index]);
                 }
+            }
+        }
+
+        private void SelectOrGive(WeaponHash SelectedHash)
+        {
+            // Check if the player does not has the weapon on the inventory
+            if (!Game.Player.Character.Weapons.HasWeapon(SelectedHash))
+            {
+                // If not, give them the requested weapon with no ammo
+                Game.Player.Character.Weapons.Give(SelectedHash, 0, true, false);
+            }
+            else
+            {
+                // If the user has it, change the weapon to it
+                Game.Player.Character.Weapons.Select(SelectedHash, true);
             }
         }
     }
