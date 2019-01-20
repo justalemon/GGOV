@@ -227,7 +227,7 @@ namespace GGO
                 }
 
                 // Set a dummy in case of the weapon does not exists
-                string Ammo = "";
+                string Ammo = "0";
                 // If the weapon is on the player inventory
                 if (Game.Player.Character.Weapons.HasWeapon(Config.Items[Index]))
                 {
