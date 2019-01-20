@@ -28,6 +28,9 @@ namespace GGO
         /// Positions of the weapons inside of the inventory.
         /// </summary>
         private static List<Point> WeaponPositions = new List<Point>();
+        /// <summary>
+        /// Offset for the item click detection.
+        /// </summary>
         private int Offset = 0;
 
         /// <summary>
