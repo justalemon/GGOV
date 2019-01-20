@@ -26,7 +26,7 @@ namespace GGO
         /// <summary>
         /// Types of weapons that are going to be counted as items.
         /// </summary>
-        public static List<WeaponGroup> ItemWeapons = new List<WeaponGroup>
+        public static List<WeaponGroup> ItemGroups = new List<WeaponGroup>
         {
             WeaponGroup.PetrolCan,
             WeaponGroup.Thrown,
@@ -37,7 +37,7 @@ namespace GGO
         /// Types of weapons that can be considered sidearm either by the size or firing mechanism.
         /// In order: Pistol (Type), SMG.
         /// </summary>
-        public static List<WeaponGroup> SecondaryWeapons = new List<WeaponGroup>
+        public static List<WeaponGroup> SecondaryGroups = new List<WeaponGroup>
         {
             WeaponGroup.Pistol,
             WeaponGroup.SMG
@@ -111,9 +111,9 @@ namespace GGO
         /// <returns>The usage of the weapon.</returns>
         public static Usage GetStyle(this Weapon PlayerWeapon)
         {
-            if (ItemWeapons.Contains(PlayerWeapon.Group))
+            if (ItemGroups.Contains(PlayerWeapon.Group))
                 return Usage.Item;
-            else if (SecondaryWeapons.Contains(PlayerWeapon.Group))
+            else if (SecondaryGroups.Contains(PlayerWeapon.Group))
                 return Usage.Sidearm;
             else
                 return Usage.Main;
