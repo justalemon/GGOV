@@ -27,11 +27,25 @@ namespace GGO
         /// Positions of the weapons inside of the inventory.
         /// </summary>
         private static List<Point> WeaponPositions = new List<Point>();
-        /// <summary>
-        /// The startup index for the inventory items.
-        /// </summary>
-        private static int StartIndex = 0;
         
+        /// <summary>
+        /// If the ammo count should be available for the current weapon.
+        /// </summary>
+        public bool IsAmmoAvailable
+        {
+            get
+            {
+                switch (Game.Player.Character.Weapons.Current.GetStyle())
+                {
+                    case Usage.Main:
+                    case Usage.Sidearm:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        }
+
         public Inventory()
         {
             // Start by parsing the config
@@ -41,16 +55,6 @@ namespace GGO
             if (!Config.Enabled)
             {
                 return;
-            }
-
-            // See if we need to increase the startup index because of the features requested
-            if (Config.AmmoTotal)
-            {
-                StartIndex += 1;
-            }
-            if (Config.AmmoMags)
-            {
-                StartIndex += 1;
             }
 
             // Itterate between 0-2 (1-3) and 0-4 (1-5) and create the item positions
@@ -73,6 +77,24 @@ namespace GGO
 
             // Add the events
             Tick += OnTick;
+        }
+
+        /// <summary>
+        /// Gets the Item Index offset for the player Index Listing.
+        /// </summary>
+        /// <returns></returns>
+        public int GetItemOffset()
+        {
+            int Offset = 0;
+            if (IsAmmoAvailable && Config.AmmoTotal)
+            {
+                Offset += 1;
+            }
+            if (IsAmmoAvailable && Config.AmmoMags)
+            {
+                Offset += 1;
+            }
+            return Offset;
         }
 
         /// <summary>
@@ -173,7 +195,7 @@ namespace GGO
             int ItemIndex = 0;
 
             // Show the total ammo count if the user wants
-            if (Config.AmmoTotal)
+            if (Config.AmmoTotal && IsAmmoAvailable)
             {
                 DrawImage(Game.Player.Character.Weapons.Current.GetAmmoImage(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
                 new UIText(Game.Player.Character.Weapons.Current.Ammo.ToString(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
@@ -181,7 +203,7 @@ namespace GGO
             }
 
             // If the user wants the mags to be shown
-            if (Config.AmmoMags)
+            if (Config.AmmoMags && IsAmmoAvailable)
             {
                 float MagsLeft = 0;
                 if (Game.Player.Character.Weapons.Current.Ammo != 0 && Game.Player.Character.Weapons.Current.MaxAmmoInClip != 0)
@@ -230,7 +252,7 @@ namespace GGO
             for (int Index = 0; Index < Config.Items.Count; Index++)
             {
                 // If the player clicked on the weapon position
-                if (ItemsPosition[Index + StartIndex].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
+                if (ItemsPosition[Index + GetItemOffset()].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
                 {
                     // Check if the player does not has the weapon on the inventory
                     if (!Game.Player.Character.Weapons.HasWeapon(Config.Items[Index]))
