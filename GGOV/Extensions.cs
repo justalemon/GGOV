@@ -35,7 +35,6 @@ namespace GGO
         };
         /// <summary>
         /// Types of weapons that can be considered sidearm either by the size or firing mechanism.
-        /// In order: Pistol (Type), SMG.
         /// </summary>
         public static List<WeaponGroup> SecondaryGroups = new List<WeaponGroup>
         {
