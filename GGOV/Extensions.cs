@@ -1,20 +1,20 @@
 ﻿using GTA;
 using GTA.Native;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
 namespace GGO
 {
     /// <summary>
-    /// The style of the weapon that the player currently has.
+    /// The usage for the selected weapon.
     /// </summary>
-    public enum WeaponStyle
+    public enum Usage
     {
         Banned = -1,
         Main = 0,
         Sidearm = 1,
-        Melee = 2,
+        Item = 2,
         Double = 3
     }
 
@@ -24,20 +24,24 @@ namespace GGO
     public static class Extensions
     {
         /// <summary>
-        /// Types of weapons that are not going to be shown on the HUD.
-        /// In order: Gas Can (Type), Throwables, Fists (Type), None/Phone (Type).
+        /// Types of weapons that are going to be counted as items.
         /// </summary>
-        public static uint[] BannedWeapons = new uint[] { 1595662460u, 1548507267u, 2685387236u, 0 };
+        public static List<WeaponGroup> ItemWeapons = new List<WeaponGroup>
+        {
+            WeaponGroup.PetrolCan,
+            WeaponGroup.Thrown,
+            WeaponGroup.Unarmed,
+            WeaponGroup.Melee
+        };
         /// <summary>
         /// Types of weapons that can be considered sidearm either by the size or firing mechanism.
         /// In order: Pistol (Type), SMG.
         /// </summary>
-        public static uint[] SecondaryWeapons = new uint[] { 416676503u, 3337201093u };
-        /// <summary>
-        /// Types of weapons that can be considered melee.
-        /// In order: Melee (Type).
-        /// </summary>
-        public static uint[] MeleeWeapons = new uint[] { 3566412244u };
+        public static List<WeaponGroup> SecondaryWeapons = new List<WeaponGroup>
+        {
+            WeaponGroup.Pistol,
+            WeaponGroup.SMG
+        };
 
         /// <summary>
         /// Checks if the position is being clicked by the user.
@@ -74,25 +78,6 @@ namespace GGO
         }
 
         /// <summary>
-        /// Checks for the weapon type.
-        /// </summary>
-        /// <param name="ID">The Weapon Type ID.</param>
-        /// <returns>The style of weapon.</returns>
-        public static WeaponStyle GetStyle(this WeaponCollection Collection)
-        {
-            // Return the first match, in order
-            // From dangerous to normal
-            if (BannedWeapons.Contains((uint)Collection.Current.Group))
-                return WeaponStyle.Banned;
-            else if (MeleeWeapons.Contains((uint)Collection.Current.Group))
-                return WeaponStyle.Melee;
-            else if (SecondaryWeapons.Contains((uint)Collection.Current.Group))
-                return WeaponStyle.Sidearm;
-            else
-                return WeaponStyle.Main;
-        }
-
-        /// <summary>
         /// Gets the player state based on what is doing currently.
         /// </summary>
         /// <returns>A string with the current player state.</returns>
@@ -118,6 +103,20 @@ namespace GGO
             {
                 return "Neutral";
             }
+        }
+
+        /// <summary>
+        /// Gets the type for the current player weapon.
+        /// </summary>
+        /// <returns>The usage of the weapon.</returns>
+        public static Usage GetStyle(this Weapon PlayerWeapon)
+        {
+            if (ItemWeapons.Contains(PlayerWeapon.Group))
+                return Usage.Item;
+            else if (SecondaryWeapons.Contains(PlayerWeapon.Group))
+                return Usage.Sidearm;
+            else
+                return Usage.Main;
         }
 
         /// <summary>

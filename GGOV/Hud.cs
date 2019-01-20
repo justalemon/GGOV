@@ -150,7 +150,7 @@ namespace GGO
             }
 
             // Get the current weapon style
-            WeaponStyle CurrentStyle = Game.Player.Character.Weapons.GetStyle();
+            Usage CurrentStyle = Game.Player.Character.Weapons.Current.GetStyle();
 
             // Calculate and store the position of the primary and secondary icons
             Point PrimaryIcon = Config.GetSpecificPosition(Position.PlayerIcon, 2);
@@ -160,7 +160,7 @@ namespace GGO
 
             // And draw the weapon information for both the primary and secondary
             // If they are not available, draw dummies instead
-            if (CurrentStyle == WeaponStyle.Main || CurrentStyle == WeaponStyle.Double)
+            if (CurrentStyle == Usage.Main || CurrentStyle == Usage.Double)
             {
                 Icon("IconWeapon", PrimaryIcon);
                 WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
@@ -170,7 +170,7 @@ namespace GGO
                 Icon("Placeholder", PrimaryIcon);
                 Icon("Placeholder", PrimaryBackground);
             }
-            if (CurrentStyle == WeaponStyle.Sidearm || CurrentStyle == WeaponStyle.Double)
+            if (CurrentStyle == Usage.Sidearm || CurrentStyle == Usage.Double)
             {
                 Icon("IconWeapon", SecondaryIcon);
                 WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
@@ -283,10 +283,10 @@ namespace GGO
         /// </summary>
         /// <param name="Weapon">The player weapon.</param>
         /// <param name="Style">The weapon carry style.</param>
-        public void WeaponInfo(Weapon PlayerWeapon, WeaponStyle Style)
+        public void WeaponInfo(Weapon PlayerWeapon, Usage Style)
         {
             // Check if the player is using a secondary weapon
-            bool Sidearm = Style == WeaponStyle.Sidearm;
+            bool Sidearm = Style == Usage.Sidearm;
 
             // Store the weapon name
             string Name = Weapon.GetDisplayNameFromHash(PlayerWeapon.Hash).Replace("WTT_", string.Empty);
