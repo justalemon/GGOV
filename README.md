@@ -1,6 +1,6 @@
 # GGOV
 
-[![5mods](https://img.shields.io/badge/5mods-download-1B9E42.svg)](https://www.gta5-mods.com/scripts/ggo)
+[![5mods](https://img.shields.io/badge/5mods-download-20BA4E.svg)](https://www.gta5-mods.com/scripts/ggo)
 [![AppVeyor](https://img.shields.io/appveyor/ci/justalemon/ggov.svg?label=appveyor)](https://ci.appveyor.com/project/justalemon/ggov)
 [![CodeFactor](https://www.codefactor.io/repository/github/justalemon/ggov/badge)](https://www.codefactor.io/repository/github/justalemon/ggov)
 [![Discord](https://img.shields.io/badge/discord-join-7289DA.svg)](https://discord.gg/Cf6sspj)
