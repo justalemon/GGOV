@@ -11,7 +11,8 @@ namespace GGO.Extensions
         /// </summary>
         public static List<WeaponHash> ItemWeapons = new List<WeaponHash>
         {
-            WeaponHash.StunGun
+            WeaponHash.StunGun,
+            WeaponHash.FlareGun
         };
         /// <summary>
         /// Types of weapons that are going to be counted as items.
