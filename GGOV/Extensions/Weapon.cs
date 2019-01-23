@@ -39,7 +39,7 @@ namespace GGO.Extensions
         /// <returns>The correct ammo as a string.</returns>
         public static string GetCorrectAmmo(this Weapon PlayerWeapon)
         {
-            if (PlayerWeapon.Hash == WeaponHash.StunGun)
+            if (PlayerWeapon.Hash == WeaponHash.StunGun || PlayerWeapon.Group == WeaponGroup.Melee)
             {
                 return "∞";
             }
