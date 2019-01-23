@@ -269,8 +269,14 @@ namespace GGO
 
         private void SelectOrGive(WeaponHash SelectedHash)
         {
+            // If the current weapon equals the desired one
+            if (Game.Player.Character.Weapons.Current.Hash == SelectedHash)
+            {
+                // Hide the weapon
+                Game.Player.Character.Weapons.Select(WeaponHash.Unarmed, true);
+            }
             // Check if the player does not has the weapon on the inventory
-            if (!Game.Player.Character.Weapons.HasWeapon(SelectedHash))
+            else if (!Game.Player.Character.Weapons.HasWeapon(SelectedHash))
             {
                 // If not, give them the requested weapon with no ammo
                 Game.Player.Character.Weapons.Give(SelectedHash, 0, true, false);
