@@ -22,6 +22,8 @@
     "ammo_total": true,
     "ammo_mags": true,
 
+    "auto_add": true,
+
     "background_x": 0.325,
     "background_y": 0.25,
     "background_width": 0.35,

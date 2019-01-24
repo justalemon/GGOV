@@ -41,6 +41,12 @@ namespace GGO.UserData
         public bool AmmoMags { get; set; }
 
         /// <summary>
+        /// If we should automatically add the inventory items and weapons.
+        /// </summary>
+        [JsonProperty("auto_add")]
+        public bool AutoAdd { get; set; }
+
+        /// <summary>
         /// X position of the inventory background.
         /// </summary>
         [JsonProperty("background_x")]

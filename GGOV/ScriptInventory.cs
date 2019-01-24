@@ -81,7 +81,43 @@ namespace GGO
             }
 
             // Add the events
+            Tick += OnTickGiveWeapons;
             Tick += OnTick;
+        }
+
+        /// <summary>
+        /// Gives the startup weapons to the player, and gets unloaded once we are done.
+        /// </summary>
+        public void OnTickGiveWeapons(object Sender, EventArgs Args)
+        {
+            // If the player disabled the option
+            if (!Config.AutoAdd)
+            {
+                // Unsubscribe the event
+                Tick -= OnTickGiveWeapons;
+            }
+
+            // If the game is loading
+            if (Game.IsLoading)
+            {
+                return;
+            }
+
+            // Remove all of the weapons
+            Game.Player.Character.Weapons.RemoveAll();
+
+            // And add the items and weapons, one by one with the max ammo
+            foreach (WeaponHash Item in Config.Items)
+            {
+                Game.Player.Character.Weapons.Give(Item, 9999, true, false);
+            }
+            foreach (WeaponHash Weapon in Config.Weapons)
+            {
+                Game.Player.Character.Weapons.Give(Weapon, 9999, true, false);
+            }
+
+            // Finally, unsubscribe the event
+            Tick -= OnTickGiveWeapons;
         }
 
         /// <summary>
