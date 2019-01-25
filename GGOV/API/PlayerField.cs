@@ -56,6 +56,10 @@
         /// Gets the name for the image of the weapon. This (obviously) only needs to be implemented on Weapon.
         /// </summary>
         public abstract string GetWeaponImage();
+        /// <summary>
+        /// If the weapon data (ammo and the respective image) should be shown.
+        /// </summary>
+        public abstract bool DataShouldBeShown();
 
         #endregion
     }
