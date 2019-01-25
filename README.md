@@ -93,3 +93,12 @@ Please note that the maximum of Weapons is 5 and for items is 13 (15 is possible
 * FIX: Now you don't get FPS drops because of the ped checks
 * FIX: The image drawing time has been reduced
 * FIX: We no longer copy the UI images while the script is running
+
+### 2.1
+
+* NEW: Added more default items to fill the empty spaces
+* NEW: You can now hide your current weapon/change to your fists by clicking the current weapon
+* NEW: Added option to automatically give the items and weapons when the script starts
+* NEW: Added option to remove the weapons and items that are not part of the inventory
+* FIX: The Flare Gun no longer shows ammo and magazines left
+* FIX: We now show infinite ammo for melee weapons
