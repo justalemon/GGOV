@@ -13,7 +13,7 @@ namespace GGO.API.Native
 
         public override float GetCurrentValue()
         {
-            return Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character.CurrentVehicle) - 100;
+            return Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character.CurrentVehicle);
         }
 
         public override FieldType GetFieldType()
