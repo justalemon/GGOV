@@ -32,6 +32,10 @@ namespace GGO
         /// Offset for the item click detection.
         /// </summary>
         private int Offset = 0;
+        /// <summary>
+        /// Next time to check if the user has a weapon that is not on the inventory.
+        /// </summary>
+        private int NextWeaponCheck = 0;
 
         /// <summary>
         /// If the ammo count should be available for the current weapon.
@@ -82,6 +86,7 @@ namespace GGO
 
             // Add the events
             Tick += OnTickGiveWeapons;
+            Tick += OnTickRemoveWeapons;
             Tick += OnTick;
         }
 
@@ -118,6 +123,32 @@ namespace GGO
 
             // Finally, unsubscribe the event
             Tick -= OnTickGiveWeapons;
+        }
+
+        /// <summary>
+        /// Removes the player weapons that are not on the items or weapons.
+        /// </summary>
+        public void OnTickRemoveWeapons(object Sender, EventArgs Args)
+        {
+            // If the user has this option disabled, remove the event.
+            if (!Config.RemvoveNonListed)
+            {
+                Tick -= OnTickRemoveWeapons;
+            }
+
+            // If the time is higher or equal than the next check
+            if (Game.GameTime >= NextWeaponCheck)
+            {
+                // If the current player weapon is not on the inventory
+                if (!Config.Items.Contains(Game.Player.Character.Weapons.Current.Hash) && !Config.Weapons.Contains(Game.Player.Character.Weapons.Current.Hash))
+                {
+                    // Remove the weapon
+                    Game.Player.Character.Weapons.Remove(Game.Player.Character.Weapons.Current.Hash);
+                }
+
+                // And set the next check to one second in the future
+                NextWeaponCheck = Game.GameTime + 1000;
+            }
         }
 
         /// <summary>

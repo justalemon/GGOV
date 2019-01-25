@@ -23,6 +23,7 @@
     "ammo_mags": true,
 
     "auto_add": true,
+    "remove_non_listed": false,
 
     "background_x": 0.325,
     "background_y": 0.25,

@@ -45,6 +45,11 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("auto_add")]
         public bool AutoAdd { get; set; }
+        /// <summary>
+        /// If we should automatically remove the items and weapons that are on the mod.
+        /// </summary>
+        [JsonProperty("remove_non_listed")]
+        public bool RemvoveNonListed { get; set; }
 
         /// <summary>
         /// X position of the inventory background.
