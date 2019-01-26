@@ -1,3 +1,5 @@
+using GGO.API;
+using GGO.API.Native;
 using GGO.Extensions;
 using GGO.Properties;
 using GGO.UserData;
@@ -36,6 +38,10 @@ namespace GGO
         /// Next game time that we should update the lists of peds.
         /// </summary>
         private int NextFetch = 0;
+        /// <summary>
+        /// The list of player fields to be drawn while the game is running.
+        /// </summary>
+        private List<PlayerField> Fields = new List<PlayerField>();
 
         public Hud()
         {
@@ -44,6 +50,12 @@ namespace GGO
             {
                 return;
             }
+
+            // Add the player fields
+            Fields.Add(new PlayerSidearm());
+            Fields.Add(new PlayerMain());
+            Fields.Add(new PlayerHealth());
+            if (Config.VehicleInfo) { Fields.Add(new PlayerVehicle()); }
 
             // Add our Tick and Aborted events
             Tick += OnTick;
@@ -116,7 +128,7 @@ namespace GGO
 
                         // Draw the icon and the ped info for it
                         Icon(SquadMember.IsAlive ? "IconAlive" : "IconDead", Config.GetSpecificPosition(Position.SquadIcon, Number));
-                        EntityInfo(SquadMember, InfoSize.Small, Number);
+                        // EntityInfo(SquadMember, InfoSize.Small, Number);
                     }
                 }
 
@@ -139,47 +151,20 @@ namespace GGO
                 }
             }
 
-            // Then, start by drawing the player info
-            Icon("IconAlive", Config.GetSpecificPosition(Position.PlayerIcon, 1));
-            EntityInfo(Game.Player.Character, InfoSize.Normal);
-
-            // If the player is on a vehicle, also draw that information
-            if (Game.Player.Character.CurrentVehicle != null && Config.VehicleInfo)
+            // Count the items that should not be drawn
+            int Skipped = 0;
+            // Iterate over the count of fields
+            for (int i = 0; i < Fields.Count; i++)
             {
-                Icon("IconVehicle", Config.GetSpecificPosition(Position.PlayerIcon, 0));
-                EntityInfo(Game.Player.Character.CurrentVehicle, InfoSize.Normal);
-            }
-
-            // Get the current weapon style
-            Usage CurrentStyle = Game.Player.Character.Weapons.Current.GetStyle();
-
-            // Calculate and store the position of the primary and secondary icons
-            Point PrimaryIcon = Config.GetSpecificPosition(Position.PlayerIcon, 2);
-            Point PrimaryBackground = Config.GetSpecificPosition(Position.PlayerAmmo, 2);
-            Point SecondaryIcon = Config.GetSpecificPosition(Position.PlayerIcon, 3);
-            Point SecondaryBackground = Config.GetSpecificPosition(Position.PlayerAmmo, 3);
-
-            // And draw the weapon information for both the primary and secondary
-            // If they are not available, draw dummies instead
-            if (CurrentStyle == Usage.Main || CurrentStyle == Usage.Double)
-            {
-                Icon("IconWeapon", PrimaryIcon);
-                WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
-            }
-            else
-            {
-                Icon("Placeholder", PrimaryIcon);
-                Icon("Placeholder", PrimaryBackground);
-            }
-            if (CurrentStyle == Usage.Sidearm || CurrentStyle == Usage.Double)
-            {
-                Icon("IconWeapon", SecondaryIcon);
-                WeaponInfo(Game.Player.Character.Weapons.Current, CurrentStyle);
-            }
-            else
-            {
-                Icon("Placeholder", SecondaryIcon);
-                Icon("Placeholder", SecondaryBackground);
+                // If the field should not be shown
+                if (!Fields[i].ShouldBeShown())
+                {
+                    // Add one more and skip the iteration
+                    Skipped += 1;
+                    continue;
+                }
+                // Then, draw the specified field
+                PlayerField(Fields[i], i - Skipped);
             }
         }
 
@@ -187,6 +172,69 @@ namespace GGO
         {
             // Reset the Radar state to enabled (just if the script is aborted but not started again)
             Function.Call(Hash.DISPLAY_RADAR, true);
+        }
+
+        public void PlayerField(PlayerField Field, int Index)
+        {
+            // We are always going to need an icon
+            Icon("Icon" + Field.GetIconName(), Config.GetSpecificPosition(Position.PlayerIcon, Index));
+
+            // Store the base position
+            Point BasePosition = Config.GetSpecificPosition(Position.PlayerInfo, Index);
+
+            // If the field type is health
+            if (Field.GetFieldType() == FieldType.Health)
+            {
+                // Draw the background for the health information
+                new UIRectangle(BasePosition, LiteralSize(Config.PlayerWidth, Config.PlayerHeight), Colors.Backgrounds).Draw();
+
+                // Calculate the percentage of health bar
+                float Percentage = (Field.GetCurrentValue() / Field.GetMaxValue()) * 100;
+                float Width = (Percentage / 100) * LiteralSize(Config.PlayerHealthWidth, 0).Width;
+                // And create the size with the real health size
+                Size HealthSize = new Size((int)Width, LiteralSize(0, Config.PlayerHealthHeight).Height);
+
+                // Draw the entity health
+                new UIRectangle(BasePosition + LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY), HealthSize, Colors.GetHealthColor(Field.GetCurrentValue(), Field.GetMaxValue())).Draw();
+
+                // Draw the health dividers
+                foreach (Point Position in Config.GetDividerPositions(BasePosition, true))
+                {
+                    new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers).Draw();
+                }
+
+                // Draw the field name
+                new UIText(Field.GetName(), BasePosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), .325f).Draw();
+            }
+            // Else if the field type is weapon
+            else if (Field.GetFieldType() == FieldType.Weapon)
+            {
+                // If we should draw the ammo count and weapon image
+                if (Field.DataShouldBeShown())
+                {
+                    // Store the position of the weapon space
+                    Point WeaponLocation = Config.GetSpecificPosition(Position.PlayerWeapon, Index);
+
+                    // Draw the ammo quantity
+                    new UIRectangle(BasePosition, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();
+                    new UIText(Field.GetCurrentValue().ToString("0"), BasePosition + LiteralSize(Config.AmmoX, Config.AmmoY), .6f, Color.White, GTA.Font.Monospace, true).Draw();
+
+                    // And weapon image
+                    new UIRectangle(WeaponLocation, LiteralSize(Config.PlayerWidth, Config.PlayerHeight) - LiteralSize(Config.SquareWidth, 0) - LiteralSize(Config.CommonX, 0), Colors.Backgrounds).Draw();
+                    DrawImage("Weapon" + Field.GetWeaponImage(), WeaponLocation + LiteralSize(Config.WeaponX, Config.WeaponY), LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
+                }
+                // Otherwise, draw a simple placeholder
+                else
+                {
+                    Icon("Placeholder", BasePosition);
+                }
+            }
+            // Otherwise
+            else
+            {
+                // Throw an exception because fuck it
+                throw new InvalidOperationException("That Field type is not supported or valid.");
+            }
         }
 
         /// <summary>
@@ -200,109 +248,6 @@ namespace GGO
             new UIRectangle(Position, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();
             // And the image over it
             DrawImage(Filename, Position + LiteralSize(Config.IconX, Config.IconY), LiteralSize(Config.IconWidth, Config.IconHeight));
-        }
-
-        /// <summary>
-        /// Draws the information of a Game Entity.
-        /// This can be a Ped or a Vehicle.
-        /// </summary>
-        /// <param name="GameEntity">The game entity.</param>
-        /// <param name="EntitySize">Size of the information.</param>
-        /// <param name="Count">If drawing the small boxes, the number of it.</param>
-        public void EntityInfo(object GameEntity, InfoSize EntitySize, int Count = 0)
-        {
-            // Store general usage information
-            float HealthNow = 0;
-            float HealthMax = 0;
-            string EntityName = string.Empty;
-            Point BackgroundPosition = Point.Empty;
-            // And use single line if's for the rest
-            float TextSize = EntitySize == InfoSize.Small ? .3f : .325f;
-            Size InformationSize = EntitySize == InfoSize.Small ? LiteralSize(Config.SquadWidth, Config.SquadHeight) : LiteralSize(Config.PlayerWidth, Config.PlayerHeight);
-            Size HealthSize = EntitySize == InfoSize.Small ? LiteralSize(Config.SquadHealthWidth, Config.SquadHealthHeight) : LiteralSize(Config.PlayerHealthWidth, Config.PlayerHealthHeight);
-            Size HealthPosition = EntitySize == InfoSize.Small ? LiteralSize(Config.SquadHealthX, Config.SquadHealthY) : LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY);
-
-            // Check what type of game entity has been sent and set the appropiate parameters
-            if (GameEntity is Ped GamePed)
-            {
-                HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, GamePed) - 100;
-                HealthMax = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, GamePed) - 100;
-
-                BackgroundPosition = EntitySize == InfoSize.Small ? Config.GetSpecificPosition(Position.SquadInfo, Count) : Config.GetSpecificPosition(Position.PlayerInfo, 1);
-
-                // Set the correct ped name
-                if (GamePed.IsPlayer)
-                {
-                    EntityName = Game.Player.Name;
-                }
-                else if (Names.ContainsKey(GamePed.Model.GetHashCode().ToString()))
-                {
-                    EntityName = Names[GamePed.Model.GetHashCode().ToString()];
-                }
-                else
-                {
-                    EntityName = GamePed.Model.Hash.ToString();
-                }
-            }
-            else if (GameEntity is Vehicle Car)
-            {
-                HealthNow = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Car);
-                HealthMax = 1000;
-                EntityName = Car.FriendlyName;
-                BackgroundPosition = new Point((int)(UI.WIDTH * Config.PlayerX) + (int)(UI.WIDTH * Config.SquareWidth) + (int)(UI.WIDTH * Config.CommonX), (int)(UI.HEIGHT * Config.PlayerY));
-            }
-            else
-            {
-                throw new InvalidCastException("This is not a valid Entity.");
-            }
-
-            // Draw the general background
-            new UIRectangle(BackgroundPosition, InformationSize, Colors.Backgrounds).Draw();
-
-            // Calculate the percentage of health and width
-            float Percentage = (HealthNow / HealthMax) * 100;
-            float Width = (Percentage / 100) * HealthSize.Width;
-
-            // Finally, return the new size
-            HealthSize = new Size((int)Width, HealthSize.Height);
-
-            // Draw the entity health
-            new UIRectangle(BackgroundPosition + LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY), HealthSize, Colors.GetHealthColor(HealthNow, HealthMax)).Draw();
-
-            // Draw the health dividers
-            foreach (Point Position in Config.GetDividerPositions(BackgroundPosition, !(EntitySize == InfoSize.Small)))
-            {
-                new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers).Draw();
-            }
-
-            // Draw the entity name
-            new UIText(EntityName, BackgroundPosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), TextSize).Draw();
-        }
-
-        /// <summary>
-        /// Draws the player weapon information.
-        /// </summary>
-        /// <param name="Weapon">The player weapon.</param>
-        /// <param name="Style">The weapon carry style.</param>
-        public void WeaponInfo(Weapon PlayerWeapon, Usage Style)
-        {
-            // Check if the player is using a secondary weapon
-            bool Sidearm = Style == Usage.Sidearm;
-
-            // Store the weapon name based on the WeaponHash enum value
-            string Name = Enum.GetName(typeof(WeaponHash), Game.Player.Character.Weapons.Current.Hash);
-
-            // Store the information for the primary or secondary weapon
-            Point BackgroundLocation = Sidearm ? Config.GetSpecificPosition(Position.PlayerInfo, 3) : Config.GetSpecificPosition(Position.PlayerInfo, 2);
-            Point WeaponLocation = Sidearm ? Config.GetSpecificPosition(Position.PlayerWeapon, 3) : Config.GetSpecificPosition(Position.PlayerWeapon, 2);
-
-            // Draw the background and ammo quantity
-            new UIRectangle(BackgroundLocation, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();
-            new UIText(PlayerWeapon.AmmoInClip.ToString(), BackgroundLocation + LiteralSize(Config.AmmoX, Config.AmmoY), .6f, Color.White, (GTA.Font)2, true).Draw();
-
-            // Finally, draw the weapon image with the respective background
-            new UIRectangle(WeaponLocation, LiteralSize(Config.PlayerWidth, Config.PlayerHeight) - LiteralSize(Config.SquareWidth, 0) - LiteralSize(Config.CommonX, 0), Colors.Backgrounds).Draw();
-            DrawImage($"Weapon{Name}", WeaponLocation + LiteralSize(Config.WeaponX, Config.WeaponY), LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
         }
 
         /// <summary>
