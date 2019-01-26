@@ -306,7 +306,7 @@ namespace GGO.UserData
             }
 
             // Finally, return the correct position
-            return new Point(DefaultPosition.X, DefaultPosition.Y + (LiteralPoint(CommonX, 0).X + LiteralPoint(SquareWidth, 0).X) * Index);
+            return new Point(DefaultPosition.X, DefaultPosition.Y - (LiteralPoint(CommonX, 0).X + LiteralPoint(SquareWidth, 0).X) * Index);
         }
     }
 }
