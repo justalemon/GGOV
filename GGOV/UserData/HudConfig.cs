@@ -119,6 +119,16 @@ namespace GGO.UserData
         [JsonProperty("squad_name_y")]
         public float SquadNameY { get; set; }
         /// <summary>
+        /// X position of the seccond text relative to the background.
+        /// </summary>
+        [JsonProperty("squad_name2_x")]
+        public float SquadName2X { get; set; }
+        /// <summary>
+        /// Y position of the seccond text relative to the background.
+        /// </summary>
+        [JsonProperty("squad_name2_y")]
+        public float SquadName2Y { get; set; }
+        /// <summary>
         /// X position of the squad health bar relative to the background.
         /// </summary>
         [JsonProperty("squad_health_x")]

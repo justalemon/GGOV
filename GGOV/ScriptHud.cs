@@ -262,7 +262,7 @@ namespace GGO
                 else if (Field.GetFieldType() == FieldType.Text)
                 {
                     // Draw the second text field
-                    new UIText(Field.GetSecondText(), BasePosition + LiteralSize(Config.SquadNameX, Config.SquadNameY) + LiteralSize(0, Config.SquadNameY), IsPlayer ? .325f : .3f).Draw();
+                    new UIText(Field.GetSecondText(), BasePosition + LiteralSize(Config.SquadName2X, Config.SquadName2Y) + LiteralSize(0, Config.SquadNameY), IsPlayer ? .325f : .3f).Draw();
                 }
             }
             // Else if the field type is weapon
