@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using static GGO.Tools;
 
 namespace GGO
@@ -41,7 +42,7 @@ namespace GGO
         /// <summary>
         /// The list of player fields to be drawn while the game is running.
         /// </summary>
-        private static List<Field> Fields = new List<Field>();
+        private static List<Field> PlayerFields = new List<Field>();
 
         public Hud()
         {
@@ -52,14 +53,21 @@ namespace GGO
             }
 
             // Add the player fields
-            Fields.Add(new PlayerSidearm());
-            Fields.Add(new PlayerMain());
-            Fields.Add(new PlayerHealth());
-            if (Config.VehicleInfo) { Fields.Add(new PlayerVehicle()); }
+            PlayerFields.Add(new PlayerSidearm());
+            PlayerFields.Add(new PlayerMain());
+            PlayerFields.Add(new PlayerHealth());
+            if (Config.VehicleInfo) { PlayerFields.Add(new PlayerVehicle()); }
 
             // Add our Tick and Aborted events
             Tick += OnTick;
             Aborted += OnAbort;
+        }
+
+        public static void AddPlayerField(Field PlayerField)
+        {
+            string OriginName = Assembly.GetCallingAssembly().ManifestModule.ScopeName;
+            UI.Notify($"The script {OriginName} has added a new Player Field.");
+            PlayerFields.Add(PlayerField);
         }
 
         private void OnTick(object Sender, EventArgs Args)
@@ -152,17 +160,17 @@ namespace GGO
             // Count the items that should not be drawn
             int Skipped = 0;
             // Iterate over the count of fields
-            for (int i = 0; i < Fields.Count; i++)
+            for (int i = 0; i < PlayerFields.Count; i++)
             {
                 // If the field should not be shown
-                if (!Fields[i].ShouldBeShown())
+                if (!PlayerFields[i].ShouldBeShown())
                 {
                     // Add one more and skip the iteration
                     Skipped += 1;
                     continue;
                 }
                 // Then, draw the specified field
-                PlayerField(Fields[i], i - Skipped, FieldSection.Player);
+                PlayerField(PlayerFields[i], i - Skipped, FieldSection.Player);
             }
         }
 
