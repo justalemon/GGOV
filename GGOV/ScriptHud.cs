@@ -127,7 +127,7 @@ namespace GGO
                         int Number = Array.IndexOf(FriendlyPeds, SquadMember) - InvalidPeds;
 
                         // Draw the icon and the ped info for it
-                        Icon(SquadMember.IsAlive ? "IconAlive" : "IconDead", Config.GetSpecificPosition(Position.SquadIcon, Number));
+                        Icon(SquadMember.IsAlive ? "IconAlive" : "IconDead", Config.GetSpecificPosition(Position.SquadIcon, Number, false));
                         // EntityInfo(SquadMember, InfoSize.Small, Number);
                     }
                 }
@@ -177,10 +177,10 @@ namespace GGO
         public void PlayerField(PlayerField Field, int Index)
         {
             // We are always going to need an icon
-            Icon("Icon" + Field.GetIconName(), Config.GetSpecificPosition(Position.PlayerIcon, Index));
+            Icon("Icon" + Field.GetIconName(), Config.GetSpecificPosition(Position.PlayerIcon, Index, true));
 
             // Store the base position
-            Point BasePosition = Config.GetSpecificPosition(Position.PlayerInfo, Index);
+            Point BasePosition = Config.GetSpecificPosition(Position.PlayerInfo, Index, true);
 
             // If the field type is health
             if (Field.GetFieldType() == FieldType.Health)
@@ -213,7 +213,7 @@ namespace GGO
                 if (Field.DataShouldBeShown())
                 {
                     // Store the position of the weapon space
-                    Point WeaponLocation = Config.GetSpecificPosition(Position.PlayerWeapon, Index);
+                    Point WeaponLocation = Config.GetSpecificPosition(Position.PlayerWeapon, Index, true);
 
                     // Draw the ammo quantity
                     new UIRectangle(BasePosition, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();

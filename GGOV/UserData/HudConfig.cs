@@ -277,7 +277,7 @@ namespace GGO.UserData
         /// <param name="HudPos">Position of the screen calculations.</param>
         /// <param name="Index">Multiplier for the position.</param>
         /// <returns>A Point with the on screen position.</returns>
-        public Point GetSpecificPosition(Position HudPos, int Index)
+        public Point GetSpecificPosition(Position HudPos, int Index, bool Reversed)
         {
             // Set a dummy position to change later
             Point DefaultPosition = Point.Empty;
@@ -305,8 +305,11 @@ namespace GGO.UserData
                     throw new NotSupportedException("You can't calculate the position for this Screen location.");
             }
 
+            // Calculate the correct number
+            int Calculated = (LiteralPoint(CommonX, 0).X + LiteralPoint(SquareWidth, 0).X) * Index;
+
             // Finally, return the correct position
-            return new Point(DefaultPosition.X, DefaultPosition.Y - (LiteralPoint(CommonX, 0).X + LiteralPoint(SquareWidth, 0).X) * Index);
+            return new Point(DefaultPosition.X, DefaultPosition.Y + (Reversed ? -Calculated : Calculated));
         }
     }
 }
