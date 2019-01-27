@@ -4,7 +4,7 @@ using System;
 
 namespace GGO.API.Native
 {
-    public class PlayerHealth : PlayerField
+    public class PlayerHealth : Field
     {
         public override bool DataShouldBeShown()
         {

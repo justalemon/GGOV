@@ -12,7 +12,7 @@
     /// <summary>
     /// Abstract class used for showing all of the player data.
     /// </summary>
-    public abstract class PlayerField
+    public abstract class Field
     {
         #region Generic
 

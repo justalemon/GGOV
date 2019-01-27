@@ -41,7 +41,7 @@ namespace GGO
         /// <summary>
         /// The list of player fields to be drawn while the game is running.
         /// </summary>
-        private List<PlayerField> Fields = new List<PlayerField>();
+        private List<Field> Fields = new List<Field>();
 
         public Hud()
         {
@@ -174,7 +174,7 @@ namespace GGO
             Function.Call(Hash.DISPLAY_RADAR, true);
         }
 
-        public void PlayerField(PlayerField Field, int Index)
+        public void PlayerField(Field Field, int Index)
         {
             // We are always going to need an icon
             Icon("Icon" + Field.GetIconName(), Config.GetSpecificPosition(Position.PlayerIcon, Index, true));

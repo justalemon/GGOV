@@ -4,7 +4,7 @@ using System;
 
 namespace GGO.API.Native
 {
-    public class PlayerVehicle : PlayerField
+    public class PlayerVehicle : Field
     {
         public override bool DataShouldBeShown()
         {

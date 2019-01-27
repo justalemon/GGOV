@@ -4,7 +4,7 @@ using System;
 
 namespace GGO.API.Native
 {
-    public class PlayerWeapon : PlayerField
+    public class PlayerWeapon : Field
     {
         public override bool DataShouldBeShown()
         {
