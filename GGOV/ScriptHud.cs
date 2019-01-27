@@ -204,7 +204,7 @@ namespace GGO
                 }
 
                 // Draw the field name
-                new UIText(Field.GetName(), BasePosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), .325f).Draw();
+                new UIText(Field.GetFirstText(), BasePosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), .325f).Draw();
             }
             // Else if the field type is weapon
             else if (Field.GetFieldType() == FieldType.Weapon)

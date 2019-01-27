@@ -31,7 +31,12 @@ namespace GGO.API.Native
             throw new NotImplementedException();
         }
 
-        public override string GetName()
+        public override string GetFirstText()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetSecondText()
         {
             throw new NotImplementedException();
         }

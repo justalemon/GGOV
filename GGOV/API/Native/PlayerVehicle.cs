@@ -31,9 +31,14 @@ namespace GGO.API.Native
             return 1000;
         }
 
-        public override string GetName()
+        public override string GetFirstText()
         {
             return Game.Player.Character.CurrentVehicle.FriendlyName;
+        }
+
+        public override string GetSecondText()
+        {
+            return string.Empty;
         }
 
         public override string GetWeaponImage()

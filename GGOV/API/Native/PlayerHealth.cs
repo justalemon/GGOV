@@ -31,9 +31,14 @@ namespace GGO.API.Native
             return Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;
         }
 
-        public override string GetName()
+        public override string GetFirstText()
         {
             return Game.Player.Name;
+        }
+
+        public override string GetSecondText()
+        {
+            return string.Empty;
         }
 
         public override string GetWeaponImage()

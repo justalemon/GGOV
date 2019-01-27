@@ -38,10 +38,15 @@
         #region Health Only
 
         /// <summary>
-        /// Gets the name of the information field.
+        /// Gets the contents of the first text field.
         /// It only needs to be implemented on Health.
         /// </summary>
-        public abstract string GetName();
+        public abstract string GetFirstText();
+        /// <summary>
+        /// Gets the contents of the first text field.
+        /// If this does not returns empty or a whitespace, the Health bar gets removed.
+        /// </summary>
+        public abstract string GetSecondText();
         /// <summary>
         /// Gets the maximum value for health bar.
         /// It only needs to be implemented on Health.
