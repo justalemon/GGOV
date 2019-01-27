@@ -53,11 +53,11 @@
     }
 
     /// <summary>
-    /// The size of the entity information.
+    /// The section of the field.
     /// </summary>
-    public enum InfoSize
+    public enum FieldSection
     {
-        Small = 0,
-        Normal = 1
+        Squad = 0,
+        Player = 1
     }
 }

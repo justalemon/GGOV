@@ -127,11 +127,9 @@ namespace GGO
                         int Number = Array.IndexOf(FriendlyPeds, SquadMember) - InvalidPeds;
 
                         // Draw the icon and the ped info for it
-                        Icon(SquadMember.IsAlive ? "IconAlive" : "IconDead", Config.GetSpecificPosition(Position.SquadIcon, Number, false));
-                        // EntityInfo(SquadMember, InfoSize.Small, Number);
+                        PlayerField(new SquadMember(SquadMember), Number, FieldSection.Squad);
                     }
                 }
-
 
                 // If the user wants to, draw the dead markers
                 if (Config.DeadMarkers)
@@ -164,7 +162,7 @@ namespace GGO
                     continue;
                 }
                 // Then, draw the specified field
-                PlayerField(Fields[i], i - Skipped);
+                PlayerField(Fields[i], i - Skipped, FieldSection.Player);
             }
         }
 
@@ -174,37 +172,43 @@ namespace GGO
             Function.Call(Hash.DISPLAY_RADAR, true);
         }
 
-        public void PlayerField(Field Field, int Index)
+        public void PlayerField(Field Field, int Index, FieldSection Section)
         {
+            // Store the positions for the UI elements
+            bool IsPlayer = Section == FieldSection.Player;
+            Position IconPosition = IsPlayer ? Position.PlayerIcon : Position.SquadIcon;
+            Position InfoPosition = IsPlayer ? Position.PlayerInfo : Position.SquadInfo;
+
             // We are always going to need an icon
-            Icon("Icon" + Field.GetIconName(), Config.GetSpecificPosition(Position.PlayerIcon, Index, true));
+            Icon("Icon" + Field.GetIconName(), Config.GetSpecificPosition(IconPosition, Index, IsPlayer));
 
             // Store the base position
-            Point BasePosition = Config.GetSpecificPosition(Position.PlayerInfo, Index, true);
+            Point BasePosition = Config.GetSpecificPosition(InfoPosition, Index, IsPlayer);
 
             // If the field type is health
             if (Field.GetFieldType() == FieldType.Health)
             {
                 // Draw the background for the health information
-                new UIRectangle(BasePosition, LiteralSize(Config.PlayerWidth, Config.PlayerHeight), Colors.Backgrounds).Draw();
+                new UIRectangle(BasePosition, IsPlayer ? LiteralSize(Config.PlayerWidth, Config.PlayerHeight) : LiteralSize(Config.SquadWidth, Config.SquadHeight), Colors.Backgrounds).Draw();
 
                 // Calculate the percentage of health bar
                 float Percentage = (Field.GetCurrentValue() / Field.GetMaxValue()) * 100;
-                float Width = (Percentage / 100) * LiteralSize(Config.PlayerHealthWidth, 0).Width;
+                float Width = (Percentage / 100) * LiteralSize(IsPlayer ? Config.PlayerHealthWidth : Config.SquadHealthWidth, 0).Width;
                 // And create the size with the real health size
-                Size HealthSize = new Size((int)Width, LiteralSize(0, Config.PlayerHealthHeight).Height);
+                Size HealthSize = new Size((int)Width, LiteralSize(0, IsPlayer ? Config.PlayerHealthHeight : Config.SquadHealthHeight).Height);
 
                 // Draw the entity health
-                new UIRectangle(BasePosition + LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY), HealthSize, Colors.GetHealthColor(Field.GetCurrentValue(), Field.GetMaxValue())).Draw();
+                Size HealthOffset = IsPlayer ? LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY) : LiteralSize(Config.SquadHealthX, Config.SquadHealthY);
+                new UIRectangle(BasePosition + HealthOffset, HealthSize, Colors.GetHealthColor(Field.GetCurrentValue(), Field.GetMaxValue())).Draw();
 
                 // Draw the health dividers
-                foreach (Point Position in Config.GetDividerPositions(BasePosition, true))
+                foreach (Point Position in Config.GetDividerPositions(BasePosition, IsPlayer))
                 {
                     new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers).Draw();
                 }
 
                 // Draw the field name
-                new UIText(Field.GetFirstText(), BasePosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), .325f).Draw();
+                new UIText(Field.GetFirstText(), BasePosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), IsPlayer ? .325f : .3f).Draw();
             }
             // Else if the field type is weapon
             else if (Field.GetFieldType() == FieldType.Weapon)
@@ -213,7 +217,7 @@ namespace GGO
                 if (Field.DataShouldBeShown())
                 {
                     // Store the position of the weapon space
-                    Point WeaponLocation = Config.GetSpecificPosition(Position.PlayerWeapon, Index, true);
+                    Point WeaponLocation = Config.GetSpecificPosition(Position.PlayerWeapon, Index, IsPlayer);
 
                     // Draw the ammo quantity
                     new UIRectangle(BasePosition, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();
