@@ -40,7 +40,7 @@ namespace GGO
         /// <summary>
         /// If the ammo count should be available for the current weapon.
         /// </summary>
-        public bool IsAmmoAvailable
+        private bool IsAmmoAvailable
         {
             get
             {
@@ -93,7 +93,7 @@ namespace GGO
         /// <summary>
         /// Gives the startup weapons to the player, and gets unloaded once we are done.
         /// </summary>
-        public void OnTickGiveWeapons(object Sender, EventArgs Args)
+        private void OnTickGiveWeapons(object Sender, EventArgs Args)
         {
             // If the player disabled the option
             if (!Config.AutoAdd)
@@ -128,7 +128,7 @@ namespace GGO
         /// <summary>
         /// Removes the player weapons that are not on the items or weapons.
         /// </summary>
-        public void OnTickRemoveWeapons(object Sender, EventArgs Args)
+        private void OnTickRemoveWeapons(object Sender, EventArgs Args)
         {
             // If the user has this option disabled, remove the event.
             if (!Config.RemvoveNonListed)
@@ -154,7 +154,7 @@ namespace GGO
         /// <summary>
         /// Tick that handles the drawing and actions of the inventory.
         /// </summary>
-        public void OnTick(object Sender, EventArgs Args)
+        private void OnTick(object Sender, EventArgs Args)
         {
             // Don't process the inventory when using a controller and in a vehicle
             if (Game.CurrentInputMode == InputMode.GamePad && Game.Player.Character.IsInVehicle())
@@ -208,7 +208,7 @@ namespace GGO
         /// <summary>
         /// Draws the Inventory on screen.
         /// </summary>
-        public void Draw()
+        private void Draw()
         {
             // Get the current and max health and calculate the size of the health bar
             float HealthMaxN = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;

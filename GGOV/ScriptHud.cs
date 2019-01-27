@@ -166,13 +166,13 @@ namespace GGO
             }
         }
 
-        public void OnAbort(object Sender, EventArgs Args)
+        private void OnAbort(object Sender, EventArgs Args)
         {
             // Reset the Radar state to enabled (just if the script is aborted but not started again)
             Function.Call(Hash.DISPLAY_RADAR, true);
         }
 
-        public void PlayerField(Field Field, int Index, FieldSection Section)
+        private void PlayerField(Field Field, int Index, FieldSection Section)
         {
             // Store the positions for the UI elements
             bool IsPlayer = Section == FieldSection.Player;
@@ -246,7 +246,7 @@ namespace GGO
         /// </summary>
         /// <param name="Filename">The file to draw.</param>
         /// <param name="Position">The on-screen position.</param>
-        public void Icon(string Filename, Point Position)
+        private void Icon(string Filename, Point Position)
         {
             // Draw the background
             new UIRectangle(Position, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();
@@ -258,7 +258,7 @@ namespace GGO
         /// Draws a dead marker over the ped head.
         /// </summary>
         /// <param name="GamePed">The ped where the dead marker should be drawn.</param>
-        public void DeadMarker(Ped GamePed)
+        private void DeadMarker(Ped GamePed)
         {
             // Get the coordinates for the head
             Vector3 HeadCoord = GamePed.GetBoneCoord(Bone.SKEL_Head);
