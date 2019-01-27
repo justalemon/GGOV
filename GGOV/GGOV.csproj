@@ -57,6 +57,7 @@
     <Compile Include="API\Native\PlayerVehicle.cs" />
     <Compile Include="API\Native\PlayerWeapon.cs" />
     <Compile Include="API\Field.cs" />
+    <Compile Include="API\Native\SquadMember.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="Extensions\Entity.cs" />
