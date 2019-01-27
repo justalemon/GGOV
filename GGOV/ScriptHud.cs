@@ -21,27 +21,27 @@ namespace GGO
         /// <summary>
         /// Configuration for the HUD elements.
         /// </summary>
-        private HudConfig Config = JsonConvert.DeserializeObject<HudConfig>(File.ReadAllText("scripts\\GGO\\Hud.json"));
+        private static HudConfig Config = JsonConvert.DeserializeObject<HudConfig>(File.ReadAllText("scripts\\GGO\\Hud.json"));
         /// <summary>
         /// Names for the peds on the squad section.
         /// </summary>
-        private Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
+        private static Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
         /// <summary>
         /// List of peds that are near the player.
         /// </summary>
-        private Ped[] NearbyPeds = new Ped[0];
+        private static Ped[] NearbyPeds = new Ped[0];
         /// <summary>
         /// List of peds that are friendly and part of the squad.
         /// </summary>
-        private Ped[] FriendlyPeds = new Ped[0];
+        private static Ped[] FriendlyPeds = new Ped[0];
         /// <summary>
         /// Next game time that we should update the lists of peds.
         /// </summary>
-        private int NextFetch = 0;
+        private static int NextFetch = 0;
         /// <summary>
         /// The list of player fields to be drawn while the game is running.
         /// </summary>
-        private List<Field> Fields = new List<Field>();
+        private static List<Field> Fields = new List<Field>();
 
         public Hud()
         {
