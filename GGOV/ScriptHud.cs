@@ -30,11 +30,11 @@ namespace GGO
         /// <summary>
         /// List of peds that are near the player.
         /// </summary>
-        private static Ped[] NearbyPeds = new Ped[0];
+        private static List<Ped> NearbyPeds = new List<Ped>();
         /// <summary>
         /// List of peds that are friendly and part of the squad.
         /// </summary>
-        private static Ped[] FriendlyPeds = new Ped[0];
+        private static List<Ped> FriendlyPeds = new List<Ped>();
         /// <summary>
         /// Next game time that we should update the lists of peds.
         /// </summary>
@@ -123,36 +123,12 @@ namespace GGO
                 if (Game.GameTime >= NextFetch)
                 {
                     // Get all of the peds and order them by hash
-                    NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToArray();
+                    NearbyPeds = World.GetAllPeds().OrderBy(P => P.GetHashCode()).ToList();
                     // THen, filter the friendly squad peds
-                    FriendlyPeds = NearbyPeds.Where(P => P.IsFriendly() && P.IsMissionEntity()).ToArray();
+                    FriendlyPeds = NearbyPeds.Where(P => P.IsFriendly() && P.IsMissionEntity()).ToList();
 
                     // Finally, set the next fetch time to one second in the future
                     NextFetch = Game.GameTime + 1000;
-                }
-
-                // If the squad members are enabled
-                if (Config.Squad)
-                {
-                    // Store a number of the invalid peds
-                    int InvalidPeds = 0;
-
-                    // Iterate over the squad members
-                    foreach (Ped SquadMember in FriendlyPeds)
-                    {                        
-                        // Skip non-existant peds and those inside of the night club (if enabled) and increase the count of invalid
-                        if (SquadMember == null || !SquadMember.Exists() || (Config.ClubFix && Interior == 271617 && !SquadMember.IsPlayer))
-                        {
-                            InvalidPeds += 1;
-                            continue;
-                        }
-
-                        // Get the number of the ped minus the invalid ones
-                        int Number = Array.IndexOf(FriendlyPeds, SquadMember) - InvalidPeds;
-
-                        // Draw the icon and the ped info for it
-                        PlayerField(new SquadMember(SquadMember), Number, FieldSection.Squad);
-                    }
                 }
 
                 // If the user wants to, draw the dead markers
@@ -172,9 +148,54 @@ namespace GGO
                     }
                 }
             }
+            
+            // If the squad members are enabled
+            if (Config.Squad)
+            {
+                // Store a number of the skipped peds
+                int SquadSkipped = 0;
+
+                // Iterate over the squad members
+                for (int i = 0; i < SquadFields.Count + FriendlyPeds.Count; i++)
+                {
+                    // Set a place for the member
+                    Field Member;
+
+                    // Get the ped on that position
+                    if (SquadFields.Count != 0 && i <= SquadFields.Count - 1)
+                    {
+                        // See if we should show the specified field
+                        if (!SquadFields[i].ShouldBeShown())
+                        {
+                            SquadSkipped += 1;
+                            continue;
+                        }
+
+                        // Add the field
+                        Member = SquadFields[i];
+                    }
+                    else
+                    {
+                        // Store the selected ped
+                        Ped SelectedPed = FriendlyPeds[i - SquadFields.Count];
+
+                        // Skip non-existant peds and those inside of the night club (if enabled) and increase the count of invalid
+                        if (SelectedPed == null || !SelectedPed.Exists() || (Config.ClubFix && Interior == 271617 && !SelectedPed.IsPlayer))
+                        {
+                            SquadSkipped += 1;
+                            continue;
+                        }
+
+                        Member = new SquadMember(SelectedPed);
+                    }
+
+                    // Draw the icon and the ped info for it
+                    PlayerField(Member, i - SquadSkipped, FieldSection.Squad);
+                }
+            }
 
             // Count the items that should not be drawn
-            int Skipped = 0;
+            int PlayerSkipped = 0;
             // Iterate over the count of fields
             for (int i = 0; i < PlayerFields.Count; i++)
             {
@@ -182,11 +203,11 @@ namespace GGO
                 if (!PlayerFields[i].ShouldBeShown())
                 {
                     // Add one more and skip the iteration
-                    Skipped += 1;
+                    PlayerSkipped += 1;
                     continue;
                 }
                 // Then, draw the specified field
-                PlayerField(PlayerFields[i], i - Skipped, FieldSection.Player);
+                PlayerField(PlayerFields[i], i - PlayerSkipped, FieldSection.Player);
             }
         }
 
