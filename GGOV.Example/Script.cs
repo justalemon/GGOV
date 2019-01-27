@@ -7,8 +7,10 @@ namespace GGO.Example
     {
         public ExampleScript()
         {
-            // When the script is booting up, add the player fields
+            // When the script is booting up, add the player field
             Hud.AddField(new HealthExample(), FieldSection.Player);
+            // And the squad field
+            Hud.AddField(new HealthExample(), FieldSection.Squad);
         }
     }
 
@@ -29,13 +31,13 @@ namespace GGO.Example
         public override FieldType GetFieldType()
         {
             // The type of field to use
-            return FieldType.Health;
+            return FieldType.Text;
         }
 
         public override string GetFirstText()
         {
             // Text of the top part of the field
-            return "Health Example";
+            return "An Example";
         }
 
         public override string GetIconName()
@@ -55,7 +57,7 @@ namespace GGO.Example
         {
             // The text to replace the health bar
             // If you really want to show the health bar, set this to null or string.Empty
-            return string.Empty;
+            return "of the fields";
         }
 
         public override string GetWeaponImage()
