@@ -209,30 +209,40 @@ namespace GGO
             // Store the base position
             Point BasePosition = Config.GetSpecificPosition(InfoPosition, Index, IsPlayer);
 
-            // If the field type is health
-            if (Field.GetFieldType() == FieldType.Health)
+            // If the field type is health or text
+            if (Field.GetFieldType() == FieldType.Health || Field.GetFieldType() == FieldType.Text)
             {
                 // Draw the background for the health information
                 new UIRectangle(BasePosition, IsPlayer ? LiteralSize(Config.PlayerWidth, Config.PlayerHeight) : LiteralSize(Config.SquadWidth, Config.SquadHeight), Colors.Backgrounds).Draw();
 
-                // Calculate the percentage of health bar
-                float Percentage = (Field.GetCurrentValue() / Field.GetMaxValue()) * 100;
-                float Width = (Percentage / 100) * LiteralSize(IsPlayer ? Config.PlayerHealthWidth : Config.SquadHealthWidth, 0).Width;
-                // And create the size with the real health size
-                Size HealthSize = new Size((int)Width, LiteralSize(0, IsPlayer ? Config.PlayerHealthHeight : Config.SquadHealthHeight).Height);
-
-                // Draw the entity health
-                Size HealthOffset = IsPlayer ? LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY) : LiteralSize(Config.SquadHealthX, Config.SquadHealthY);
-                new UIRectangle(BasePosition + HealthOffset, HealthSize, Colors.GetHealthColor(Field.GetCurrentValue(), Field.GetMaxValue())).Draw();
-
-                // Draw the health dividers
-                foreach (Point Position in Config.GetDividerPositions(BasePosition, IsPlayer))
-                {
-                    new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers).Draw();
-                }
-
-                // Draw the field name
+                // Draw the first field name
                 new UIText(Field.GetFirstText(), BasePosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), IsPlayer ? .325f : .3f).Draw();
+
+                // If the current field type is health
+                if (Field.GetFieldType() == FieldType.Health)
+                {
+                    // Calculate the percentage of health bar
+                    float Percentage = (Field.GetCurrentValue() / Field.GetMaxValue()) * 100;
+                    float Width = (Percentage / 100) * LiteralSize(IsPlayer ? Config.PlayerHealthWidth : Config.SquadHealthWidth, 0).Width;
+                    // And create the size with the real health size
+                    Size HealthSize = new Size((int)Width, LiteralSize(0, IsPlayer ? Config.PlayerHealthHeight : Config.SquadHealthHeight).Height);
+
+                    // Draw the entity health
+                    Size HealthOffset = IsPlayer ? LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY) : LiteralSize(Config.SquadHealthX, Config.SquadHealthY);
+                    new UIRectangle(BasePosition + HealthOffset, HealthSize, Colors.GetHealthColor(Field.GetCurrentValue(), Field.GetMaxValue())).Draw();
+
+                    // Draw the health dividers
+                    foreach (Point Position in Config.GetDividerPositions(BasePosition, IsPlayer))
+                    {
+                        new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers).Draw();
+                    }
+                }
+                // Otherwise if the field type is text
+                else if (Field.GetFieldType() == FieldType.Text)
+                {
+                    // Draw the second text field
+                    new UIText(Field.GetSecondText(), BasePosition + LiteralSize(Config.SquadNameX, Config.SquadNameY) + LiteralSize(0, Config.SquadNameY), IsPlayer ? .325f : .3f).Draw();
+                }
             }
             // Else if the field type is weapon
             else if (Field.GetFieldType() == FieldType.Weapon)

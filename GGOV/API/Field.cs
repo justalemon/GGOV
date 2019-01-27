@@ -6,7 +6,8 @@
     public enum FieldType
     {
         Health = 0,
-        Weapon = 1
+        Weapon = 1,
+        Text = 2
     }
 
     /// <summary>
