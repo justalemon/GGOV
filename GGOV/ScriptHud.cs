@@ -40,7 +40,11 @@ namespace GGO
         /// </summary>
         private static int NextFetch = 0;
         /// <summary>
-        /// The list of player fields to be drawn while the game is running.
+        /// The list of squad fields.
+        /// </summary>
+        private static List<Field> SquadFields = new List<Field>();
+        /// <summary>
+        /// The list of player fields.
         /// </summary>
         private static List<Field> PlayerFields = new List<Field>();
 
@@ -63,11 +67,23 @@ namespace GGO
             Aborted += OnAbort;
         }
 
-        public static void AddPlayerField(Field PlayerField)
+        public static void AddField(Field CustomField, FieldSection Destination)
         {
-            string OriginName = Assembly.GetCallingAssembly().ManifestModule.ScopeName;
-            UI.Notify($"The script {OriginName} has added a new Player Field.");
-            PlayerFields.Add(PlayerField);
+            // Notify the user about what we are going to do
+            UI.Notify("The script " + Assembly.GetCallingAssembly().ManifestModule.ScopeName + " has added a new Field.");
+
+            // Then, add the field to their respective list
+            switch (Destination)
+            {
+                case FieldSection.Player:
+                    PlayerFields.Add(CustomField);
+                    break;
+                case FieldSection.Squad:
+                    SquadFields.Add(CustomField);
+                    break;
+                default:
+                    throw new InvalidOperationException("This field type is not supported.");
+            }
         }
 
         private void OnTick(object Sender, EventArgs Args)
