@@ -30,7 +30,18 @@ namespace GGO.API.Native
 
         public override string GetFirstText()
         {
-            return InternalPed.Model.Hash.ToString();
+            if (InternalPed.IsPlayer)
+            {
+                return Game.Player.Name;
+            }
+            else if (Hud.Names.ContainsKey(InternalPed.Model.GetHashCode().ToString()))
+            {
+                return Hud.Names[InternalPed.Model.GetHashCode().ToString()];
+            }
+            else
+            {
+                return InternalPed.Model.Hash.ToString();
+            }
         }
 
         public override string GetIconName()

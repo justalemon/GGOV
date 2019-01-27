@@ -26,7 +26,7 @@ namespace GGO
         /// <summary>
         /// Names for the peds on the squad section.
         /// </summary>
-        private static Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
+        public static Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
         /// <summary>
         /// List of peds that are near the player.
         /// </summary>
