@@ -21,17 +21,17 @@ namespace GGO.API.Native
             return FieldType.Weapon;
         }
 
+        public override string GetFirstText()
+        {
+            throw new NotImplementedException();
+        }
+
         public override string GetIconName()
         {
             return "Weapon";
         }
 
         public override float GetMaxValue()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string GetFirstText()
         {
             throw new NotImplementedException();
         }

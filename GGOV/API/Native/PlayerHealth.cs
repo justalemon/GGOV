@@ -21,6 +21,11 @@ namespace GGO.API.Native
             return FieldType.Health;
         }
 
+        public override string GetFirstText()
+        {
+            return Game.Player.Name;
+        }
+
         public override string GetIconName()
         {
             return "Alive";
@@ -29,11 +34,6 @@ namespace GGO.API.Native
         public override float GetMaxValue()
         {
             return Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;
-        }
-
-        public override string GetFirstText()
-        {
-            return Game.Player.Name;
         }
 
         public override string GetSecondText()

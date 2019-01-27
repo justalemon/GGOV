@@ -21,6 +21,11 @@ namespace GGO.API.Native
             return FieldType.Health;
         }
 
+        public override string GetFirstText()
+        {
+            return Game.Player.Character.CurrentVehicle.FriendlyName;
+        }
+
         public override string GetIconName()
         {
             return "Vehicle";
@@ -29,11 +34,6 @@ namespace GGO.API.Native
         public override float GetMaxValue()
         {
             return 1000;
-        }
-
-        public override string GetFirstText()
-        {
-            return Game.Player.Character.CurrentVehicle.FriendlyName;
         }
 
         public override string GetSecondText()
