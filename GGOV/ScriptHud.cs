@@ -19,6 +19,8 @@ namespace GGO
 {
     public class Hud : Script
     {
+        #region Properties
+
         /// <summary>
         /// Configuration for the HUD elements.
         /// </summary>
@@ -56,6 +58,10 @@ namespace GGO
         /// </summary>
         private static string Script = null;
 
+        #endregion
+
+        #region Constructors
+
         public Hud()
         {
             // Don't do nothing if the user requested the menu to be disabled
@@ -74,6 +80,10 @@ namespace GGO
             Tick += OnTick;
             Aborted += OnAbort;
         }
+
+        #endregion
+
+        #region API
 
         public static bool AddField(Field CustomField, FieldSection Destination)
         {
@@ -137,6 +147,10 @@ namespace GGO
             // Finally, return
             return true;
         }
+
+        #endregion
+
+        #region Events
 
         private void OnTick(object Sender, EventArgs Args)
         {
@@ -269,6 +283,10 @@ namespace GGO
             Function.Call(Hash.DISPLAY_RADAR, true);
         }
 
+        #endregion
+
+        #region Drawing Tools
+
         private void PlayerField(Field Field, int Index, FieldSection Section)
         {
             // Store the positions for the UI elements
@@ -383,5 +401,7 @@ namespace GGO
             // Finally, draw the marker on screen
             DrawImage("DeadMarker", ScreenPos, MarkerSize);
         }
+
+        #endregion
     }
 }
