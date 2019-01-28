@@ -14,12 +14,12 @@ namespace GGO
     /// <summary>
     /// Script that handles the inventory actions.
     /// </summary>
-    public class Inventory : Script
+    public class ScriptInventory : Script
     {
         /// <summary>
         /// Configuration for the inventory script.
         /// </summary>
-        private InventoryConfig Config;
+        private Inventory InventoryConfig;
         /// <summary>
         /// Positions of the items inside of the inventory.
         /// </summary>
@@ -55,13 +55,13 @@ namespace GGO
             }
         }
 
-        public Inventory()
+        public ScriptInventory()
         {
             // Start by parsing the config
-            Config = JsonConvert.DeserializeObject<InventoryConfig>(File.ReadAllText("scripts\\GGO\\Inventory.json"));
+            InventoryConfig = JsonConvert.DeserializeObject<Inventory>(File.ReadAllText("scripts\\GGO\\Inventory.json"));
 
             // Don't do nothing if the user requested the menu to be disabled
-            if (!Config.Enabled)
+            if (!InventoryConfig.Enabled)
             {
                 return;
             }
@@ -72,8 +72,8 @@ namespace GGO
                 for (int X = 0; X < 3; X++)
                 {
                     // And generate the item positions
-                    ItemsPosition.Add(new Point((int)(UI.WIDTH * Config.ItemsX) + ((int)(UI.HEIGHT * Config.SpacingX) * X) + ((int)(UI.HEIGHT * Config.ItemsWidth) * X),
-                                                (int)(UI.HEIGHT * Config.ItemsY) + ((int)(UI.HEIGHT * Config.SpacingY) * Y)));
+                    ItemsPosition.Add(new Point((int)(UI.WIDTH * InventoryConfig.ItemsX) + ((int)(UI.HEIGHT * InventoryConfig.SpacingX) * X) + ((int)(UI.HEIGHT * InventoryConfig.ItemsWidth) * X),
+                                                (int)(UI.HEIGHT * InventoryConfig.ItemsY) + ((int)(UI.HEIGHT * InventoryConfig.SpacingY) * Y)));
                 }
             }
             // Iterate between 0-4 (1-5) and create the weapon positions
@@ -81,7 +81,7 @@ namespace GGO
             {
                 // And add a weapon on that position
                 // Formula for Y: VerticalPosition + (SeparationBetweenWeapons * WeaponNumber)
-                WeaponPositions.Add(new Point((int)(UI.WIDTH * Config.WeaponX), (int)(UI.HEIGHT * Config.WeaponY) + ((int)(UI.HEIGHT * Config.SpacingY) * Index)));
+                WeaponPositions.Add(new Point((int)(UI.WIDTH * InventoryConfig.WeaponX), (int)(UI.HEIGHT * InventoryConfig.WeaponY) + ((int)(UI.HEIGHT * InventoryConfig.SpacingY) * Index)));
             }
 
             // Add the events
@@ -96,7 +96,7 @@ namespace GGO
         private void OnTickGiveWeapons(object Sender, EventArgs Args)
         {
             // If the player disabled the option
-            if (!Config.AutoAdd)
+            if (!InventoryConfig.AutoAdd)
             {
                 // Unsubscribe the event
                 Tick -= OnTickGiveWeapons;
@@ -112,11 +112,11 @@ namespace GGO
             Game.Player.Character.Weapons.RemoveAll();
 
             // And add the items and weapons, one by one with the max ammo
-            foreach (WeaponHash Item in Config.Items)
+            foreach (WeaponHash Item in InventoryConfig.Items)
             {
                 Game.Player.Character.Weapons.Give(Item, 9999, true, false);
             }
-            foreach (WeaponHash Weapon in Config.Weapons)
+            foreach (WeaponHash Weapon in InventoryConfig.Weapons)
             {
                 Game.Player.Character.Weapons.Give(Weapon, 9999, true, false);
             }
@@ -131,7 +131,7 @@ namespace GGO
         private void OnTickRemoveWeapons(object Sender, EventArgs Args)
         {
             // If the user has this option disabled, remove the event.
-            if (!Config.RemvoveNonListed)
+            if (!InventoryConfig.RemvoveNonListed)
             {
                 Tick -= OnTickRemoveWeapons;
             }
@@ -140,7 +140,7 @@ namespace GGO
             if (Game.GameTime >= NextWeaponCheck)
             {
                 // If the current player weapon is not on the inventory
-                if (!Config.Items.Contains(Game.Player.Character.Weapons.Current.Hash) && !Config.Weapons.Contains(Game.Player.Character.Weapons.Current.Hash))
+                if (!InventoryConfig.Items.Contains(Game.Player.Character.Weapons.Current.Hash) && !InventoryConfig.Weapons.Contains(Game.Player.Character.Weapons.Current.Hash))
                 {
                     // Remove the weapon
                     Game.Player.Character.Weapons.Remove(Game.Player.Character.Weapons.Current.Hash);
@@ -164,11 +164,11 @@ namespace GGO
 
             // Update the item offset
             Offset = 0;
-            if (IsAmmoAvailable && Config.AmmoTotal)
+            if (IsAmmoAvailable && InventoryConfig.AmmoTotal)
             {
                 Offset += 1;
             }
-            if (IsAmmoAvailable && Config.AmmoMags)
+            if (IsAmmoAvailable && InventoryConfig.AmmoMags)
             {
                 Offset += 1;
             }
@@ -213,75 +213,75 @@ namespace GGO
             // Get the current and max health and calculate the size of the health bar
             float HealthMaxN = Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;
             float HealthCurrentN = Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character) - 100;
-            float HealthWidth = HealthCurrentN / HealthMaxN * 100 / 100 * (UI.WIDTH * Config.HealthWidth);
-            Size HealthSize = new Size((int)HealthWidth, (int)(UI.HEIGHT * Config.HealthHeight));
+            float HealthWidth = HealthCurrentN / HealthMaxN * 100 / 100 * (UI.WIDTH * InventoryConfig.HealthWidth);
+            Size HealthSize = new Size((int)HealthWidth, (int)(UI.HEIGHT * InventoryConfig.HealthHeight));
 
             // Generate the information for the Rectangles and Texts and draw them on the screen
-            new UIRectangle(LiteralPoint(Config.BackgroundX, Config.BackgroundY), LiteralSize(Config.BackgroundWidth, Config.BackgroundHeight), Colors.Inventory).Draw();
-            new UIRectangle(LiteralPoint(Config.BackgroundX, Config.BackgroundY), LiteralSize(Config.InfoWidth, Config.InfoHeight), Colors.Backgrounds).Draw();
-            new UIRectangle(LiteralPoint(Config.PlayerX, Config.PlayerY), LiteralSize(Config.PlayerWidth, Config.PlayerHeight), Colors.Details).Draw();
-            new UIRectangle(LiteralPoint(Config.HealthX, Config.HealthY), LiteralSize(Config.HealthWidth, Config.HealthHeight), Color.Gray).Draw();
-            new UIRectangle(LiteralPoint(Config.HealthX, Config.HealthY), HealthSize, Color.White).Draw();
-            new UIText(Game.Player.Name, LiteralPoint(Config.NameX, Config.NameY), 0.7f, Color.White, GTA.Font.Monospace, false, false, false).Draw();
-            new UIText("Life", LiteralPoint(Config.LifeX, Config.LifeY), 0.3f, Color.White, GTA.Font.ChaletLondon, false, false, false).Draw();
-            new UIText("Items", LiteralPoint(Config.ItemsX, Config.ItemsY) + LiteralSize(Config.TextX, Config.TextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
-            new UIText("Arms", LiteralPoint(Config.WeaponX, Config.WeaponY) + LiteralSize(Config.TextX, Config.TextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
+            new UIRectangle(LiteralPoint(InventoryConfig.BackgroundX, InventoryConfig.BackgroundY), LiteralSize(InventoryConfig.BackgroundWidth, InventoryConfig.BackgroundHeight), Colors.Inventory).Draw();
+            new UIRectangle(LiteralPoint(InventoryConfig.BackgroundX, InventoryConfig.BackgroundY), LiteralSize(InventoryConfig.InfoWidth, InventoryConfig.InfoHeight), Colors.Backgrounds).Draw();
+            new UIRectangle(LiteralPoint(InventoryConfig.PlayerX, InventoryConfig.PlayerY), LiteralSize(InventoryConfig.PlayerWidth, InventoryConfig.PlayerHeight), Colors.Details).Draw();
+            new UIRectangle(LiteralPoint(InventoryConfig.HealthX, InventoryConfig.HealthY), LiteralSize(InventoryConfig.HealthWidth, InventoryConfig.HealthHeight), Color.Gray).Draw();
+            new UIRectangle(LiteralPoint(InventoryConfig.HealthX, InventoryConfig.HealthY), HealthSize, Color.White).Draw();
+            new UIText(Game.Player.Name, LiteralPoint(InventoryConfig.NameX, InventoryConfig.NameY), 0.7f, Color.White, GTA.Font.Monospace, false, false, false).Draw();
+            new UIText("Life", LiteralPoint(InventoryConfig.LifeX, InventoryConfig.LifeY), 0.3f, Color.White, GTA.Font.ChaletLondon, false, false, false).Draw();
+            new UIText("Items", LiteralPoint(InventoryConfig.ItemsX, InventoryConfig.ItemsY) + LiteralSize(InventoryConfig.TextX, InventoryConfig.TextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
+            new UIText("Arms", LiteralPoint(InventoryConfig.WeaponX, InventoryConfig.WeaponY) + LiteralSize(InventoryConfig.TextX, InventoryConfig.TextY), 0.3f, Color.White, GTA.Font.ChaletLondon, false).Draw();
             
             // Draw the gender image
-            DrawImage(Config.PlayerGender == Gender.Male ? "GenderMale" : "GenderFemale", LiteralPoint(Config.GenderX, Config.GenderY), LiteralSize(Config.GenderWidth, Config.GenderHeight));
+            DrawImage(InventoryConfig.PlayerGender == Gender.Male ? "GenderMale" : "GenderFemale", LiteralPoint(InventoryConfig.GenderX, InventoryConfig.GenderY), LiteralSize(InventoryConfig.GenderWidth, InventoryConfig.GenderHeight));
 
             // Draw the player status
-            new UIText("Status", LiteralPoint(Config.StatusBaseX, Config.StatusY), 0.38f, Color.White, GTA.Font.ChaletLondon, false).Draw();
-            new UIText(Game.Player.GetState(), LiteralPoint(Config.StatusCurrentX, Config.StatusY), 0.38f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+            new UIText("Status", LiteralPoint(InventoryConfig.StatusBaseX, InventoryConfig.StatusY), 0.38f, Color.White, GTA.Font.ChaletLondon, false).Draw();
+            new UIText(Game.Player.GetState(), LiteralPoint(InventoryConfig.StatusCurrentX, InventoryConfig.StatusY), 0.38f, Color.White, GTA.Font.ChaletLondon, true).Draw();
 
             // Draw the item backgrounds
             foreach (Point Position in ItemsPosition)
             {
-                DrawImage("InventoryItem", Position, LiteralSize(Config.ItemsWidth, Config.ItemsHeight));
-                new UIRectangle(Position + LiteralSize(Config.ItemsSeparatorX, Config.ItemsSeparatorY), LiteralSize(Config.ItemsSeparatorWidth, Config.ItemsSeparatorHeight), Colors.Dividers).Draw();
+                DrawImage("InventoryItem", Position, LiteralSize(InventoryConfig.ItemsWidth, InventoryConfig.ItemsHeight));
+                new UIRectangle(Position + LiteralSize(InventoryConfig.ItemsSeparatorX, InventoryConfig.ItemsSeparatorY), LiteralSize(InventoryConfig.ItemsSeparatorWidth, InventoryConfig.ItemsSeparatorHeight), Colors.Dividers).Draw();
             }
 
             // For each one of the positions, draw a background rectangle
             foreach (Point Position in WeaponPositions)
             {
-                DrawImage("InventoryItem", Position, LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
+                DrawImage("InventoryItem", Position, LiteralSize(InventoryConfig.WeaponWidth, InventoryConfig.WeaponHeight));
             }
 
             // Iterate over the number of player weapons
-            for (int Index = 0; Index < Config.Weapons.Count; Index++)
+            for (int Index = 0; Index < InventoryConfig.Weapons.Count; Index++)
             {
                 // Get the weapon internal name
-                string Name = Enum.GetName(typeof(WeaponHash), Config.Weapons[Index]);
+                string Name = Enum.GetName(typeof(WeaponHash), InventoryConfig.Weapons[Index]);
                 // Draw the weapon image
-                DrawImage($"Weapon{Name}", WeaponPositions[Index] + LiteralSize(Config.WeaponImageX, Config.WeaponImageY), LiteralSize(Config.WeaponImageWidth, Config.WeaponImageHeight));
+                DrawImage($"Weapon{Name}", WeaponPositions[Index] + LiteralSize(InventoryConfig.WeaponImageX, InventoryConfig.WeaponImageY), LiteralSize(InventoryConfig.WeaponImageWidth, InventoryConfig.WeaponImageHeight));
             }
 
             // Start an index to count how many items we have in total
             int ItemIndex = 0;
 
             // Show the total ammo count if the user wants
-            if (Config.AmmoTotal && IsAmmoAvailable)
+            if (InventoryConfig.AmmoTotal && IsAmmoAvailable)
             {
-                DrawImage(Game.Player.Character.Weapons.Current.GetAmmoImage(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
-                new UIText(Game.Player.Character.Weapons.Current.GetCorrectAmmo(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+                DrawImage(Game.Player.Character.Weapons.Current.GetAmmoImage(), ItemsPosition[ItemIndex] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
+                new UIText(Game.Player.Character.Weapons.Current.GetCorrectAmmo(), ItemsPosition[ItemIndex] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
                 ItemIndex++;
             }
 
             // If the user wants the mags to be shown
-            if (Config.AmmoMags && IsAmmoAvailable)
+            if (InventoryConfig.AmmoMags && IsAmmoAvailable)
             {
                 float MagsLeft = 0;
                 if (Game.Player.Character.Weapons.Current.Ammo != 0 && Game.Player.Character.Weapons.Current.MaxAmmoInClip != 0)
                 {
                     MagsLeft = Game.Player.Character.Weapons.Current.Ammo / Game.Player.Character.Weapons.Current.MaxAmmoInClip;
                 }
-                DrawImage(Game.Player.Character.Weapons.Current.GetMagazineImage(), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
-                new UIText(MagsLeft.ToString("0"), ItemsPosition[ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+                DrawImage(Game.Player.Character.Weapons.Current.GetMagazineImage(), ItemsPosition[ItemIndex] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
+                new UIText(MagsLeft.ToString("0"), ItemsPosition[ItemIndex] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
                 ItemIndex++;
             }
 
             // Iterate over the maximum count of items
-            for (int Index = 0; Index < Config.Items.Count; Index++)
+            for (int Index = 0; Index < InventoryConfig.Items.Count; Index++)
             {
                 // If the current index + the total index is higher than the max
                 if (Index + ItemIndex > 15)
@@ -293,15 +293,15 @@ namespace GGO
                 // Set a dummy in case of the weapon does not exists
                 string Ammo = "0";
                 // If the weapon is on the player inventory
-                if (Game.Player.Character.Weapons.HasWeapon(Config.Items[Index]))
+                if (Game.Player.Character.Weapons.HasWeapon(InventoryConfig.Items[Index]))
                 {
                     // Set the correct ammo count
-                    Ammo = Game.Player.Character.Weapons[Config.Items[Index]].GetCorrectAmmo();
+                    Ammo = Game.Player.Character.Weapons[InventoryConfig.Items[Index]].GetCorrectAmmo();
                 }
 
                 // Draw the item
-                DrawImage("Item" + Enum.GetName(typeof(WeaponHash), Config.Items[Index]), ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsImageX, Config.ItemsImageY), LiteralSize(Config.ItemsImageWidth, Config.ItemsImageHeight));
-                new UIText(Ammo, ItemsPosition[Index + ItemIndex] + LiteralSize(Config.ItemsQuantityX, Config.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+                DrawImage("Item" + Enum.GetName(typeof(WeaponHash), InventoryConfig.Items[Index]), ItemsPosition[Index + ItemIndex] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
+                new UIText(Ammo, ItemsPosition[Index + ItemIndex] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
             }
         }
 
@@ -314,22 +314,22 @@ namespace GGO
             }
 
             // Iterate over the item count
-            for (int Index = 0; Index < Config.Items.Count; Index++)
+            for (int Index = 0; Index < InventoryConfig.Items.Count; Index++)
             {
                 // If the player clicked on the weapon position
-                if (ItemsPosition[Index + Offset].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
+                if (ItemsPosition[Index + Offset].IsClicked(LiteralSize(InventoryConfig.WeaponWidth, InventoryConfig.WeaponHeight)))
                 {
-                    SelectOrGive(Config.Items[Index]);
+                    SelectOrGive(InventoryConfig.Items[Index]);
                 }
             }
 
             // Iterate over the weapon count
-            for (int Index = 0; Index < Config.Weapons.Count; Index++)
+            for (int Index = 0; Index < InventoryConfig.Weapons.Count; Index++)
             {
                 // If the player clicked on the weapon position
-                if (WeaponPositions[Index].IsClicked(LiteralSize(Config.WeaponWidth, Config.WeaponHeight)))
+                if (WeaponPositions[Index].IsClicked(LiteralSize(InventoryConfig.WeaponWidth, InventoryConfig.WeaponHeight)))
                 {
-                    SelectOrGive(Config.Weapons[Index]);
+                    SelectOrGive(InventoryConfig.Weapons[Index]);
                 }
             }
         }

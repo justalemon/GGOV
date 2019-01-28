@@ -76,8 +76,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Tools.cs" />
-    <Compile Include="UserData\HudConfig.cs" />
-    <Compile Include="UserData\InventoryConfig.cs" />
+    <Compile Include="UserData\Hud.cs" />
+    <Compile Include="UserData\Inventory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GGO\Hud.json">

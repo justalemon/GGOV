@@ -8,7 +8,7 @@ namespace GGO.UserData
     /// <summary>
     /// Class that contains the configuration for the Screen HUD.
     /// </summary>
-    public class HudConfig
+    public class Hud
     {
         /// <summary>
         /// If the Custom HUD should be enabled or disabled.

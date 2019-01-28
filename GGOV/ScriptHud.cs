@@ -1,7 +1,6 @@
 using GGO.API;
 using GGO.API.Native;
 using GGO.Extensions;
-using GGO.Properties;
 using GGO.UserData;
 using GTA;
 using GTA.Math;
@@ -17,14 +16,14 @@ using static GGO.Tools;
 
 namespace GGO
 {
-    public class Hud : Script
+    public class ScriptHud : Script
     {
         #region Properties
 
         /// <summary>
         /// Configuration for the HUD elements.
         /// </summary>
-        private static HudConfig Config = JsonConvert.DeserializeObject<HudConfig>(File.ReadAllText("scripts\\GGO\\Hud.json"));
+        private static Hud HudConfig = JsonConvert.DeserializeObject<Hud>(File.ReadAllText("scripts\\GGO\\Hud.json"));
         /// <summary>
         /// Names for the peds on the squad section.
         /// </summary>
@@ -62,10 +61,10 @@ namespace GGO
 
         #region Constructors
 
-        public Hud()
+        public ScriptHud()
         {
             // Don't do nothing if the user requested the menu to be disabled
-            if (!Config.Enabled)
+            if (!HudConfig.Enabled)
             {
                 return;
             }
@@ -74,7 +73,7 @@ namespace GGO
             PlayerFields.Add(new PlayerSidearm());
             PlayerFields.Add(new PlayerMain());
             PlayerFields.Add(new PlayerHealth());
-            if (Config.VehicleInfo) { PlayerFields.Add(new PlayerVehicle()); }
+            if (HudConfig.VehicleInfo) { PlayerFields.Add(new PlayerVehicle()); }
 
             // Add our Tick and Aborted events
             Tick += OnTick;
@@ -164,7 +163,7 @@ namespace GGO
             ResetImageIndex();
 
             // Disable the colliding HUD elements by default
-            if (!Config.Collisions)
+            if (!HudConfig.Collisions)
             {
                 UI.HideHudComponentThisFrame(HudComponent.WeaponIcon);
                 UI.HideHudComponentThisFrame(HudComponent.AreaName);
@@ -174,7 +173,7 @@ namespace GGO
             }
 
             // If the user wants to disable the Radar and is not hidden, do it now
-            if (!Config.Radar && !Function.Call<bool>(Hash.IS_RADAR_HIDDEN))
+            if (!HudConfig.Radar && !Function.Call<bool>(Hash.IS_RADAR_HIDDEN))
             {
                 Function.Call(Hash.DISPLAY_RADAR, false);
             }
@@ -183,7 +182,7 @@ namespace GGO
             int Interior = Function.Call<int>(Hash.GET_INTERIOR_FROM_ENTITY, Game.Player.Character);
 
             // Draw get the ped information only if the squad members or dead markers have been enabled
-            if (Config.Squad || Config.DeadMarkers)
+            if (HudConfig.Squad || HudConfig.DeadMarkers)
             {
                 // If the current time is higher or equal than the next fetch time
                 if (Game.GameTime >= NextFetch)
@@ -198,7 +197,7 @@ namespace GGO
                 }
 
                 // If the user wants to, draw the dead markers
-                if (Config.DeadMarkers)
+                if (HudConfig.DeadMarkers)
                 {
                     // Iterate over all the peds
                     foreach (Ped DeadPed in NearbyPeds)
@@ -216,7 +215,7 @@ namespace GGO
             }
             
             // If the squad members are enabled
-            if (Config.Squad)
+            if (HudConfig.Squad)
             {
                 // Store a number of the skipped peds
                 int SquadSkipped = 0;
@@ -246,7 +245,7 @@ namespace GGO
                         Ped SelectedPed = FriendlyPeds[i - SquadFields.Count];
 
                         // Skip non-existant peds and those inside of the night club (if enabled) and increase the count of invalid
-                        if (Exclusive || SelectedPed == null || !SelectedPed.Exists() || (Config.ClubFix && Interior == 271617 && !SelectedPed.IsPlayer))
+                        if (Exclusive || SelectedPed == null || !SelectedPed.Exists() || (HudConfig.ClubFix && Interior == 271617 && !SelectedPed.IsPlayer))
                         {
                             SquadSkipped += 1;
                             continue;
@@ -295,44 +294,44 @@ namespace GGO
             Position InfoPosition = IsPlayer ? Position.PlayerInfo : Position.SquadInfo;
 
             // We are always going to need an icon
-            Icon("Icon" + Field.GetIconName(), Config.GetSpecificPosition(IconPosition, Index, IsPlayer));
+            Icon("Icon" + Field.GetIconName(), HudConfig.GetSpecificPosition(IconPosition, Index, IsPlayer));
 
             // Store the base position
-            Point BasePosition = Config.GetSpecificPosition(InfoPosition, Index, IsPlayer);
+            Point BasePosition = HudConfig.GetSpecificPosition(InfoPosition, Index, IsPlayer);
 
             // If the field type is health or text
             if (Field.GetFieldType() == FieldType.Health || Field.GetFieldType() == FieldType.Text)
             {
                 // Draw the background for the health information
-                new UIRectangle(BasePosition, IsPlayer ? LiteralSize(Config.PlayerWidth, Config.PlayerHeight) : LiteralSize(Config.SquadWidth, Config.SquadHeight), Colors.Backgrounds).Draw();
+                new UIRectangle(BasePosition, IsPlayer ? LiteralSize(HudConfig.PlayerWidth, HudConfig.PlayerHeight) : LiteralSize(HudConfig.SquadWidth, HudConfig.SquadHeight), Colors.Backgrounds).Draw();
 
                 // Draw the first field name
-                new UIText(Field.GetFirstText(), BasePosition + LiteralSize(Config.SquadNameX, Config.SquadNameY), IsPlayer ? .325f : .3f).Draw();
+                new UIText(Field.GetFirstText(), BasePosition + LiteralSize(HudConfig.SquadNameX, HudConfig.SquadNameY), IsPlayer ? .325f : .3f).Draw();
 
                 // If the current field type is health
                 if (Field.GetFieldType() == FieldType.Health)
                 {
                     // Calculate the percentage of health bar
                     float Percentage = (Field.GetCurrentValue() / Field.GetMaxValue()) * 100;
-                    float Width = (Percentage / 100) * LiteralSize(IsPlayer ? Config.PlayerHealthWidth : Config.SquadHealthWidth, 0).Width;
+                    float Width = (Percentage / 100) * LiteralSize(IsPlayer ? HudConfig.PlayerHealthWidth : HudConfig.SquadHealthWidth, 0).Width;
                     // And create the size with the real health size
-                    Size HealthSize = new Size((int)Width, LiteralSize(0, IsPlayer ? Config.PlayerHealthHeight : Config.SquadHealthHeight).Height);
+                    Size HealthSize = new Size((int)Width, LiteralSize(0, IsPlayer ? HudConfig.PlayerHealthHeight : HudConfig.SquadHealthHeight).Height);
 
                     // Draw the entity health
-                    Size HealthOffset = IsPlayer ? LiteralSize(Config.PlayerHealthX, Config.PlayerHealthY) : LiteralSize(Config.SquadHealthX, Config.SquadHealthY);
+                    Size HealthOffset = IsPlayer ? LiteralSize(HudConfig.PlayerHealthX, HudConfig.PlayerHealthY) : LiteralSize(HudConfig.SquadHealthX, HudConfig.SquadHealthY);
                     new UIRectangle(BasePosition + HealthOffset, HealthSize, Colors.GetHealthColor(Field.GetCurrentValue(), Field.GetMaxValue())).Draw();
 
                     // Draw the health dividers
-                    foreach (Point Position in Config.GetDividerPositions(BasePosition, IsPlayer))
+                    foreach (Point Position in HudConfig.GetDividerPositions(BasePosition, IsPlayer))
                     {
-                        new UIRectangle(Position, LiteralSize(Config.DividerWidth, Config.DividerHeight), Colors.Dividers).Draw();
+                        new UIRectangle(Position, LiteralSize(HudConfig.DividerWidth, HudConfig.DividerHeight), Colors.Dividers).Draw();
                     }
                 }
                 // Otherwise if the field type is text
                 else if (Field.GetFieldType() == FieldType.Text)
                 {
                     // Draw the second text field
-                    new UIText(Field.GetSecondText(), BasePosition + LiteralSize(Config.SquadName2X, Config.SquadName2Y) + LiteralSize(0, Config.SquadNameY), IsPlayer ? .325f : .3f).Draw();
+                    new UIText(Field.GetSecondText(), BasePosition + LiteralSize(HudConfig.SquadName2X, HudConfig.SquadName2Y) + LiteralSize(0, HudConfig.SquadNameY), IsPlayer ? .325f : .3f).Draw();
                 }
             }
             // Else if the field type is weapon
@@ -342,15 +341,15 @@ namespace GGO
                 if (Field.DataShouldBeShown())
                 {
                     // Store the position of the weapon space
-                    Point WeaponLocation = Config.GetSpecificPosition(Position.PlayerWeapon, Index, IsPlayer);
+                    Point WeaponLocation = HudConfig.GetSpecificPosition(Position.PlayerWeapon, Index, IsPlayer);
 
                     // Draw the ammo quantity
-                    new UIRectangle(BasePosition, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();
-                    new UIText(Field.GetCurrentValue().ToString("0"), BasePosition + LiteralSize(Config.AmmoX, Config.AmmoY), .6f, Color.White, GTA.Font.Monospace, true).Draw();
+                    new UIRectangle(BasePosition, LiteralSize(HudConfig.SquareWidth, HudConfig.SquareHeight), Colors.Backgrounds).Draw();
+                    new UIText(Field.GetCurrentValue().ToString("0"), BasePosition + LiteralSize(HudConfig.AmmoX, HudConfig.AmmoY), .6f, Color.White, GTA.Font.Monospace, true).Draw();
 
                     // And weapon image
-                    new UIRectangle(WeaponLocation, LiteralSize(Config.PlayerWidth, Config.PlayerHeight) - LiteralSize(Config.SquareWidth, 0) - LiteralSize(Config.CommonX, 0), Colors.Backgrounds).Draw();
-                    DrawImage("Weapon" + Field.GetWeaponImage(), WeaponLocation + LiteralSize(Config.WeaponX, Config.WeaponY), LiteralSize(Config.WeaponWidth, Config.WeaponHeight));
+                    new UIRectangle(WeaponLocation, LiteralSize(HudConfig.PlayerWidth, HudConfig.PlayerHeight) - LiteralSize(HudConfig.SquareWidth, 0) - LiteralSize(HudConfig.CommonX, 0), Colors.Backgrounds).Draw();
+                    DrawImage("Weapon" + Field.GetWeaponImage(), WeaponLocation + LiteralSize(HudConfig.WeaponX, HudConfig.WeaponY), LiteralSize(HudConfig.WeaponWidth, HudConfig.WeaponHeight));
                 }
                 // Otherwise, draw a simple placeholder
                 else
@@ -374,9 +373,9 @@ namespace GGO
         private void Icon(string Filename, Point Position)
         {
             // Draw the background
-            new UIRectangle(Position, LiteralSize(Config.SquareWidth, Config.SquareHeight), Colors.Backgrounds).Draw();
+            new UIRectangle(Position, LiteralSize(HudConfig.SquareWidth, HudConfig.SquareHeight), Colors.Backgrounds).Draw();
             // And the image over it
-            DrawImage(Filename, Position + LiteralSize(Config.IconX, Config.IconY), LiteralSize(Config.IconWidth, Config.IconHeight));
+            DrawImage(Filename, Position + LiteralSize(HudConfig.IconX, HudConfig.IconY), LiteralSize(HudConfig.IconWidth, HudConfig.IconHeight));
         }
 
         /// <summary>
@@ -393,7 +392,7 @@ namespace GGO
             // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
             double Ratio = Math.Log(Vector3.Distance(Game.Player.Character.Position, HeadCoord) + 1.65);
             // Calculate the marker size based on the distance between player and dead ped
-            Size LiteralMarker = LiteralSize(Config.DeadMarkerWidth, Config.DeadMarkerHeight);
+            Size LiteralMarker = LiteralSize(HudConfig.DeadMarkerWidth, HudConfig.DeadMarkerHeight);
             Size MarkerSize = new Size((int)(LiteralMarker.Width / Ratio), (int)(LiteralMarker.Height / Ratio));
             // Offset the marker by half width to center, and full height to put on top.
             ScreenPos.Offset(-MarkerSize.Width / 2, -MarkerSize.Height);
