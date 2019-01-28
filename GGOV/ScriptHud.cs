@@ -47,6 +47,14 @@ namespace GGO
         /// The list of player fields.
         /// </summary>
         private static List<Field> PlayerFields = new List<Field>();
+        /// <summary>
+        /// If the squad side is running on the exclusive mode.
+        /// </summary>
+        private static bool Exclusive = false;
+        /// <summary>
+        /// The Script that is using the exclusive mode.
+        /// </summary>
+        private static string Script = null;
 
         public Hud()
         {
@@ -67,8 +75,14 @@ namespace GGO
             Aborted += OnAbort;
         }
 
-        public static void AddField(Field CustomField, FieldSection Destination)
+        public static bool AddField(Field CustomField, FieldSection Destination)
         {
+            // If the exclusive mode is enabled and the script does not matches
+            if (Exclusive && Destination == FieldSection.Squad && Script != Assembly.GetCallingAssembly().ManifestModule.ScopeName)
+            {
+                return false;
+            }
+
             // Notify the user about what we are going to do
             UI.Notify("The script " + Assembly.GetCallingAssembly().ManifestModule.ScopeName + " has added a new Field.");
 
@@ -84,6 +98,44 @@ namespace GGO
                 default:
                     throw new InvalidOperationException("This field type is not supported.");
             }
+
+            // Finally, return true
+            return true;
+        }
+
+        public static bool RequestExclusiveMode(bool Force = false)
+        {
+            // If the exclusive mode is enabled and the user does not wants to force it
+            if (Exclusive && !Force)
+            {
+                return false;
+            }
+
+            // Clear the existing squad fields
+            SquadFields.Clear();
+            // Get the name of the next assembly and store it
+            Script = Assembly.GetCallingAssembly().ManifestModule.ScopeName;
+            // Set the squad section as exclusive for that script
+            Exclusive = true;
+            // Return a success
+            return true;
+        }
+
+        public static bool DisableExclusiveMode(bool Force = true)
+        {
+            // If the disable should not be forced and the script does not matches
+            if (!Force && Script != Assembly.GetCallingAssembly().ManifestModule.ScopeName)
+            {
+                return false;
+            }
+
+            // Remove thev custom fields
+            SquadFields.Clear();
+            // Set the exclusive mode to false and remove the stored script
+            Exclusive = false;
+            Script = null;
+            // Finally, return
+            return true;
         }
 
         private void OnTick(object Sender, EventArgs Args)
@@ -180,7 +232,7 @@ namespace GGO
                         Ped SelectedPed = FriendlyPeds[i - SquadFields.Count];
 
                         // Skip non-existant peds and those inside of the night club (if enabled) and increase the count of invalid
-                        if (SelectedPed == null || !SelectedPed.Exists() || (Config.ClubFix && Interior == 271617 && !SelectedPed.IsPlayer))
+                        if (Exclusive || SelectedPed == null || !SelectedPed.Exists() || (Config.ClubFix && Interior == 271617 && !SelectedPed.IsPlayer))
                         {
                             SquadSkipped += 1;
                             continue;
