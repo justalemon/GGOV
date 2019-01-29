@@ -31,7 +31,7 @@ namespace GGO.API
         /// </summary>
         public virtual bool IsAvailable()
         {
-            throw new NotImplementedException();
+            return true;
         }
         /// <summary>
         /// Gets the name for the icon.
@@ -93,7 +93,7 @@ namespace GGO.API
         /// </summary>
         public virtual bool IsDataAvailable()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         #endregion

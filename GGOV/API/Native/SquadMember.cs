@@ -55,10 +55,5 @@ namespace GGO.API.Native
         {
             return Function.Call<int>(Hash.GET_PED_MAX_HEALTH, InternalPed) - 100;
         }
-
-        public override bool IsAvailable()
-        {
-            return true;
-        }
     }
 }
