@@ -6,11 +6,6 @@ namespace GGO.API.Native
 {
     public class PlayerWeapon : Field
     {
-        public override bool DataShouldBeShown()
-        {
-            throw new NotImplementedException();
-        }
-
         public override float GetCurrentValue()
         {
             return Game.Player.Character.Weapons.Current.AmmoInClip;
@@ -21,24 +16,9 @@ namespace GGO.API.Native
             return FieldType.Weapon;
         }
 
-        public override string GetFirstText()
-        {
-            throw new NotImplementedException();
-        }
-
         public override string GetIconName()
         {
             return "Weapon";
-        }
-
-        public override float GetMaxValue()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string GetSecondText()
-        {
-            throw new NotImplementedException();
         }
 
         public override string GetWeaponImage()
