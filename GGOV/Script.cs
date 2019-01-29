@@ -46,6 +46,10 @@ namespace GGO
         /// </summary>
         private static List<Field> PlayerFields = new List<Field>();
         /// <summary>
+        /// The list of inventory items.
+        /// </summary>
+        private static List<Item> InventoryItems = new List<Item>();
+        /// <summary>
         /// If the squad side is running on the exclusive mode.
         /// </summary>
         private static bool Exclusive = false;
@@ -58,10 +62,6 @@ namespace GGO
 
         #region Positions
 
-        /// <summary>
-        /// Offset for the item click detection.
-        /// </summary>
-        private int InventoryOffset = 0;
         /// <summary>
         /// Positions of the items inside of the inventory.
         /// </summary>
@@ -91,23 +91,6 @@ namespace GGO
         /// Next time to check if the user has a weapon that is not on the inventory.
         /// </summary>
         private int NextWeaponCheck = 0;
-        /// <summary>
-        /// If the ammo count should be available for the current weapon.
-        /// </summary>
-        private bool IsAmmoAvailable
-        {
-            get
-            {
-                switch (Game.Player.Character.Weapons.Current.GetStyle())
-                {
-                    case Usage.Main:
-                    case Usage.Sidearm:
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        }
 
         #endregion
 
@@ -132,6 +115,16 @@ namespace GGO
             // Don't do nothing if the user requested the menu to be disabled
             if (InventoryConfig.Enabled)
             {
+                // Add the inventory fields
+                InventoryItems.Add(new ItemAmmo());
+                InventoryItems.Add(new ItemMagazines());
+
+                // Add the weapon fields
+                foreach (WeaponHash StoredHash in InventoryConfig.Items)
+                {
+                    InventoryItems.Add(new ItemWeapon(StoredHash));
+                }
+
                 // Itterate between 0-2 (1-3) and 0-4 (1-5) and create the item positions
                 for (int Y = 0; Y < 5; Y++)
                 {
@@ -186,6 +179,19 @@ namespace GGO
             }
 
             // Finally, return true
+            return true;
+        }
+
+        public static bool AddItem(Item CustomItem)
+        {
+            // If the inventory count is over the limit and the exclusive script does not matches
+            if (InventoryItems.Count > 15)
+            {
+                return false;
+            }
+
+            // Add the item and return
+            InventoryItems.Add(CustomItem);
             return true;
         }
 
@@ -425,17 +431,6 @@ namespace GGO
                 return;
             }
 
-            // Update the item offset
-            InventoryOffset = 0;
-            if (IsAmmoAvailable && InventoryConfig.AmmoTotal)
-            {
-                InventoryOffset += 1;
-            }
-            if (IsAmmoAvailable && InventoryConfig.AmmoMags)
-            {
-                InventoryOffset += 1;
-            }
-
             // Disable the weapon wheel
             Game.DisableControlThisFrame(0, Control.SelectWeapon);
             // If the user just pressed TAB/L1/LB
@@ -463,8 +458,6 @@ namespace GGO
                 Game.DisableControlThisFrame(0, Control.Aim);
                 Game.DisableControlThisFrame(0, Control.LookUpDown);
                 Game.DisableControlThisFrame(0, Control.LookLeftRight);
-                // And check the user clicked something
-                CheckClick();
             }
         }
 
@@ -527,82 +520,51 @@ namespace GGO
                 string Name = Enum.GetName(typeof(WeaponHash), InventoryConfig.Weapons[Index]);
                 // Draw the weapon image
                 DrawImage($"Weapon{Name}", WeaponPositions[Index] + LiteralSize(InventoryConfig.WeaponImageX, InventoryConfig.WeaponImageY), LiteralSize(InventoryConfig.WeaponImageWidth, InventoryConfig.WeaponImageHeight));
-            }
 
-            // Start an index to count how many items we have in total
-            int ItemIndex = 0;
-
-            // Show the total ammo count if the user wants
-            if (InventoryConfig.AmmoTotal && IsAmmoAvailable)
-            {
-                DrawImage(Game.Player.Character.Weapons.Current.GetAmmoImage(), ItemsPositions[ItemIndex] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
-                new UIText(Game.Player.Character.Weapons.Current.GetCorrectAmmo(), ItemsPositions[ItemIndex] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
-                ItemIndex++;
-            }
-
-            // If the user wants the mags to be shown
-            if (InventoryConfig.AmmoMags && IsAmmoAvailable)
-            {
-                float MagsLeft = 0;
-                if (Game.Player.Character.Weapons.Current.Ammo != 0 && Game.Player.Character.Weapons.Current.MaxAmmoInClip != 0)
+                // If the player pressed the click, do the specific action
+                if (Game.IsControlJustPressed(0, Control.PhoneSelect))
                 {
-                    MagsLeft = Game.Player.Character.Weapons.Current.Ammo / Game.Player.Character.Weapons.Current.MaxAmmoInClip;
+                    // If the player clicked on the weapon position
+                    if (WeaponPositions[Index].IsClicked(LiteralSize(InventoryConfig.WeaponWidth, InventoryConfig.WeaponHeight)))
+                    {
+                        SelectOrGive(InventoryConfig.Weapons[Index]);
+                    }
                 }
-                DrawImage(Game.Player.Character.Weapons.Current.GetMagazineImage(), ItemsPositions[ItemIndex] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
-                new UIText(MagsLeft.ToString("0"), ItemsPositions[ItemIndex] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
-                ItemIndex++;
             }
+
+            // Store the offset for invalid items
+            int Offset = 0;
 
             // Iterate over the maximum count of items
-            for (int Index = 0; Index < InventoryConfig.Items.Count; Index++)
+            for (int Index = 0; Index < InventoryItems.Count; Index++)
             {
                 // If the current index + the total index is higher than the max
-                if (Index + ItemIndex > 15)
+                if (Index > 15)
                 {
                     // Break the for
                     break;
                 }
 
-                // Set a dummy in case of the weapon does not exists
-                string Ammo = "0";
-                // If the weapon is on the player inventory
-                if (Game.Player.Character.Weapons.HasWeapon(InventoryConfig.Items[Index]))
+                // If the item is not available
+                if (!InventoryItems[Index].IsAvailable())
                 {
-                    // Set the correct ammo count
-                    Ammo = Game.Player.Character.Weapons[InventoryConfig.Items[Index]].GetCorrectAmmo();
+                    // Increase the offset and skip the iteration
+                    Offset += 1;
+                    continue;
                 }
 
                 // Draw the item
-                DrawImage("Item" + Enum.GetName(typeof(WeaponHash), InventoryConfig.Items[Index]), ItemsPositions[Index + ItemIndex] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
-                new UIText(Ammo, ItemsPositions[Index + ItemIndex] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
-            }
-        }
+                DrawImage("Item" + InventoryItems[Index].GetIcon(), ItemsPositions[Index - Offset] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
+                new UIText(InventoryItems[Index].GetQuantity(), ItemsPositions[Index - Offset] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
 
-        private void CheckClick()
-        {
-            // If the player did not pressed the click, return
-            if (!Game.IsControlJustPressed(0, Control.PhoneSelect))
-            {
-                return;
-            }
-
-            // Iterate over the item count
-            for (int Index = 0; Index < InventoryConfig.Items.Count; Index++)
-            {
-                // If the player clicked on the weapon position
-                if (ItemsPositions[Index + InventoryOffset].IsClicked(LiteralSize(InventoryConfig.WeaponWidth, InventoryConfig.WeaponHeight)))
+                // If the player pressed the click, do the specific action
+                if (Game.IsControlJustPressed(0, Control.PhoneSelect))
                 {
-                    SelectOrGive(InventoryConfig.Items[Index]);
-                }
-            }
-
-            // Iterate over the weapon count
-            for (int Index = 0; Index < InventoryConfig.Weapons.Count; Index++)
-            {
-                // If the player clicked on the weapon position
-                if (WeaponPositions[Index].IsClicked(LiteralSize(InventoryConfig.WeaponWidth, InventoryConfig.WeaponHeight)))
-                {
-                    SelectOrGive(InventoryConfig.Weapons[Index]);
+                    // If the player clicked on the weapon position
+                    if (ItemsPositions[Index - Offset].IsClicked(LiteralSize(InventoryConfig.ItemsWidth, InventoryConfig.ItemsHeight)))
+                    {
+                        InventoryItems[Index].Clicked();
+                    }
                 }
             }
         }
