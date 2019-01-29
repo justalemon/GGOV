@@ -66,9 +66,8 @@
     <Compile Include="Extensions\Player.cs" />
     <Compile Include="Extensions\Point.cs" />
     <Compile Include="Extensions\Weapon.cs" />
-    <Compile Include="ScriptInventory.cs" />
     <Compile Include="Logging.cs" />
-    <Compile Include="ScriptHud.cs" />
+    <Compile Include="Script.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

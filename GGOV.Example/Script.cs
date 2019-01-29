@@ -8,9 +8,9 @@ namespace GGO.Example
         public ExampleScript()
         {
             // When the script is booting up, add the player field
-            Hud.AddField(new HealthExample(), FieldSection.Player);
+            GGO.AddField(new HealthExample(), FieldSection.Player);
             // And the squad field
-            Hud.AddField(new HealthExample(), FieldSection.Squad);
+            GGO.AddField(new HealthExample(), FieldSection.Squad);
         }
     }
 

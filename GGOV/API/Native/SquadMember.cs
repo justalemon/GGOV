@@ -34,9 +34,9 @@ namespace GGO.API.Native
             {
                 return Game.Player.Name;
             }
-            else if (Hud.Names.ContainsKey(InternalPed.Model.GetHashCode().ToString()))
+            else if (GGO.Names.ContainsKey(InternalPed.Model.GetHashCode().ToString()))
             {
-                return Hud.Names[InternalPed.Model.GetHashCode().ToString()];
+                return GGO.Names[InternalPed.Model.GetHashCode().ToString()];
             }
             else
             {
