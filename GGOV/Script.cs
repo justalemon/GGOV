@@ -313,7 +313,7 @@ namespace GGO
                     if (SquadFields.Count != 0 && i <= SquadFields.Count - 1)
                     {
                         // See if we should show the specified field
-                        if (!SquadFields[i].ShouldBeShown())
+                        if (!SquadFields[i].IsAvailable())
                         {
                             SquadSkipped += 1;
                             continue;
@@ -348,7 +348,7 @@ namespace GGO
             for (int i = 0; i < PlayerFields.Count; i++)
             {
                 // If the field should not be shown
-                if (!PlayerFields[i].ShouldBeShown())
+                if (!PlayerFields[i].IsAvailable())
                 {
                     // Add one more and skip the iteration
                     PlayerSkipped += 1;
@@ -621,7 +621,7 @@ namespace GGO
             else if (Field.GetFieldType() == FieldType.Weapon)
             {
                 // If we should draw the ammo count and weapon image
-                if (Field.DataShouldBeShown())
+                if (Field.IsDataAvailable())
                 {
                     // Store the position of the weapon space
                     Point WeaponLocation = HudConfig.GetSpecificPosition(Position.PlayerWeapon, Index, IsPlayer);

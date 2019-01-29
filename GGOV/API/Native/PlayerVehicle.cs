@@ -30,7 +30,7 @@ namespace GGO.API.Native
             return 1000;
         }
 
-        public override bool ShouldBeShown()
+        public override bool IsDataAvailable()
         {
             return Game.Player.Character.CurrentVehicle != null;
         }

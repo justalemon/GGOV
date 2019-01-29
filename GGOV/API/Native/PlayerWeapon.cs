@@ -26,7 +26,7 @@ namespace GGO.API.Native
             return Enum.GetName(typeof(WeaponHash), Game.Player.Character.Weapons.Current.Hash);
         }
 
-        public override bool ShouldBeShown()
+        public override bool IsAvailable()
         {
             return true;
         }

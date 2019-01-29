@@ -29,7 +29,7 @@ namespace GGO.API
         /// <summary>
         /// If the information field should be shown during the next game tick.
         /// </summary>
-        public virtual bool ShouldBeShown()
+        public virtual bool IsAvailable()
         {
             throw new NotImplementedException();
         }
@@ -91,7 +91,7 @@ namespace GGO.API
         /// <summary>
         /// If the weapon data (ammo and the respective image) should be shown.
         /// </summary>
-        public virtual bool DataShouldBeShown()
+        public virtual bool IsDataAvailable()
         {
             throw new NotImplementedException();
         }
