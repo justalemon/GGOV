@@ -130,7 +130,7 @@ namespace GGO
             }
 
             // Don't do nothing if the user requested the menu to be disabled
-            if (!InventoryConfig.Enabled)
+            if (InventoryConfig.Enabled)
             {
                 // Itterate between 0-2 (1-3) and 0-4 (1-5) and create the item positions
                 for (int Y = 0; Y < 5; Y++)
