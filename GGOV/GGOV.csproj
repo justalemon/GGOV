@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Item.cs" />
     <Compile Include="API\Native\PlayerHealth.cs" />
     <Compile Include="API\Native\PlayerMain.cs" />
     <Compile Include="API\Native\PlayerSidearm.cs" />
