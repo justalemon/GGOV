@@ -16,12 +16,6 @@ namespace GGO.Example
 
     public class HealthExample : Field
     {
-        public override bool DataShouldBeShown()
-        {
-            // This determines if the weapon data should be shown (ammo count and image)
-            throw new System.NotImplementedException();
-        }
-
         public override float GetCurrentValue()
         {
             // This is the current value for the health bar
@@ -58,18 +52,6 @@ namespace GGO.Example
             // The text to replace the health bar
             // If you really want to show the health bar, set this to null or string.Empty
             return "of the fields";
-        }
-
-        public override string GetWeaponImage()
-        {
-            // The weapon image, this does not needs to be implemented in the health field
-            throw new System.NotImplementedException();
-        }
-
-        public override bool ShouldBeShown()
-        {
-            // If this field should be shown during the next game tick
-            return true;
         }
     }
 }
