@@ -7,7 +7,7 @@ namespace GGO.UserData
     /// <summary>
     /// Class that contains the configuration for the inventory.
     /// </summary>
-    public class InventoryConfig
+    public class Inventory
     {
         /// <summary>
         /// If the Custom inventory should be enabled or disabled.

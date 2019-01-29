@@ -8,7 +8,7 @@ namespace GGO.UserData
     /// <summary>
     /// Class that contains the configuration for the Screen HUD.
     /// </summary>
-    public class HudConfig
+    public class Hud
     {
         /// <summary>
         /// If the Custom HUD should be enabled or disabled.
@@ -118,6 +118,16 @@ namespace GGO.UserData
         /// </summary>
         [JsonProperty("squad_name_y")]
         public float SquadNameY { get; set; }
+        /// <summary>
+        /// X position of the seccond text relative to the background.
+        /// </summary>
+        [JsonProperty("squad_name2_x")]
+        public float SquadName2X { get; set; }
+        /// <summary>
+        /// Y position of the seccond text relative to the background.
+        /// </summary>
+        [JsonProperty("squad_name2_y")]
+        public float SquadName2Y { get; set; }
         /// <summary>
         /// X position of the squad health bar relative to the background.
         /// </summary>
@@ -277,7 +287,7 @@ namespace GGO.UserData
         /// <param name="HudPos">Position of the screen calculations.</param>
         /// <param name="Index">Multiplier for the position.</param>
         /// <returns>A Point with the on screen position.</returns>
-        public Point GetSpecificPosition(Position HudPos, int Index)
+        public Point GetSpecificPosition(Position HudPos, int Index, bool Reversed)
         {
             // Set a dummy position to change later
             Point DefaultPosition = Point.Empty;
@@ -305,8 +315,11 @@ namespace GGO.UserData
                     throw new NotSupportedException("You can't calculate the position for this Screen location.");
             }
 
+            // Calculate the correct number
+            int Calculated = (LiteralPoint(CommonX, 0).X + LiteralPoint(SquareWidth, 0).X) * Index;
+
             // Finally, return the correct position
-            return new Point(DefaultPosition.X, DefaultPosition.Y + (LiteralPoint(CommonX, 0).X + LiteralPoint(SquareWidth, 0).X) * Index);
+            return new Point(DefaultPosition.X, DefaultPosition.Y + (Reversed ? -Calculated : Calculated));
         }
     }
 }

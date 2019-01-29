@@ -1,6 +1,6 @@
 ﻿using GTA;
+using GTA.Native;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 
 namespace GGO
@@ -66,6 +66,27 @@ namespace GGO
             // Finally, if the file exists draw it
             UI.DrawTexture(ImagePath, Index, 0, 150, Position, Sizes);
             Index++;
+        }
+
+        public static void SelectOrGive(WeaponHash SelectedHash)
+        {
+            // If the current weapon equals the desired one
+            if (Game.Player.Character.Weapons.Current.Hash == SelectedHash)
+            {
+                // Hide the weapon
+                Game.Player.Character.Weapons.Select(WeaponHash.Unarmed, true);
+            }
+            // Check if the player does not has the weapon on the inventory
+            else if (!Game.Player.Character.Weapons.HasWeapon(SelectedHash))
+            {
+                // If not, give them the requested weapon with no ammo
+                Game.Player.Character.Weapons.Give(SelectedHash, 0, true, false);
+            }
+            else
+            {
+                // If the user has it, change the weapon to it
+                Game.Player.Character.Weapons.Select(SelectedHash, true);
+            }
         }
     }
 }
