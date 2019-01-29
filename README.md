@@ -55,6 +55,7 @@ Please note that the maximum of Weapons is 5 and for items is 13 (15 is possible
 
 * NEW: Code and Configuration has been refactored (in other words, rewriten)
 * NEW: Removed support for jedijosh920's Dual Wield
+* NEW: Added dead ped markers
 
 ### 1.0.1
 
