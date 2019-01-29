@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -297,55 +297,55 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GGO\Images\Ammo12Gauge.png">
+    <Content Include="GGO\Images\ItemAmmo12Gauge.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo22Long.png">
+    <Content Include="GGO\Images\ItemAmmo22Long.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo22Scamp.png">
+    <Content Include="GGO\Images\ItemAmmo22Scamp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo32ACP.png">
+    <Content Include="GGO\Images\ItemAmmo32ACP.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo38LongColt.png">
+    <Content Include="GGO\Images\ItemAmmo38LongColt.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo40mm.png">
+    <Content Include="GGO\Images\ItemAmmo40mm.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo44Magnum.png">
+    <Content Include="GGO\Images\ItemAmmo44Magnum.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo45ACP.png">
+    <Content Include="GGO\Images\ItemAmmo45ACP.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo50AE.png">
+    <Content Include="GGO\Images\ItemAmmo50AE.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo50BMG.png">
+    <Content Include="GGO\Images\ItemAmmo50BMG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo556NATO.png">
+    <Content Include="GGO\Images\ItemAmmo556NATO.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo762NATO.png">
+    <Content Include="GGO\Images\ItemAmmo762NATO.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo762Soviet.png">
+    <Content Include="GGO\Images\ItemAmmo762Soviet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\Ammo9mm.png">
+    <Content Include="GGO\Images\ItemAmmo9mm.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\AmmoFN57.png">
+    <Content Include="GGO\Images\ItemAmmoFN57.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\AmmoPG7VM.png">
+    <Content Include="GGO\Images\ItemAmmoPG7VM.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\AmmoUnknown.png">
+    <Content Include="GGO\Images\ItemAmmoUnknown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="GGO\Images\ItemBall.png">
@@ -441,64 +441,64 @@
     <Content Include="GGO\Images\ItemWrench.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagAccuracyInternational.png">
+    <Content Include="GGO\Images\ItemMagAccuracyInternational.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagAK47.png">
+    <Content Include="GGO\Images\ItemMagAK47.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagAR15.png">
+    <Content Include="GGO\Images\ItemMagAR15.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagATIOmniHybrid.png">
+    <Content Include="GGO\Images\ItemMagATIOmniHybrid.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagBarrettM107.png">
+    <Content Include="GGO\Images\ItemMagBarrettM107.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagBerettaPx4Storm.png">
+    <Content Include="GGO\Images\ItemMagBerettaPx4Storm.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagCylinder.png">
+    <Content Include="GGO\Images\ItemMagCylinder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagDesertEagle50AE.png">
+    <Content Include="GGO\Images\ItemMagDesertEagle50AE.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagEAWB1911.png">
+    <Content Include="GGO\Images\ItemMagEAWB1911.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagFNModel1922.png">
+    <Content Include="GGO\Images\ItemMagFNModel1922.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagFNP90.png">
+    <Content Include="GGO\Images\ItemMagFNP90.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagHeckler&amp;KochP7M10.png">
+    <Content Include="GGO\Images\ItemMagHecklerKochP7M10.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagMP5.png">
+    <Content Include="GGO\Images\ItemMagMP5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagProMagSAI05Saiga.png">
+    <Content Include="GGO\Images\ItemMagProMagSAI05Saiga.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagSIGSauerMPX.png">
+    <Content Include="GGO\Images\ItemMagSIGSauerMPX.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagSkorpion.png">
+    <Content Include="GGO\Images\ItemMagSkorpion.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagTaurusPT92AF.png">
+    <Content Include="GGO\Images\ItemMagTaurusPT92AF.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagTec9.png">
+    <Content Include="GGO\Images\ItemMagTec9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagThompson.png">
+    <Content Include="GGO\Images\ItemMagThompson.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GGO\Images\MagUzi.png">
+    <Content Include="GGO\Images\ItemMagUzi.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="GGO\Images\WeaponUnholyHellbringer.png">
