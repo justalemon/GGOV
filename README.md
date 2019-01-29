@@ -102,3 +102,13 @@ Please note that the maximum of Weapons is 5 and for items is 13 (15 is possible
 * NEW: Added option to remove the weapons and items that are not part of the inventory
 * FIX: The Flare Gun no longer shows ammo and magazines left
 * FIX: We now show infinite ammo for melee weapons
+
+### 2.2
+
+* NEW: Added C# API, so other developers can add Squad Info, Player Info or Inventory Items with custom behaviour
+* NEW: Added Example for the API (Squad and Player Info only, **not part of the final product**)
+* NEW: Added exclusive mode so other developers can use the squad section for important information
+* NEW: Merged the `Hud` and `Inventory` scripts/classes into a single one called `GGO`
+* NEW: Bumped .Net Framework requirement from 4.7.1 to 4.7.2
+* NEW: The list of Squad Names is now `public` (other developers can add, remove or replace them)
+* NEW: The Inventory Ammo and Magazine now need to have "Item" at the start (`Ammo32ACP.png` becomes `ItemAmmo32ACP.png`)
