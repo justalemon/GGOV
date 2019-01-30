@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="logo.png" alt="Gun Gale Online Logo" width="500" />
+<img src="logo.png" alt="Gun Gale Online Logo" width="750" />
 
 [![5mods](https://img.shields.io/badge/5mods-download-20BA4E.svg)](https://www.gta5-mods.com/scripts/ggo)
 [![AppVeyor](https://img.shields.io/appveyor/ci/justalemon/ggov.svg?label=appveyor)](https://ci.appveyor.com/project/justalemon/ggov)
