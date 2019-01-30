@@ -2,6 +2,9 @@
 
 namespace GGO
 {
+    /// <summary>
+    /// Colors used on the mod.
+    /// </summary>
     public class Colors
     {
         /// <summary>
@@ -36,41 +39,5 @@ namespace GGO
         /// Color for a ped with health under 24%.
         /// </summary>
         public static Color HealthDying = Color.FromArgb(255, 200, 0, 0);
-
-        /// <summary>
-        /// Returns a color based on the player health.
-        /// </summary>
-        /// <param name="Current">The current ped health check.</param>
-        /// <param name="Max">The max ped health..</param>
-        /// <returns>A color that match the current health percentage.</returns>
-        public static Color GetHealthColor(float Current, float Max)
-        {
-            float Percentage = (Current / Max) * 100;
-
-            // If the player is on normal levels
-            // Return White
-            if (Percentage >= 50 && Percentage <= 100)
-            {
-                return HealthNormal;
-            }
-            // If the player is under risky levels
-            // Return Yellow
-            else if (Percentage <= 50 && Percentage >= 25)
-            {
-                return HealthDanger;
-            }
-            // If the player is about to die
-            // Return Red
-            else if (Percentage <= 25)
-            {
-                return HealthDying;
-            }
-            // If the player is under 0 or over 100
-            // Return blue
-            else
-            {
-                return HealthOverflow;
-            }
-        }
     }
 }

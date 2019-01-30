@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace GGO.API
 {
@@ -75,6 +76,40 @@ namespace GGO.API
         public virtual float GetMaxValue()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets the colour for the health bar.
+        /// </summary>
+        public virtual Color GetColor()
+        {
+            /// Calculate the percentage
+            float Percentage = GetCurrentValue() / GetMaxValue() * 100;
+
+            // If the player is on normal levels
+            // Return White
+            if (Percentage >= 50 && Percentage <= 100)
+            {
+                return Colors.HealthNormal;
+            }
+            // If the player is under risky levels
+            // Return Yellow
+            else if (Percentage <= 50 && Percentage >= 25)
+            {
+                return Colors.HealthDanger;
+            }
+            // If the player is about to die
+            // Return Red
+            else if (Percentage <= 25)
+            {
+                return Colors.HealthDying;
+            }
+            // If the player is under 0 or over 100
+            // Return blue
+            else
+            {
+                return Colors.HealthOverflow;
+            }
         }
 
         #endregion

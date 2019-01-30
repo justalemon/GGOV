@@ -602,7 +602,7 @@ namespace GGO
 
                     // Draw the entity health
                     Size HealthOffset = IsPlayer ? LiteralSize(HudConfig.PlayerHealthX, HudConfig.PlayerHealthY) : LiteralSize(HudConfig.SquadHealthX, HudConfig.SquadHealthY);
-                    new UIRectangle(BasePosition + HealthOffset, HealthSize, Colors.GetHealthColor(Field.GetCurrentValue(), Field.GetMaxValue())).Draw();
+                    new UIRectangle(BasePosition + HealthOffset, HealthSize, Field.GetColor()).Draw();
 
                     // Draw the health dividers
                     foreach (Point Position in HudConfig.GetDividerPositions(BasePosition, IsPlayer))
