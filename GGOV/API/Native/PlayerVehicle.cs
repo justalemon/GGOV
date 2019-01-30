@@ -5,6 +5,11 @@ namespace GGO.API.Native
 {
     public class PlayerVehicle : Field
     {
+        public override bool IsAvailable()
+        {
+            return Game.Player.Character.CurrentVehicle != null;
+        }
+
         public override float GetCurrentValue()
         {
             return Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character.CurrentVehicle);
@@ -28,11 +33,6 @@ namespace GGO.API.Native
         public override float GetMaxValue()
         {
             return 1000;
-        }
-
-        public override bool IsDataAvailable()
-        {
-            return Game.Player.Character.CurrentVehicle != null;
         }
     }
 }
