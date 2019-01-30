@@ -1,3 +1,5 @@
+<div align="center">
+
 # GGOV
 
 [![5mods](https://img.shields.io/badge/5mods-download-20BA4E.svg)](https://www.gta5-mods.com/scripts/ggo)
@@ -8,6 +10,8 @@
 GGOV is a mod for Grand Theft Auto V that aims to bring the Gun Gale Online experience into GTA V. It started as just the HUD but now we have the inventory fully working with the "laser if finger on trigger" comming soon.
 
 ![Preview](https://raw.githubusercontent.com/justalemon/GGOV/master/preview.png)
+
+</div>
 
 ## Prerequisites
 
