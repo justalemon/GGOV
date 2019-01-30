@@ -1,15 +1,21 @@
 <div align="center">
 
-<img src="logo.png" alt="Gun Gale Online Logo" width="750" />
+<img src="https://raw.githubusercontent.com/justalemon/GGOV/master/logo.png" width="750" />
 
-[![5mods](https://img.shields.io/badge/5mods-download-20BA4E.svg)](https://www.gta5-mods.com/scripts/ggo)
-[![AppVeyor](https://img.shields.io/appveyor/ci/justalemon/ggov.svg?label=appveyor)](https://ci.appveyor.com/project/justalemon/ggov)
-[![CodeFactor](https://www.codefactor.io/repository/github/justalemon/ggov/badge)](https://www.codefactor.io/repository/github/justalemon/ggov)
-[![Discord](https://img.shields.io/badge/discord-join-7289DA.svg)](https://discord.gg/Cf6sspj)
+<br><br>
 
-GGOV is a mod for Grand Theft Auto V that aims to bring the Gun Gale Online experience into GTA V. It started as just the HUD but now we have the inventory fully working with the "laser if finger on trigger" comming soon.
+<a href="https://www.gta5-mods.com/scripts/ggo"><img src="https://img.shields.io/badge/5mods-download-20BA4E.svg"></a>
+<a href="https://ci.appveyor.com/project/justalemon/ggov"><img src="https://img.shields.io/appveyor/ci/justalemon/ggov.svg?label=appveyor"></a>
+<a href="https://www.codefactor.io/repository/github/justalemon/ggov"><img src="https://www.codefactor.io/repository/github/justalemon/ggov/badge"></a>
+<a href="https://discord.gg/Cf6sspj"><img src="https://img.shields.io/badge/discord-join-7289DA.svg"></a>
 
-![Preview](https://raw.githubusercontent.com/justalemon/GGOV/master/preview.png)
+<br><br>
+
+This is a mod for Grand Theft Auto V that aims to bring the Gun Gale Online experience into GTA V. It started as a basic script but with time we have added more and more functions from the anime.
+
+<br><br>
+
+<img src="https://raw.githubusercontent.com/justalemon/GGOV/master/preview.png" />
 
 </div>
 
