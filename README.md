@@ -4,6 +4,7 @@
 <a href="https://www.gta5-mods.com/scripts/ggo"><img src="https://img.shields.io/badge/5mods-download-20BA4E.svg"></a>
 <a href="https://ci.appveyor.com/project/justalemon/ggov"><img src="https://img.shields.io/appveyor/ci/justalemon/ggov.svg?label=appveyor"></a>
 <a href="https://www.codefactor.io/repository/github/justalemon/ggov"><img src="https://www.codefactor.io/repository/github/justalemon/ggov/badge"></a>
+<a href="https://dependabot.com"><img src="https://api.dependabot.com/badges/status?host=github&repo=justalemon/GGOV"></a>
 <a href="https://discord.gg/Cf6sspj"><img src="https://img.shields.io/badge/discord-join-7289DA.svg"></a>
 <br><br>
 This is a mod for Grand Theft Auto V that aims to bring the Gun Gale Online experience into GTA V. It started as a basic script but with time we have added more and more functions from the anime.
