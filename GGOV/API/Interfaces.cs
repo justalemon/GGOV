@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace GGO.API
 {
@@ -24,9 +24,17 @@ namespace GGO.API
     #region Fields
 
     /// <summary>
+    /// Base interface for all of the fields.
+    /// </summary>
+    public interface IField : IBase
+    {
+
+    }
+
+    /// <summary>
     /// Interface for fields that need a health bar.
     /// </summary>
-    public interface IHealth : IBase
+    public interface IHealth : IField
     {
         /// <summary>
         /// Title of the field.
@@ -45,7 +53,7 @@ namespace GGO.API
     /// <summary>
     /// Interface for weapon fields that contains the ammo count and weapon image.
     /// </summary>
-    public interface IWeapon : IBase
+    public interface IWeapon : IField
     {
         /// <summary>
         /// Current ammo count.
@@ -64,7 +72,7 @@ namespace GGO.API
     /// <summary>
     /// Interface for text fields that only show a title and a piece of text.
     /// </summary>
-    public interface IText : IBase
+    public interface IText : IField
     {
         /// <summary>
         /// Title of the field.
