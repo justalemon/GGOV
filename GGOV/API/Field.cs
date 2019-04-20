@@ -3,62 +3,70 @@
 namespace GGO.API
 {
     /// <summary>
-    /// Type of data field that is going to be shown.
+    /// Interface for fields that need a health bar.
     /// </summary>
-    public enum FieldType
+    public interface IHealth : IField
     {
-        Health = 0,
-        Weapon = 1,
-        Text = 2
+        /// <summary>
+        /// Title of the field.
+        /// </summary>
+        string Title { get; }
+        /// <summary>
+        /// Current health value.
+        /// </summary>
+        float Current { get; }
+        /// <summary>
+        /// Maximum health value.
+        /// </summary>
+        float Maximum { get; }
     }
 
     /// <summary>
-    /// Interface for showing player data.
+    /// Interface for weapon fields that contains the ammo count and weapon image.
+    /// </summary>
+    public interface IWeapon : IField
+    {
+        /// <summary>
+        /// Current ammo count.
+        /// </summary>
+        int Ammo { get; }
+        /// <summary>
+        /// The name for the weapon image.
+        /// </summary>
+        string Image { get; }
+        /// <summary>
+        /// If the weapon data (ammo and the respective image) should be shown.
+        /// </summary>
+        bool Available { get; }
+    }
+
+    /// <summary>
+    /// Interface for text fields that only show a title and a piece of text.
+    /// </summary>
+    public interface IText : IField
+    {
+        /// <summary>
+        /// Title of the field.
+        /// </summary>
+        string Title { get; }
+        /// <summary>
+        /// Bottom text of the field.
+        /// </summary>
+        string Text { get; }
+    }
+
+    /// <summary>
+    /// Base Interface for all of the fields.
     /// </summary>
     public interface IField
     {
         /// <summary>
-        /// Type of field to be shown on the player section.
-        /// </summary>
-        FieldType Type { get; }
-        /// <summary>
-        /// If the information field should be shown during the next game tick.
+        /// If the field should be shown during the next game tick.
         /// </summary>
         bool Visible { get; }
         /// <summary>
-        /// Name for the icon.
+        /// Filename for the icon.
         /// </summary>
         string Icon { get; }
-        /// <summary>
-        /// Gets the current value for the health bar or ammo count.
-        /// </summary>
-        float Value { get; }
-        /// <summary>
-        /// Contents of the first text field.
-        /// It only needs to be implemented on Health.
-        /// </summary>
-        string FirstText { get; }
-        /// <summary>
-        /// Contents of the second text field.
-        /// If this does not returns empty or a whitespace, the Health bar gets removed.
-        /// </summary>
-        string SecondText { get; }
-        /// <summary>
-        /// The maximum value for health bar.
-        /// It only needs to be implemented on Health.
-        /// </summary>
-        float MaxValue { get; }
-        /// <summary>
-        /// Gets the colour for the health bar.
-        /// </summary>
-        Color Color { get; set; }
-        /// <summary>
-        /// Gets the name for the image of the weapon. This (obviously) only needs to be implemented on Weapon.
-        /// </summary>
-        string WeaponImage { get; }
-        /// <summary>
-        /// If the weapon data (ammo and the respective image) should be shown.
-        /// </summary>
-        bool WeaponAvailable { get; }
     }
 }
