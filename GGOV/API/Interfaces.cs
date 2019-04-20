@@ -1,5 +1,28 @@
-﻿namespace GGO.API
+﻿using System;
+
+namespace GGO.API
 {
+    #region Base
+
+    /// <summary>
+    /// Base interface for the mod.
+    /// </summary>
+    public interface IBase
+    {
+        /// <summary>
+        /// If the field or item should be shown during the next game tick.
+        /// </summary>
+        bool Visible { get; }
+        /// <summary>
+        /// Filename for the icon.
+        /// </summary>
+        string Icon { get; }
+    }
+
+    #endregion
+
+    #region Fields
+
     /// <summary>
     /// Interface for fields that need a health bar.
     /// </summary>
@@ -56,15 +79,29 @@
     /// <summary>
     /// Base Interface for all of the fields.
     /// </summary>
-    public interface IField
+    public interface IField : IBase
+    {
+        
+    }
+
+    #endregion
+
+    #region Items
+
+    /// <summary>
+    /// Interface used for inventory items.
+    /// </summary>
+    public interface IItem : IBase
     {
         /// <summary>
-        /// If the field should be shown during the next game tick.
+        /// Event triggered when the user clicks the specific item.
         /// </summary>
-        bool Visible { get; }
+        event EventHandler OnClick;
         /// <summary>
-        /// Filename for the icon.
+        /// Quantity of the inventory item.
         /// </summary>
-        string Icon { get; }
+        string Quantity { get; }
     }
+
+    #endregion
 }
