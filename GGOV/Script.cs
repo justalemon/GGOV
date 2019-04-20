@@ -40,15 +40,15 @@ namespace GGO
         /// <summary>
         /// The list of squad fields.
         /// </summary>
-        private static List<Field> SquadFields = new List<Field>();
+        private static List<IField> SquadFields = new List<IField>();
         /// <summary>
         /// The list of player fields.
         /// </summary>
-        private static List<Field> PlayerFields = new List<Field>();
+        private static List<IField> PlayerFields = new List<IField>();
         /// <summary>
         /// The list of inventory items.
         /// </summary>
-        private static List<Item> InventoryItems = new List<Item>();
+        private static List<IItem> InventoryItems = new List<IItem>();
         /// <summary>
         /// If the squad side is running on the exclusive mode.
         /// </summary>
@@ -102,8 +102,8 @@ namespace GGO
             if (HudConfig.Enabled)
             {
                 // Add the player fields
-                PlayerFields.Add(new PlayerSidearm());
-                PlayerFields.Add(new PlayerMain());
+                PlayerFields.Add(new PlayerSecondary());
+                PlayerFields.Add(new PlayerPrimary());
                 PlayerFields.Add(new PlayerHealth());
                 if (HudConfig.VehicleInfo) { PlayerFields.Add(new PlayerVehicle()); }
 
@@ -154,7 +154,7 @@ namespace GGO
 
         #region API
 
-        public static bool AddField(Field CustomField, FieldSection Destination)
+        public static bool AddField(IField CustomField, FieldSection Destination)
         {
             // If the exclusive mode is enabled and the script does not matches
             if (Exclusive && Destination == FieldSection.Squad && Script != Assembly.GetCallingAssembly().ManifestModule.ScopeName)
@@ -182,7 +182,7 @@ namespace GGO
             return true;
         }
 
-        public static bool AddItem(Item CustomItem)
+        public static bool AddItem(IItem CustomItem)
         {
             // If the inventory count is over the limit and the exclusive script does not matches
             if (InventoryItems.Count > 15)
@@ -307,13 +307,13 @@ namespace GGO
                 for (int i = 0; i < SquadFields.Count + FriendlyPeds.Count; i++)
                 {
                     // Set a place for the member
-                    Field Member;
+                    IBase Member;
 
                     // Get the ped on that position
                     if (SquadFields.Count != 0 && i <= SquadFields.Count - 1)
                     {
                         // See if we should show the specified field
-                        if (!SquadFields[i].IsAvailable())
+                        if (!SquadFields[i].Visible)
                         {
                             SquadSkipped += 1;
                             continue;
@@ -348,7 +348,7 @@ namespace GGO
             for (int i = 0; i < PlayerFields.Count; i++)
             {
                 // If the field should not be shown
-                if (!PlayerFields[i].IsAvailable())
+                if (!PlayerFields[i].Visible)
                 {
                     // Add one more and skip the iteration
                     PlayerSkipped += 1;
@@ -546,7 +546,7 @@ namespace GGO
                 }
 
                 // If the item is not available
-                if (!InventoryItems[Index].IsAvailable())
+                if (!InventoryItems[Index].Visible)
                 {
                     // Increase the offset and skip the iteration
                     Offset += 1;
@@ -554,8 +554,8 @@ namespace GGO
                 }
 
                 // Draw the item
-                DrawImage("Item" + InventoryItems[Index].GetIcon(), ItemsPositions[Index - Offset] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
-                new UIText(InventoryItems[Index].GetQuantity(), ItemsPositions[Index - Offset] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
+                DrawImage("Item" + InventoryItems[Index].Icon, ItemsPositions[Index - Offset] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
+                new UIText(InventoryItems[Index].Quantity, ItemsPositions[Index - Offset] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
 
                 // If the player pressed the click, do the specific action
                 if (Game.IsControlJustPressed(0, Control.PhoneSelect))
@@ -563,13 +563,13 @@ namespace GGO
                     // If the player clicked on the weapon position
                     if (ItemsPositions[Index - Offset].IsClicked(LiteralSize(InventoryConfig.ItemsWidth, InventoryConfig.ItemsHeight)))
                     {
-                        InventoryItems[Index].Clicked();
+                        InventoryItems[Index].PerformClick();
                     }
                 }
             }
         }
 
-        private void PlayerField(Field Field, int Index, FieldSection Section)
+        private void PlayerField(IBase Field, int Index, FieldSection Section)
         {
             // Store the positions for the UI elements
             bool IsPlayer = Section == FieldSection.Player;
@@ -577,62 +577,92 @@ namespace GGO
             Position InfoPosition = IsPlayer ? Position.PlayerInfo : Position.SquadInfo;
 
             // We are always going to need an icon
-            Icon("Icon" + Field.GetIconName(), HudConfig.GetSpecificPosition(IconPosition, Index, IsPlayer));
+            Icon("Icon" + Field.Icon, HudConfig.GetSpecificPosition(IconPosition, Index, IsPlayer));
 
             // Store the base position
             Point BasePosition = HudConfig.GetSpecificPosition(InfoPosition, Index, IsPlayer);
 
-            // If the field type is health or text
-            if (Field.GetFieldType() == FieldType.Health || Field.GetFieldType() == FieldType.Text)
+            // If the field is either a health or text type
+            if (Field is IHealth || Field is IText)
             {
-                // Draw the background for the health information
+                // Draw the background for normal fields
                 new UIRectangle(BasePosition, IsPlayer ? LiteralSize(HudConfig.PlayerWidth, HudConfig.PlayerHeight) : LiteralSize(HudConfig.SquadWidth, HudConfig.SquadHeight), Colors.Backgrounds).Draw();
+            }
 
+            // If the type of field is health
+            if (Field is IHealth Health)
+            {
                 // Draw the first field name
-                new UIText(Field.GetFirstText(), BasePosition + LiteralSize(HudConfig.SquadNameX, HudConfig.SquadNameY), IsPlayer ? .325f : .3f).Draw();
+                new UIText(Health.Title, BasePosition + LiteralSize(HudConfig.SquadNameX, HudConfig.SquadNameY), IsPlayer ? .325f : .3f).Draw();
 
-                // If the current field type is health
-                if (Field.GetFieldType() == FieldType.Health)
+                // Calculate the percentage of total health
+                float Percentage = Health.Current / Health.Maximum * 100;
+
+                // With the percentage, calculate the right width for the health bar
+                float Width = Percentage / 100 * LiteralSize(IsPlayer ? HudConfig.PlayerHealthWidth : HudConfig.SquadHealthWidth, 0).Width;
+                // And create the size with the real health size
+                Size HealthSize = new Size((int)Width, LiteralSize(0, IsPlayer ? HudConfig.PlayerHealthHeight : HudConfig.SquadHealthHeight).Height);
+
+                // Calculate the color of the health bar
+                Color HealthColor = Color.White;
+                // If the health is on normal levels
+                // Return White
+                if (Percentage >= 50 && Percentage <= 100)
                 {
-                    // Calculate the percentage of health bar
-                    float Percentage = (Field.GetCurrentValue() / Field.GetMaxValue()) * 100;
-                    float Width = (Percentage / 100) * LiteralSize(IsPlayer ? HudConfig.PlayerHealthWidth : HudConfig.SquadHealthWidth, 0).Width;
-                    // And create the size with the real health size
-                    Size HealthSize = new Size((int)Width, LiteralSize(0, IsPlayer ? HudConfig.PlayerHealthHeight : HudConfig.SquadHealthHeight).Height);
-
-                    // Draw the entity health
-                    Size HealthOffset = IsPlayer ? LiteralSize(HudConfig.PlayerHealthX, HudConfig.PlayerHealthY) : LiteralSize(HudConfig.SquadHealthX, HudConfig.SquadHealthY);
-                    new UIRectangle(BasePosition + HealthOffset, HealthSize, Field.GetColor()).Draw();
-
-                    // Draw the health dividers
-                    foreach (Point Position in HudConfig.GetDividerPositions(BasePosition, IsPlayer))
-                    {
-                        new UIRectangle(Position, LiteralSize(HudConfig.DividerWidth, HudConfig.DividerHeight), Colors.Dividers).Draw();
-                    }
+                    HealthColor = Colors.HealthNormal;
                 }
-                // Otherwise if the field type is text
-                else if (Field.GetFieldType() == FieldType.Text)
+                // If the health is on risky levels
+                // Return Yellow
+                else if (Percentage <= 50 && Percentage >= 25)
                 {
-                    // Draw the second text field
-                    new UIText(Field.GetSecondText(), BasePosition + LiteralSize(HudConfig.SquadName2X, HudConfig.SquadName2Y) + LiteralSize(0, HudConfig.SquadNameY), IsPlayer ? .325f : .3f).Draw();
+                    HealthColor = Colors.HealthDanger;
+                }
+                // If is about to die
+                // Return Red
+                else if (Percentage <= 25)
+                {
+                    HealthColor = Colors.HealthDying;
+                }
+                // If the health is under 0 or over 100
+                // Return blue
+                else
+                {
+                    HealthColor = Colors.HealthOverflow;
+                }
+
+                // Draw the entity health
+                Size HealthOffset = IsPlayer ? LiteralSize(HudConfig.PlayerHealthX, HudConfig.PlayerHealthY) : LiteralSize(HudConfig.SquadHealthX, HudConfig.SquadHealthY);
+                new UIRectangle(BasePosition + HealthOffset, HealthSize, HealthColor).Draw();
+
+                // Draw the health dividers
+                foreach (Point Position in HudConfig.GetDividerPositions(BasePosition, IsPlayer))
+                {
+                    new UIRectangle(Position, LiteralSize(HudConfig.DividerWidth, HudConfig.DividerHeight), Colors.Dividers).Draw();
                 }
             }
+            else if (Field is IText Text)
+            {
+                // Draw the first field name
+                new UIText(Text.Title, BasePosition + LiteralSize(HudConfig.SquadNameX, HudConfig.SquadNameY), IsPlayer ? .325f : .3f).Draw();
+                // Draw the second text field
+                new UIText(Text.Text, BasePosition + LiteralSize(HudConfig.SquadName2X, HudConfig.SquadName2Y) + LiteralSize(0, HudConfig.SquadNameY), IsPlayer ? .325f : .3f).Draw();
+            }
             // Else if the field type is weapon
-            else if (Field.GetFieldType() == FieldType.Weapon)
+            else if (Field is IWeapon Weapon)
             {
                 // If we should draw the ammo count and weapon image
-                if (Field.IsDataAvailable())
+                if (Weapon.Available)
                 {
                     // Store the position of the weapon space
                     Point WeaponLocation = HudConfig.GetSpecificPosition(Position.PlayerWeapon, Index, IsPlayer);
 
                     // Draw the ammo quantity
                     new UIRectangle(BasePosition, LiteralSize(HudConfig.SquareWidth, HudConfig.SquareHeight), Colors.Backgrounds).Draw();
-                    new UIText(Field.GetCurrentValue().ToString("0"), BasePosition + LiteralSize(HudConfig.AmmoX, HudConfig.AmmoY), .6f, Color.White, GTA.Font.Monospace, true).Draw();
+                    new UIText(Weapon.Ammo.ToString("0"), BasePosition + LiteralSize(HudConfig.AmmoX, HudConfig.AmmoY), .6f, Color.White, GTA.Font.Monospace, true).Draw();
 
                     // And weapon image
                     new UIRectangle(WeaponLocation, LiteralSize(HudConfig.PlayerWidth, HudConfig.PlayerHeight) - LiteralSize(HudConfig.SquareWidth, 0) - LiteralSize(HudConfig.CommonX, 0), Colors.Backgrounds).Draw();
-                    DrawImage("Weapon" + Field.GetWeaponImage(), WeaponLocation + LiteralSize(HudConfig.WeaponX, HudConfig.WeaponY), LiteralSize(HudConfig.WeaponWidth, HudConfig.WeaponHeight));
+                    DrawImage("Weapon" + Weapon.Image, WeaponLocation + LiteralSize(HudConfig.WeaponX, HudConfig.WeaponY), LiteralSize(HudConfig.WeaponWidth, HudConfig.WeaponHeight));
                 }
                 // Otherwise, draw a simple placeholder
                 else

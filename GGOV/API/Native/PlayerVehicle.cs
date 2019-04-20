@@ -3,36 +3,16 @@ using GTA.Native;
 
 namespace GGO.API.Native
 {
-    public class PlayerVehicle : Field
+    public class PlayerVehicle : IHealth
     {
-        public override bool IsAvailable()
-        {
-            return Game.Player.Character.CurrentVehicle != null;
-        }
+        public bool Visible => Game.Player.Character.CurrentVehicle != null;
 
-        public override float GetCurrentValue()
-        {
-            return Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character.CurrentVehicle);
-        }
+        public string Icon => "Vehicle";
 
-        public override FieldType GetFieldType()
-        {
-            return FieldType.Health;
-        }
+        public string Title => Game.Player.Character.CurrentVehicle.FriendlyName;
 
-        public override string GetFirstText()
-        {
-            return Game.Player.Character.CurrentVehicle.FriendlyName;
-        }
+        public float Current => Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character.CurrentVehicle);
 
-        public override string GetIconName()
-        {
-            return "Vehicle";
-        }
-
-        public override float GetMaxValue()
-        {
-            return 1000;
-        }
+        public float Maximum => 1000;
     }
 }

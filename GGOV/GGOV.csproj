@@ -52,16 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\Item.cs" />
     <Compile Include="API\Native\ItemAmmo.cs" />
     <Compile Include="API\Native\ItemMagazines.cs" />
     <Compile Include="API\Native\ItemWeapon.cs" />
     <Compile Include="API\Native\PlayerHealth.cs" />
-    <Compile Include="API\Native\PlayerMain.cs" />
-    <Compile Include="API\Native\PlayerSidearm.cs" />
     <Compile Include="API\Native\PlayerVehicle.cs" />
     <Compile Include="API\Native\PlayerWeapon.cs" />
-    <Compile Include="API\Field.cs" />
+    <Compile Include="API\Interfaces.cs" />
     <Compile Include="API\Native\SquadMember.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Colors.cs" />

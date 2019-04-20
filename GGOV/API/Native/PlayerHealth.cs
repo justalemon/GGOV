@@ -3,31 +3,16 @@ using GTA.Native;
 
 namespace GGO.API.Native
 {
-    public class PlayerHealth : Field
+    public class PlayerHealth : IHealth
     {
-        public override float GetCurrentValue()
-        {
-            return Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character) - 100;
-        }
+        public bool Visible => true;
 
-        public override FieldType GetFieldType()
-        {
-            return FieldType.Health;
-        }
+        public string Icon => "Alive";
 
-        public override string GetFirstText()
-        {
-            return Game.Player.Name;
-        }
+        public string Title => Game.Player.Name;
 
-        public override string GetIconName()
-        {
-            return "Alive";
-        }
+        public float Current => Function.Call<int>(Hash.GET_ENTITY_HEALTH, Game.Player.Character) - 100;
 
-        public override float GetMaxValue()
-        {
-            return Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;
-        }
+        public float Maximum => Function.Call<int>(Hash.GET_PED_MAX_HEALTH, Game.Player.Character) - 100;
     }
 }

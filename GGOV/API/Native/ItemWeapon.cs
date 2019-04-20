@@ -5,36 +5,45 @@ using System;
 
 namespace GGO.API.Native
 {
-    public class ItemWeapon : Item
+    public class ItemWeapon : IItem
     {
-        private WeaponHash StoredHash;
+        public bool Visible => true;
+   
+        public string Icon => Enum.GetName(typeof(WeaponHash), Hash);
 
-        public ItemWeapon(WeaponHash Hash)
+        public event EventHandler OnClick;
+
+        public string Quantity
         {
-            StoredHash = Hash;
+            get
+            {
+                if (Game.Player.Character.Weapons.HasWeapon(Hash))
+                {
+                    return Game.Player.Character.Weapons[Hash].GetCorrectAmmo();
+                }
+                else
+                {
+                    return "0";
+                }
+            }
+        }
+
+        private WeaponHash Hash;
+
+        public ItemWeapon(WeaponHash hash)
+        {
+            Hash = hash;
             OnClick += OnClickGiveWeapon;
         }
 
-        public override string GetQuantity()
+        public void OnClickGiveWeapon(object sender, EventArgs args)
         {
-            if (Game.Player.Character.Weapons.HasWeapon(StoredHash))
-            {
-                return Game.Player.Character.Weapons[StoredHash].GetCorrectAmmo();
-            }
-            else
-            {
-                return "0";
-            }
+            Tools.SelectOrGive(Hash);
         }
 
-        public override string GetIcon()
+        public void PerformClick()
         {
-            return Enum.GetName(typeof(WeaponHash), StoredHash);
-        }
-
-        public void OnClickGiveWeapon(object Sender, EventArgs Args)
-        {
-            Tools.SelectOrGive(StoredHash);
+            OnClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }
