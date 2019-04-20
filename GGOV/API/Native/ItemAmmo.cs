@@ -89,5 +89,10 @@ namespace GGO.API.Native
         public event EventHandler OnClick;
 
         public string Quantity => Game.Player.Character.Weapons.Current.Ammo.ToString();
+
+        public void PerformClick()
+        {
+            OnClick?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

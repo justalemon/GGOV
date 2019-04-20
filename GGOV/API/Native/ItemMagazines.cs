@@ -104,5 +104,10 @@ namespace GGO.API.Native
                 }
             }
         }
+
+        public void PerformClick()
+        {
+            OnClick?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

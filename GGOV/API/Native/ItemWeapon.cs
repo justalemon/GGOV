@@ -40,5 +40,10 @@ namespace GGO.API.Native
         {
             Tools.SelectOrGive(Hash);
         }
+
+        public void PerformClick()
+        {
+            OnClick?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
