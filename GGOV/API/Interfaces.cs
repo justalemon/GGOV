@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace GGO.API
 {
@@ -93,6 +93,10 @@ namespace GGO.API
         /// Quantity of the inventory item.
         /// </summary>
         string Quantity { get; }
+        /// <summary>
+        /// Function called to simulate a click on the item.
+        /// </summary>
+        void PerformClick();
     }
 
     #endregion
