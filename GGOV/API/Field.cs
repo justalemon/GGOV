@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace GGO.API
+﻿namespace GGO.API
 {
     /// <summary>
     /// Interface for fields that need a health bar.
