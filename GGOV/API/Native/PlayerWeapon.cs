@@ -1,29 +1,30 @@
-﻿using GTA;
+﻿using GGO.Extensions;
+using GTA;
 using GTA.Native;
 using System;
 
 namespace GGO.API.Native
 {
-    public class PlayerWeapon : Field
+    public class PlayerWeapon : IWeapon
     {
-        public override float GetCurrentValue()
-        {
-            return Game.Player.Character.Weapons.Current.AmmoInClip;
-        }
+        public bool Visible => true;
 
-        public override FieldType GetFieldType()
-        {
-            return FieldType.Weapon;
-        }
+        public string Icon => "Weapon";
 
-        public override string GetIconName()
-        {
-            return "Weapon";
-        }
+        public int Ammo => Game.Player.Character.Weapons.Current.AmmoInClip;
 
-        public override string GetWeaponImage()
-        {
-            return Enum.GetName(typeof(WeaponHash), Game.Player.Character.Weapons.Current.Hash);
-        }
+        public string Image => Enum.GetName(typeof(WeaponHash), Game.Player.Character.Weapons.Current.Hash);
+
+        public virtual bool Available => true;
+    }
+
+    public class PlayerPrimary : PlayerWeapon
+    {
+        public override bool Available => Game.Player.Character.Weapons.Current.GetStyle() == Usage.Main;
+    }
+
+    public class PlayerSecondary : PlayerWeapon
+    {
+        public override bool Available => Game.Player.Character.Weapons.Current.GetStyle() == Usage.Sidearm;
     }
 }
