@@ -26,7 +26,7 @@ namespace GGO.API
     /// <summary>
     /// Interface for fields that need a health bar.
     /// </summary>
-    public interface IHealth : IField
+    public interface IHealth : IBase
     {
         /// <summary>
         /// Title of the field.
@@ -45,7 +45,7 @@ namespace GGO.API
     /// <summary>
     /// Interface for weapon fields that contains the ammo count and weapon image.
     /// </summary>
-    public interface IWeapon : IField
+    public interface IWeapon : IBase
     {
         /// <summary>
         /// Current ammo count.
@@ -64,7 +64,7 @@ namespace GGO.API
     /// <summary>
     /// Interface for text fields that only show a title and a piece of text.
     /// </summary>
-    public interface IText : IField
+    public interface IText : IBase
     {
         /// <summary>
         /// Title of the field.
@@ -74,14 +74,6 @@ namespace GGO.API
         /// Bottom text of the field.
         /// </summary>
         string Text { get; }
-    }
-
-    /// <summary>
-    /// Base Interface for all of the fields.
-    /// </summary>
-    public interface IField : IBase
-    {
-        
     }
 
     #endregion
