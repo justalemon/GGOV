@@ -89,22 +89,33 @@ namespace GGO.API
     #region Items
 
     /// <summary>
-    /// Interface used for inventory items.
+    /// Class used for inventory items.
     /// </summary>
-    public interface IItem : IBase
+    public class Item : IBase
     {
+        /// <summary>
+        /// If the item should be visible on the inventory
+        /// </summary>
+        public virtual bool Visible { get; } = true;
+        /// <summary>
+        /// The name of the icon for the inventory.
+        /// </summary>
+        public virtual string Icon { get; } = "";
         /// <summary>
         /// Event triggered when the user clicks the specific item.
         /// </summary>
-        event EventHandler OnClick;
+        public event EventHandler OnClick;
         /// <summary>
         /// Quantity of the inventory item.
         /// </summary>
-        string Quantity { get; }
+        public string Quantity { get; }
         /// <summary>
         /// Function called to simulate a click on the item.
         /// </summary>
-        void PerformClick();
+        public void PerformClick()
+        {
+            OnClick?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     #endregion
