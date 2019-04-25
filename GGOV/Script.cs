@@ -604,7 +604,7 @@ namespace GGO
                 Size HealthSize = new Size((int)Width, LiteralSize(0, IsPlayer ? HudConfig.PlayerHealthHeight : HudConfig.SquadHealthHeight).Height);
 
                 // Calculate the color of the health bar
-                Color HealthColor = Color.White;
+                Color HealthColor;
                 // If the health is on normal levels
                 // Return White
                 if (Percentage >= 50 && Percentage <= 100)
