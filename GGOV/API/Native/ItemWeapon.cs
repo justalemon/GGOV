@@ -5,15 +5,13 @@ using System;
 
 namespace GGO.API.Native
 {
-    public class ItemWeapon : IItem
+    public class ItemWeapon : Item
     {
-        public bool Visible => true;
+        public override bool Visible => true;
    
-        public string Icon => Enum.GetName(typeof(WeaponHash), Hash);
+        public override string Icon => Enum.GetName(typeof(WeaponHash), Hash);
 
-        public event EventHandler OnClick;
-
-        public string Quantity
+        public override string Quantity
         {
             get
             {
@@ -39,11 +37,6 @@ namespace GGO.API.Native
         public void OnClickGiveWeapon(object sender, EventArgs args)
         {
             Tools.SelectOrGive(Hash);
-        }
-
-        public void PerformClick()
-        {
-            OnClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }

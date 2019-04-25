@@ -48,7 +48,7 @@ namespace GGO
         /// <summary>
         /// The list of inventory items.
         /// </summary>
-        private static List<IItem> InventoryItems = new List<IItem>();
+        private static List<Item> InventoryItems = new List<Item>();
         /// <summary>
         /// If the squad side is running on the exclusive mode.
         /// </summary>
@@ -182,7 +182,7 @@ namespace GGO
             return true;
         }
 
-        public static bool AddItem(IItem CustomItem)
+        public static bool AddItem(Item CustomItem)
         {
             // If the inventory count is over the limit and the exclusive script does not matches
             if (InventoryItems.Count > 15)

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace GGO.API
 {
@@ -116,11 +116,11 @@ namespace GGO.API
         /// <summary>
         /// Quantity of the inventory item.
         /// </summary>
-        public string Quantity { get; }
+        public virtual string Quantity { get; }
         /// <summary>
         /// Function called to simulate a click on the item.
         /// </summary>
-        public void PerformClick()
+        internal void PerformClick()
         {
             OnClick?.Invoke(this, EventArgs.Empty);
         }

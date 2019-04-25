@@ -1,15 +1,14 @@
-﻿using System;
-using GGO.Extensions;
+﻿using GGO.Extensions;
 using GTA;
 using GTA.Native;
 
 namespace GGO.API.Native
 {
-    public class ItemMagazines : IItem
+    public class ItemMagazines : Item
     {
-        public bool Visible => Game.Player.Character.Weapons.Current.IsAmmoAvailable();
+        public override bool Visible => Game.Player.Character.Weapons.Current.IsAmmoAvailable();
 
-        public string Icon
+        public override string Icon
         {
             get
             {
@@ -87,9 +86,7 @@ namespace GGO.API.Native
             }
         }
 
-        public event EventHandler OnClick;
-
-        public string Quantity
+        public override string Quantity
         {
             get
             {
@@ -103,11 +100,6 @@ namespace GGO.API.Native
                     return "0";
                 }
             }
-        }
-
-        public void PerformClick()
-        {
-            OnClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }
