@@ -80,6 +80,7 @@
     <Compile Include="UserData\Inventory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GGOV.nuspec" />
     <None Include="GGO\Hud.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
