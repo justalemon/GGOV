@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace GGO.API
 {
@@ -106,6 +106,14 @@ namespace GGO.API
         /// </summary>
         public event EventHandler OnClick;
         /// <summary>
+        /// Event triggered when the user right clicks the specific item.
+        /// </summary>
+        public event EventHandler OnRightClick;
+        /// <summary>
+        /// Event triggered when the user presses the mouse wheel the specific item.
+        /// </summary>
+        public event EventHandler OnMiddleClick;
+        /// <summary>
         /// Quantity of the inventory item.
         /// </summary>
         public string Quantity { get; }
@@ -115,6 +123,20 @@ namespace GGO.API
         public void PerformClick()
         {
             OnClick?.Invoke(this, EventArgs.Empty);
+        }
+        /// <summary>
+        /// Function called to simulate a click on the item.
+        /// </summary>
+        internal void PerformRightClick()
+        {
+            OnRightClick?.Invoke(this, EventArgs.Empty);
+        }
+        /// <summary>
+        /// Function called to simulate a wheel click on the item.
+        /// </summary>
+        internal void PerformMiddleClick()
+        {
+            OnMiddleClick?.Invoke(this, EventArgs.Empty);
         }
     }
 
