@@ -23,15 +23,15 @@ namespace GGO
         /// <summary>
         /// Configuration for the HUD.
         /// </summary>
-        private static Hud HudConfig = JsonConvert.DeserializeObject<Hud>(File.ReadAllText("scripts\\GGO\\Hud.json"));
+        private static readonly Hud HudConfig = JsonConvert.DeserializeObject<Hud>(File.ReadAllText("scripts\\GGO\\Hud.json"));
         /// <summary>
         /// Configuration for the inventory.
         /// </summary>
-        private Inventory InventoryConfig = JsonConvert.DeserializeObject<Inventory>(File.ReadAllText("scripts\\GGO\\Inventory.json"));
+        private static readonly Inventory InventoryConfig = JsonConvert.DeserializeObject<Inventory>(File.ReadAllText("scripts\\GGO\\Inventory.json"));
         /// <summary>
         /// Names for the peds on the squad section.
         /// </summary>
-        public static Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
+        public static readonly Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
 
         #endregion
 
