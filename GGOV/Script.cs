@@ -31,7 +31,7 @@ namespace GGO
         /// <summary>
         /// Names for the peds on the squad section.
         /// </summary>
-        public static readonly Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
+        internal static readonly Dictionary<string, string> Names = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText("scripts\\GGO\\Names.json"));
 
         #endregion
 
