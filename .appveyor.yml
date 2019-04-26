@@ -7,6 +7,11 @@ version: "2.2.0.{build}"
 # The AppVeyor image to use, usually the most up-to-date
 image: Visual Studio 2017
 
+# Store here the NuGet token
+environment:
+  NUGET:
+    secure: HJz3mB6SCC32R5bQy/rbBHXj0T0UIWKbS6VTSai7BJc4PgE7pP8ue2wxZd5idnBA
+
 # Send a Discord notification to notify the build progress
 notifications:
   - provider: Webhook
@@ -22,6 +27,7 @@ assembly_info:
 
 # Some simple stuff: If this is a tag, use the tag without the v at the start as our version
 init:
+  - nuget setApiKey %NUGET% >nul 2>&1
   - ps: if ($env:APPVEYOR_REPO_TAG -eq "true") { Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))" }
 
 # During the install, restore Git Submodules and NuGet Packages
@@ -33,12 +39,14 @@ install:
 # So build the Solution File that is called just like the repo
 build_script:
   - msbuild %APPVEYOR_PROJECT_NAME%.sln /t:Build /p:Configuration=Release
+  - nuget pack %APPVEYOR_PROJECT_NAME%\%APPVEYOR_PROJECT_NAME%.nuspec
 
 # After the build, package the output files from the release folder
 # REMEMBER: Set the output location to "..\bin\Debug\" and "..\bin\Release\"
 after_build:
   - 7z a %APPVEYOR_PROJECT_NAME%.7z %APPVEYOR_BUILD_FOLDER%\bin\Release\*
   - appveyor PushArtifact %APPVEYOR_PROJECT_NAME%.7z
+  - ps: if ($env:APPVEYOR_REPO_TAG -eq "true") { nuget push *.nupkg -Source https://api.nuget.org/v3/index.json }
 
 # During tags, deploy the 7zip file(s) to GitHub Releases
 deploy:
