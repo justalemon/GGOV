@@ -10,7 +10,7 @@ image: Visual Studio 2017
 # Store here the NuGet token
 environment:
   NUGET:
-    secure: o1pJ8GwksHwZJitWvaMX3CjRgrfPKs+Ld2uTm31NcZtKwqojU7GYCW1t+1eCVaDU
+    secure: HJz3mB6SCC32R5bQy/rbBHXj0T0UIWKbS6VTSai7BJc4PgE7pP8ue2wxZd5idnBA
 
 # Send a Discord notification to notify the build progress
 notifications:
@@ -27,7 +27,7 @@ assembly_info:
 
 # Some simple stuff: If this is a tag, use the tag without the v at the start as our version
 init:
-  - nuget setApiKey %NUGET%
+  - nuget setApiKey %NUGET% >nul 2>&1
   - ps: if ($env:APPVEYOR_REPO_TAG -eq "true") { Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))" }
 
 # During the install, restore Git Submodules and NuGet Packages
