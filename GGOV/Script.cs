@@ -557,13 +557,21 @@ namespace GGO
                 DrawImage("Item" + InventoryItems[Index].Icon, ItemsPositions[Index - Offset] + LiteralSize(InventoryConfig.ItemsImageX, InventoryConfig.ItemsImageY), LiteralSize(InventoryConfig.ItemsImageWidth, InventoryConfig.ItemsImageHeight));
                 new UIText(InventoryItems[Index].Quantity, ItemsPositions[Index - Offset] + LiteralSize(InventoryConfig.ItemsQuantityX, InventoryConfig.ItemsQuantityY), 0.475f, Color.White, GTA.Font.ChaletLondon, true).Draw();
 
-                // If the player pressed the click, do the specific action
-                if (Game.IsControlJustPressed(0, Control.PhoneSelect))
+                // If the player is hovering on the weapon position
+                if (ItemsPositions[Index - Offset].IsClicked(LiteralSize(InventoryConfig.ItemsWidth, InventoryConfig.ItemsHeight)))
                 {
-                    // If the player clicked on the weapon position
-                    if (ItemsPositions[Index - Offset].IsClicked(LiteralSize(InventoryConfig.ItemsWidth, InventoryConfig.ItemsHeight)))
+                    // If for every click, execute the right event
+                    if (Game.IsControlJustPressed(0, Control.PhoneSelect))
                     {
                         InventoryItems[Index].PerformClick();
+                    }
+                    else if (Game.IsControlJustPressed(0, Control.PhoneCancel))
+                    {
+                        InventoryItems[Index].PerformRightClick();
+                    }
+                    else if (Game.IsControlJustPressed(0, Control.Phone))
+                    {
+                        InventoryItems[Index].PerformMiddleClick();
                     }
                 }
             }
