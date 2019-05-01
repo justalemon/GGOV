@@ -31,7 +31,7 @@ namespace GGO.API.Native
         public ItemWeapon(WeaponHash hash)
         {
             Hash = hash;
-            OnClick += OnClickGiveWeapon;
+            Click += OnClickGiveWeapon;
         }
 
         public void OnClickGiveWeapon(object sender, EventArgs args)

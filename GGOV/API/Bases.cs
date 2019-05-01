@@ -104,15 +104,15 @@ namespace GGO.API
         /// <summary>
         /// Event triggered when the user clicks the specific item.
         /// </summary>
-        public event EventHandler OnClick;
+        public event EventHandler Click;
         /// <summary>
         /// Event triggered when the user right clicks the specific item.
         /// </summary>
-        public event EventHandler OnRightClick;
+        public event EventHandler RightClick;
         /// <summary>
         /// Event triggered when the user presses the mouse wheel the specific item.
         /// </summary>
-        public event EventHandler OnMiddleClick;
+        public event EventHandler MiddleClick;
         /// <summary>
         /// Quantity of the inventory item.
         /// </summary>
@@ -122,21 +122,21 @@ namespace GGO.API
         /// </summary>
         internal void PerformClick()
         {
-            OnClick?.Invoke(this, EventArgs.Empty);
+            Click?.Invoke(this, EventArgs.Empty);
         }
         /// <summary>
         /// Function called to simulate a click on the item.
         /// </summary>
         internal void PerformRightClick()
         {
-            OnRightClick?.Invoke(this, EventArgs.Empty);
+            RightClick?.Invoke(this, EventArgs.Empty);
         }
         /// <summary>
         /// Function called to simulate a wheel click on the item.
         /// </summary>
         internal void PerformMiddleClick()
         {
-            OnMiddleClick?.Invoke(this, EventArgs.Empty);
+            MiddleClick?.Invoke(this, EventArgs.Empty);
         }
     }
 
