@@ -9,35 +9,18 @@
 <br><br>
 This is a mod for Grand Theft Auto V that aims to bring the Gun Gale Online experience into GTA V. It started as a basic script but with time we have added more and more functions from the anime.
 <br><br>
-<img src="https://raw.githubusercontent.com/justalemon/GGOV/master/preview.png" />
+<img src="https://raw.githubusercontent.com/justalemon/GGOV/master/preview.png"/>
 </div>
 
 ## Prerequisites
 
-* GTA V 1.0.1493.0 (After Hours) or higher
-* [ScriptHookV](http://www.dev-c.com/gtav/scripthookv/) 1.0.1493.0 or higher
-* [ScriptHookVDotNet](https://github.com/crosire/scripthookvdotnet/releases) 2.10.7 or higher
+* GTA V 1.0.1604.0 (After Hours) or higher
+* [ScriptHookV](http://www.dev-c.com/gtav/scripthookv/) 1.0.1604.1 or higher
+* [ScriptHookVDotNet](https://github.com/crosire/scripthookvdotnet/releases) 2.10.9 or higher
 
 ## Install
 
-* Drop all of the compressed files into your `scripts` folder.
-
-## Configuration
-
-For editing the configuration files, we recommend [Visual Studio Code](https://code.visualstudio.com).
-
-### Enabling and Disabling the Hud or Inventory
-
-* Open `GGO/Inventory.json` or `GGO/Hud.json`
-* Change `enabled` to `false`
-
-### Inventory Items and Weapons
-
-Please note that the maximum of Weapons is 5 and for items is 13 (15 is possible, but the last 2 get hiden when a weapon is equiped).
-
-* Get the hash of your desired Item or Weapons from [here](https://www.justalemon.ml/gtav/weapons/)
-* Open `GGO/Inventory.json` with a text editor
-* You are going to see two lists: `weapons` and `items`, add the new item or replace an existing one
+* Drop all of the files into your `scripts` folder
 
 ## Changelog
 
