@@ -50,8 +50,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="API\Native\ItemAmmo.cs" />
     <Compile Include="API\Native\ItemMagazines.cs" />
     <Compile Include="API\Native\ItemWeapon.cs" />
@@ -67,6 +65,7 @@
     <Compile Include="Extensions\Player.cs" />
     <Compile Include="Extensions\Point.cs" />
     <Compile Include="Extensions\Weapon.cs" />
+    <Compile Include="..\Citron\Paths.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,8 +77,6 @@
     <Compile Include="Tools.cs" />
     <Compile Include="UserData\Hud.cs" />
     <Compile Include="UserData\Inventory.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="GGOV.nuspec" />
     <None Include="GGO\Hud.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -91,8 +88,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="GGO\Images\IconVehicle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -276,29 +271,19 @@
     <None Include="GGO\Images\Placeholder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="GGO\Images\GenderFemale.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="GGO\Images\GenderMale.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="GGO\Images\InventoryItem.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="GGO\Images\ItemAmmo12Gauge.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -513,6 +498,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
