@@ -1,4 +1,5 @@
-﻿using GTA;
+﻿using Citron;
+using GTA;
 using GTA.Native;
 using System.Drawing;
 using System.IO;
@@ -54,7 +55,7 @@ namespace GGO
         public static void DrawImage(string FileName, Point Position, Size Sizes)
         {
             // Create the path of the image
-            string ImagePath = $"scripts\\GGO\\Images\\{FileName}.png";
+            string ImagePath = Path.Combine(Paths.GetCallingPath(), "GGO", "Images", $"{FileName}.png");
 
             // If the image does not exists, notify the user and return
             if (!File.Exists(ImagePath))
