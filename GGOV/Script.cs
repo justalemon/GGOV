@@ -605,10 +605,12 @@ namespace GGO
                 new UIText(Health.Title, BasePosition + LiteralSize(HudConfig.SquadNameX, HudConfig.SquadNameY), IsPlayer ? .325f : .3f).Draw();
 
                 // Calculate the percentage of total health
-                float Percentage = Health.Current / Health.Maximum * 100;
+                float BasePercentage = Health.Current / Health.Maximum * 100;
+                // Then, make sure that the percentage is over zero and under 100
+                float FixedPercentage = BasePercentage < 0 ? 0 : (BasePercentage > 100 ? 100 : BasePercentage);
 
                 // With the percentage, calculate the right width for the health bar
-                float Width = Percentage / 100 * LiteralSize(IsPlayer ? HudConfig.PlayerHealthWidth : HudConfig.SquadHealthWidth, 0).Width;
+                float Width = FixedPercentage / 100 * LiteralSize(IsPlayer ? HudConfig.PlayerHealthWidth : HudConfig.SquadHealthWidth, 0).Width;
                 // And create the size with the real health size
                 Size HealthSize = new Size((int)Width, LiteralSize(0, IsPlayer ? HudConfig.PlayerHealthHeight : HudConfig.SquadHealthHeight).Height);
 
@@ -616,19 +618,19 @@ namespace GGO
                 Color HealthColor;
                 // If the health is on normal levels
                 // Return White
-                if (Percentage >= 50 && Percentage <= 100)
+                if (BasePercentage >= 50 && BasePercentage <= 100)
                 {
                     HealthColor = Colors.HealthNormal;
                 }
                 // If the health is on risky levels
                 // Return Yellow
-                else if (Percentage <= 50 && Percentage >= 25)
+                else if (BasePercentage <= 50 && BasePercentage >= 25)
                 {
                     HealthColor = Colors.HealthDanger;
                 }
                 // If is about to die
                 // Return Red
-                else if (Percentage <= 25)
+                else if (BasePercentage <= 25)
                 {
                     HealthColor = Colors.HealthDying;
                 }
