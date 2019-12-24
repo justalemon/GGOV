@@ -711,7 +711,7 @@ namespace GGO
             // Get the coordinates for the head
             Vector3 HeadCoord = GamePed.GetBoneCoord(Bone.SKEL_Head);
             // Get the On Screen position for the head
-            Point ScreenPos = UI.WorldToScreen(HeadCoord);
+            Point ScreenPos = WorldToScreen(HeadCoord);
 
             // Get distance ratio by Ln(Distance + Sqrt(e)), then calculate size of marker using intercept thereom.
             double Ratio = Math.Log(Vector3.Distance(Game.Player.Character.Position, HeadCoord) + 1.65);

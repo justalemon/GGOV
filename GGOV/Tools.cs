@@ -1,5 +1,6 @@
 ﻿using Citron;
 using GTA;
+using GTA.Math;
 using GTA.Native;
 using System.Drawing;
 using System.IO;
@@ -88,6 +89,20 @@ namespace GGO
                 // If the user has it, change the weapon to it
                 Game.Player.Character.Weapons.Select(SelectedHash, true);
             }
+        }
+
+        public static Point WorldToScreen(Vector3 position)
+        {
+        	float pointX, pointY;
+
+            unsafe
+            {
+                if (!Function.Call<bool>(Hash._WORLD3D_TO_SCREEN2D, position.X, position.Y, position.Z, &pointX, &pointY))
+                    return Point.Empty;
+            }
+
+
+            return new Point((int)(pointX * UI.WIDTH), (int)(pointY * UI.HEIGHT));
         }
     }
 }
