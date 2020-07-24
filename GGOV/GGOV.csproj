@@ -31,6 +31,7 @@
     <PackageReference Include="ScriptHookVDotNet3" Version="3.0.2">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
+    <ProjectReference Include="..\LemonUI\LemonUI.SHVDN3\LemonUI.SHVDN3.csproj" />
   </ItemGroup>
 
 </Project>

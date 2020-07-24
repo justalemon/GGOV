@@ -1,0 +1,3 @@
+[submodule "LemonUI"]
+	path = LemonUI
+	url = https://github.com/justalemon/LemonUI.git
