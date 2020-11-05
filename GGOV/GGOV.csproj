@@ -28,10 +28,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ScriptHookVDotNet3" Version="3.0.2">
+    <PackageReference Include="LemonUI.SHVDN3" Version="1.1.0">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
-    <ProjectReference Include="..\LemonUI\LemonUI.SHVDN3\LemonUI.SHVDN3.csproj" />
+    <PackageReference Include="ScriptHookVDotNet3" Version="3.0.4">
+      <IncludeAssets>compile</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
