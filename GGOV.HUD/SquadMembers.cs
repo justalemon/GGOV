@@ -9,11 +9,11 @@ namespace GGO
     /// <summary>
     /// The Squad Members (aka friendly peds on the top right).
     /// </summary>
-    public sealed class SquadMembers : IContainer<SquadMember>
+    public sealed class SquadMembers : IContainer<PedHealth>
     {
         #region Fields
 
-        private readonly List<SquadMember> members = new List<SquadMember>();
+        private readonly List<PedHealth> members = new List<PedHealth>();
 
         #endregion
 
@@ -43,7 +43,7 @@ namespace GGO
         /// Adds a squad member information into the HUD.
         /// </summary>
         /// <param name="member">The member's object to add.</param>
-        public void Add(SquadMember member)
+        public void Add(PedHealth member)
         {
             // If is already part of the squad members or the ped has another object attached to it, ignore it
             if (members.Contains(member) || Contains(member.Ped))
@@ -59,15 +59,15 @@ namespace GGO
         /// Removes the information of a Squad Member from the HUD.
         /// </summary>
         /// <param name="member">The member's information to remove.</param>
-        public void Remove(SquadMember member) => members.Remove(member);
+        public void Remove(PedHealth member) => members.Remove(member);
         /// <summary>
         /// Removes the information of specific squad members from the HUD.
         /// </summary>
         /// <param name="func">The predicate to match.</param>
-        public void Remove(Func<SquadMember, bool> func)
+        public void Remove(Func<PedHealth, bool> func)
         {
-            List<SquadMember> copy = new List<SquadMember>(members);
-            foreach (SquadMember member in copy)
+            List<PedHealth> copy = new List<PedHealth>(members);
+            foreach (PedHealth member in copy)
             {
                 if (func(member))
                 {
@@ -79,7 +79,7 @@ namespace GGO
         /// Checks if the information of a specific squad member is present.
         /// </summary>
         /// <param name="member">The member's information to check.</param>
-        public bool Contains(SquadMember member) => members.Contains(member);
+        public bool Contains(PedHealth member) => members.Contains(member);
         /// <summary>
         /// Checks if the ped has a Member object attached to it.
         /// </summary>
@@ -87,7 +87,7 @@ namespace GGO
         public bool Contains(Ped ped)
         {
             // Iterate over the member objects
-            foreach (SquadMember member in members)
+            foreach (PedHealth member in members)
             {
                 // If the peds match, return true
                 if (member.Ped == ped)
@@ -110,12 +110,12 @@ namespace GGO
             // If the player is not on the list of squad members, add it
             if (!Contains(Game.Player.Character))
             {
-                Add(new SquadMember(Game.Player.Character));
+                Add(new PedHealth(Game.Player.Character));
             }
 
             // Check that the peds are present in the game world
             // If not, force a recalculation
-            foreach (SquadMember member in members)
+            foreach (PedHealth member in members)
             {
                 if (!member.Ped.Exists())
                 {
@@ -124,7 +124,7 @@ namespace GGO
             }
 
             // Finally, draw the squad members
-            foreach (SquadMember member in members)
+            foreach (PedHealth member in members)
             {
                 member.Process();
             }

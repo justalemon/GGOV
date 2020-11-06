@@ -19,7 +19,7 @@ namespace GGO
         /// <summary>
         /// The health of the player.
         /// </summary>
-        public SquadMember Health { get; } = new SquadMember(Game.Player.Character, true);
+        public PedHealth Health { get; } = new PedHealth(Game.Player.Character, true);
 
         #endregion
 

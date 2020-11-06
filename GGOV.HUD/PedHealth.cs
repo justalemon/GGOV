@@ -8,7 +8,7 @@ namespace GGO
     /// <summary>
     /// UI Element that shows the information of a ped.
     /// </summary>
-    public class SquadMember : Field
+    public class PedHealth : Field
     {
         #region Fields
 
@@ -37,7 +37,7 @@ namespace GGO
         /// Creates a new Squad Member HUD information for the specified ped.
         /// </summary>
         /// <param name="ped">The Ped to use as a base.</param>
-        public SquadMember(Ped ped) : this(ped, false)
+        public PedHealth(Ped ped) : this(ped, false)
         {
         }
         /// <summary>
@@ -45,7 +45,7 @@ namespace GGO
         /// </summary>
         /// <param name="ped">The Ped to use as a base.</param>
         /// <param name="bigHealth">If a bigger health bar should be used. Set it to <see langword="true"/> to use it on the player fields.</param>
-        internal SquadMember(Ped ped, bool bigHealth)
+        internal PedHealth(Ped ped, bool bigHealth)
         {
             Ped = ped;
             showBigHealth = bigHealth;
