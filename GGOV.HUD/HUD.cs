@@ -20,11 +20,11 @@ namespace GGO
         /// <summary>
         /// The Squad members panel.
         /// </summary>
-        public SquadMembers Squad { get; } = new SquadMembers();
+        public static SquadMembers Squad { get; } = new SquadMembers();
         /// <summary>
         /// The fields with the information of the player.
         /// </summary>
-        public PlayerFields Player { get; } = new PlayerFields();
+        public static PlayerFields Player { get; } = new PlayerFields();
 
         #endregion
 
