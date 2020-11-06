@@ -96,7 +96,8 @@ namespace GGO
         /// </summary>
         public override void Process()
         {
-            // Everyone knows that I'm against
+            // Everyone knows that I'm against calculations every tick, but this is for the player health
+            // It is important to keep the player health up to date
 
             // Get the health percentage
             float percentage = (Ped.HealthFloat - 100) / (Ped.MaxHealthFloat - 100);

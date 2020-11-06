@@ -21,6 +21,10 @@ namespace GGO
         /// The Squad members panel.
         /// </summary>
         public SquadMembers Squad { get; } = new SquadMembers();
+        /// <summary>
+        /// The fields with the information of the player.
+        /// </summary>
+        public PlayerFields Player { get; } = new PlayerFields();
 
         #endregion
 
@@ -30,13 +34,14 @@ namespace GGO
         {
             // Add the hud panels onto the pool
             pool.Add(Squad);
+            pool.Add(Player);
             // And add the tick event
             Tick += HUD_Tick;
         }
 
         #endregion
 
-        #region 
+        #region Events
 
         private void HUD_Tick(object sender, EventArgs e)
         {
