@@ -12,6 +12,7 @@ namespace GGO
     {
         #region Fields
 
+        internal bool updatePlayerPed = false;
         private static readonly Color colorHealthLow = Color.FromArgb(255, 200, 0, 0);
         private static readonly Color colorHealthDanger = Color.FromArgb(255, 247, 227, 18);
         private static readonly Color colorHealthNormal = Color.FromArgb(255, 230, 230, 230);
@@ -30,7 +31,7 @@ namespace GGO
         /// <summary>
         /// The ped that is getting the information fetched from.
         /// </summary>
-        public Ped Ped { get; }
+        public Ped Ped { get; private set; }
 
         #endregion
 
@@ -40,7 +41,7 @@ namespace GGO
         /// Creates a new Squad Member HUD information for the specified ped.
         /// </summary>
         /// <param name="ped">The Ped to use as a base.</param>
-        public PedHealth(Ped ped) : this(ped, false)
+        public PedHealth(Ped ped) : this(ped, false, false)
         {
         }
         /// <summary>
@@ -48,10 +49,12 @@ namespace GGO
         /// </summary>
         /// <param name="ped">The Ped to use as a base.</param>
         /// <param name="bigHealth">If a bigger health bar should be used. Set it to <see langword="true"/> to use it on the player fields.</param>
-        internal PedHealth(Ped ped, bool bigHealth)
+        /// <param name="isPlayer">If this health bar should be updated with the most up to date player ped..</param>
+        internal PedHealth(Ped ped, bool bigHealth, bool isPlayer)
         {
             Ped = ped;
             showBigHealth = bigHealth;
+            updatePlayerPed = isPlayer;
 
             if (ped.IsPlayer)
             {
@@ -102,6 +105,12 @@ namespace GGO
         /// </summary>
         public override void Process()
         {
+            // Update the player ped if required
+            if (updatePlayerPed && Game.Player.Character != Ped)
+            {
+                Ped = Game.Player.Character;
+            }
+
             // Everyone knows that I'm against calculations every tick, but this is for the player health
             // It is important to keep the player health up to date
 

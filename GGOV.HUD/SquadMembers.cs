@@ -33,6 +33,7 @@ namespace GGO
         /// </summary>
         internal SquadMembers()
         {
+            AddPlayerHealth();
         }
 
         #endregion
@@ -54,6 +55,23 @@ namespace GGO
             members.Add(member);
             // And recalculate the items
             Recalculate();
+        }
+        /// <summary>
+        /// Adds an item with the health of the player if is not present.
+        /// </summary>
+        public void AddPlayerHealth()
+        {
+            // Make sure that none of the current Health Bars need to be updated with the player ped
+            foreach (PedHealth member in members)
+            {
+                if (member.updatePlayerPed)
+                {
+                    return;
+                }
+            }
+
+            // If we got here, there is no player health bar so just add one
+            Add(new PedHealth(Game.Player.Character, false, true));
         }
         /// <summary>
         /// Removes the information of a Squad Member from the HUD.
@@ -107,21 +125,17 @@ namespace GGO
         /// </summary>
         public void Process()
         {
-            // If the player is not on the list of squad members, add it
-            if (!Contains(Game.Player.Character))
-            {
-                Add(new PedHealth(Game.Player.Character));
-            }
-
             // Check that the peds are present in the game world
             // If not, force a recalculation
+            List<PedHealth> toRemove = new List<PedHealth>();
             foreach (PedHealth member in members)
             {
-                if (!member.Ped.Exists())
+                if (!member.Ped.Exists() && !member.updatePlayerPed)
                 {
-                    Remove(member);
+                    toRemove.Add(member);
                 }
             }
+            members.RemoveAll(x => toRemove.Contains(x));
 
             // Finally, draw the squad members
             foreach (PedHealth member in members)
