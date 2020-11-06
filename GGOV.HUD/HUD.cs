@@ -15,10 +15,22 @@ namespace GGO
 
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        /// The Squad members panel.
+        /// </summary>
+        public SquadMembers Squad { get; } = new SquadMembers();
+
+        #endregion
+
         #region Constructor
 
         public HUD()
         {
+            // Add the hud panels onto the pool
+            pool.Add(Squad);
+            // And add the tick event
             Tick += HUD_Tick;
         }
 
