@@ -12,6 +12,9 @@ namespace GGO
     {
         #region Fields
 
+        private const float big = 230;
+        private const float small = 108;
+        private const float healthOffset = 19;
         private bool showBigHealth = false;
         private readonly ScaledText name = new ScaledText(PointF.Empty, "", 0.295f);
         private readonly ScaledRectangle health = new ScaledRectangle(PointF.Empty, SizeF.Empty);
@@ -73,14 +76,14 @@ namespace GGO
         {
             base.Recalculate(position);
 
-            float infoWidth = showBigHealth ? 230 : 108;
+            float infoWidth = showBigHealth ? big : small;
 
             infoBackground.Size = new SizeF(infoWidth, 50);
 
             name.Position = new PointF(infoBackground.Position.X + 4, infoBackground.Position.Y + 5);
 
             health.Position = new PointF(infoBackground.Position.X + 8, infoBackground.Position.Y + 34);
-            health.Size = new SizeF(infoWidth - 19, 4);
+            health.Size = new SizeF(infoWidth - healthOffset, 4);
 
             for (int i = 0; i < separators.Count; i++)
             {
@@ -115,7 +118,7 @@ namespace GGO
                 percentage = 0;
             }
             // And set the size of the health bar
-            health.Size = new SizeF(89 * percentage, 4);
+            health.Size = new SizeF(((showBigHealth ? big : small) - healthOffset) * percentage, 4);
 
             // Then, just draw everything else
             base.Process();
