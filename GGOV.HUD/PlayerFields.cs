@@ -20,6 +20,10 @@ namespace GGO
         /// The health of the player.
         /// </summary>
         public PedHealth Health { get; } = new PedHealth(Game.Player.Character, true, true);
+        /// <summary>
+        /// The primary weapon of the player.
+        /// </summary>
+        public Weapon PrimaryWeapon { get; } = new Weapon();
 
         #endregion
 
@@ -41,6 +45,7 @@ namespace GGO
         {
             PointF position = new PointF(1f.ToXAbsolute() - 388, 848);
             Health.Recalculate(position);
+            PrimaryWeapon.Recalculate(new PointF(position.X, position.Y + 50 + 5));
         }
         /// <summary>
         /// Processes the player fields.
@@ -48,6 +53,7 @@ namespace GGO
         public void Process()
         {
             Health.Process();
+            PrimaryWeapon.Process();
         }
 
         #endregion
