@@ -12,6 +12,9 @@ namespace GGO
     {
         #region Fields
 
+        private static readonly Color colorHealthLow = Color.FromArgb(255, 200, 0, 0);
+        private static readonly Color colorHealthDanger = Color.FromArgb(255, 247, 227, 18);
+        private static readonly Color colorHealthNormal = Color.FromArgb(255, 230, 230, 230);
         private const float big = 230;
         private const float small = 108;
         private const float healthOffset = 19;
@@ -116,6 +119,19 @@ namespace GGO
             else if (float.IsNaN(percentage))
             {
                 percentage = 0;
+            }
+            // Set the correct color based on the current health percentage
+            if (percentage < 0.25f)
+            {
+                health.Color = colorHealthLow;
+            }
+            else if (percentage < 0.5f)
+            {
+                health.Color = colorHealthDanger;
+            }
+            else
+            {
+                health.Color = colorHealthNormal;
             }
             // And set the size of the health bar
             health.Size = new SizeF(((showBigHealth ? big : small) - healthOffset) * percentage, 4);
