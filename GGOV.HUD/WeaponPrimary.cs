@@ -14,9 +14,31 @@ namespace GGO
         {
             get
             {
+                // What is considered a Primary Weapon:
+                // - Group: Assault Rifles
+                // - Group: Machine Guns
+                // - Group: SMG
+                // - Group: Heavy
+                // - Group: Shotguns
+                // - Group: Sniper Rifles
+                // - Weapon: Musket
+                // With the following exceptions:
+                // - Weapon: Micro SMG
+                // - Weapon: Machine Pistol
+                // - Weapon: Mini SMG
+                // - Weapon: Compact Grenade Launcher
+                // - Weapon: Sawed-Off Shotgun
+                // - Weapon: Double Barrel Shotgun
+
                 WeaponGroup group = Game.Player.Character.Weapons.Current.Group;
                 WeaponHash hash = Game.Player.Character.Weapons.Current.Hash;
-                return hash != WeaponHash.Unarmed && group != WeaponGroup.Unarmed && group != WeaponGroup.Pistol;
+                bool isGroupValid = group == WeaponGroup.AssaultRifle || group == WeaponGroup.MG || group == WeaponGroup.SMG ||
+                    group == WeaponGroup.Heavy || group == WeaponGroup.Shotgun || group == WeaponGroup.Sniper;
+                bool isWeaponValid = hash == WeaponHash.Musket;
+                bool isWeaponInvalid = hash == WeaponHash.MicroSMG || hash == WeaponHash.MachinePistol || hash == WeaponHash.MiniSMG ||
+                    hash == WeaponHash.CompactGrenadeLauncher || hash == WeaponHash.SawnOffShotgun || hash == WeaponHash.DoubleBarrelShotgun ||
+                    hash == WeaponHash.SweeperShotgun;
+                return (isGroupValid || isWeaponValid) && !isWeaponInvalid;
             }
         }
     }
