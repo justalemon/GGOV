@@ -11,6 +11,7 @@ namespace GGO
     {
         #region Fields
 
+        private WeaponHash lastHash = 0;
         internal ScaledRectangle weaponBackground = new ScaledRectangle(PointF.Empty, SizeF.Empty)
         {
             Color = Color.FromArgb(175, 0, 0, 0)
@@ -19,6 +20,7 @@ namespace GGO
         {
             Alignment = GTA.UI.Alignment.Center
         };
+        internal ScaledTexture weapon = new ScaledTexture("ggo_weapons", "");
 
         #endregion
 
@@ -64,12 +66,24 @@ namespace GGO
 
             weaponBackground.Position = new PointF(infoBackground.Position.X + infoBackground.Size.Width + 5, position.Y);
             weaponBackground.Size = new SizeF(230 - infoBackground.Size.Width - 5, 50);
+
+            weapon.Position = new PointF(weaponBackground.Position.X + (weaponBackground.Size.Width * 0.5f) - (165 * 0.5f), weaponBackground.Position.Y);
+            weapon.Size = new SizeF(165, 50);
         }
         /// <summary>
         /// Draws the current weapon being used by the player.
         /// </summary>
         public override void Process()
         {
+            GTA.UI.Screen.ShowSubtitle(((int)Game.Player.Character.Weapons.Current.Hash).ToString());
+
+            // If the last hash is not the same as the current one, update it
+            if (lastHash != Game.Player.Character.Weapons.Current.Hash)
+            {
+                lastHash = Game.Player.Character.Weapons.Current.Hash;
+                weapon.Texture = ((int)lastHash).ToString();
+            }
+
             // Update the current ammo count
             ammo.Text = AmmoCount.ToString();
             // And set the correct font size
@@ -88,6 +102,7 @@ namespace GGO
             {
                 weaponBackground.Draw();
                 ammo.Draw();
+                weapon.Draw();
             }
         }
 
