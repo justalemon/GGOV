@@ -7,7 +7,7 @@ namespace GGO
     /// <summary>
     /// The information of a player weapon.
     /// </summary>
-    public class Weapon : Field
+    public abstract class Weapon : Field
     {
         #region Fields
 
@@ -32,6 +32,10 @@ namespace GGO
         /// The hash of the current weapon.
         /// </summary>
         public virtual int Hash => Game.Player.Character.Weapons.Current.Model.Hash;
+        /// <summary>
+        /// If the current weapon hash is valid for this type of weapon.
+        /// </summary>
+        public abstract bool IsWeaponValid { get; }
 
         #endregion
 
@@ -80,8 +84,11 @@ namespace GGO
             // And draw all of the elements
             base.Process();
             infoBackground.Draw();
-            weaponBackground.Draw();
-            ammo.Draw();
+            if (IsWeaponValid)
+            {
+                weaponBackground.Draw();
+                ammo.Draw();
+            }
         }
 
         #endregion

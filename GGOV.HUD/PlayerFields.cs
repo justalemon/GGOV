@@ -21,9 +21,13 @@ namespace GGO
         /// </summary>
         public PedHealth Health { get; } = new PedHealth(Game.Player.Character, true, true);
         /// <summary>
-        /// The primary weapon of the player.
+        /// ThePprimary Weapon slot of the player.
         /// </summary>
-        public Weapon PrimaryWeapon { get; } = new Weapon();
+        public Weapon PrimaryWeapon { get; } = new WeaponPrimary();
+        /// <summary>
+        /// The Secondary Weapon slot of the Player.
+        /// </summary>
+        public Weapon SecondaryWeapon { get; } = new WeaponSecondary();
 
         #endregion
 
@@ -46,6 +50,7 @@ namespace GGO
             PointF position = new PointF(1f.ToXAbsolute() - 388, 848);
             Health.Recalculate(position);
             PrimaryWeapon.Recalculate(new PointF(position.X, position.Y + 50 + 5));
+            SecondaryWeapon.Recalculate(new PointF(position.X, position.Y + (50 * 2) + (5 * 2)));
         }
         /// <summary>
         /// Processes the player fields.
@@ -54,6 +59,7 @@ namespace GGO
         {
             Health.Process();
             PrimaryWeapon.Process();
+            SecondaryWeapon.Process();
         }
 
         #endregion
