@@ -31,7 +31,7 @@ namespace GGO
         /// <summary>
         /// The hash of the current weapon.
         /// </summary>
-        public virtual int WeaponHash => Game.Player.Character.Weapons.Current.Model.Hash;
+        public virtual int Hash => Game.Player.Character.Weapons.Current.Model.Hash;
 
         #endregion
 
