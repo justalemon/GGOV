@@ -75,8 +75,6 @@ namespace GGO
         /// </summary>
         public override void Process()
         {
-            GTA.UI.Screen.ShowSubtitle(((int)Game.Player.Character.Weapons.Current.Hash).ToString());
-
             // If the last hash is not the same as the current one, update it
             if (lastHash != Game.Player.Character.Weapons.Current.Hash)
             {
