@@ -148,11 +148,14 @@ namespace GGO
         /// </summary>
         public void Recalculate()
         {
+            float x = HUD.selectedPreset == null ? 103 : HUD.selectedPreset.SquadX.Value;
+            float y = HUD.selectedPreset == null ? 66 : HUD.selectedPreset.SquadY.Value;
+
             for (int i = 0; i < members.Count; i++)
             {
                 // 50 is the height of the spaces
                 // 5 is the separation between them
-                members[i].Recalculate(new PointF(103, 66 + (50 * i) + (5 * i)));
+                members[i].Recalculate(new PointF(x, y + (50 * i) + (5 * i)));
             }
         }
 

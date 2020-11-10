@@ -47,7 +47,10 @@ namespace GGO
         /// </summary>
         public void Recalculate()
         {
-            PointF position = new PointF(1f.ToXAbsolute() - 388, 848);
+            float x = HUD.selectedPreset == null ? 388 : HUD.selectedPreset.PlayerX.Value;
+            float y = HUD.selectedPreset == null ? 848 : HUD.selectedPreset.PlayerY.Value;
+
+            PointF position = new PointF(1f.ToXAbsolute() - x, y);
             Health.Recalculate(position);
             PrimaryWeapon.Recalculate(new PointF(position.X, position.Y + 50 + 5));
             SecondaryWeapon.Recalculate(new PointF(position.X, position.Y + (50 * 2) + (5 * 2)));
