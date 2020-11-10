@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LemonUI.SHVDN3" Version="1.1.0">
+    <PackageReference Include="LemonUI.SHVDN3" Version="1.1.1">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
     <PackageReference Include="ScriptHookVDotNet3" Version="3.0.4">
