@@ -147,6 +147,7 @@ namespace GGO
 
             // Then, just draw everything else
             base.Process();
+            Icon?.Draw();
             infoBackground.Draw();
             name.Draw();
             foreach (ScaledRectangle separator in separators)

@@ -99,6 +99,7 @@ namespace GGO
             if (IsWeaponValid)
             {
                 weaponBackground.Draw();
+                Icon?.Draw();
                 ammo.Draw();
                 weapon.Draw();
             }

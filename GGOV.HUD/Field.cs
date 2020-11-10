@@ -58,9 +58,7 @@ namespace GGO
         /// </summary>
         public virtual void Process()
         {
-            // Draw the icon background and foreground
             iconBackground.Draw();
-            Icon?.Draw();
         }
 
         #endregion
