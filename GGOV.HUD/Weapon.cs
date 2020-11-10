@@ -1,4 +1,5 @@
 ﻿using GTA;
+using GTA.UI;
 using LemonUI.Elements;
 using System.Drawing;
 
@@ -12,13 +13,21 @@ namespace GGO
         #region Fields
 
         private int lastHash = 0;
+        private readonly ScaledText noneIcon = new ScaledText(PointF.Empty, "-", 0.4f)
+        {
+            Alignment = Alignment.Center
+        };
+        private readonly ScaledText noneAmmo = new ScaledText(PointF.Empty, "-", 0.4f)
+        {
+            Alignment = Alignment.Center
+        };
         internal ScaledRectangle weaponBackground = new ScaledRectangle(PointF.Empty, SizeF.Empty)
         {
             Color = Color.FromArgb(175, 0, 0, 0)
         };
         internal ScaledText ammo = new ScaledText(PointF.Empty, "")
         {
-            Alignment = GTA.UI.Alignment.Center
+            Alignment = Alignment.Center
         };
         internal ScaledTexture weapon = new ScaledTexture("ggo_weapons", "");
 
@@ -59,6 +68,9 @@ namespace GGO
         public override void Recalculate(PointF position)
         {
             base.Recalculate(position);
+
+            noneIcon.Position = new PointF(position.X + (50 * 0.5f), position.Y + 6);
+            noneAmmo.Position = new PointF(position.X + + 50 + 5 + (60 * 0.5f), position.Y + 6);
 
             infoBackground.Size = new SizeF(60, 50);
 
@@ -102,6 +114,11 @@ namespace GGO
                 Icon?.Draw();
                 ammo.Draw();
                 weapon.Draw();
+            }
+            else
+            {
+                noneIcon.Draw();
+                noneAmmo.Draw();
             }
         }
 
