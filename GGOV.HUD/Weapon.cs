@@ -11,7 +11,7 @@ namespace GGO
     {
         #region Fields
 
-        private WeaponHash lastHash = 0;
+        private int lastHash = 0;
         internal ScaledRectangle weaponBackground = new ScaledRectangle(PointF.Empty, SizeF.Empty)
         {
             Color = Color.FromArgb(175, 0, 0, 0)
@@ -33,7 +33,7 @@ namespace GGO
         /// <summary>
         /// The hash of the current weapon.
         /// </summary>
-        public virtual int Hash => Game.Player.Character.Weapons.Current.Model.Hash;
+        public virtual int Hash => (int)Game.Player.Character.Weapons.Current.Hash;
         /// <summary>
         /// If the current weapon hash is valid for this type of weapon.
         /// </summary>
@@ -76,10 +76,10 @@ namespace GGO
         public override void Process()
         {
             // If the last hash is not the same as the current one, update it
-            if (lastHash != Game.Player.Character.Weapons.Current.Hash)
+            if (lastHash != Hash)
             {
-                lastHash = Game.Player.Character.Weapons.Current.Hash;
-                weapon.Texture = ((int)lastHash).ToString();
+                lastHash = Hash;
+                weapon.Texture = lastHash.ToString();
             }
 
             // Update the current ammo count
