@@ -3,7 +3,10 @@ using GTA.UI;
 using LemonUI;
 using LemonUI.Menus;
 using LemonUI.Scaleform;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace GGO
 {
@@ -49,7 +52,7 @@ namespace GGO
         {
             // Build the menus
             presets.Buttons.Add(new InstructionalButton("Create New", Control.FrontendX));
-            presets.Buttons.Add(new InstructionalButton("Mark as Active", Control.FrontendY));
+            presets.Buttons.Add(new InstructionalButton("Save Presets", Control.FrontendY));
             menu.AddSubMenu(presets);
             // Add the UI elements into the pool
             pool.Add(menu);
@@ -58,6 +61,18 @@ namespace GGO
             pool.Add(Player);
             // And add the tick event
             Tick += HUD_Tick;
+
+            // Once everything is loaded, load the presets if they are present
+            if (File.Exists("scripts\\GGOV\\HUDPresets.json"))
+            {
+                string contents = File.ReadAllText("scripts\\GGOV\\HUDPresets.json");
+                List<PresetMenu> foundPresets = JsonConvert.DeserializeObject<List<PresetMenu>>(contents, new PresetConverter());
+                foreach (PresetMenu preset in foundPresets)
+                {
+                    pool.Add(preset);
+                    presets.AddSubMenu(preset);
+                }
+            }
         }
 
         #endregion
@@ -107,17 +122,16 @@ namespace GGO
                 // If the user pressed Y/Triangle/Tab
                 else if (Game.IsControlJustPressed(Control.FrontendY))
                 {
-                    // Get the currently selected submenu
-                    NativeSubmenuItem item = (NativeSubmenuItem)presets.SelectedItem;
-                    // If is null, return
-                    if (item == null)
-                    {
-                        return;
-                    }
-                    // Otherwise, set it as the active preset and recalculate the on screen elements
-                    selectedPreset = (PresetMenu)item.Menu;
-                    Player.Recalculate();
-                    Squad.Recalculate();
+                    // Get all of the presets in a list
+                    List<PresetMenu> fields = new List<PresetMenu>();
+                    pool.ForEach<PresetMenu>(x => fields.Add(x));
+                    // Convert them to JSON
+                    string json = JsonConvert.SerializeObject(fields, new PresetConverter());
+                    // And write them to a file
+                    Directory.CreateDirectory("scripts\\GGOV");
+                    File.WriteAllText("scripts\\GGOV\\HUDPresets.json", json);
+
+                    Notification.Show("The Presets have been ~g~Saved~s~!");
                 }
             }
         }

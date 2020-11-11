@@ -1,4 +1,5 @@
 ﻿using LemonUI.Menus;
+using System;
 
 namespace GGO
 {
@@ -13,6 +14,7 @@ namespace GGO
         internal NativeSliderItem SquadY { get; } = new NativeSliderItem("Squad Members: Y", "The Y value of the Squad Health Information.", 1080, 0);
         internal NativeSliderItem PlayerX { get; } = new NativeSliderItem("Player Info: X", "The X value of the Player Information.", 5000, 0);
         internal NativeSliderItem PlayerY { get; } = new NativeSliderItem("Player Info: Y", "The Y value of the Player Information.", 1080, 0);
+        internal NativeItem MarkAsActive { get; } = new NativeItem("Mark as Active", "Activates this HUD Preset.");
 
         #endregion
 
@@ -21,7 +23,7 @@ namespace GGO
         internal PresetMenu(string name) : this(0, 0, 0, 0, name)
         {
         }
-        internal PresetMenu(int squadX, int squadY, int playerX, int playerY, string name) : base("", $"{name}", "", null)
+        internal PresetMenu(int squadX, int squadY, int playerX, int playerY, string name) : base("", name, "", null)
         {
             // Set the properties of the menu
             Alignment = GTA.UI.Alignment.Right;
@@ -36,11 +38,24 @@ namespace GGO
             SquadY.ValueChanged += (sender, e) => UpdateSquad();
             PlayerX.ValueChanged += (sender, e) => UpdatePlayer();
             PlayerY.ValueChanged += (sender, e) => UpdatePlayer();
+            MarkAsActive.Activated += MarkAsActive_Activated;
             // And finally add the UI Elements
             Add(SquadX);
             Add(SquadY);
             Add(PlayerX);
             Add(PlayerY);
+            Add(MarkAsActive);
+        }
+
+        #endregion
+
+        #region Events
+
+        private void MarkAsActive_Activated(object sender, EventArgs e)
+        {
+            HUD.selectedPreset = this;
+            HUD.Player.Recalculate();
+            HUD.Squad.Recalculate();
         }
 
         #endregion

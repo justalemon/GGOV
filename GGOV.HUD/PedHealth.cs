@@ -19,7 +19,7 @@ namespace GGO
         private const float big = 230;
         private const float small = 108;
         private const float healthOffset = 19;
-        private bool showBigHealth = false;
+        private readonly bool showBigHealth = false;
         private readonly ScaledText name = new ScaledText(PointF.Empty, "", 0.295f);
         private readonly ScaledRectangle health = new ScaledRectangle(PointF.Empty, SizeF.Empty);
         private readonly List<ScaledRectangle> separators = new List<ScaledRectangle>();
