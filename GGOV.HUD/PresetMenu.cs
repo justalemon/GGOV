@@ -1,4 +1,6 @@
-﻿using LemonUI.Menus;
+﻿using GTA;
+using LemonUI.Menus;
+using LemonUI.Scaleform;
 using System;
 
 namespace GGO
@@ -10,10 +12,10 @@ namespace GGO
     {
         #region Properties
 
-        internal NativeSliderItem SquadX { get; } = new NativeSliderItem("Squad Members: X", "The X value of the Squad Health Information.", 5000, 0);
-        internal NativeSliderItem SquadY { get; } = new NativeSliderItem("Squad Members: Y", "The Y value of the Squad Health Information.", 1080, 0);
-        internal NativeSliderItem PlayerX { get; } = new NativeSliderItem("Player Info: X", "The X value of the Player Information.", 5000, 0);
-        internal NativeSliderItem PlayerY { get; } = new NativeSliderItem("Player Info: Y", "The Y value of the Player Information.", 1080, 0);
+        internal FloatSelectorItem SquadX { get; } = new FloatSelectorItem("Squad Members: X", "The X value of the Squad Health Information.");
+        internal FloatSelectorItem SquadY { get; } = new FloatSelectorItem("Squad Members: Y", "The Y value of the Squad Health Information.");
+        internal FloatSelectorItem PlayerX { get; } = new FloatSelectorItem("Player Info: X", "The X value of the Player Information.");
+        internal FloatSelectorItem PlayerY { get; } = new FloatSelectorItem("Player Info: Y", "The Y value of the Player Information.");
         internal NativeItem MarkAsActive { get; } = new NativeItem("Mark as Active", "Activates this HUD Preset.");
 
         #endregion
@@ -28,16 +30,19 @@ namespace GGO
             // Set the properties of the menu
             Alignment = GTA.UI.Alignment.Right;
             ResetCursorWhenOpened = false;
+            // Add some innstructional buttons
+            Buttons.Add(new InstructionalButton("Increment 10x", Control.FrontendX));
+            Buttons.Add(new InstructionalButton("Increment 0.1x", Control.FrontendY));
             // Set the values of the sliders
-            SquadX.Value = squadX;
-            SquadY.Value = squadY;
-            PlayerX.Value = playerX;
-            PlayerY.Value = playerY;
+            SquadX.SelectedItem = squadX;
+            SquadY.SelectedItem = squadY;
+            PlayerX.SelectedItem = playerX;
+            PlayerY.SelectedItem = playerY;
             // Add the events
-            SquadX.ValueChanged += (sender, e) => UpdateSquad();
-            SquadY.ValueChanged += (sender, e) => UpdateSquad();
-            PlayerX.ValueChanged += (sender, e) => UpdatePlayer();
-            PlayerY.ValueChanged += (sender, e) => UpdatePlayer();
+            SquadX.ItemChanged += (sender, e) => UpdateSquad();
+            SquadY.ItemChanged += (sender, e) => UpdateSquad();
+            PlayerX.ItemChanged += (sender, e) => UpdatePlayer();
+            PlayerY.ItemChanged += (sender, e) => UpdatePlayer();
             MarkAsActive.Activated += MarkAsActive_Activated;
             // And finally add the UI Elements
             Add(SquadX);
@@ -89,7 +94,7 @@ namespace GGO
         /// </summary>
         internal void UpdateText()
         {
-            Description = $"Squad X: {SquadX.Value}~n~Squad Y: {SquadY.Value}~n~Player X: {PlayerX.Value}~n~Player Y: {PlayerY.Value}";
+            Description = $"Squad X: {SquadX.SelectedItem}~n~Squad Y: {SquadY.SelectedItem}~n~Player X: {PlayerX.SelectedItem}~n~Player Y: {PlayerY.SelectedItem}";
         }
 
         #endregion

@@ -20,10 +20,10 @@ namespace GGO
             JObject @object = new JObject
             {
                 ["name"] = value.Subtitle,
-                ["sx"] = value.SquadX.Value,
-                ["sy"] = value.SquadY.Value,
-                ["px"] = value.PlayerX.Value,
-                ["py"] = value.PlayerY.Value
+                ["sx"] = value.SquadX.SelectedItem,
+                ["sy"] = value.SquadY.SelectedItem,
+                ["px"] = value.PlayerX.SelectedItem,
+                ["py"] = value.PlayerY.SelectedItem
             };
             @object.WriteTo(writer);
         }
