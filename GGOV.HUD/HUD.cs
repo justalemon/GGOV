@@ -17,7 +17,7 @@ namespace GGO
     {
         #region Private Fields
 
-        internal static PresetMenu selectedPreset = null;
+        internal static Preset selectedPreset = null;
 
         private readonly ObjectPool pool = new ObjectPool();
         private readonly NativeMenu menu = new NativeMenu("", "Gun Gale Online HUD Settings", "", null)
@@ -66,8 +66,8 @@ namespace GGO
             if (File.Exists("scripts\\GGOV\\HUDPresets.json"))
             {
                 string contents = File.ReadAllText("scripts\\GGOV\\HUDPresets.json");
-                List<PresetMenu> foundPresets = JsonConvert.DeserializeObject<List<PresetMenu>>(contents, new PresetConverter());
-                foreach (PresetMenu preset in foundPresets)
+                List<Preset> foundPresets = JsonConvert.DeserializeObject<List<Preset>>(contents, new PresetConverter());
+                foreach (Preset preset in foundPresets)
                 {
                     pool.Add(preset);
                     presets.AddSubMenu(preset);
@@ -115,7 +115,7 @@ namespace GGO
                         return;
                     }
                     // Otherwise, create a new preset
-                    PresetMenu menu = new PresetMenu(input);
+                    Preset menu = new Preset(input);
                     presets.AddSubMenu(menu);
                     pool.Add(menu);
                 }
@@ -123,8 +123,8 @@ namespace GGO
                 else if (Game.IsControlJustPressed(Control.FrontendY))
                 {
                     // Get all of the presets in a list
-                    List<PresetMenu> fields = new List<PresetMenu>();
-                    pool.ForEach<PresetMenu>(x => fields.Add(x));
+                    List<Preset> fields = new List<Preset>();
+                    pool.ForEach<Preset>(x => fields.Add(x));
                     // Convert them to JSON
                     string json = JsonConvert.SerializeObject(fields, new PresetConverter());
                     // And write them to a file

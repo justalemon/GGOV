@@ -8,7 +8,7 @@ namespace GGO
     /// <summary>
     /// Represents the Preset used as a start position for the on screen elements.
     /// </summary>
-    public sealed class PresetMenu : NativeMenu
+    public sealed class Preset : NativeMenu
     {
         #region Properties
 
@@ -22,10 +22,10 @@ namespace GGO
 
         #region Constructor
 
-        internal PresetMenu(string name) : this(0, 0, 0, 0, name)
+        internal Preset(string name) : this(0, 0, 0, 0, name)
         {
         }
-        internal PresetMenu(int squadX, int squadY, int playerX, int playerY, string name) : base("", name, "", null)
+        internal Preset(int squadX, int squadY, int playerX, int playerY, string name) : base("", name, "", null)
         {
             // Set the properties of the menu
             Alignment = GTA.UI.Alignment.Right;
