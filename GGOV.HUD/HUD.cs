@@ -30,6 +30,7 @@ namespace GGO
             Alignment = Alignment.Right,
             ResetCursorWhenOpened = false
         };
+        private int nextPedUpdate = 0;
 
         #endregion
 
@@ -81,6 +82,27 @@ namespace GGO
 
         private void HUD_Tick(object sender, EventArgs e)
         {
+            // If a Ped update is required and we are not in a cutscene
+            if ((nextPedUpdate <= Game.GameTime || nextPedUpdate == 0) && Game.IsCutsceneActive)
+            {
+                // Iterate over the peds in the whole game world
+                foreach (Ped ped in World.GetAllPeds())
+                {
+                    bool isFriend = Game.Player.Character.GetRelationshipWithPed(ped) <= Relationship.Like && ped.GetRelationshipWithPed(Game.Player.Character) <= Relationship.Like;
+                    bool sameGroup = Game.Player.Character.PedGroup == ped.PedGroup;
+                    bool groupLeader = ped.PedGroup.Leader == Game.Player.Character;
+
+                    // If the ped is a friend or is part of the player's group, is not the player, and is not part of the squad, add it
+                    if ((isFriend || sameGroup || groupLeader) && ped != Game.Player.Character && !Squad.Contains(ped))
+                    {
+                        Squad.Add(new PedHealth(ped));
+                    }
+                }
+
+                // Finally, set the new update time
+                nextPedUpdate = Game.GameTime + 1000;
+            }
+
             // If the user entered ggohudconfig in the cheat input, open the menu
             if (Game.WasCheatStringJustEntered("ggohudconfig"))
             {
