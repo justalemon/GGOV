@@ -130,7 +130,7 @@ namespace GGO
             List<PedHealth> toRemove = new List<PedHealth>();
             foreach (PedHealth member in members)
             {
-                if (!member.Ped.Exists() && !member.updatePlayerPed)
+                if ((!member.Ped.Exists() && !member.updatePlayerPed) || (member.Ped == Game.Player.Character && !member.updatePlayerPed))
                 {
                     toRemove.Add(member);
                 }
