@@ -60,6 +60,10 @@ namespace GGO
             {
                 name.Text = Game.Player.Name;
             }
+            else
+            {
+                name.Text = ped.Model.Hash.ToString();
+            }
 
             for (int i = 0; i < 5; i++)
             {
