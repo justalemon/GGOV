@@ -83,7 +83,7 @@ namespace GGO
         private void HUD_Tick(object sender, EventArgs e)
         {
             // If a Ped update is required and we are not in a cutscene
-            if ((nextPedUpdate <= Game.GameTime || nextPedUpdate == 0) && Game.IsCutsceneActive)
+            if ((nextPedUpdate <= Game.GameTime || nextPedUpdate == 0) && !Game.IsCutsceneActive)
             {
                 // Iterate over the peds in the whole game world
                 foreach (Ped ped in World.GetAllPeds())
