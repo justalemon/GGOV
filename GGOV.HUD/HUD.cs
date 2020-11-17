@@ -90,7 +90,7 @@ namespace GGO
                 {
                     bool isFriend = Game.Player.Character.GetRelationshipWithPed(ped) <= Relationship.Like && ped.GetRelationshipWithPed(Game.Player.Character) <= Relationship.Like;
                     bool sameGroup = Game.Player.Character.PedGroup == ped.PedGroup;
-                    bool groupLeader = ped.PedGroup.Leader == Game.Player.Character;
+                    bool groupLeader = ped.PedGroup?.Leader == Game.Player.Character;
 
                     // If the ped is a friend or is part of the player's group, is not the player, and is not part of the squad, add it
                     if ((isFriend || sameGroup || groupLeader) && ped != Game.Player.Character && !Squad.Contains(ped))
