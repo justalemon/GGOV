@@ -1,4 +1,5 @@
 ﻿using GTA;
+using GTA.Native;
 using GTA.UI;
 using LemonUI;
 using LemonUI.Menus;
@@ -7,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace GGO
 {
@@ -19,6 +21,7 @@ namespace GGO
 
         internal static Preset selectedPreset = null;
 
+        private readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
         private readonly ObjectPool pool = new ObjectPool();
         private readonly NativeMenu menu = new NativeMenu("", "Gun Gale Online HUD Settings", "", null)
         {
@@ -37,6 +40,10 @@ namespace GGO
         #region Properties
 
         /// <summary>
+        /// The names for the Ped Models.
+        /// </summary>
+        public static Dictionary<Model, string> Names { get; private set; } = new Dictionary<Model, string>();
+        /// <summary>
         /// The Squad members panel.
         /// </summary>
         public static SquadMembers Squad { get; } = new SquadMembers();
@@ -51,6 +58,55 @@ namespace GGO
 
         public HUD()
         {
+            // Look for the names in GGOV/Names and load them
+            foreach (string file in Directory.EnumerateFiles(Path.Combine(location, "GGOV", "Names")))
+            {
+                // If the file is not JSON, warn about it and skip it
+                if (Path.GetExtension(file) != ".json")
+                {
+                    Notification.Show($"~o~Warning~s~: Non JSON file found in Names Directory! ({Path.GetFileName(file)})");
+                    continue;
+                }
+
+                // Otherwise, try to load it
+                string contents = File.ReadAllText(file);
+                // And then to parse it
+                Dictionary<string, string> loaded;
+                // If we failed, notify the user and continue
+                try
+                {
+                    loaded = JsonConvert.DeserializeObject<Dictionary<string, string>>(contents);
+                }
+                catch (JsonSerializationException e)
+                {
+                    Notification.Show($"~r~Error~s~:Unable to load {Path.GetFileName(file)}: {e.Message}");
+                    continue;
+                }
+
+                // Otherwise, add the names onto the list
+                foreach (KeyValuePair<string, string> pair in loaded)
+                {
+                    // Convert the model from a number or a string
+                    Model model;
+                    if (int.TryParse(pair.Key, out int number))
+                    {
+                        model = new Model(number);
+                    }
+                    else
+                    {
+                        model = new Model(pair.Key);
+                    }
+
+                    // If the key is already on the dictionary, warn the user
+                    if (Names.ContainsKey(model))
+                    {
+                        Notification.Show($"~o~Warning~s~: Model {pair.Key} ({model.Hash}) has more than one name!");
+                    }
+                    // Then, just add it to the list
+                    Names[model] = pair.Value;
+                }
+            }
+
             // Build the menus
             presets.Buttons.Add(new InstructionalButton("Create New", Control.FrontendX));
             presets.Buttons.Add(new InstructionalButton("Save Presets", Control.FrontendY));

@@ -30,6 +30,9 @@
     <PackageReference Include="ScriptHookVDotNet3" Version="3.0.4">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
+    <None Update="GGOV\Names\Vanilla.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

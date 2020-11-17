@@ -1,4 +1,5 @@
 ﻿using GTA;
+using GTA.UI;
 using LemonUI.Elements;
 using System.Collections.Generic;
 using System.Drawing;
@@ -60,8 +61,13 @@ namespace GGO
             {
                 name.Text = Game.Player.Name;
             }
+            else if (HUD.Names.ContainsKey(ped.Model))
+            {
+                name.Text = HUD.Names[ped.Model];
+            }
             else
             {
+                Notification.Show($"~o~Warning~s~: There is no name for Model {ped.Model.Hash}, falling back to Hash.");
                 name.Text = ped.Model.Hash.ToString();
             }
 
