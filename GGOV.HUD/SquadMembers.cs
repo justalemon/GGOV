@@ -135,7 +135,10 @@ namespace GGO
                     toRemove.Add(member);
                 }
             }
-            members.RemoveAll(x => toRemove.Contains(x));
+            if (members.RemoveAll(x => toRemove.Contains(x)) != 0)
+            {
+                Recalculate();
+            }
 
             // Finally, draw the squad members
             foreach (PedHealth member in members)
