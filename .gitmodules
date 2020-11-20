@@ -1,0 +1,3 @@
+[submodule "PlayerCompanion"]
+	path = PlayerCompanion
+	url = https://github.com/justalemon/PlayerCompanion.git
