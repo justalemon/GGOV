@@ -30,6 +30,10 @@ namespace GGO
 
         private void Inventory_Tick(object sender, EventArgs e)
         {
+            // If the user pressed the Inventory button
+            Game.DisableControlThisFrame(Control.SelectWeapon);
+            inventory.Visible = Game.IsControlPressed(Control.SelectWeapon);
+
             // Just process the menu pool
             pool.Process();
         }
