@@ -2,6 +2,7 @@
 using LemonUI;
 using LemonUI.Elements;
 using LemonUI.Extensions;
+using System.Collections.Generic;
 using System.Drawing;
 using Font = GTA.UI.Font;
 
@@ -27,20 +28,26 @@ namespace GGO
         {
             Color = Color.FromArgb(200, 47, 52, 62)
         };
+
         private readonly ScaledRectangle playerColor = new ScaledRectangle(PointF.Empty, SizeF.Empty)
         {
             Color = Color.FromArgb(250, 33, 145, 198)
         };
         private readonly ScaledText playerName = new ScaledText(PointF.Empty, Game.Player.Name, 0.625f, Font.Monospace);
         private readonly ScaledTexture playerGender = new ScaledTexture("ggo", "");
+
         private readonly ScaledText textStatus = new ScaledText(PointF.Empty, "Status", 0.325f);
         private readonly ScaledText textStrage = new ScaledText(PointF.Empty, "Strage", 0.325f);
+
         private readonly ScaledText healthText = new ScaledText(PointF.Empty, "Life", 0.225f);
         private readonly ScaledRectangle healthBar = new ScaledRectangle(PointF.Empty, SizeF.Empty);
         private readonly ScaledRectangle healthCornerTop = new ScaledRectangle(PointF.Empty, SizeF.Empty);
         private readonly ScaledRectangle healthCornerBottom = new ScaledRectangle(PointF.Empty, SizeF.Empty);
         private readonly ScaledRectangle healthCornerLeft = new ScaledRectangle(PointF.Empty, SizeF.Empty);
         private readonly ScaledRectangle healthCornerRight = new ScaledRectangle(PointF.Empty, SizeF.Empty);
+
+        private readonly ScaledText weaponText = new ScaledText(PointF.Empty, "Arms", 0.225f);
+        private readonly List<List<ScaledRectangle>> weaponCorners = new List<List<ScaledRectangle>>();
 
         #endregion
 
@@ -57,6 +64,16 @@ namespace GGO
 
         internal PlayerInventory()
         {
+            for (int i = 0; i < 6; i++)
+            {
+                List<ScaledRectangle> list = new List<ScaledRectangle>();
+                list.Add(new ScaledRectangle(PointF.Empty, SizeF.Empty));
+                list.Add(new ScaledRectangle(PointF.Empty, SizeF.Empty));
+                list.Add(new ScaledRectangle(PointF.Empty, SizeF.Empty));
+                list.Add(new ScaledRectangle(PointF.Empty, SizeF.Empty));
+                weaponCorners.Add(list);
+            }
+
             Recalculate();
         }
 
@@ -101,6 +118,28 @@ namespace GGO
             healthCornerLeft.Position = healthBar.Position;
             healthCornerRight.Size = new SizeF(healthCorner, healthHeight);
             healthCornerRight.Position = new PointF(healthBar.Position.X + healthWidth - healthCorner, healthBar.Position.Y);
+
+            const float weaponWidth = 143;
+            const float weaponHeight = 50;
+            float weaponBaseX = background.Position.X + background.Size.Width - weaponWidth - 40;
+            float weaponBaseY = background.Position.Y + 252;
+            weaponText.Position = new PointF(weaponBaseX, weaponBaseY - 23);
+            for (int i = 0; i < 6; i++)
+            {
+                float weaponY = weaponBaseY + (i * weaponHeight) + (i * 14);
+                // Top
+                weaponCorners[i][0].Size = new SizeF(weaponWidth, healthCorner * 2);
+                weaponCorners[i][0].Position = new PointF(weaponBaseX, weaponY);
+                // Bottom
+                weaponCorners[i][1].Size = new SizeF(weaponWidth, healthCorner);
+                weaponCorners[i][1].Position = new PointF(weaponBaseX, weaponY + weaponHeight);
+                // Left
+                weaponCorners[i][2].Size = new SizeF(healthCorner, weaponHeight);
+                weaponCorners[i][2].Position = new PointF(weaponBaseX, weaponY);
+                // Right
+                weaponCorners[i][3].Size = new SizeF(healthCorner, weaponHeight);
+                weaponCorners[i][3].Position = new PointF(weaponBaseX + weaponWidth - healthCorner, weaponY);
+            }
         }
         /// <summary>
         /// Processes the inventory.
@@ -161,6 +200,15 @@ namespace GGO
             healthCornerLeft.Draw();
             healthCornerRight.Draw();
             healthBar.Draw();
+
+            weaponText.Draw();
+            foreach (List<ScaledRectangle> corners in weaponCorners)
+            {
+                foreach (ScaledRectangle corner in corners)
+                {
+                    corner.Draw();
+                }
+            }
         }
 
         #endregion
