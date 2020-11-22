@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace GGOV
+namespace GGO
 {
     /// <summary>
     /// Script that draws the ped markers.
