@@ -1,5 +1,4 @@
 ﻿using GTA;
-using GTA.Native;
 using GTA.UI;
 using LemonUI;
 using LemonUI.Menus;
@@ -20,7 +19,6 @@ namespace GGO
         #region Private Fields
 
         internal static Preset selectedPreset = null;
-
         private readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
         private readonly ObjectPool pool = new ObjectPool();
         private readonly NativeMenu menu = new NativeMenu("", "Gun Gale Online HUD Settings", "", null)
