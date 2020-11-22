@@ -14,6 +14,10 @@ namespace GGO
     {
         #region Fields
 
+        private const float healthWidth = 258;
+        private const float healthHeight = 23;
+        private const float healthCorner = 1;
+
         private Ped lastPed = null;
         private readonly ScaledRectangle background = new ScaledRectangle(PointF.Empty, SizeF.Empty)
         {
@@ -31,6 +35,12 @@ namespace GGO
         private readonly ScaledTexture playerGender = new ScaledTexture("ggo", "");
         private readonly ScaledText textStatus = new ScaledText(PointF.Empty, "Status", 0.325f);
         private readonly ScaledText textStrage = new ScaledText(PointF.Empty, "Strage", 0.325f);
+        private readonly ScaledText healthText = new ScaledText(PointF.Empty, "Life", 0.225f);
+        private readonly ScaledRectangle healthBar = new ScaledRectangle(PointF.Empty, SizeF.Empty);
+        private readonly ScaledRectangle healthCornerTop = new ScaledRectangle(PointF.Empty, SizeF.Empty);
+        private readonly ScaledRectangle healthCornerBottom = new ScaledRectangle(PointF.Empty, SizeF.Empty);
+        private readonly ScaledRectangle healthCornerLeft = new ScaledRectangle(PointF.Empty, SizeF.Empty);
+        private readonly ScaledRectangle healthCornerRight = new ScaledRectangle(PointF.Empty, SizeF.Empty);
 
         #endregion
 
@@ -71,7 +81,6 @@ namespace GGO
 
             playerColor.Size = new SizeF(255, 60);
             playerColor.Position = new PointF(background.Position.X - 23, background.Position.Y + 30);
-
             playerName.Position = new PointF(playerColor.Position.X + 92, playerColor.Position.Y + 7);
 
             playerGender.Size = new SizeF(50, 50);
@@ -80,6 +89,18 @@ namespace GGO
             float statusY = background.Position.Y + 173;
             textStatus.Position = new PointF(background.Position.X + 197, statusY);
             textStrage.Position = new PointF(background.Position.X + 337, statusY);
+
+            healthText.Position = new PointF(background.Position.X + 265, background.Position.Y + 37);
+            healthBar.Position = new PointF(background.Position.X + 295, background.Position.Y + 37);
+
+            healthCornerTop.Size = new SizeF(healthWidth, healthCorner);
+            healthCornerTop.Position = healthBar.Position;
+            healthCornerBottom.Size = new SizeF(healthWidth, healthCorner * 2);
+            healthCornerBottom.Position = new PointF(healthBar.Position.X, healthBar.Position.Y + healthHeight - healthCorner);
+            healthCornerLeft.Size = new SizeF(healthCorner, healthHeight);
+            healthCornerLeft.Position = healthBar.Position;
+            healthCornerRight.Size = new SizeF(healthCorner, healthHeight);
+            healthCornerRight.Position = new PointF(healthBar.Position.X + healthWidth - healthCorner, healthBar.Position.Y);
         }
         /// <summary>
         /// Processes the inventory.
@@ -110,6 +131,22 @@ namespace GGO
                 return;
             }
 
+            // Update the value of the health bar
+            float percentage = (Game.Player.Character.HealthFloat - 100) / (Game.Player.Character.MaxHealthFloat - 100);
+            if (percentage < 0)
+            {
+                percentage = 0;
+            }
+            else if (percentage > 1)
+            {
+                percentage = 1;
+            }
+            else if (float.IsNaN(percentage))
+            {
+                percentage = 0;
+            }
+            healthBar.Size = new SizeF(healthWidth * percentage, healthHeight);
+
             // Draw the UI Elements
             background.Draw();
             top.Draw();
@@ -118,6 +155,12 @@ namespace GGO
             playerGender.Draw();
             textStatus.Draw();
             textStrage.Draw();
+            healthText.Draw();
+            healthCornerTop.Draw();
+            healthCornerBottom.Draw();
+            healthCornerLeft.Draw();
+            healthCornerRight.Draw();
+            healthBar.Draw();
         }
 
         #endregion
