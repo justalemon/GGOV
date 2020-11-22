@@ -152,6 +152,8 @@ namespace GGO
             {
                 health.Color = colorHealthNormal;
             }
+            // Set the correct texture
+            Icon.Texture = percentage == 0 ? "icon_dead" : "icon_alive";
             // And set the size of the health bar
             health.Size = new SizeF(((showBigHealth ? big : small) - healthOffset) * percentage, 4);
 
