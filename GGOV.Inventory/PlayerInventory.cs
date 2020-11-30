@@ -49,6 +49,9 @@ namespace GGO
         private readonly ScaledText weaponText = new ScaledText(PointF.Empty, "Arms", 0.225f);
         private readonly List<List<ScaledRectangle>> weaponCorners = new List<List<ScaledRectangle>>();
 
+        private readonly ScaledText itemsText = new ScaledText(PointF.Empty, "Items", 0.225f);
+        private readonly List<List<ScaledRectangle>> itemsCorners = new List<List<ScaledRectangle>>();
+
         #endregion
 
         #region Properties
@@ -66,12 +69,27 @@ namespace GGO
         {
             for (int i = 0; i < 6; i++)
             {
-                List<ScaledRectangle> list = new List<ScaledRectangle>();
-                list.Add(new ScaledRectangle(PointF.Empty, SizeF.Empty));
-                list.Add(new ScaledRectangle(PointF.Empty, SizeF.Empty));
-                list.Add(new ScaledRectangle(PointF.Empty, SizeF.Empty));
-                list.Add(new ScaledRectangle(PointF.Empty, SizeF.Empty));
+                List<ScaledRectangle> list = new List<ScaledRectangle>
+                {
+                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
+                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
+                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
+                    new ScaledRectangle(PointF.Empty, SizeF.Empty)
+                };
                 weaponCorners.Add(list);
+            }
+
+            for (int i = 0; i < (6 * 3); i++)
+            {
+                List<ScaledRectangle> list = new List<ScaledRectangle>
+                {
+                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
+                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
+                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
+                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
+                    new ScaledRectangle(PointF.Empty, SizeF.Empty)
+                };
+                itemsCorners.Add(list);
             }
 
             Recalculate();
@@ -89,6 +107,7 @@ namespace GGO
             // Get the current resolution for calculations
             float width = 1f.ToXAbsolute();
             const float height = 1080;
+
             // And set the positions
             background.Size = new SizeF(575, 710);
             background.Position = new PointF((width * 0.5f) - (background.Size.Width * 0.5f), (height * 0.5f) - (background.Size.Height * 0.5f));
@@ -119,26 +138,58 @@ namespace GGO
             healthCornerRight.Size = new SizeF(healthCorner, healthHeight);
             healthCornerRight.Position = new PointF(healthBar.Position.X + healthWidth - healthCorner, healthBar.Position.Y);
 
+            const float inventorySpaceHeight = 50;
+            float baseY = background.Position.Y + 252;
+
+            const float itemWidth = 107;
+            const float itemWidthFromX = 35;
+            itemsText.Position = new PointF(background.Position.X + itemWidthFromX, baseY - 23);
+            for (int iy = 0; iy < 6; iy++)
+            {
+                float itemBaseY = baseY + (iy * inventorySpaceHeight) + (iy * 14);
+
+                for (int ix = 0; ix < 3; ix++)
+                {
+                    int i = (iy * 3) + ix;
+                    float itemBaseX = background.Position.X + itemWidthFromX + ((itemWidth + 4) * ix);
+
+                    // Top
+                    itemsCorners[i][0].Size = new SizeF(itemWidth, healthCorner * 2);
+                    itemsCorners[i][0].Position = new PointF(itemBaseX, itemBaseY);
+                    // Bottom
+                    itemsCorners[i][1].Size = new SizeF(itemWidth, healthCorner);
+                    itemsCorners[i][1].Position = new PointF(itemBaseX, itemBaseY + inventorySpaceHeight);
+                    // Left
+                    itemsCorners[i][2].Size = new SizeF(healthCorner, inventorySpaceHeight);
+                    itemsCorners[i][2].Position = new PointF(itemBaseX, itemBaseY);
+                    // Right
+                    itemsCorners[i][3].Size = new SizeF(healthCorner * 2, inventorySpaceHeight);
+                    itemsCorners[i][3].Position = new PointF(itemBaseX + itemWidth - healthCorner, itemBaseY);
+                    // Center
+                    itemsCorners[i][4].Size = new SizeF(healthCorner * 2, inventorySpaceHeight - (8 * 2));
+                    itemsCorners[i][4].Position = new PointF(itemBaseX + (itemWidth * 0.5f) + (itemsCorners[i][4].Size.Width * 0.5f), itemBaseY + (inventorySpaceHeight * 0.5f) - (itemsCorners[i][4].Size.Height * 0.5f));
+                }
+            }
+
             const float weaponWidth = 143;
-            const float weaponHeight = 50;
             float weaponBaseX = background.Position.X + background.Size.Width - weaponWidth - 40;
-            float weaponBaseY = background.Position.Y + 252;
-            weaponText.Position = new PointF(weaponBaseX, weaponBaseY - 23);
+            weaponText.Position = new PointF(weaponBaseX, baseY - 23);
             for (int i = 0; i < 6; i++)
             {
-                float weaponY = weaponBaseY + (i * weaponHeight) + (i * 14);
+                float weaponBaseY = baseY + (i * inventorySpaceHeight) + (i * 14);
+
                 // Top
                 weaponCorners[i][0].Size = new SizeF(weaponWidth, healthCorner * 2);
-                weaponCorners[i][0].Position = new PointF(weaponBaseX, weaponY);
+                weaponCorners[i][0].Position = new PointF(weaponBaseX, weaponBaseY);
                 // Bottom
                 weaponCorners[i][1].Size = new SizeF(weaponWidth, healthCorner);
-                weaponCorners[i][1].Position = new PointF(weaponBaseX, weaponY + weaponHeight);
+                weaponCorners[i][1].Position = new PointF(weaponBaseX, weaponBaseY + inventorySpaceHeight);
                 // Left
-                weaponCorners[i][2].Size = new SizeF(healthCorner, weaponHeight);
-                weaponCorners[i][2].Position = new PointF(weaponBaseX, weaponY);
+                weaponCorners[i][2].Size = new SizeF(healthCorner, inventorySpaceHeight);
+                weaponCorners[i][2].Position = new PointF(weaponBaseX, weaponBaseY);
                 // Right
-                weaponCorners[i][3].Size = new SizeF(healthCorner, weaponHeight);
-                weaponCorners[i][3].Position = new PointF(weaponBaseX + weaponWidth - healthCorner, weaponY);
+                weaponCorners[i][3].Size = new SizeF(healthCorner, inventorySpaceHeight);
+                weaponCorners[i][3].Position = new PointF(weaponBaseX + weaponWidth - healthCorner, weaponBaseY);
             }
         }
         /// <summary>
@@ -200,6 +251,15 @@ namespace GGO
             healthCornerLeft.Draw();
             healthCornerRight.Draw();
             healthBar.Draw();
+
+            itemsText.Draw();
+            foreach (List<ScaledRectangle> itemCorner in itemsCorners)
+            {
+                foreach (ScaledRectangle iCorner in itemCorner)
+                {
+                    iCorner.Draw();
+                }
+            }
 
             weaponText.Draw();
             foreach (List<ScaledRectangle> corners in weaponCorners)
