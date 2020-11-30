@@ -4,7 +4,7 @@ using LemonUI.Elements;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace GGO
+namespace GGO.HUD
 {
     /// <summary>
     /// UI Element that shows the information of a ped.
@@ -61,9 +61,9 @@ namespace GGO
             {
                 name.Text = Game.Player.Name;
             }
-            else if (HUD.Names.ContainsKey(ped.Model))
+            else if (GGO.Names.ContainsKey(ped.Model))
             {
-                name.Text = HUD.Names[ped.Model];
+                name.Text = GGO.Names[ped.Model];
             }
             else
             {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Font = GTA.UI.Font;
 
-namespace GGO
+namespace GGO.Inventory
 {
     /// <summary>
     /// The Inventory UI Item.

@@ -3,7 +3,7 @@ using GTA.UI;
 using LemonUI.Elements;
 using System.Drawing;
 
-namespace GGO
+namespace GGO.HUD
 {
     /// <summary>
     /// The information of a player weapon.

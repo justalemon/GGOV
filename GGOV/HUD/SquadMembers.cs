@@ -1,10 +1,11 @@
-﻿using GTA;
+﻿using GGO.HUD;
+using GTA;
 using LemonUI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace GGO
+namespace GGO.HUD
 {
     /// <summary>
     /// The Squad Members (aka friendly peds on the top right).
@@ -151,8 +152,8 @@ namespace GGO
         /// </summary>
         public void Recalculate()
         {
-            float x = HUD.selectedPreset == null ? 103 : HUD.selectedPreset.SquadX.SelectedItem;
-            float y = HUD.selectedPreset == null ? 66 : HUD.selectedPreset.SquadY.SelectedItem;
+            float x = GGO.selectedPreset == null ? 103 : GGO.selectedPreset.SquadX.SelectedItem;
+            float y = GGO.selectedPreset == null ? 66 : GGO.selectedPreset.SquadY.SelectedItem;
 
             for (int i = 0; i < members.Count; i++)
             {

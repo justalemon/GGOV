@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using GGO.HUD;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace GGO
+namespace GGO.Converters
 {
     /// <summary>
     /// Converter for the presets.

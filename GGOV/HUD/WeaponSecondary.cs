@@ -1,6 +1,6 @@
 ﻿using GTA;
 
-namespace GGO
+namespace GGO.HUD
 {
     /// <summary>
     /// Represents the Secondary Weapon Slot on the Player Fields.

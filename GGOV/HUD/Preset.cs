@@ -1,9 +1,10 @@
-﻿using GTA;
+﻿using GGO.Items;
+using GTA;
 using LemonUI.Menus;
 using LemonUI.Scaleform;
 using System;
 
-namespace GGO
+namespace GGO.HUD
 {
     /// <summary>
     /// Represents the Preset used as a start position for the on screen elements.
@@ -58,9 +59,9 @@ namespace GGO
 
         private void MarkAsActive_Activated(object sender, EventArgs e)
         {
-            HUD.selectedPreset = this;
-            HUD.Player.Recalculate();
-            HUD.Squad.Recalculate();
+            GGO.selectedPreset = this;
+            GGO.Player.Recalculate();
+            GGO.Squad.Recalculate();
         }
 
         #endregion
@@ -72,9 +73,9 @@ namespace GGO
         /// </summary>
         internal void UpdateSquad()
         {
-            if (HUD.selectedPreset == this)
+            if (GGO.selectedPreset == this)
             {
-                HUD.Squad.Recalculate();
+                GGO.Squad.Recalculate();
             }
             UpdateText();
         }
@@ -83,9 +84,9 @@ namespace GGO
         /// </summary>
         internal void UpdatePlayer()
         {
-            if (HUD.selectedPreset == this)
+            if (GGO.selectedPreset == this)
             {
-                HUD.Player.Recalculate();
+                GGO.Player.Recalculate();
             }
             UpdateText();
         }

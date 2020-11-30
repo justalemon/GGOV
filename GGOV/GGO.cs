@@ -1,26 +1,38 @@
-﻿using GTA;
+﻿using GGO.Converters;
+using GGO.HUD;
+using GGO.Inventory;
+using GTA;
+using GTA.Math;
+using GTA.Native;
 using GTA.UI;
 using LemonUI;
+using LemonUI.Elements;
+using LemonUI.Extensions;
 using LemonUI.Menus;
 using LemonUI.Scaleform;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 
 namespace GGO
 {
     /// <summary>
-    /// Script that handles the HUD Elements.
+    /// Main script for the entire GGO HUD System.
     /// </summary>
-    public class HUD : Script
+    public class GGO : Script
     {
         #region Private Fields
+
+        private readonly Dictionary<Ped, ScaledTexture> markers = new Dictionary<Ped, ScaledTexture>();
+        private int nextMarkerUpdate = 0;
 
         internal static Preset selectedPreset = null;
         private readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
         private readonly ObjectPool pool = new ObjectPool();
+        private readonly PlayerInventory inventory = new PlayerInventory();
         private readonly NativeMenu menu = new NativeMenu("", "Gun Gale Online HUD Settings", "", null)
         {
             Alignment = Alignment.Right,
@@ -54,7 +66,7 @@ namespace GGO
 
         #region Constructor
 
-        public HUD()
+        public GGO()
         {
             // Look for the names in GGOV/Names and load them
             foreach (string file in Directory.EnumerateFiles(Path.Combine(location, "GGOV", "Names")))
@@ -112,6 +124,7 @@ namespace GGO
             // Add the UI elements into the pool
             pool.Add(menu);
             pool.Add(presets);
+            pool.Add(inventory);
             pool.Add(Squad);
             pool.Add(Player);
             // And add the tick event
@@ -136,6 +149,10 @@ namespace GGO
 
         private void HUD_Tick(object sender, EventArgs e)
         {
+            // Make the inventory visible based on the button pressed
+            Game.DisableControlThisFrame(Control.SelectWeapon);
+            inventory.Visible = Game.IsControlPressed(Control.SelectWeapon);
+
             // If a Ped update is required and we are not in a cutscene
             if ((nextPedUpdate <= Game.GameTime || nextPedUpdate == 0) && !Game.IsCutsceneActive)
             {
@@ -209,6 +226,71 @@ namespace GGO
 
                     Notification.Show("The Presets have been ~g~Saved~s~!");
                 }
+            }
+
+            // Finally, update the markers
+            UpdateMarkers();
+        }
+
+        private void UpdateMarkers()
+        {
+            // If is time for the next update or is the first update
+            if (nextMarkerUpdate <= Game.GameTime || nextMarkerUpdate == 0)
+            {
+                // Iterate the the peds on the game world
+                foreach (Ped ped in World.GetAllPeds())
+                {
+                    // If the ped is dead and is not part of the markers, add it
+                    if (ped.IsDead && !markers.ContainsKey(ped))
+                    {
+                        markers.Add(ped, new ScaledTexture(PointF.Empty, new SizeF(220 * 0.75f, 124 * 0.75f), "ggo", "marker_dead"));
+                    }
+                }
+
+                // Finally, set the new update time
+                nextMarkerUpdate = Game.GameTime + 500;
+            }
+
+            // Iterate over the existing items
+            // (creating the new dictionary is required to prevent the "collection was edited" exception)
+            foreach (KeyValuePair<Ped, ScaledTexture> marker in new Dictionary<Ped, ScaledTexture>(markers))
+            {
+                Ped ped = marker.Key;
+
+                // If the ped is no longer present in the game world, remove it and continue
+                if (!ped.Exists())
+                {
+                    markers.Remove(ped);
+                    continue;
+                }
+
+                // If the ped is not on the screen, skip it
+                if (!ped.IsOnScreen)
+                {
+                    continue;
+                }
+
+                // Get the position of the ped head
+                Vector3 headPos = ped.Bones[Bone.SkelHead].Position;
+
+                // And then conver it to screen coordinates
+                OutputArgument originalX = new OutputArgument();
+                OutputArgument originalY = new OutputArgument();
+                bool ok = Function.Call<bool>(Hash.GET_SCREEN_COORD_FROM_WORLD_COORD, headPos.X, headPos.Y, headPos.Z, originalX, originalY);
+
+                // If it was unable to get the position, continue
+                if (!ok)
+                {
+                    continue;
+                }
+
+                // Otherwise, convert the position from relative to absolute
+                PointF screenPos = new PointF(originalX.GetResult<float>(), originalY.GetResult<float>()).ToAbsolute();
+                // And set it for the correct
+                marker.Value.Position = new PointF(screenPos.X - (marker.Value.Size.Width * 0.5f), screenPos.Y - marker.Value.Size.Height);
+
+                // Finally, draw it
+                marker.Value.Draw();
             }
         }
 

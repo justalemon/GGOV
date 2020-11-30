@@ -1,6 +1,6 @@
 ﻿using GTA;
 
-namespace GGO
+namespace GGO.HUD
 {
     /// <summary>
     /// Represents the Primary Weapon Slot on the Player Fields.

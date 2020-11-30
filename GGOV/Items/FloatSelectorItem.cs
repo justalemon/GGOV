@@ -1,7 +1,7 @@
 ﻿using GTA;
 using LemonUI.Menus;
 
-namespace GGO
+namespace GGO.Items
 {
     /// <summary>
     /// Item used to select a Float value.

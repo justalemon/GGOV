@@ -3,7 +3,7 @@ using LemonUI;
 using LemonUI.Extensions;
 using System.Drawing;
 
-namespace GGO
+namespace GGO.HUD
 {
     /// <summary>
     /// The set of fields used for the player information.
@@ -47,8 +47,8 @@ namespace GGO
         /// </summary>
         public void Recalculate()
         {
-            float x = HUD.selectedPreset == null ? -388 : HUD.selectedPreset.PlayerX.SelectedItem;
-            float y = HUD.selectedPreset == null ? -232 : HUD.selectedPreset.PlayerY.SelectedItem;
+            float x = GGO.selectedPreset == null ? -388 : GGO.selectedPreset.PlayerX.SelectedItem;
+            float y = GGO.selectedPreset == null ? -232 : GGO.selectedPreset.PlayerY.SelectedItem;
 
             PointF position = new PointF(1f.ToXAbsolute() + x, 1080 + y);
             Health.Recalculate(position);

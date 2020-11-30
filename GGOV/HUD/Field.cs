@@ -2,7 +2,7 @@
 using LemonUI.Elements;
 using System.Drawing;
 
-namespace GGO
+namespace GGO.HUD
 {
     /// <summary>
     /// Represents a field shown on the top left or bottom right section of the screen.
