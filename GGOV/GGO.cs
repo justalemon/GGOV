@@ -28,22 +28,22 @@ namespace GGO
 
         private readonly Dictionary<Ped, ScaledTexture> markers = new Dictionary<Ped, ScaledTexture>();
         private int nextMarkerUpdate = 0;
-
-        internal static Preset selectedPreset = null;
-        private readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
-        private readonly ObjectPool pool = new ObjectPool();
-        private readonly PlayerInventory inventory = new PlayerInventory();
-        private readonly NativeMenu menu = new NativeMenu("", "Gun Gale Online HUD Settings", "", null)
-        {
-            Alignment = Alignment.Right,
-            ResetCursorWhenOpened = false
-        };
-        private readonly NativeMenu presets = new NativeMenu("", "Presets", "Presets allow you to store and apply different positions for the HUD Elements.", null)
-        {
-            Alignment = Alignment.Right,
-            ResetCursorWhenOpened = false
-        };
         private int nextPedUpdate = 0;
+
+        private readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+        internal static Preset selectedPreset = null;
+        internal static readonly ObjectPool pool = new ObjectPool();
+        internal static readonly PlayerInventory inventory = new PlayerInventory();
+        internal static readonly NativeMenu menu = new NativeMenu("", "Gun Gale Online Settings", "", null)
+        {
+            Alignment = Alignment.Right,
+            ResetCursorWhenOpened = false
+        };
+        internal static readonly NativeMenu presets = new NativeMenu("", "Presets", "Presets allow you to store and apply different positions for the HUD Elements.", null)
+        {
+            Alignment = Alignment.Right,
+            ResetCursorWhenOpened = false
+        };
 
         #endregion
 
@@ -151,7 +151,10 @@ namespace GGO
         {
             // Make the inventory visible based on the button pressed
             Game.DisableControlThisFrame(Control.SelectWeapon);
-            inventory.Visible = Game.IsControlPressed(Control.SelectWeapon);
+            if (Game.IsControlJustPressed(Control.SelectWeapon))
+            {
+                inventory.Visible = !inventory.Visible;
+            }
 
             // If a Ped update is required and we are not in a cutscene
             if ((nextPedUpdate <= Game.GameTime || nextPedUpdate == 0) && !Game.IsCutsceneActive)

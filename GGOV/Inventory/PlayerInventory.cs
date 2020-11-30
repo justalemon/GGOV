@@ -1,4 +1,5 @@
 ﻿using GTA;
+using GTA.Native;
 using LemonUI;
 using LemonUI.Elements;
 using LemonUI.Extensions;
@@ -38,6 +39,7 @@ namespace GGO.Inventory
 
         private readonly ScaledText textStatus = new ScaledText(PointF.Empty, "Status", 0.325f);
         private readonly ScaledText textStrage = new ScaledText(PointF.Empty, "Strage", 0.325f);
+        private readonly ScaledTexture settingsIcon = new ScaledTexture("ggo", "icon_settings");
 
         private readonly ScaledText healthText = new ScaledText(PointF.Empty, "Life", 0.225f);
         private readonly ScaledRectangle healthBar = new ScaledRectangle(PointF.Empty, SizeF.Empty);
@@ -125,6 +127,8 @@ namespace GGO.Inventory
             float statusY = background.Position.Y + 173;
             textStatus.Position = new PointF(background.Position.X + 197, statusY);
             textStrage.Position = new PointF(background.Position.X + 337, statusY);
+            settingsIcon.Size = new SizeF(20, 20);
+            settingsIcon.Position = new PointF(background.Position.X + background.Size.Width - 25 - settingsIcon.Size.Width, statusY + 3);
 
             healthText.Position = new PointF(background.Position.X + 265, background.Position.Y + 37);
             healthBar.Position = new PointF(background.Position.X + 295, background.Position.Y + 37);
@@ -248,6 +252,7 @@ namespace GGO.Inventory
             playerGender.Draw();
             textStatus.Draw();
             textStrage.Draw();
+            settingsIcon.Draw();
             healthText.Draw();
             healthCornerTop.Draw();
             healthCornerBottom.Draw();
@@ -271,6 +276,12 @@ namespace GGO.Inventory
                 {
                     corner.Draw();
                 }
+            }
+
+            // If the settings button was pressed, open the settings menu
+            if (Game.IsControlJustPressed(Control.CursorAccept) && Screen.IsCursorInArea(settingsIcon.Position, settingsIcon.Size))
+            {
+                GGO.menu.Open();
             }
         }
 
