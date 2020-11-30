@@ -221,6 +221,9 @@ namespace GGO.Inventory
                 return;
             }
 
+            // Show the cursor during this frame
+            Function.Call(Hash._SET_MOUSE_CURSOR_ACTIVE_THIS_FRAME);
+
             // Update the value of the health bar
             float percentage = (Game.Player.Character.HealthFloat - 100) / (Game.Player.Character.MaxHealthFloat - 100);
             if (percentage < 0)
