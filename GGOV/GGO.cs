@@ -39,7 +39,7 @@ namespace GGO
             Alignment = Alignment.Right,
             ResetCursorWhenOpened = false
         };
-        internal static readonly NativeMenu presets = new NativeMenu("", "Presets", "Presets allow you to store and apply different positions for the HUD Elements.", null)
+        internal static readonly NativeMenu presets = new NativeMenu("", "HUD Presets", "Presets allow you to store and apply different positions for the HUD Elements.", null)
         {
             Alignment = Alignment.Right,
             ResetCursorWhenOpened = false
@@ -120,8 +120,12 @@ namespace GGO
             // Build the menus
             presets.Buttons.Add(new InstructionalButton("Create New", Control.FrontendX));
             presets.Buttons.Add(new InstructionalButton("Save Presets", Control.FrontendY));
-            menu.AddSubMenu(presets);
+            // Add the menu items
+            NativeItem itemDisablePreset = new NativeItem("Disable Active Preset", "Disables the Active HUD Preset.");
+            itemDisablePreset.Activated += ItemDisablePreset_Activated;
             // Add the UI elements into the pool
+            menu.AddSubMenu(presets);
+            menu.Add(itemDisablePreset);
             pool.Add(menu);
             pool.Add(presets);
             pool.Add(inventory);
@@ -146,6 +150,21 @@ namespace GGO
         #endregion
 
         #region Events
+
+        private void ItemDisablePreset_Activated(object sender, EventArgs e)
+        {
+            if (selectedPreset == null)
+            {
+                Notification.Show("There is no HUD Preset active.");
+            }
+            else
+            {
+                selectedPreset = null;
+                Squad.Recalculate();
+                Player.Recalculate();
+                Notification.Show("The Active Preset has been Disabled. The HUD now uses the Default Values.");
+            }
+        }
 
         private void HUD_Tick(object sender, EventArgs e)
         {
