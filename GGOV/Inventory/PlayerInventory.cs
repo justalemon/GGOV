@@ -3,8 +3,10 @@ using GTA.Native;
 using LemonUI;
 using LemonUI.Elements;
 using LemonUI.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Font = GTA.UI.Font;
 
 namespace GGO.Inventory
@@ -16,9 +18,13 @@ namespace GGO.Inventory
     {
         #region Fields
 
-        private const float healthWidth = 258;
+        private static readonly List<WeaponHash> weapons = ((WeaponHash[])Enum.GetValues(typeof(WeaponHash))).Where(x => Tools.GetWeaponType(x) == WeaponType.Primary || Tools.GetWeaponType(x) == WeaponType.Secondary).ToList();
+
+        private const float genericHeight = 50;
         private const float healthHeight = 23;
+        private const float healthWidth = 258;
         private const float healthCorner = 1;
+        private const float weaponWidth = 143;
 
         private Ped lastPed = null;
         private readonly ScaledRectangle background = new ScaledRectangle(PointF.Empty, SizeF.Empty)
@@ -50,6 +56,10 @@ namespace GGO.Inventory
 
         private readonly ScaledText weaponText = new ScaledText(PointF.Empty, "Arms", 0.225f);
         private readonly List<List<ScaledRectangle>> weaponCorners = new List<List<ScaledRectangle>>();
+        private readonly Dictionary<WeaponHash, ScaledTexture> weaponImages = new Dictionary<WeaponHash, ScaledTexture>();
+        private readonly Dictionary<WeaponHash, ScaledTexture> weaponVisible = new Dictionary<WeaponHash, ScaledTexture>();
+        private SizeF weaponAreaSize = SizeF.Empty;
+        private int weaponIndex = 0;
 
         private readonly ScaledText itemsText = new ScaledText(PointF.Empty, "Items", 0.225f);
         private readonly List<List<ScaledRectangle>> itemsCorners = new List<List<ScaledRectangle>>();
@@ -95,6 +105,7 @@ namespace GGO.Inventory
             }
 
             Recalculate();
+            UpdateWeapons();
         }
 
         #endregion
@@ -142,7 +153,6 @@ namespace GGO.Inventory
             healthCornerRight.Size = new SizeF(healthCorner, healthHeight);
             healthCornerRight.Position = new PointF(healthBar.Position.X + healthWidth - healthCorner, healthBar.Position.Y);
 
-            const float inventorySpaceHeight = 50;
             float baseY = background.Position.Y + 252;
 
             const float itemWidth = 107;
@@ -150,7 +160,7 @@ namespace GGO.Inventory
             itemsText.Position = new PointF(background.Position.X + itemWidthFromX, baseY - 23);
             for (int iy = 0; iy < 6; iy++)
             {
-                float itemBaseY = baseY + (iy * inventorySpaceHeight) + (iy * 14);
+                float itemBaseY = baseY + (iy * genericHeight) + (iy * 14);
 
                 for (int ix = 0; ix < 3; ix++)
                 {
@@ -162,39 +172,40 @@ namespace GGO.Inventory
                     itemsCorners[i][0].Position = new PointF(itemBaseX, itemBaseY);
                     // Bottom
                     itemsCorners[i][1].Size = new SizeF(itemWidth, healthCorner);
-                    itemsCorners[i][1].Position = new PointF(itemBaseX, itemBaseY + inventorySpaceHeight);
+                    itemsCorners[i][1].Position = new PointF(itemBaseX, itemBaseY + genericHeight);
                     // Left
-                    itemsCorners[i][2].Size = new SizeF(healthCorner, inventorySpaceHeight);
+                    itemsCorners[i][2].Size = new SizeF(healthCorner, genericHeight);
                     itemsCorners[i][2].Position = new PointF(itemBaseX, itemBaseY);
                     // Right
-                    itemsCorners[i][3].Size = new SizeF(healthCorner * 2, inventorySpaceHeight);
+                    itemsCorners[i][3].Size = new SizeF(healthCorner * 2, genericHeight);
                     itemsCorners[i][3].Position = new PointF(itemBaseX + itemWidth - healthCorner, itemBaseY);
                     // Center
-                    itemsCorners[i][4].Size = new SizeF(healthCorner * 2, inventorySpaceHeight - (8 * 2));
-                    itemsCorners[i][4].Position = new PointF(itemBaseX + (itemWidth * 0.5f) + (itemsCorners[i][4].Size.Width * 0.5f), itemBaseY + (inventorySpaceHeight * 0.5f) - (itemsCorners[i][4].Size.Height * 0.5f));
+                    itemsCorners[i][4].Size = new SizeF(healthCorner * 2, genericHeight - (8 * 2));
+                    itemsCorners[i][4].Position = new PointF(itemBaseX + (itemWidth * 0.5f) + (itemsCorners[i][4].Size.Width * 0.5f), itemBaseY + (genericHeight * 0.5f) - (itemsCorners[i][4].Size.Height * 0.5f));
                 }
             }
 
-            const float weaponWidth = 143;
             float weaponBaseX = background.Position.X + background.Size.Width - weaponWidth - 40;
             weaponText.Position = new PointF(weaponBaseX, baseY - 23);
             for (int i = 0; i < 6; i++)
             {
-                float weaponBaseY = baseY + (i * inventorySpaceHeight) + (i * 14);
+                float weaponBaseY = baseY + (i * genericHeight) + (i * 14);
 
                 // Top
                 weaponCorners[i][0].Size = new SizeF(weaponWidth, healthCorner * 2);
                 weaponCorners[i][0].Position = new PointF(weaponBaseX, weaponBaseY);
                 // Bottom
                 weaponCorners[i][1].Size = new SizeF(weaponWidth, healthCorner);
-                weaponCorners[i][1].Position = new PointF(weaponBaseX, weaponBaseY + inventorySpaceHeight);
+                weaponCorners[i][1].Position = new PointF(weaponBaseX, weaponBaseY + genericHeight);
                 // Left
-                weaponCorners[i][2].Size = new SizeF(healthCorner, inventorySpaceHeight);
+                weaponCorners[i][2].Size = new SizeF(healthCorner, genericHeight);
                 weaponCorners[i][2].Position = new PointF(weaponBaseX, weaponBaseY);
                 // Right
-                weaponCorners[i][3].Size = new SizeF(healthCorner, inventorySpaceHeight);
+                weaponCorners[i][3].Size = new SizeF(healthCorner, genericHeight);
                 weaponCorners[i][3].Position = new PointF(weaponBaseX + weaponWidth - healthCorner, weaponBaseY);
             }
+
+            weaponAreaSize = new SizeF(weaponWidth, (genericHeight * 6) +  (14 * 5));
         }
         /// <summary>
         /// Processes the inventory.
@@ -228,6 +239,13 @@ namespace GGO.Inventory
             // Show the cursor during this frame
             Function.Call(Hash._SET_MOUSE_CURSOR_ACTIVE_THIS_FRAME);
 
+            // Disable the firing controls
+            Game.DisableControlThisFrame(Control.Attack);
+            Game.DisableControlThisFrame(Control.Aim);
+            Game.DisableControlThisFrame(Control.Attack2);
+            // And the HUD Reticle
+            Hud.HideComponentThisFrame(HudComponent.Reticle);
+
             // Update the value of the health bar
             float percentage = (Game.Player.Character.HealthFloat - 100) / (Game.Player.Character.MaxHealthFloat - 100);
             if (percentage < 0)
@@ -243,6 +261,26 @@ namespace GGO.Inventory
                 percentage = 0;
             }
             healthBar.Size = new SizeF(healthWidth * percentage, healthHeight);
+
+            // Make sure that the weapon images are up to date
+            bool weaponUpdateRequired = false;
+            foreach (WeaponHash weaponHash in weapons)
+            {
+                // Check if the player has the weapon
+                bool has = Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, weaponHash, false);
+
+                // If the player does not has the weapon and is on the list, or he does but it is, remove it
+                if ((!has && weaponImages.ContainsKey(weaponHash)) || (has && !weaponImages.ContainsKey(weaponHash)))
+                {
+                    weaponUpdateRequired = true;
+                    break;
+                }
+            }
+            // If they are not, update them
+            if (weaponUpdateRequired)
+            {
+                UpdateWeapons();
+            }
 
             // Draw the UI Elements
             background.Draw();
@@ -269,6 +307,7 @@ namespace GGO.Inventory
                 }
             }
 
+            // Corners of the weapon spaces
             weaponText.Draw();
             foreach (List<ScaledRectangle> corners in weaponCorners)
             {
@@ -277,11 +316,96 @@ namespace GGO.Inventory
                     corner.Draw();
                 }
             }
+            // And the weapon images themselves
+            foreach (KeyValuePair<WeaponHash, ScaledTexture> weapon in weaponVisible)
+            {
+                weapon.Value.Draw();
+            }
+
+            // Check if the user clicked any of the weapons
+            // If he did, switch to it and update the weapons on the screen
+            foreach (KeyValuePair<WeaponHash, ScaledTexture> weapon in weaponVisible)
+            {
+                if (Game.IsControlJustPressed(Control.CursorAccept) && Screen.IsCursorInArea(weapon.Value.Position, weapon.Value.Size))
+                {
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weapon.Key, true);
+                    UpdateVisibleWeapons();
+                    break;
+                }
+            }
+
+            // If the player moved the mouse wheel up or down when the weapons are selected, move
+            bool isMouseOnWeapons = Screen.IsCursorInArea(weaponCorners[0][0].Position, weaponAreaSize);
+            if (Game.IsControlJustPressed(Control.PhoneScrollForward) && isMouseOnWeapons)
+            {
+                weaponIndex++;
+                UpdateVisibleWeapons();
+            }
+            else if (Game.IsControlJustPressed(Control.PhoneScrollBackward) && isMouseOnWeapons)
+            {
+                weaponIndex--;
+                UpdateVisibleWeapons();
+            }
 
             // If the settings button was pressed, open the settings menu
             if (Game.IsControlJustPressed(Control.CursorAccept) && Screen.IsCursorInArea(settingsIcon.Position, settingsIcon.Size))
             {
                 GGO.menu.Open();
+            }
+        }
+        /// <summary>
+        /// Updates the weapon on the list.
+        /// </summary>
+        private void UpdateWeapons()
+        {
+            // Remove all of the existing weapon activators
+            weaponImages.Clear();
+            // Iterate the weapons and add the images for the weapons that the player has
+            foreach (WeaponHash weaponHash in weapons)
+            {
+                if (Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, weaponHash, false))
+                {
+                    weaponImages.Add(weaponHash, new ScaledTexture("ggo_weapons", $"{(int)weaponHash}"));
+                }
+            }
+
+            // And recalculate the position of the visible weapons
+            UpdateVisibleWeapons();
+        }
+        /// <summary>
+        /// Recalculates the position of the Weapons shown on the screen.
+        /// </summary>
+        private void UpdateVisibleWeapons()
+        {
+            // Clear the list of existing weapons
+            weaponVisible.Clear();
+
+            // If there are no weapons, return
+            if (weaponImages.Count == 0)
+            {
+                return;
+            }
+
+            // If the index of the weapons is over the number of weapon images, set the maximum probable index
+            if (weaponImages.Count > 6 && weaponIndex + 6 > weaponImages.Count)
+            {
+                weaponIndex = weaponImages.Count - 6;
+            }
+            else if (weaponImages.Count < 6 || weaponIndex < 0)
+            {
+                weaponIndex = 0;
+            }
+
+            // Then, get the weapons and change their positions on screen
+            for (int i = 0; i < 6 && i + weaponIndex < weaponImages.Count; i++)
+            {
+                KeyValuePair<WeaponHash, ScaledTexture> image = weaponImages.ElementAt(i + weaponIndex);
+
+                image.Value.Position = weaponCorners[i][0].Position;
+                image.Value.Size = new SizeF(weaponWidth, genericHeight);
+                weaponImages[image.Key] = image.Value;
+
+                weaponVisible.Add(image.Key, image.Value);
             }
         }
 
