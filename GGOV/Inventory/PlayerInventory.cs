@@ -298,6 +298,8 @@ namespace GGO.Inventory
             }
 
             weaponAreaSize = new SizeF(weaponWidth, (genericHeight * 6) +  (14 * 5));
+
+            UpdateVisibleWeapons();
         }
         /// <summary>
         /// Processes the inventory.
