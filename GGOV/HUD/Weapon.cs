@@ -1,4 +1,5 @@
 ﻿using GTA;
+using GTA.Native;
 using GTA.UI;
 using LemonUI.Elements;
 using System.Drawing;
@@ -12,7 +13,7 @@ namespace GGO.HUD
     {
         #region Fields
 
-        private int lastHash = 0;
+        private WeaponHash lastHash = 0;
         private readonly ScaledText noneIcon = new ScaledText(PointF.Empty, "-", 0.4f)
         {
             Alignment = Alignment.Center
@@ -38,15 +39,30 @@ namespace GGO.HUD
         /// <summary>
         /// The current ammo in the clip.
         /// </summary>
-        public virtual int AmmoCount => Game.Player.Character.Weapons.Current.AmmoInClip;
+        public virtual int AmmoCount
+        {
+            get
+            {
+                // If the player has the Weapon equipped, get the current ammo in the clip
+                if (Game.Player.Character.Weapons.Current.Hash == Hash)
+                {
+                    return Game.Player.Character.Weapons.Current.AmmoInClip;
+                }
+                // If he does not, return the ammo of the clip (because GTA auto reloads)
+                else
+                {
+                    return Function.Call<int>(GTA.Native.Hash.GET_MAX_AMMO_IN_CLIP, Game.Player.Character, Hash, true);
+                }
+            }
+        }
         /// <summary>
         /// The hash of the current weapon.
         /// </summary>
-        public virtual int Hash => (int)Game.Player.Character.Weapons.Current.Hash;
+        public virtual WeaponHash Hash => Game.Player.Character.Weapons.Current.Hash;
         /// <summary>
         /// If the current weapon hash is valid for this type of weapon.
         /// </summary>
-        public abstract bool IsWeaponValid { get; }
+        public virtual bool IsWeaponValid => Function.Call<bool>(GTA.Native.Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, Hash, false);
 
         #endregion
 
@@ -91,7 +107,7 @@ namespace GGO.HUD
             if (lastHash != Hash)
             {
                 lastHash = Hash;
-                weapon.Texture = lastHash.ToString();
+                weapon.Texture = ((int)lastHash).ToString();
             }
 
             // Update the current ammo count

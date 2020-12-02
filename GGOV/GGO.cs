@@ -36,6 +36,15 @@ namespace GGO
         internal static readonly ObjectPool pool = new ObjectPool();
 
         /// <summary>
+        /// The current Primary Weapon.
+        /// </summary>
+        internal static WeaponHash weaponPrimary = 0;
+        /// <summary>
+        /// The current Secondary Weapon.
+        /// </summary>
+        internal static WeaponHash weaponSecondary = 0;
+
+        /// <summary>
         /// The main configuration menu.
         /// </summary>
         internal static readonly SettingsMenu menu = new SettingsMenu();
@@ -206,6 +215,34 @@ namespace GGO
                 DisableControlCollisions();
             }
 
+            // If the current weapon used by the player is not the primary or secondary and is not unarmed
+            WeaponHash current = Game.Player.Character.Weapons.Current.Hash;
+            if ((current != weaponPrimary || current != weaponSecondary) && current != WeaponHash.Unarmed)
+            {
+                // Check for the group and switch it if required
+                switch (Tools.GetWeaponType(current))
+                {
+                    case WeaponType.Primary:
+                        weaponPrimary = current;
+                        inventory.UpdateWeapons();
+                        break;
+                    case WeaponType.Secondary:
+                        weaponSecondary = current;
+                        inventory.UpdateWeapons();
+                        break;
+                }
+            }
+
+            // If the player does not has either the primary or secondary weapons, clear them out
+            if (!Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, weaponPrimary, false))
+            {
+                weaponPrimary = 0;
+            }
+            if (!Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, weaponSecondary, false))
+            {
+                weaponSecondary = 0;
+            }
+
             // Just process the HUD Elements
             pool.Process();
 
@@ -245,6 +282,23 @@ namespace GGO
                     File.WriteAllText("scripts\\GGOV\\HUDPresets.json", json);
 
                     Notification.Show("The Presets have been ~g~Saved~s~!");
+                }
+            }
+
+            // If the user pressed 1, 2 or 3 with the equip mode enabled, change the weapon
+            if (menu.EquipWeapons.Checked)
+            {
+                if (Game.IsControlJustPressed(Control.SelectWeaponUnarmed))
+                {
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weaponPrimary, true);
+                }
+                if (Game.IsControlJustPressed(Control.SelectWeaponMelee))
+                {
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weaponSecondary, true);
+                }
+                if (Game.IsControlJustPressed(Control.SelectWeaponShotgun))
+                {
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, WeaponHash.Unarmed, true);
                 }
             }
 

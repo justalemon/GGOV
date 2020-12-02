@@ -23,6 +23,10 @@ namespace GGO
             Alignment = Alignment.Right,
             ResetCursorWhenOpened = false
         };
+        /// <summary>
+        /// Item to toggle between Equipping and Switching weapons on the inventory.
+        /// </summary>
+        public NativeCheckboxItem EquipWeapons { get; } = new NativeCheckboxItem("Equip Inventory Weapons", "Enabled: Marks the Weapons as Primary or Secondary, allowing you to switch between your Primary, Secondary and Fists with 1, 2 and 3 respectively (like Apex Legends).~n~~n~Disabled: Equips the Weapons directly. Requires you to open the Inventory every time that you want to change weapons.", true);
 
         #endregion
 
@@ -35,9 +39,11 @@ namespace GGO
             ResetCursorWhenOpened = false;
             // Subscribe the events
             DisableActivePreset.Activated += DisableActivePreset_Activated;
+            EquipWeapons.CheckboxChanged += EquipWeapons_CheckboxChanged;
             // And add the items and submenus
             Add(DisableActivePreset);
             AddSubMenu(Presets);
+            Add(EquipWeapons);
         }
 
         #endregion
@@ -56,6 +62,16 @@ namespace GGO
                 GGO.Squad.Recalculate();
                 GGO.Player.Recalculate();
                 Notification.Show("The Active Preset has been Disabled. The HUD now uses the Default Values.");
+            }
+        }
+
+        private void EquipWeapons_CheckboxChanged(object sender, EventArgs e)
+        {
+            // If the feature was disabled, clear the current weapons
+            if (!EquipWeapons.Checked)
+            {
+                GGO.weaponPrimary = 0;
+                GGO.weaponSecondary = 0;
             }
         }
 

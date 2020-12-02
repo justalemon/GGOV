@@ -427,14 +427,51 @@ namespace GGO.Inventory
                 weapon.Value.Draw();
             }
 
-            // Check if the user clicked any of the weapons
-            // If he did, switch to it and update the weapons on the screen
+            // Iterate over the visible weapons
             foreach (KeyValuePair<WeaponHash, ScaledTexture> weapon in weaponVisible)
             {
+                // If the user clicked in the weapon
                 if (Game.IsControlJustPressed(Control.CursorAccept) && Screen.IsCursorInArea(weapon.Value.Position, weapon.Value.Size))
                 {
-                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weapon.Key, true);
-                    UpdateVisibleWeapons();
+                    // If the Equip Weapons feature is enabled
+                    if (GGO.menu.EquipWeapons.Checked)
+                    {
+                        // Get the type of it
+                        WeaponType type = Tools.GetWeaponType(weapon.Key);
+
+                        // If the weapon is primary or secondary, set it
+                        WeaponHash previous;
+                        if (type == WeaponType.Primary)
+                        {
+                            previous = GGO.weaponPrimary;
+                            GGO.weaponPrimary = weapon.Key;
+                        }
+                        else if (type == WeaponType.Secondary)
+                        {
+                            previous = GGO.weaponSecondary;
+                            GGO.weaponSecondary = weapon.Key;
+                        }
+                        // If the weapon is not primary or secondary, warn the player
+                        else
+                        {
+                            Notification.Show("~r~Error~s~: The weapon is not Primary nor Secondary. Please check your GGO Settings and try again.");
+                            return;
+                        }
+
+                        // If the player has the previous weapon equiped or is unarmed, set the weapon as active
+                        if (Game.Player.Character.Weapons.Current.Hash == previous || previous == WeaponHash.Unarmed || previous == 0)
+                        {
+                            Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weapon.Key, true);
+                        }
+                    }
+                    // If is not
+                    else
+                    {
+                        // Just set the weapon as active
+                        Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weapon.Key, true);
+                    }
+                    // Update the weapons shown on the inventory and on the screen and break the iterator
+                    UpdateWeapons();
                     break;
                 }
             }
@@ -461,14 +498,17 @@ namespace GGO.Inventory
         /// <summary>
         /// Updates the weapon on the list.
         /// </summary>
-        private void UpdateWeapons()
+        internal void UpdateWeapons()
         {
             // Remove all of the existing weapon activators
             weaponImages.Clear();
             // Iterate the weapons and add the images for the weapons that the player has
             foreach (WeaponHash weaponHash in weapons)
             {
-                if (Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, weaponHash, false))
+                // If the player has the weapon, is not currently using it and is not equpped (if the setting is enabled)
+                if (Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, weaponHash, false) &&
+                    Game.Player.Character.Weapons.Current.Hash != weaponHash &&
+                    weaponHash != GGO.weaponPrimary && weaponHash != GGO.weaponSecondary)
                 {
                     weaponImages.Add(weaponHash, new ScaledTexture("ggo_weapons", $"{(int)weaponHash}"));
                 }
