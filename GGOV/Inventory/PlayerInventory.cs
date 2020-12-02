@@ -1,4 +1,5 @@
-﻿using GTA;
+﻿using GGO.HUD;
+using GTA;
 using GTA.Native;
 using GTA.UI;
 using LemonUI;
@@ -145,7 +146,7 @@ namespace GGO.Inventory
         /// <summary>
         /// The Corners of the Inventory Items.
         /// </summary>
-        private readonly List<List<ScaledRectangle>> itemsCorners = new List<List<ScaledRectangle>>();
+        private readonly List<CornerSet> itemsCorners = new List<CornerSet>();
 
         /// <summary>
         /// The Text on top of the Weapons.
@@ -154,7 +155,7 @@ namespace GGO.Inventory
         /// <summary>
         /// The corners of all of the weapon slots.
         /// </summary>
-        private readonly List<List<ScaledRectangle>> weaponCorners = new List<List<ScaledRectangle>>();
+        private readonly List<CornerSet> weaponCorners = new List<CornerSet>();
         /// <summary>
         /// The known Weapon Images.
         /// </summary>
@@ -189,27 +190,12 @@ namespace GGO.Inventory
         {
             for (int i = 0; i < 6; i++)
             {
-                List<ScaledRectangle> list = new List<ScaledRectangle>
-                {
-                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
-                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
-                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
-                    new ScaledRectangle(PointF.Empty, SizeF.Empty)
-                };
-                weaponCorners.Add(list);
+                weaponCorners.Add(new CornerSet());
             }
 
             for (int i = 0; i < (6 * 3); i++)
             {
-                List<ScaledRectangle> list = new List<ScaledRectangle>
-                {
-                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
-                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
-                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
-                    new ScaledRectangle(PointF.Empty, SizeF.Empty),
-                    new ScaledRectangle(PointF.Empty, SizeF.Empty)
-                };
-                itemsCorners.Add(list);
+                itemsCorners.Add(new CornerSet());
             }
 
             Recalculate();
@@ -274,20 +260,20 @@ namespace GGO.Inventory
                     float itemBaseX = background.Position.X + itemXFromCorner + ((itemWidth + 4) * ix);
 
                     // Top
-                    itemsCorners[i][0].Size = new SizeF(itemWidth, healthCorner * 2);
-                    itemsCorners[i][0].Position = new PointF(itemBaseX, itemBaseY);
+                    itemsCorners[i].Top.Size = new SizeF(itemWidth, healthCorner * 2);
+                    itemsCorners[i].Top.Position = new PointF(itemBaseX, itemBaseY);
                     // Bottom
-                    itemsCorners[i][1].Size = new SizeF(itemWidth, healthCorner);
-                    itemsCorners[i][1].Position = new PointF(itemBaseX, itemBaseY + genericHeight);
+                    itemsCorners[i].Bottom.Size = new SizeF(itemWidth, healthCorner);
+                    itemsCorners[i].Bottom.Position = new PointF(itemBaseX, itemBaseY + genericHeight);
                     // Left
-                    itemsCorners[i][2].Size = new SizeF(healthCorner, genericHeight);
-                    itemsCorners[i][2].Position = new PointF(itemBaseX, itemBaseY);
+                    itemsCorners[i].Left.Size = new SizeF(healthCorner, genericHeight);
+                    itemsCorners[i].Left.Position = new PointF(itemBaseX, itemBaseY);
                     // Right
-                    itemsCorners[i][3].Size = new SizeF(healthCorner * 2, genericHeight);
-                    itemsCorners[i][3].Position = new PointF(itemBaseX + itemWidth - healthCorner, itemBaseY);
+                    itemsCorners[i].Right.Size = new SizeF(healthCorner * 2, genericHeight);
+                    itemsCorners[i].Right.Position = new PointF(itemBaseX + itemWidth - healthCorner, itemBaseY);
                     // Center
-                    itemsCorners[i][4].Size = new SizeF(healthCorner * 2, genericHeight - (8 * 2));
-                    itemsCorners[i][4].Position = new PointF(itemBaseX + (itemWidth * 0.5f) + (itemsCorners[i][4].Size.Width * 0.5f), itemBaseY + (genericHeight * 0.5f) - (itemsCorners[i][4].Size.Height * 0.5f));
+                    itemsCorners[i].Extra.Size = new SizeF(healthCorner * 2, genericHeight - (8 * 2));
+                    itemsCorners[i].Extra.Position = new PointF(itemBaseX + (itemWidth * 0.5f) + (itemsCorners[i].Extra.Size.Width * 0.5f), itemBaseY + (genericHeight * 0.5f) - (itemsCorners[i].Extra.Size.Height * 0.5f));
                 }
             }
 
@@ -298,17 +284,17 @@ namespace GGO.Inventory
                 float weaponBaseY = baseY + (i * genericHeight) + (i * 14);
 
                 // Top
-                weaponCorners[i][0].Size = new SizeF(weaponWidth, healthCorner * 2);
-                weaponCorners[i][0].Position = new PointF(weaponBaseX, weaponBaseY);
+                weaponCorners[i].Top.Size = new SizeF(weaponWidth, healthCorner * 2);
+                weaponCorners[i].Top.Position = new PointF(weaponBaseX, weaponBaseY);
                 // Bottom
-                weaponCorners[i][1].Size = new SizeF(weaponWidth, healthCorner);
-                weaponCorners[i][1].Position = new PointF(weaponBaseX, weaponBaseY + genericHeight);
+                weaponCorners[i].Bottom.Size = new SizeF(weaponWidth, healthCorner);
+                weaponCorners[i].Bottom.Position = new PointF(weaponBaseX, weaponBaseY + genericHeight);
                 // Left
-                weaponCorners[i][2].Size = new SizeF(healthCorner, genericHeight);
-                weaponCorners[i][2].Position = new PointF(weaponBaseX, weaponBaseY);
+                weaponCorners[i].Left.Size = new SizeF(healthCorner, genericHeight);
+                weaponCorners[i].Left.Position = new PointF(weaponBaseX, weaponBaseY);
                 // Right
-                weaponCorners[i][3].Size = new SizeF(healthCorner, genericHeight);
-                weaponCorners[i][3].Position = new PointF(weaponBaseX + weaponWidth - healthCorner, weaponBaseY);
+                weaponCorners[i].Right.Size = new SizeF(healthCorner, genericHeight);
+                weaponCorners[i].Right.Position = new PointF(weaponBaseX + weaponWidth - healthCorner, weaponBaseY);
             }
 
             weaponAreaSize = new SizeF(weaponWidth, (genericHeight * 6) +  (14 * 5));
@@ -405,22 +391,23 @@ namespace GGO.Inventory
             healthBar.Draw();
 
             itemsText.Draw();
-            foreach (List<ScaledRectangle> itemCorner in itemsCorners)
+            foreach (CornerSet corners in itemsCorners)
             {
-                foreach (ScaledRectangle iCorner in itemCorner)
-                {
-                    iCorner.Draw();
-                }
+                corners.Top.Draw();
+                corners.Bottom.Draw();
+                corners.Left.Draw();
+                corners.Right.Draw();
+                corners.Extra.Draw();
             }
 
             // Corners of the weapon spaces
             weaponText.Draw();
-            foreach (List<ScaledRectangle> corners in weaponCorners)
+            foreach (CornerSet corners in weaponCorners)
             {
-                foreach (ScaledRectangle corner in corners)
-                {
-                    corner.Draw();
-                }
+                corners.Top.Draw();
+                corners.Bottom.Draw();
+                corners.Left.Draw();
+                corners.Right.Draw();
             }
             // And the weapon images themselves
             foreach (KeyValuePair<WeaponHash, ScaledTexture> weapon in weaponVisible)
@@ -441,7 +428,7 @@ namespace GGO.Inventory
             }
 
             // If the player moved the mouse wheel up or down when the weapons are selected, move
-            bool isMouseOnWeapons = Screen.IsCursorInArea(weaponCorners[0][0].Position, weaponAreaSize);
+            bool isMouseOnWeapons = Screen.IsCursorInArea(weaponCorners[0].Top.Position, weaponAreaSize);
             if (Game.IsControlJustPressed(Control.PhoneScrollForward) && isMouseOnWeapons)
             {
                 weaponIndex++;
@@ -507,7 +494,7 @@ namespace GGO.Inventory
             {
                 KeyValuePair<WeaponHash, ScaledTexture> image = weaponImages.ElementAt(i + weaponIndex);
 
-                image.Value.Position = weaponCorners[i][0].Position;
+                image.Value.Position = weaponCorners[i].Top.Position;
                 image.Value.Size = new SizeF(weaponWidth, genericHeight);
                 weaponImages[image.Key] = image.Value;
 
