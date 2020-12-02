@@ -195,7 +195,7 @@ namespace GGO
             }
 
             // If the user entered ggohudconfig in the cheat input, open the menu
-            if (Game.WasCheatStringJustEntered("ggohudconfig"))
+            if (Game.WasCheatStringJustEntered("ggo"))
             {
                 menu.Visible = true;
             }
