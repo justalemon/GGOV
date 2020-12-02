@@ -337,6 +337,16 @@ namespace GGO.Inventory
             Game.DisableControlThisFrame(Control.Attack);
             Game.DisableControlThisFrame(Control.Aim);
             Game.DisableControlThisFrame(Control.Attack2);
+            Game.DisableControlThisFrame(Control.NextWeapon);
+            Game.DisableControlThisFrame(Control.PrevWeapon);
+            Game.DisableControlThisFrame(Control.VehicleSelectNextWeapon);
+            Game.DisableControlThisFrame(Control.VehicleSelectPrevWeapon);
+            Game.DisableControlThisFrame(Control.VehicleFlySelectNextWeapon);
+            Game.DisableControlThisFrame(Control.WeaponWheelNext);
+            Game.DisableControlThisFrame(Control.WeaponWheelPrev);
+            Game.DisableControlThisFrame(Control.SelectNextWeapon);
+            Game.DisableControlThisFrame(Control.SelectPrevWeapon);
+            Game.DisableControlThisFrame(Control.SelectWeapon);
             // And the HUD Reticle
             Hud.HideComponentThisFrame(HudComponent.Reticle);
 
