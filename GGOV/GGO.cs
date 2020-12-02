@@ -24,26 +24,56 @@ namespace GGO
     /// </summary>
     public class GGO : Script
     {
-        #region Private Fields
+        #region Fields
 
-        private readonly Dictionary<Ped, ScaledTexture> markers = new Dictionary<Ped, ScaledTexture>();
-        private int nextMarkerUpdate = 0;
-        private int nextPedUpdate = 0;
-
+        /// <summary>
+        /// The location of this script.
+        /// </summary>
         private readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
-        internal static Preset selectedPreset = null;
+        /// <summary>
+        /// The Pool that holds all of the Processable items.
+        /// </summary>
         internal static readonly ObjectPool pool = new ObjectPool();
-        internal static readonly PlayerInventory inventory = new PlayerInventory();
+
+        /// <summary>
+        /// The main configuration menu.
+        /// </summary>
         internal static readonly NativeMenu menu = new NativeMenu("", "Gun Gale Online Settings", "", null)
         {
             Alignment = Alignment.Right,
             ResetCursorWhenOpened = false
         };
+        /// <summary>
+        /// The menu that manages the HUD Presets.
+        /// </summary>
         internal static readonly NativeMenu presets = new NativeMenu("", "HUD Presets", "Presets allow you to store and apply different positions for the HUD Elements.", null)
         {
             Alignment = Alignment.Right,
             ResetCursorWhenOpened = false
         };
+        /// <summary>
+        /// The currently active HUD Preset.
+        /// </summary>
+        internal static Preset selectedPreset = null;
+
+        /// <summary>
+        /// The inventory of the user.
+        /// </summary>
+        internal static readonly PlayerInventory inventory = new PlayerInventory();
+
+        /// <summary>
+        /// The currently active Death Markers.
+        /// </summary>
+        private readonly Dictionary<Ped, ScaledTexture> markers = new Dictionary<Ped, ScaledTexture>();
+        /// <summary>
+        /// The next time for the Marker update.
+        /// </summary>
+        private int nextMarkerUpdate = 0;
+
+        /// <summary>
+        /// The next time for updating the Squad Members.
+        /// </summary>
+        private int nextSquadUpdate = 0;
 
         #endregion
 
@@ -176,7 +206,7 @@ namespace GGO
             }
 
             // If a Ped update is required and we are not in a cutscene
-            if ((nextPedUpdate <= Game.GameTime || nextPedUpdate == 0) && !Game.IsCutsceneActive)
+            if ((nextSquadUpdate <= Game.GameTime || nextSquadUpdate == 0) && !Game.IsCutsceneActive)
             {
                 // Iterate over the peds in the whole game world
                 foreach (Ped ped in World.GetAllPeds())
@@ -193,7 +223,7 @@ namespace GGO
                 }
 
                 // Finally, set the new update time
-                nextPedUpdate = Game.GameTime + 1000;
+                nextSquadUpdate = Game.GameTime + 1000;
             }
 
             // If the user entered ggohudconfig in the cheat input, open the menu
