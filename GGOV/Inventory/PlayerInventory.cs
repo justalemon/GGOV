@@ -1,5 +1,6 @@
 ﻿using GTA;
 using GTA.Native;
+using GTA.UI;
 using LemonUI;
 using LemonUI.Elements;
 using LemonUI.Extensions;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Font = GTA.UI.Font;
+using Screen = LemonUI.Screen;
 
 namespace GGO.Inventory
 {
@@ -16,53 +18,159 @@ namespace GGO.Inventory
     /// </summary>
     public class PlayerInventory : IRecalculable, IProcessable
     {
-        #region Fields
+        #region Constants
 
-        private static readonly List<WeaponHash> weapons = ((WeaponHash[])Enum.GetValues(typeof(WeaponHash))).Where(x => Tools.GetWeaponType(x) == WeaponType.Primary || Tools.GetWeaponType(x) == WeaponType.Secondary).ToList();
-
+        /// <summary>
+        /// The Height of all of the Items and Weapons on the inventory.
+        /// </summary>
         private const float genericHeight = 50;
+
+        /// <summary>
+        /// The Height of the Health bar.
+        /// </summary>
         private const float healthHeight = 23;
+        /// <summary>
+        /// The Width of the Health bar.
+        /// </summary>
         private const float healthWidth = 258;
+        /// <summary>
+        /// The Size of the corners of the Health Bar.
+        /// </summary>
         private const float healthCorner = 1;
+
+        /// <summary>
+        /// The Start X position of the Inventory Items from the left side of the background.
+        /// </summary>
+        private const float itemXFromCorner = 35;
+        /// <summary>
+        /// The Width of the Inventory items.
+        /// </summary>
+        private const float itemWidth = 107;
+
+        /// <summary>
+        /// The Width of the Weapon Fields.
+        /// </summary>
         private const float weaponWidth = 143;
 
-        private Ped lastPed = null;
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        /// The Weapons that the player can use in the Inventory.
+        /// </summary>
+        /// TODO: Read this from memory, either via SHVDN or Manually
+        private static readonly List<WeaponHash> weapons = ((WeaponHash[])Enum.GetValues(typeof(WeaponHash))).Where(x => Tools.GetWeaponType(x) == WeaponType.Primary || Tools.GetWeaponType(x) == WeaponType.Secondary).ToList();
+
+        /// <summary>
+        /// The last know Ped of the player.
+        /// </summary>
+        private Ped lastPlayerPed = null;
+
+        /// <summary>
+        /// The background of the entire GGO Inventory.
+        /// </summary>
         private readonly ScaledRectangle background = new ScaledRectangle(PointF.Empty, SizeF.Empty)
         {
             Color = Color.FromArgb(130, 90, 90, 90)
         };
+        /// <summary>
+        /// The detail on the Top of the Inventory.
+        /// </summary>
         private readonly ScaledRectangle top = new ScaledRectangle(PointF.Empty, SizeF.Empty)
         {
             Color = Color.FromArgb(200, 47, 52, 62)
         };
 
-        private readonly ScaledRectangle playerColor = new ScaledRectangle(PointF.Empty, SizeF.Empty)
+        /// <summary>
+        /// The background of the Player Name and Gender.
+        /// </summary>
+        private readonly ScaledRectangle playerBackground = new ScaledRectangle(PointF.Empty, SizeF.Empty)
         {
             Color = Color.FromArgb(250, 33, 145, 198)
         };
+        /// <summary>
+        /// The name of the Player.
+        /// </summary>
         private readonly ScaledText playerName = new ScaledText(PointF.Empty, Game.Player.Name, 0.625f, Font.Monospace);
+        /// <summary>
+        /// The Gender of the player, as reported by the game.
+        /// </summary>
         private readonly ScaledTexture playerGender = new ScaledTexture("ggo", "");
 
-        private readonly ScaledText textStatus = new ScaledText(PointF.Empty, "Status", 0.325f);
-        private readonly ScaledText textStrage = new ScaledText(PointF.Empty, "Strage", 0.325f);
+        /// <summary>
+        /// The Status text.
+        /// </summary>
+        private readonly ScaledText statusText = new ScaledText(PointF.Empty, "Status", 0.325f);
+        /// <summary>
+        /// The current Status of the player.
+        /// This is always shown as "Strage" on SAO:AGGO.
+        /// </summary>
+        private readonly ScaledText statusCurrent = new ScaledText(PointF.Empty, "Strage", 0.325f);
+
+        /// <summary>
+        /// The icon used for opening the GGO Settings.
+        /// </summary>
         private readonly ScaledTexture settingsIcon = new ScaledTexture("ggo", "icon_settings");
 
+        /// <summary>
+        /// The "Life" text to the left of the Health bar.
+        /// </summary>
         private readonly ScaledText healthText = new ScaledText(PointF.Empty, "Life", 0.225f);
+        /// <summary>
+        /// The Health bar itself.
+        /// </summary>
         private readonly ScaledRectangle healthBar = new ScaledRectangle(PointF.Empty, SizeF.Empty);
+        /// <summary>
+        /// The Top corner of the Health bar.
+        /// </summary>
         private readonly ScaledRectangle healthCornerTop = new ScaledRectangle(PointF.Empty, SizeF.Empty);
+        /// <summary>
+        /// The Bottom corner of the Health bar.
+        /// </summary>
         private readonly ScaledRectangle healthCornerBottom = new ScaledRectangle(PointF.Empty, SizeF.Empty);
+        /// <summary>
+        /// The Left corner of the Health bar.
+        /// </summary>
         private readonly ScaledRectangle healthCornerLeft = new ScaledRectangle(PointF.Empty, SizeF.Empty);
+        /// <summary>
+        /// The Right corner of the Health bar.
+        /// </summary>
         private readonly ScaledRectangle healthCornerRight = new ScaledRectangle(PointF.Empty, SizeF.Empty);
 
-        private readonly ScaledText weaponText = new ScaledText(PointF.Empty, "Arms", 0.225f);
-        private readonly List<List<ScaledRectangle>> weaponCorners = new List<List<ScaledRectangle>>();
-        private readonly Dictionary<WeaponHash, ScaledTexture> weaponImages = new Dictionary<WeaponHash, ScaledTexture>();
-        private readonly Dictionary<WeaponHash, ScaledTexture> weaponVisible = new Dictionary<WeaponHash, ScaledTexture>();
-        private SizeF weaponAreaSize = SizeF.Empty;
-        private int weaponIndex = 0;
-
+        /// <summary>
+        /// The Text on top of the Weapons.
+        /// </summary>
         private readonly ScaledText itemsText = new ScaledText(PointF.Empty, "Items", 0.225f);
+        /// <summary>
+        /// The Corners of the Inventory Items.
+        /// </summary>
         private readonly List<List<ScaledRectangle>> itemsCorners = new List<List<ScaledRectangle>>();
+
+        /// <summary>
+        /// The Text on top of the Weapons.
+        /// </summary>
+        private readonly ScaledText weaponText = new ScaledText(PointF.Empty, "Arms", 0.225f);
+        /// <summary>
+        /// The corners of all of the weapon slots.
+        /// </summary>
+        private readonly List<List<ScaledRectangle>> weaponCorners = new List<List<ScaledRectangle>>();
+        /// <summary>
+        /// The known Weapon Images.
+        /// </summary>
+        private readonly Dictionary<WeaponHash, ScaledTexture> weaponImages = new Dictionary<WeaponHash, ScaledTexture>();
+        /// <summary>
+        /// The 6 (or less) Weapons shown on the Inventory.
+        /// </summary>
+        private readonly Dictionary<WeaponHash, ScaledTexture> weaponVisible = new Dictionary<WeaponHash, ScaledTexture>();
+        /// <summary>
+        /// The area of the Weapons inside of the inventory.
+        /// </summary>
+        private SizeF weaponAreaSize = SizeF.Empty;
+        /// <summary>
+        /// The current Index of the Weapons.
+        /// </summary>
+        private int weaponIndex = 0;
 
         #endregion
 
@@ -117,27 +225,27 @@ namespace GGO.Inventory
         /// </summary>
         public void Recalculate()
         {
-            // Get the current resolution for calculations
+            // Get the current width of the screen for the calculations
+            // The height is always 1080
             float width = 1f.ToXAbsolute();
-            const float height = 1080;
 
             // And set the positions
             background.Size = new SizeF(575, 710);
-            background.Position = new PointF((width * 0.5f) - (background.Size.Width * 0.5f), (height * 0.5f) - (background.Size.Height * 0.5f));
+            background.Position = new PointF((width * 0.5f) - (background.Size.Width * 0.5f), (1080f * 0.5f) - (background.Size.Height * 0.5f));
 
             top.Size = new SizeF(background.Size.Width, 155);
             top.Position = background.Position;
 
-            playerColor.Size = new SizeF(255, 60);
-            playerColor.Position = new PointF(background.Position.X - 23, background.Position.Y + 30);
-            playerName.Position = new PointF(playerColor.Position.X + 92, playerColor.Position.Y + 7);
+            playerBackground.Size = new SizeF(255, 60);
+            playerBackground.Position = new PointF(background.Position.X - 23, background.Position.Y + 30);
+            playerName.Position = new PointF(playerBackground.Position.X + 92, playerBackground.Position.Y + 7);
 
             playerGender.Size = new SizeF(50, 50);
-            playerGender.Position = new PointF(playerColor.Position.X + 40, playerColor.Position.Y + 5);
+            playerGender.Position = new PointF(playerBackground.Position.X + 40, playerBackground.Position.Y + 5);
 
             float statusY = background.Position.Y + 173;
-            textStatus.Position = new PointF(background.Position.X + 197, statusY);
-            textStrage.Position = new PointF(background.Position.X + 337, statusY);
+            statusText.Position = new PointF(background.Position.X + 197, statusY);
+            statusCurrent.Position = new PointF(background.Position.X + 337, statusY);
             settingsIcon.Size = new SizeF(20, 20);
             settingsIcon.Position = new PointF(background.Position.X + background.Size.Width - 25 - settingsIcon.Size.Width, statusY + 3);
 
@@ -155,9 +263,7 @@ namespace GGO.Inventory
 
             float baseY = background.Position.Y + 252;
 
-            const float itemWidth = 107;
-            const float itemWidthFromX = 35;
-            itemsText.Position = new PointF(background.Position.X + itemWidthFromX, baseY - 23);
+            itemsText.Position = new PointF(background.Position.X + itemXFromCorner, baseY - 23);
             for (int iy = 0; iy < 6; iy++)
             {
                 float itemBaseY = baseY + (iy * genericHeight) + (iy * 14);
@@ -165,7 +271,7 @@ namespace GGO.Inventory
                 for (int ix = 0; ix < 3; ix++)
                 {
                     int i = (iy * 3) + ix;
-                    float itemBaseX = background.Position.X + itemWidthFromX + ((itemWidth + 4) * ix);
+                    float itemBaseX = background.Position.X + itemXFromCorner + ((itemWidth + 4) * ix);
 
                     // Top
                     itemsCorners[i][0].Size = new SizeF(itemWidth, healthCorner * 2);
@@ -213,7 +319,7 @@ namespace GGO.Inventory
         public void Process()
         {
             // If the last ped is not the same as the current one, update the player gender
-            if (lastPed != Game.Player.Character)
+            if (lastPlayerPed != Game.Player.Character)
             {
                 switch (Game.Player.Character.Gender)
                 {
@@ -227,7 +333,7 @@ namespace GGO.Inventory
                         playerGender.Texture = "gender_u";
                         break;
                 }
-                lastPed = Game.Player.Character;
+                lastPlayerPed = Game.Player.Character;
             }
 
             // If is not visible, return
@@ -285,11 +391,11 @@ namespace GGO.Inventory
             // Draw the UI Elements
             background.Draw();
             top.Draw();
-            playerColor.Draw();
+            playerBackground.Draw();
             playerName.Draw();
             playerGender.Draw();
-            textStatus.Draw();
-            textStrage.Draw();
+            statusText.Draw();
+            statusCurrent.Draw();
             settingsIcon.Draw();
             healthText.Draw();
             healthCornerTop.Draw();
