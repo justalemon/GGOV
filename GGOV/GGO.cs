@@ -38,19 +38,7 @@ namespace GGO
         /// <summary>
         /// The main configuration menu.
         /// </summary>
-        internal static readonly NativeMenu menu = new NativeMenu("", "Gun Gale Online Settings", "", null)
-        {
-            Alignment = Alignment.Right,
-            ResetCursorWhenOpened = false
-        };
-        /// <summary>
-        /// The menu that manages the HUD Presets.
-        /// </summary>
-        internal static readonly NativeMenu presets = new NativeMenu("", "HUD Presets", "Presets allow you to store and apply different positions for the HUD Elements.", null)
-        {
-            Alignment = Alignment.Right,
-            ResetCursorWhenOpened = false
-        };
+        internal static readonly SettingsMenu menu = new SettingsMenu();
         /// <summary>
         /// The currently active HUD Preset.
         /// </summary>
@@ -148,16 +136,11 @@ namespace GGO
             }
 
             // Build the menus
-            presets.Buttons.Add(new InstructionalButton("Create New", Control.FrontendX));
-            presets.Buttons.Add(new InstructionalButton("Save Presets", Control.FrontendY));
-            // Add the menu items
-            NativeItem itemDisablePreset = new NativeItem("Disable Active Preset", "Disables the Active HUD Preset.");
-            itemDisablePreset.Activated += ItemDisablePreset_Activated;
+            menu.Presets.Buttons.Add(new InstructionalButton("Create New", Control.FrontendX));
+            menu.Presets.Buttons.Add(new InstructionalButton("Save Presets", Control.FrontendY));
             // Add the UI elements into the pool
-            menu.AddSubMenu(presets);
-            menu.Add(itemDisablePreset);
             pool.Add(menu);
-            pool.Add(presets);
+            pool.Add(menu.Presets);
             pool.Add(inventory);
             pool.Add(Squad);
             pool.Add(Player);
@@ -172,7 +155,7 @@ namespace GGO
                 foreach (Preset preset in foundPresets)
                 {
                     pool.Add(preset);
-                    presets.AddSubMenu(preset);
+                    menu.Presets.AddSubMenu(preset);
                 }
             }
         }
@@ -180,21 +163,6 @@ namespace GGO
         #endregion
 
         #region Events
-
-        private void ItemDisablePreset_Activated(object sender, EventArgs e)
-        {
-            if (selectedPreset == null)
-            {
-                Notification.Show("There is no HUD Preset active.");
-            }
-            else
-            {
-                selectedPreset = null;
-                Squad.Recalculate();
-                Player.Recalculate();
-                Notification.Show("The Active Preset has been Disabled. The HUD now uses the Default Values.");
-            }
-        }
 
         private void HUD_Tick(object sender, EventArgs e)
         {
@@ -233,7 +201,7 @@ namespace GGO
             }
 
             // If the presets menu is visible, disable the controls that collide with X/Space and Y/Square
-            if (presets.Visible)
+            if (menu.Presets.Visible)
             {
                 DisableControlCollisions();
             }
@@ -242,7 +210,7 @@ namespace GGO
             pool.Process();
 
             // If the presets menu is still visible
-            if (presets.Visible)
+            if (menu.Presets.Visible)
             {
                 // Disable the colliding controls again
                 DisableControlCollisions();
@@ -250,9 +218,9 @@ namespace GGO
                 if (Game.IsControlJustPressed(Control.FrontendX))
                 {
                     // Ask the user for the name
-                    presets.Visible = false;
+                    menu.Presets.Visible = false;
                     string input = Game.GetUserInput(WindowTitle.EnterMessage60, "", 60);
-                    presets.Visible = true;
+                    menu.Presets.Visible = true;
                     // If the user didn't entered anything, return
                     if (string.IsNullOrWhiteSpace(input))
                     {
@@ -260,9 +228,9 @@ namespace GGO
                         return;
                     }
                     // Otherwise, create a new preset
-                    Preset menu = new Preset(input);
-                    presets.AddSubMenu(menu);
-                    pool.Add(menu);
+                    Preset newMenu = new Preset(input);
+                    menu.Presets.AddSubMenu(newMenu);
+                    pool.Add(newMenu);
                 }
                 // If the user pressed Y/Triangle/Tab
                 else if (Game.IsControlJustPressed(Control.FrontendY))
