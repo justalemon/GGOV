@@ -290,15 +290,15 @@ namespace GGO
             {
                 if (Game.IsControlJustPressed(Control.SelectWeaponUnarmed))
                 {
-                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weaponPrimary, true);
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weaponPrimary, false);
                 }
                 if (Game.IsControlJustPressed(Control.SelectWeaponMelee))
                 {
-                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weaponSecondary, true);
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weaponSecondary, false);
                 }
                 if (Game.IsControlJustPressed(Control.SelectWeaponShotgun))
                 {
-                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, WeaponHash.Unarmed, true);
+                    Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, WeaponHash.Unarmed, false);
                 }
             }
 
