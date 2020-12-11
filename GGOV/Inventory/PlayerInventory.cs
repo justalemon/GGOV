@@ -5,6 +5,7 @@ using GTA.UI;
 using LemonUI;
 using LemonUI.Elements;
 using LemonUI.Extensions;
+using PlayerCompanion;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,6 +15,56 @@ using Screen = LemonUI.Screen;
 
 namespace GGO.Inventory
 {
+    /// <summary>
+    /// Represents an Item and the Text Label used for showing the count.
+    /// </summary>
+    internal class ItemPair
+    {
+        #region Properties
+
+        /// <summary>
+        /// The Item used to fetch the information from.
+        /// </summary>
+        internal Item Item { get; set; }
+        /// <summary>
+        /// The text used for showing the count.
+        /// </summary>
+        internal ScaledText Count { get; } = new ScaledText(PointF.Empty, "", 0.475f, Font.ChaletLondon) { Alignment = Alignment.Center };
+
+        #endregion
+
+        #region Constructor
+
+        internal ItemPair(Item item)
+        {
+            Item = item;
+        }
+
+        #endregion
+
+        #region Functions
+
+        /// <summary>
+        /// Draws the Item Image and Count.
+        /// </summary>
+        internal void Draw()
+        {
+            if (Item is StackableItem stackable)
+            {
+                Count.Text = stackable.Count.ToString();
+            }
+            else
+            {
+                Count.Text = "1";
+            }
+
+            Item.Icon.Draw();
+            Count.Draw();
+        }
+
+        #endregion
+    }
+
     /// <summary>
     /// The Inventory UI Item.
     /// </summary>
@@ -151,6 +202,26 @@ namespace GGO.Inventory
         /// The Corners of the Inventory Items.
         /// </summary>
         private readonly List<CornerSet> itemsCorners = new List<CornerSet>();
+        /// <summary>
+        /// The ammo currently being used by the player.
+        /// </summary>
+        private readonly Dictionary<WeaponHash, Magazines> itemsAmmo = new Dictionary<WeaponHash, Magazines>();
+        /// <summary>
+        /// The items that are currently in use.
+        /// </summary>
+        private readonly List<ItemPair> itemsActive = new List<ItemPair>();
+        /// <summary>
+        /// The items visible on the screen.
+        /// </summary>
+        private readonly List<ItemPair> itemsVisible = new List<ItemPair>();
+        /// <summary>
+        /// The size of the area of the items.
+        /// </summary>
+        private SizeF itemsAreaSize = SizeF.Empty;
+        /// <summary>
+        /// The index of the inventory items.
+        /// </summary>
+        private int itemsIndex = 0;
 
         /// <summary>
         /// The Text on top of the Weapons.
@@ -192,6 +263,17 @@ namespace GGO.Inventory
 
         internal PlayerInventory()
         {
+            foreach (WeaponHash hash in weapons)
+            {
+                switch (Tools.GetWeaponType(hash))
+                {
+                    case WeaponType.Primary:
+                    case WeaponType.Secondary:
+                        itemsAmmo.Add(hash, new Magazines(hash));
+                        break;
+                }
+            }
+
             for (int i = 0; i < 6; i++)
             {
                 weaponCorners.Add(new CornerSet());
@@ -203,7 +285,6 @@ namespace GGO.Inventory
             }
 
             Recalculate();
-            UpdateWeapons();
         }
 
         #endregion
@@ -303,7 +384,8 @@ namespace GGO.Inventory
 
             weaponAreaSize = new SizeF(weaponWidth, (genericHeight * 6) +  (genericHeightSeparation * 5));
 
-            UpdateVisibleWeapons();
+            UpdateItems();
+            UpdateWeapons();
         }
         /// <summary>
         /// Processes the inventory.
@@ -406,6 +488,29 @@ namespace GGO.Inventory
             healthCornerRight.Draw();
             healthBar.Draw();
 
+            // Make sure that all of the required items are present
+            bool itemUpdateRequired = false;
+            foreach (ItemPair pair in itemsVisible)
+            {
+                if (pair.Item is StackableItem stackable && stackable.Count == 0)
+                {
+                    itemUpdateRequired = true;
+                    break;
+                }
+            }
+            foreach (KeyValuePair<WeaponHash, Magazines> ammo in itemsAmmo)
+            {
+                if (ammo.Value.Count > 0 && !itemsActive.Where(x => x.Item == ammo.Value).Any()) // TODO: Look for a better solution
+                {
+                    itemUpdateRequired = true;
+                    break;
+                }
+            }
+            if (itemUpdateRequired)
+            {
+                UpdateItems();
+            }
+
             itemsText.Draw();
             foreach (CornerSet corners in itemsCorners)
             {
@@ -414,6 +519,10 @@ namespace GGO.Inventory
                 corners.Left.Draw();
                 corners.Right.Draw();
                 corners.Extra.Draw();
+            }
+            foreach (ItemPair pair in itemsVisible)
+            {
+                pair.Draw();
             }
 
             // Corners of the weapon spaces
@@ -481,13 +590,26 @@ namespace GGO.Inventory
             }
 
             // If the player moved the mouse wheel up or down when the weapons are selected, move
+            bool upPressed = Game.IsControlJustPressed(Control.PhoneScrollBackward);
+            bool downPressed = Game.IsControlJustPressed(Control.PhoneScrollForward);
+            bool isMouseOnItems = Screen.IsCursorInArea(itemsCorners[0].Top.Position, itemsAreaSize);
             bool isMouseOnWeapons = Screen.IsCursorInArea(weaponCorners[0].Top.Position, weaponAreaSize);
-            if (Game.IsControlJustPressed(Control.PhoneScrollForward) && isMouseOnWeapons)
+            if (downPressed && isMouseOnItems)
+            {
+                itemsIndex += 3;
+                UpdateVisibleItems();
+            }
+            else if (upPressed && isMouseOnItems)
+            {
+                itemsIndex -= 3;
+                UpdateVisibleItems();
+            }
+            if (downPressed && isMouseOnWeapons)
             {
                 weaponIndex++;
                 UpdateVisibleWeapons();
             }
-            else if (Game.IsControlJustPressed(Control.PhoneScrollBackward) && isMouseOnWeapons)
+            else if (upPressed && isMouseOnWeapons)
             {
                 weaponIndex--;
                 UpdateVisibleWeapons();
@@ -497,6 +619,66 @@ namespace GGO.Inventory
             if (Game.IsControlJustPressed(Control.CursorAccept) && Screen.IsCursorInArea(settingsIcon.Position, settingsIcon.Size))
             {
                 GGO.menu.Open();
+            }
+        }
+        /// <summary>
+        /// Recreates the list of custom weapons.
+        /// </summary>
+        internal void UpdateItems()
+        {
+            // Clear the existing items
+            itemsActive.Clear();
+
+            // Add the ammo items for the weapons owned by the player if the player has the weapon and the number of mags is not zero
+            foreach (KeyValuePair<WeaponHash, Magazines> ammo in itemsAmmo)
+            {
+                if (Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, ammo.Key, false)&& ammo.Value.Count > 0)
+                {
+                    itemsActive.Add(new ItemPair(ammo.Value));
+                }
+            }
+
+            // Finally, update the items on the screen
+            UpdateVisibleItems();
+        }
+        /// <summary>
+        /// Updates the items visible on the screen.
+        /// </summary>
+        internal void UpdateVisibleItems()
+        {
+            // Fix the index if is out of bounds
+            int maxIndex = (int)Math.Ceiling((itemsActive.Count - (3 * 6f)) / 3);
+            if (itemsIndex < 0 || itemsActive.Count <= (3 * 6))
+            {
+                itemsIndex = 0;
+            }
+            else if (itemsIndex > maxIndex)
+            {
+                itemsIndex = maxIndex;
+            }
+
+            // Clear the existing items
+            itemsVisible.Clear();
+
+            // Iterate the number of items and update their position
+            for (int i = 0; i < (3 * 6); i++)
+            {
+                // If the index is out of bounds, break
+                if (itemsIndex + i >= itemsActive.Count)
+                {
+                    break;
+                }
+
+                // Otherwise, set the positions based on the corners
+                ItemPair pair = itemsActive[itemsIndex + i];
+
+                pair.Item.Icon.Size = new SizeF(20, 20);
+
+                PointF pos = itemsCorners[i].Top.Position;
+                pair.Item.Icon.Position = new PointF(pos.X + (itemWidth * 0.25f), pos.Y + (genericHeight * 0.5f));
+                pair.Count.Position = new PointF(pos.X + (itemWidth * 0.75f), pos.Y + (genericHeight * 0.5f));
+
+                itemsVisible.Add(pair);
             }
         }
         /// <summary>
