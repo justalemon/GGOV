@@ -25,6 +25,10 @@ namespace GGO.Inventory
         /// The Height of all of the Items and Weapons on the inventory.
         /// </summary>
         private const float genericHeight = 50;
+        /// <summary>
+        /// The height separation between all of the separators of the inventory.
+        /// </summary>
+        private const float genericHeightSeparation = 14;
 
         /// <summary>
         /// The Height of the Health bar.
@@ -252,7 +256,7 @@ namespace GGO.Inventory
             itemsText.Position = new PointF(background.Position.X + itemXFromCorner, baseY - 23);
             for (int iy = 0; iy < 6; iy++)
             {
-                float itemBaseY = baseY + (iy * genericHeight) + (iy * 14);
+                float itemBaseY = baseY + (iy * genericHeight) + (iy * genericHeightSeparation);
 
                 for (int ix = 0; ix < 3; ix++)
                 {
@@ -281,7 +285,7 @@ namespace GGO.Inventory
             weaponText.Position = new PointF(weaponBaseX, baseY - 23);
             for (int i = 0; i < 6; i++)
             {
-                float weaponBaseY = baseY + (i * genericHeight) + (i * 14);
+                float weaponBaseY = baseY + (i * genericHeight) + (i * genericHeightSeparation);
 
                 // Top
                 weaponCorners[i].Top.Size = new SizeF(weaponWidth, healthCorner * 2);
@@ -297,7 +301,7 @@ namespace GGO.Inventory
                 weaponCorners[i].Right.Position = new PointF(weaponBaseX + weaponWidth - healthCorner, weaponBaseY);
             }
 
-            weaponAreaSize = new SizeF(weaponWidth, (genericHeight * 6) +  (14 * 5));
+            weaponAreaSize = new SizeF(weaponWidth, (genericHeight * 6) +  (genericHeightSeparation * 5));
 
             UpdateVisibleWeapons();
         }
