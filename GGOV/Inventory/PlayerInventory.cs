@@ -648,7 +648,7 @@ namespace GGO.Inventory
         internal void UpdateVisibleItems()
         {
             // Fix the index if is out of bounds
-            int maxIndex = (int)Math.Ceiling((itemsActive.Count - (3 * 6f)) / 3);
+            int maxIndex = (int)Math.Ceiling((itemsActive.Count - (3 * 6f)) / 3) * 3;
             if (itemsIndex < 0 || itemsActive.Count <= (3 * 6))
             {
                 itemsIndex = 0;
