@@ -29,7 +29,7 @@ namespace GGO.Inventory
         /// <summary>
         /// The text used for showing the count.
         /// </summary>
-        internal ScaledText Count { get; } = new ScaledText(PointF.Empty, "", 0.475f, Font.ChaletLondon) { Alignment = Alignment.Center };
+        internal ScaledText Count { get; } = new ScaledText(PointF.Empty, "", 0.41f, Font.ChaletLondon) { Alignment = Alignment.Center };
 
         #endregion
 
@@ -672,11 +672,12 @@ namespace GGO.Inventory
                 // Otherwise, set the positions based on the corners
                 ItemPair pair = itemsActive[itemsIndex + i];
 
-                pair.Item.Icon.Size = new SizeF(20, 20);
+                SizeF size = new SizeF(32.5f, 32.5f);
+                pair.Item.Icon.Size = size;
 
                 PointF pos = itemsCorners[i].Top.Position;
-                pair.Item.Icon.Position = new PointF(pos.X + (itemWidth * 0.25f), pos.Y + (genericHeight * 0.5f));
-                pair.Count.Position = new PointF(pos.X + (itemWidth * 0.75f), pos.Y + (genericHeight * 0.5f));
+                pair.Item.Icon.Position = new PointF(pos.X + (itemWidth * 0.25f) - (size.Width * 0.5f), pos.Y + (genericHeight * 0.5f) - (size.Height * 0.5f));
+                pair.Count.Position = new PointF(pos.X + (itemWidth * 0.75f), pos.Y + (genericHeight * 0.5f) - (pair.Count.LineHeight * 0.6f));
 
                 itemsVisible.Add(pair);
             }
