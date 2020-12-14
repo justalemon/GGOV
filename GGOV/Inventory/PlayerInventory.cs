@@ -382,6 +382,7 @@ namespace GGO.Inventory
                 weaponCorners[i].Right.Position = new PointF(weaponBaseX + weaponWidth - healthCorner, weaponBaseY);
             }
 
+            itemsAreaSize = new SizeF((itemWidth * 3) + (4 * 2), (genericHeight * 6) + (genericHeightSeparation * 5));
             weaponAreaSize = new SizeF(weaponWidth, (genericHeight * 6) +  (genericHeightSeparation * 5));
 
             UpdateItems();
