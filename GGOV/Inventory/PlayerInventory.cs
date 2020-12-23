@@ -116,7 +116,7 @@ namespace GGO.Inventory
         /// The Weapons that the player can use in the Inventory.
         /// </summary>
         /// TODO: Read this from memory, either via SHVDN or Manually
-        private static readonly List<WeaponHash> weapons = ((WeaponHash[])Enum.GetValues(typeof(WeaponHash))).Where(x => Tools.GetWeaponType(x) == WeaponType.Primary || Tools.GetWeaponType(x) == WeaponType.Secondary).ToList();
+        private static readonly List<WeaponHash> weapons = ((WeaponHash[])Enum.GetValues(typeof(WeaponHash))).Where(x => Tools.GetWeaponType(x) == WeaponType.Primary || Tools.GetWeaponType(x) == WeaponType.Secondary || Tools.GetWeaponType(x) == WeaponType.Melee).ToList();
 
         /// <summary>
         /// The last know Ped of the player.
@@ -560,7 +560,7 @@ namespace GGO.Inventory
                             previous = GGO.weaponPrimary;
                             GGO.weaponPrimary = weapon.Key;
                         }
-                        else if (type == WeaponType.Secondary)
+                        else if (type == WeaponType.Secondary || type == WeaponType.Melee)
                         {
                             previous = GGO.weaponSecondary;
                             GGO.weaponSecondary = weapon.Key;

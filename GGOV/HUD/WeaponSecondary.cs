@@ -37,7 +37,8 @@ namespace GGO.HUD
                 }
                 else
                 {
-                    return Tools.GetWeaponType(Game.Player.Character.Weapons.Current.Hash) == WeaponType.Secondary;
+                    WeaponType type = Tools.GetWeaponType(Game.Player.Character.Weapons.Current.Hash);
+                    return type == WeaponType.Secondary || type == WeaponType.Melee;
                 }
             }
         }

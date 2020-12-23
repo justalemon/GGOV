@@ -225,10 +225,17 @@ namespace GGO
                     case WeaponType.Primary:
                         weaponPrimary = current;
                         inventory.UpdateWeapons();
+                        Player.PrimaryWeapon.ShiftImage(false, true);
                         break;
                     case WeaponType.Secondary:
                         weaponSecondary = current;
                         inventory.UpdateWeapons();
+                        Player.SecondaryWeapon.ShiftImage(false, true);
+                        break;
+                    case WeaponType.Melee:
+                        weaponSecondary = current;
+                        inventory.UpdateWeapons();
+                        Player.SecondaryWeapon.ShiftImage(true, true);
                         break;
                 }
             }

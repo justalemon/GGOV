@@ -13,6 +13,7 @@ namespace GGO
         Unknown = 0,
         Primary = 1,
         Secondary = 2,
+        Melee = 3,
     }
 
     /// <summary>
@@ -60,6 +61,8 @@ namespace GGO
                     return WeaponType.Primary;
                 case WeaponGroup.Pistol:
                     return WeaponType.Secondary;
+                case WeaponGroup.Melee:
+                    return WeaponType.Melee;
             }
 
             // If we got here, we don't know what type of weapon it is

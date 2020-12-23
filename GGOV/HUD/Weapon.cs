@@ -13,7 +13,10 @@ namespace GGO.HUD
     {
         #region Fields
 
+        public bool firstTime = true;
+        private bool shiftedImage = false;
         private WeaponHash lastHash = 0;
+
         private readonly ScaledText noneIcon = new ScaledText(PointF.Empty, "-", 0.4f)
         {
             Alignment = Alignment.Center
@@ -78,6 +81,23 @@ namespace GGO.HUD
         #region Functions
 
         /// <summary>
+        /// Shifts the image slightly to the left if the weapon is Melee, or restores it to default.
+        /// </summary>
+        internal void ShiftImage(bool shift, bool force = false)
+        {
+            // If is the first time, the image has not been shifted to the correct position or is being forced
+            if (firstTime || shiftedImage != shift || force)
+            {
+                // Set first time to false just in case
+                firstTime = false;
+
+                // Then, set the size of the background
+                weaponBackground.Size = new SizeF(230 - infoBackground.Size.Width - 5 - (shift ? 45 : 0), 50);
+                // And the position of the weapon itself
+                weapon.Position = new PointF(weaponBackground.Position.X + (weaponBackground.Size.Width * 0.5f) - (165 * 0.5f), weaponBackground.Position.Y);
+            }
+        }
+        /// <summary>
         /// Recalculates the position of the weapon information.
         /// </summary>
         /// <param name="position">The new position of the weapon information.</param>
@@ -93,9 +113,8 @@ namespace GGO.HUD
             ammo.Position = new PointF(infoBackground.Position.X + (infoBackground.Size.Width * 0.5f), infoBackground.Position.Y + 3);
 
             weaponBackground.Position = new PointF(infoBackground.Position.X + infoBackground.Size.Width + 5, position.Y);
-            weaponBackground.Size = new SizeF(230 - infoBackground.Size.Width - 5, 50);
 
-            weapon.Position = new PointF(weaponBackground.Position.X + (weaponBackground.Size.Width * 0.5f) - (165 * 0.5f), weaponBackground.Position.Y);
+            ShiftImage(Tools.GetWeaponType(lastHash) == WeaponType.Melee, true);
             weapon.Size = new SizeF(165, 50);
         }
         /// <summary>
@@ -103,11 +122,24 @@ namespace GGO.HUD
         /// </summary>
         public override void Process()
         {
-            // If the last hash is not the same as the current one, update it
-            if (lastHash != Hash)
+            // If the last hash is not the same as the current one, update the position of the weapon and texture
+            WeaponHash currentHash = Hash;
+            if (lastHash != currentHash && IsWeaponValid)
             {
-                lastHash = Hash;
-                weapon.Texture = ((int)lastHash).ToString();
+                weapon.Texture = ((int)currentHash).ToString();
+
+                switch (Tools.GetWeaponType(currentHash))
+                {
+                    case WeaponType.Primary:
+                    case WeaponType.Secondary:
+                        ShiftImage(false);
+                        break;
+                    case WeaponType.Melee:
+                        ShiftImage(true);
+                        break;
+                }
+
+                lastHash = currentHash;
             }
 
             // Update the current ammo count
