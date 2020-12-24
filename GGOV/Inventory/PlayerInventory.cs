@@ -637,11 +637,14 @@ namespace GGO.Inventory
             itemsActive.Clear();
 
             // Add the ammo items for the weapons owned by the player if the player has the weapon and the number of mags is not zero
-            foreach (KeyValuePair<WeaponHash, Magazines> ammo in itemsAmmo)
+            if (GGO.menu.Ammo.Checked)
             {
-                if (Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, ammo.Key, false)&& ammo.Value.Count > 0)
+                foreach (KeyValuePair<WeaponHash, Magazines> ammo in itemsAmmo)
                 {
-                    itemsActive.Add(new ItemPair(ammo.Value));
+                    if (Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, ammo.Key, false) && ammo.Value.Count > 0)
+                    {
+                        itemsActive.Add(new ItemPair(ammo.Value));
+                    }
                 }
             }
 

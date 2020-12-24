@@ -15,6 +15,8 @@ namespace GGO
         public bool DeathMarkers { get; set; } = true;
         [JsonProperty("inventory")]
         public bool Inventory { get; set; } = true;
+        [JsonProperty("ammo")]
+        public bool Ammo { get; set; } = false;
         [JsonProperty("squad")]
         public bool Squad { get; set; } = true;
         [JsonProperty("squadx")]
@@ -38,6 +40,7 @@ namespace GGO
         public NativeCheckboxItem EquipWeapons { get; } = new NativeCheckboxItem("Equip Inventory Weapons", "Enabled: Marks the Weapons as Primary or Secondary, allowing you to switch between your Primary, Secondary and Fists with 1, 2 and 3 respectively (like Apex Legends).~n~~n~Disabled: Equips the Weapons directly. Requires you to open the Inventory every time that you want to change weapons.", true);
         public NativeCheckboxItem DeathMarkers { get; } = new NativeCheckboxItem("Enable Death Markers", "Enables the Death Markers shown when the Peds around you die.", true);
         public NativeCheckboxItem Inventory { get; } = new NativeCheckboxItem("Use Inventory", "Enables or Disables the Inventory system.", true);
+        public NativeCheckboxItem Ammo { get; } = new NativeCheckboxItem("Show Ammo on Inventory", "Shows the Ammo that you currently have in the inventory.~n~~n~~o~Warning~s~: This is an experimental function, so there are no textures available for the bullets and magazines.", false);
         public NativeCheckboxItem Squad { get; } = new NativeCheckboxItem("Show Squad Members", "If the Squad Members (top left) should be shown on the screen.", true);
         public FloatSelectorItem SquadX { get; } = new FloatSelectorItem("Squad Members: X", "The X value of the Squad Health Information.", 103);
         public FloatSelectorItem SquadY { get; } = new FloatSelectorItem("Squad Members: Y", "The Y value of the Squad Health Information.", 66);
@@ -60,6 +63,7 @@ namespace GGO
                 EquipWeapons.Checked = config.Equip;
                 DeathMarkers.Checked = config.DeathMarkers;
                 Inventory.Checked = config.Inventory;
+                Ammo.Checked = config.Ammo;
                 Squad.Checked = config.Squad;
                 SquadX.SelectedItem = config.SquadX;
                 SquadY.SelectedItem = config.SquadY;
@@ -74,6 +78,7 @@ namespace GGO
             Add(EquipWeapons);
             Add(DeathMarkers);
             Add(Inventory);
+            Add(Ammo);
             Add(Squad);
             Add(SquadX);
             Add(SquadY);
@@ -82,6 +87,7 @@ namespace GGO
             Add(Save);
             // Subscribe the events
             EquipWeapons.CheckboxChanged += EquipWeapons_CheckboxChanged;
+            Ammo.CheckboxChanged += Ammo_CheckboxChanged;
             SquadX.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
             SquadY.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
             PlayerX.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
@@ -101,6 +107,11 @@ namespace GGO
                 GGO.weaponPrimary = 0;
                 GGO.weaponSecondary = 0;
             }
+        }
+
+        private void Ammo_CheckboxChanged(object sender, EventArgs e)
+        {
+            GGO.inventory.UpdateItems();
         }
 
         private void Save_Activated(object sender, EventArgs e)
