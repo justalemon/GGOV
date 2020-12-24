@@ -230,6 +230,9 @@ namespace GGO
                 weaponSecondary = 0;
             }
 
+            // Work on the Death markers
+            UpdateMarkers();
+
             // Just process the HUD Elements
             pool.Process();
 
@@ -249,9 +252,6 @@ namespace GGO
                     Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, WeaponHash.Unarmed, false);
                 }
             }
-
-            // Finally, update the markers
-            UpdateMarkers();
         }
 
         private void UpdateMarkers()
