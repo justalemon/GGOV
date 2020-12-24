@@ -81,7 +81,7 @@ namespace GGO
             SquadY.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
             PlayerX.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
             PlayerY.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
-            Save.Selected += Save_Selected;
+            Save.Activated += Save_Activated;
         }
 
         #endregion
@@ -98,7 +98,7 @@ namespace GGO
             }
         }
 
-        private void Save_Selected(object sender, SelectedEventArgs e)
+        private void Save_Activated(object sender, EventArgs e)
         {
             Configuration config = new Configuration
             {
