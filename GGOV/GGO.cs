@@ -231,7 +231,10 @@ namespace GGO
             }
 
             // Work on the Death markers
-            UpdateMarkers();
+            if (menu.DeathMarkers.Checked)
+            {
+                UpdateMarkers();
+            }
 
             // Just process the HUD Elements
             pool.Process();

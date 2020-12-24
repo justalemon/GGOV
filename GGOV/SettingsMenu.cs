@@ -19,6 +19,8 @@ namespace GGO
         public float PlayerX { get; set; } = 0;
         [JsonProperty("playery")]
         public float PlayerY { get; set; } = 0;
+        [JsonProperty("deatnmarkers")]
+        public bool DeathMarkers { get; set; } = true;
     }
 
     /// <summary>
@@ -34,6 +36,7 @@ namespace GGO
         public FloatSelectorItem SquadY { get; } = new FloatSelectorItem("Squad Members: Y", "The Y value of the Squad Health Information.", 66);
         public FloatSelectorItem PlayerX { get; } = new FloatSelectorItem("Player Info: X", "The X value of the Player Information.", -388);
         public FloatSelectorItem PlayerY { get; } = new FloatSelectorItem("Player Info: Y", "The Y value of the Player Information.", -232);
+        public NativeCheckboxItem DeathMarkers { get; } = new NativeCheckboxItem("Enable Death Markers", "Enables the Death Markers shown when the Peds around you die.", true);
         public NativeItem Save { get; } = new NativeItem("Save", "Saves all of the current settings.");
 
         #endregion
@@ -53,6 +56,7 @@ namespace GGO
                 SquadY.SelectedItem = config.SquadY;
                 PlayerX.SelectedItem = config.PlayerX;
                 PlayerY.SelectedItem = config.PlayerY;
+                DeathMarkers.Checked = config.DeathMarkers;
             }
 
             // Set the options of the menu
@@ -64,6 +68,7 @@ namespace GGO
             Add(SquadY);
             Add(PlayerX);
             Add(PlayerY);
+            Add(DeathMarkers);
             Add(Save);
             // Subscribe the events
             EquipWeapons.CheckboxChanged += EquipWeapons_CheckboxChanged;
@@ -96,7 +101,8 @@ namespace GGO
                 SquadX = SquadX.SelectedItem,
                 SquadY = SquadY.SelectedItem,
                 PlayerX = PlayerX.SelectedItem,
-                PlayerY = PlayerY.SelectedItem
+                PlayerY = PlayerY.SelectedItem,
+                DeathMarkers = DeathMarkers.Checked
             };
 
             string contents = JsonConvert.SerializeObject(config);
