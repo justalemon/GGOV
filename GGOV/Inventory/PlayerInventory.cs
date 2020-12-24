@@ -393,6 +393,12 @@ namespace GGO.Inventory
         /// </summary>
         public void Process()
         {
+            // If the inventory is disabled, return
+            if (!GGO.menu.Inventory.Checked)
+            {
+                return;
+            }
+
             // If the last ped is not the same as the current one, update the player gender
             if (lastPlayerPed != Game.Player.Character)
             {

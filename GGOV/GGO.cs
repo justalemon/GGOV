@@ -162,10 +162,13 @@ namespace GGO
         private void HUD_Tick(object sender, EventArgs e)
         {
             // Make the inventory visible based on the button pressed
-            Game.DisableControlThisFrame(Control.SelectWeapon);
-            if (Game.IsControlJustPressed(Control.SelectWeapon))
+            if (menu.Inventory.Checked)
             {
-                inventory.Visible = !inventory.Visible;
+                Game.DisableControlThisFrame(Control.SelectWeapon);
+                if (Game.IsControlJustPressed(Control.SelectWeapon))
+                {
+                    inventory.Visible = !inventory.Visible;
+                }
             }
 
             // If a Ped update is required and we are not in a cutscene

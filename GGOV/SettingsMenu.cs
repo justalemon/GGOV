@@ -21,6 +21,8 @@ namespace GGO
         public float PlayerY { get; set; } = 0;
         [JsonProperty("deatnmarkers")]
         public bool DeathMarkers { get; set; } = true;
+        [JsonProperty("inventory")]
+        public bool Inventory { get; set; } = true;
     }
 
     /// <summary>
@@ -37,6 +39,7 @@ namespace GGO
         public FloatSelectorItem PlayerX { get; } = new FloatSelectorItem("Player Info: X", "The X value of the Player Information.", -388);
         public FloatSelectorItem PlayerY { get; } = new FloatSelectorItem("Player Info: Y", "The Y value of the Player Information.", -232);
         public NativeCheckboxItem DeathMarkers { get; } = new NativeCheckboxItem("Enable Death Markers", "Enables the Death Markers shown when the Peds around you die.", true);
+        public NativeCheckboxItem Inventory { get; } = new NativeCheckboxItem("Use Inventory", "Enables or Disables the Inventory system.", true);
         public NativeItem Save { get; } = new NativeItem("Save", "Saves all of the current settings.");
 
         #endregion
@@ -57,6 +60,7 @@ namespace GGO
                 PlayerX.SelectedItem = config.PlayerX;
                 PlayerY.SelectedItem = config.PlayerY;
                 DeathMarkers.Checked = config.DeathMarkers;
+                Inventory.Checked = config.Inventory;
             }
 
             // Set the options of the menu
@@ -69,6 +73,7 @@ namespace GGO
             Add(PlayerX);
             Add(PlayerY);
             Add(DeathMarkers);
+            Add(Inventory);
             Add(Save);
             // Subscribe the events
             EquipWeapons.CheckboxChanged += EquipWeapons_CheckboxChanged;
@@ -102,7 +107,8 @@ namespace GGO
                 SquadY = SquadY.SelectedItem,
                 PlayerX = PlayerX.SelectedItem,
                 PlayerY = PlayerY.SelectedItem,
-                DeathMarkers = DeathMarkers.Checked
+                DeathMarkers = DeathMarkers.Checked,
+                Inventory = Inventory.Checked,
             };
 
             string contents = JsonConvert.SerializeObject(config);
