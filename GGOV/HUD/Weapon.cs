@@ -126,7 +126,7 @@ namespace GGO.HUD
             // If the last hash is not the same as the current one, update the position of the weapon and texture
             WeaponHash currentHash = Hash;
             WeaponType currentType = Tools.GetWeaponType(currentHash);
-            if (lastHash != currentHash && IsWeaponValid)
+            if (lastHash != currentHash)
             {
                 weapon.Texture = ((int)currentHash).ToString();
 
