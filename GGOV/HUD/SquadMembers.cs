@@ -152,8 +152,8 @@ namespace GGO.HUD
         /// </summary>
         public void Recalculate()
         {
-            float x = GGO.selectedPreset == null ? 103 : GGO.selectedPreset.SquadX.SelectedItem;
-            float y = GGO.selectedPreset == null ? 66 : GGO.selectedPreset.SquadY.SelectedItem;
+            float x = GGO.menu.SquadX.SelectedItem;
+            float y = GGO.menu.SquadY.SelectedItem;
 
             for (int i = 0; i < members.Count; i++)
             {

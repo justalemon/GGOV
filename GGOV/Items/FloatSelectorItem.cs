@@ -11,7 +11,7 @@ namespace GGO.Items
     {
         #region Constructor
 
-        public FloatSelectorItem(string title, string description) : base(title, description, 0)
+        public FloatSelectorItem(string title, string description, float value) : base(title, description, value)
         {
             ItemChanged += FloatSelectorItem_ItemChanged;
         }

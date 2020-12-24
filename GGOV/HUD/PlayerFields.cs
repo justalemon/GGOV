@@ -47,8 +47,8 @@ namespace GGO.HUD
         /// </summary>
         public void Recalculate()
         {
-            float x = GGO.selectedPreset == null ? -388 : GGO.selectedPreset.PlayerX.SelectedItem;
-            float y = GGO.selectedPreset == null ? -232 : GGO.selectedPreset.PlayerY.SelectedItem;
+            float x = GGO.menu.PlayerX.SelectedItem;
+            float y = GGO.menu.PlayerY.SelectedItem;
 
             PointF position = new PointF(1f.ToXAbsolute() + x, 1080 + y);
             Health.Recalculate(position);

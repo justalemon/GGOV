@@ -1,5 +1,4 @@
-﻿using GGO.Converters;
-using GGO.HUD;
+﻿using GGO.HUD;
 using GGO.Inventory;
 using GTA;
 using GTA.Math;
@@ -8,9 +7,9 @@ using GTA.UI;
 using LemonUI;
 using LemonUI.Elements;
 using LemonUI.Extensions;
-using LemonUI.Menus;
 using LemonUI.Scaleform;
 using Newtonsoft.Json;
+using PlayerCompanion;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -29,7 +28,7 @@ namespace GGO
         /// <summary>
         /// The location of this script.
         /// </summary>
-        private readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+        internal readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
         /// <summary>
         /// The Pool that holds all of the Processable items.
         /// </summary>
@@ -48,10 +47,6 @@ namespace GGO
         /// The main configuration menu.
         /// </summary>
         internal static readonly SettingsMenu menu = new SettingsMenu();
-        /// <summary>
-        /// The currently active HUD Preset.
-        /// </summary>
-        internal static Preset selectedPreset = null;
 
         /// <summary>
         /// The inventory of the user.
@@ -144,29 +139,17 @@ namespace GGO
                 }
             }
 
-            // Build the menus
-            menu.Presets.Buttons.Add(new InstructionalButton("Create New", Control.FrontendX));
-            menu.Presets.Buttons.Add(new InstructionalButton("Save Presets", Control.FrontendY));
             // Add the UI elements into the pool
             pool.Add(menu);
-            pool.Add(menu.Presets);
             pool.Add(inventory);
             pool.Add(Squad);
             pool.Add(Player);
             // And add the tick event
             Tick += HUD_Tick;
 
-            // Once everything is loaded, load the presets if they are present
-            if (File.Exists("scripts\\GGOV\\HUDPresets.json"))
-            {
-                string contents = File.ReadAllText("scripts\\GGOV\\HUDPresets.json");
-                List<Preset> foundPresets = JsonConvert.DeserializeObject<List<Preset>>(contents, new PresetConverter());
-                foreach (Preset preset in foundPresets)
-                {
-                    pool.Add(preset);
-                    menu.Presets.AddSubMenu(preset);
-                }
-            }
+            // And create the events for item updates
+            Companion.Inventories.ItemAdded += (sender, e) => inventory.UpdateItems();
+            Companion.Inventories.ItemRemoved += (sender, e) => inventory.UpdateItems();
         }
 
         #endregion
@@ -209,12 +192,6 @@ namespace GGO
                 menu.Visible = true;
             }
 
-            // If the presets menu is visible, disable the controls that collide with X/Space and Y/Square
-            if (menu.Presets.Visible)
-            {
-                DisableControlCollisions();
-            }
-
             // If the current weapon used by the player is not the primary or secondary and is not unarmed
             WeaponHash current = Game.Player.Character.Weapons.Current.Hash;
             if ((current != weaponPrimary || current != weaponSecondary) && current != WeaponHash.Unarmed)
@@ -252,45 +229,6 @@ namespace GGO
 
             // Just process the HUD Elements
             pool.Process();
-
-            // If the presets menu is still visible
-            if (menu.Presets.Visible)
-            {
-                // Disable the colliding controls again
-                DisableControlCollisions();
-                // If the user pressed X/Square/Space
-                if (Game.IsControlJustPressed(Control.FrontendX))
-                {
-                    // Ask the user for the name
-                    menu.Presets.Visible = false;
-                    string input = Game.GetUserInput(WindowTitle.EnterMessage60, "", 60);
-                    menu.Presets.Visible = true;
-                    // If the user didn't entered anything, return
-                    if (string.IsNullOrWhiteSpace(input))
-                    {
-                        Notification.Show("~r~Error~s~: The Preset name is empty, is only whitespaces or it was cancelled.");
-                        return;
-                    }
-                    // Otherwise, create a new preset
-                    Preset newMenu = new Preset(input);
-                    menu.Presets.AddSubMenu(newMenu);
-                    pool.Add(newMenu);
-                }
-                // If the user pressed Y/Triangle/Tab
-                else if (Game.IsControlJustPressed(Control.FrontendY))
-                {
-                    // Get all of the presets in a list
-                    List<Preset> fields = new List<Preset>();
-                    pool.ForEach<Preset>(x => fields.Add(x));
-                    // Convert them to JSON
-                    string json = JsonConvert.SerializeObject(fields, new PresetConverter());
-                    // And write them to a file
-                    Directory.CreateDirectory("scripts\\GGOV");
-                    File.WriteAllText("scripts\\GGOV\\HUDPresets.json", json);
-
-                    Notification.Show("The Presets have been ~g~Saved~s~!");
-                }
-            }
 
             // If the user pressed 1, 2 or 3 with the equip mode enabled, change the weapon
             if (menu.EquipWeapons.Checked)
@@ -373,12 +311,6 @@ namespace GGO
                 // Finally, draw it
                 marker.Value.Draw();
             }
-        }
-
-        private void DisableControlCollisions()
-        {
-            Game.DisableControlThisFrame(Control.VehicleExit);
-            Game.DisableControlThisFrame(Control.Jump);
         }
 
         #endregion

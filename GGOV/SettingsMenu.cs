@@ -1,6 +1,8 @@
-﻿using GTA.UI;
+﻿using GGO.Items;
+using GTA.UI;
 using LemonUI.Menus;
 using System;
+using System.IO;
 
 namespace GGO
 {
@@ -11,22 +13,12 @@ namespace GGO
     {
         #region Properties
 
-        /// <summary>
-        /// Item used to Disable the current Active Preset.
-        /// </summary>
-        public NativeItem DisableActivePreset { get; } = new NativeItem("Disable Active Preset", "Disables the Active HUD Preset.");
-        /// <summary>
-        /// The menu that manages the HUD Presets.
-        /// </summary>
-        public NativeMenu Presets { get; } = new NativeMenu("", "HUD Presets", "Presets allow you to store and apply different positions for the HUD Elements.", null)
-        {
-            Alignment = Alignment.Right,
-            ResetCursorWhenOpened = false
-        };
-        /// <summary>
-        /// Item to toggle between Equipping and Switching weapons on the inventory.
-        /// </summary>
         public NativeCheckboxItem EquipWeapons { get; } = new NativeCheckboxItem("Equip Inventory Weapons", "Enabled: Marks the Weapons as Primary or Secondary, allowing you to switch between your Primary, Secondary and Fists with 1, 2 and 3 respectively (like Apex Legends).~n~~n~Disabled: Equips the Weapons directly. Requires you to open the Inventory every time that you want to change weapons.", true);
+        public FloatSelectorItem SquadX { get; } = new FloatSelectorItem("Squad Members: X", "The X value of the Squad Health Information.", 103);
+        public FloatSelectorItem SquadY { get; } = new FloatSelectorItem("Squad Members: Y", "The Y value of the Squad Health Information.", 66);
+        public FloatSelectorItem PlayerX { get; } = new FloatSelectorItem("Player Info: X", "The X value of the Player Information.", -388);
+        public FloatSelectorItem PlayerY { get; } = new FloatSelectorItem("Player Info: Y", "The Y value of the Player Information.", -232);
+        public NativeItem MarkAsActive { get; } = new NativeItem("Mark as Active", "Activates this HUD Preset.");
 
         #endregion
 
@@ -37,33 +29,23 @@ namespace GGO
             // Set the options of the menu
             Alignment = Alignment.Right;
             ResetCursorWhenOpened = false;
-            // Subscribe the events
-            DisableActivePreset.Activated += DisableActivePreset_Activated;
-            EquipWeapons.CheckboxChanged += EquipWeapons_CheckboxChanged;
-            // And add the items and submenus
-            Add(DisableActivePreset);
-            AddSubMenu(Presets);
+            // Add the items and submenus
             Add(EquipWeapons);
+            Add(SquadX);
+            Add(SquadY);
+            Add(PlayerX);
+            Add(PlayerY);
+            // Subscribe the events
+            EquipWeapons.CheckboxChanged += EquipWeapons_CheckboxChanged;
+            SquadX.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
+            SquadY.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
+            PlayerX.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
+            PlayerY.ValueChanged += (sender, e) => GGO.Squad.Recalculate();
         }
 
         #endregion
 
         #region Events
-
-        private void DisableActivePreset_Activated(object sender, EventArgs e)
-        {
-            if (GGO.selectedPreset == null)
-            {
-                Notification.Show("There is no HUD Preset active.");
-            }
-            else
-            {
-                GGO.selectedPreset = null;
-                GGO.Squad.Recalculate();
-                GGO.Player.Recalculate();
-                Notification.Show("The Active Preset has been Disabled. The HUD now uses the Default Values.");
-            }
-        }
 
         private void EquipWeapons_CheckboxChanged(object sender, EventArgs e)
         {
