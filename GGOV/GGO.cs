@@ -7,7 +7,6 @@ using GTA.UI;
 using LemonUI;
 using LemonUI.Elements;
 using LemonUI.Extensions;
-using LemonUI.Scaleform;
 using Newtonsoft.Json;
 using PlayerCompanion;
 using System;
@@ -53,6 +52,10 @@ namespace GGO
         /// </summary>
         internal static readonly PlayerInventory inventory = new PlayerInventory();
 
+        /// <summary>
+        /// The currently known peds.
+        /// </summary>
+        private Ped[] peds = new Ped[0];
         /// <summary>
         /// The currently active Death Markers.
         /// </summary>
@@ -253,35 +256,32 @@ namespace GGO
 
         private void UpdateMarkers()
         {
-            // If is time for the next update or is the first update
-            if (nextMarkerUpdate <= Game.GameTime || nextMarkerUpdate == 0)
+            // Update the peds if is time to do so
+            if (nextMarkerUpdate <= Game.GameTime)
             {
-                // Iterate the the peds on the game world
-                foreach (Ped ped in World.GetAllPeds())
-                {
-                    // If the ped is dead and is not part of the markers, add it
-                    if (ped.IsDead && !markers.ContainsKey(ped))
-                    {
-                        markers.Add(ped, new ScaledTexture(PointF.Empty, new SizeF(220 * 0.75f, 124 * 0.75f), "ggo", "marker_dead"));
-                    }
-                }
+                peds = World.GetAllPeds();
+                nextMarkerUpdate = Game.GameTime + 1000;
+            }
 
-                // Finally, set the new update time
-                nextMarkerUpdate = Game.GameTime + 500;
+            // Iterate over the peds in the list
+            foreach (Ped ped in peds)
+            {
+                // If the ped is alive or no longer exists and is on the list, remove it
+                if ((ped.IsAlive || !ped.Exists()) && markers.ContainsKey(ped))
+                {
+                    markers.Remove(ped);
+                }
+                // If the ped is dead and is not part of the markers, add it
+                else if (ped.IsDead && !markers.ContainsKey(ped))
+                {
+                    markers.Add(ped, new ScaledTexture(PointF.Empty, new SizeF(220 * 0.75f, 124 * 0.75f), "ggo", "marker_dead"));
+                }
             }
 
             // Iterate over the existing items
-            // (creating the new dictionary is required to prevent the "collection was edited" exception)
-            foreach (KeyValuePair<Ped, ScaledTexture> marker in new Dictionary<Ped, ScaledTexture>(markers))
+            foreach (KeyValuePair<Ped, ScaledTexture> marker in markers)
             {
                 Ped ped = marker.Key;
-
-                // If the ped is no longer present in the game world, remove it and continue
-                if (!ped.Exists())
-                {
-                    markers.Remove(ped);
-                    continue;
-                }
 
                 // If the ped is not on the screen, skip it
                 if (!ped.IsOnScreen)
