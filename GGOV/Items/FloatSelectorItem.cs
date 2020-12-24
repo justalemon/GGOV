@@ -1,5 +1,6 @@
 ﻿using GTA;
 using LemonUI.Menus;
+using System;
 
 namespace GGO.Items
 {
@@ -18,6 +19,15 @@ namespace GGO.Items
         #endregion
 
         #region Events
+
+        /// <summary>
+        /// Event triggered when the float value is changed.
+        /// </summary>
+        public event EventHandler ValueChanged;
+
+        #endregion
+
+        #region Functions
 
         private void FloatSelectorItem_ItemChanged(object sender, ItemChangedEventArgs<float> e)
         {
@@ -54,6 +64,9 @@ namespace GGO.Items
                     e.Object += 1;
                 }
             }
+
+            SelectedItem = e.Object;
+            ValueChanged?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion

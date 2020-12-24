@@ -40,10 +40,10 @@ namespace GGO.HUD
             PlayerX.SelectedItem = playerX;
             PlayerY.SelectedItem = playerY;
             // Add the events
-            SquadX.ItemChanged += (sender, e) => UpdateSquad();
-            SquadY.ItemChanged += (sender, e) => UpdateSquad();
-            PlayerX.ItemChanged += (sender, e) => UpdatePlayer();
-            PlayerY.ItemChanged += (sender, e) => UpdatePlayer();
+            SquadX.ValueChanged += (sender, e) => UpdateSquad();
+            SquadY.ValueChanged += (sender, e) => UpdateSquad();
+            PlayerX.ValueChanged += (sender, e) => UpdatePlayer();
+            PlayerY.ValueChanged += (sender, e) => UpdatePlayer();
             MarkAsActive.Activated += MarkAsActive_Activated;
             // And finally add the UI Elements
             Add(SquadX);
