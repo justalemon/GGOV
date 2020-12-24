@@ -23,6 +23,8 @@ namespace GGO
         public bool DeathMarkers { get; set; } = true;
         [JsonProperty("inventory")]
         public bool Inventory { get; set; } = true;
+        [JsonProperty("squad")]
+        public bool Squad { get; set; } = true;
     }
 
     /// <summary>
@@ -40,6 +42,7 @@ namespace GGO
         public FloatSelectorItem PlayerY { get; } = new FloatSelectorItem("Player Info: Y", "The Y value of the Player Information.", -232);
         public NativeCheckboxItem DeathMarkers { get; } = new NativeCheckboxItem("Enable Death Markers", "Enables the Death Markers shown when the Peds around you die.", true);
         public NativeCheckboxItem Inventory { get; } = new NativeCheckboxItem("Use Inventory", "Enables or Disables the Inventory system.", true);
+        public NativeCheckboxItem Squad { get; } = new NativeCheckboxItem("Show Squad Members", "If the Squad Members (top left) should be shown on the screen.", true);
         public NativeItem Save { get; } = new NativeItem("Save", "Saves all of the current settings.");
 
         #endregion
@@ -61,6 +64,7 @@ namespace GGO
                 PlayerY.SelectedItem = config.PlayerY;
                 DeathMarkers.Checked = config.DeathMarkers;
                 Inventory.Checked = config.Inventory;
+                Squad.Checked = config.Squad;
             }
 
             // Set the options of the menu
@@ -74,6 +78,7 @@ namespace GGO
             Add(PlayerY);
             Add(DeathMarkers);
             Add(Inventory);
+            Add(Squad);
             Add(Save);
             // Subscribe the events
             EquipWeapons.CheckboxChanged += EquipWeapons_CheckboxChanged;
@@ -109,6 +114,7 @@ namespace GGO
                 PlayerY = PlayerY.SelectedItem,
                 DeathMarkers = DeathMarkers.Checked,
                 Inventory = Inventory.Checked,
+                Squad = Squad.Checked,
             };
 
             string contents = JsonConvert.SerializeObject(config);

@@ -1,5 +1,4 @@
-﻿using GGO.HUD;
-using GTA;
+﻿using GTA;
 using LemonUI;
 using System;
 using System.Collections.Generic;
@@ -126,6 +125,12 @@ namespace GGO.HUD
         /// </summary>
         public void Process()
         {
+            // If this should not be shown, return
+            if (!GGO.menu.Squad.Checked)
+            {
+                return;
+            }
+
             // Check that the peds are present in the game world
             // If not, force a recalculation
             List<PedHealth> toRemove = new List<PedHealth>();
