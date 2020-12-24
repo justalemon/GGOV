@@ -16,6 +16,7 @@ namespace GGO.HUD
         public bool firstTime = true;
         private bool shiftedImage = false;
         private WeaponHash lastHash = 0;
+        private WeaponType lastType = 0;
 
         private readonly ScaledText noneIcon = new ScaledText(PointF.Empty, "-", 0.4f)
         {
@@ -124,6 +125,7 @@ namespace GGO.HUD
         {
             // If the last hash is not the same as the current one, update the position of the weapon and texture
             WeaponHash currentHash = Hash;
+            WeaponType currentType = Tools.GetWeaponType(currentHash);
             if (lastHash != currentHash && IsWeaponValid)
             {
                 weapon.Texture = ((int)currentHash).ToString();
@@ -140,6 +142,7 @@ namespace GGO.HUD
                 }
 
                 lastHash = currentHash;
+                lastType = currentType;
             }
 
             // Update the current ammo count
@@ -156,7 +159,7 @@ namespace GGO.HUD
             // And draw all of the elements
             base.Process();
             infoBackground.Draw();
-            if (IsWeaponValid)
+            if (lastType == WeaponType.Primary || lastType == WeaponType.Secondary)
             {
                 weaponBackground.Draw();
                 Icon?.Draw();
