@@ -159,11 +159,19 @@ namespace GGO.HUD
             // And draw all of the elements
             base.Process();
             infoBackground.Draw();
-            if (lastType == WeaponType.Primary || lastType == WeaponType.Secondary)
+            if (lastType == WeaponType.Primary || lastType == WeaponType.Secondary || lastType == WeaponType.Melee)
             {
+                if (lastType == WeaponType.Melee)
+                {
+                    noneAmmo.Draw();
+                }
+                else
+                {
+                    ammo.Draw();
+                }
+
                 weaponBackground.Draw();
                 Icon?.Draw();
-                ammo.Draw();
                 weapon.Draw();
             }
             else
