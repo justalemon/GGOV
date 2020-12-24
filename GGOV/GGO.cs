@@ -28,7 +28,7 @@ namespace GGO
         /// <summary>
         /// The location of this script.
         /// </summary>
-        internal readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+        internal static readonly string location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
         /// <summary>
         /// The Pool that holds all of the Processable items.
         /// </summary>
