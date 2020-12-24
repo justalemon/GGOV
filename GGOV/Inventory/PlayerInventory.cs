@@ -639,6 +639,12 @@ namespace GGO.Inventory
                 }
             }
 
+            // Add the items from the PlayerCompanion inventory
+            foreach (Item item in Companion.Inventories.Current.Items)
+            {
+                itemsActive.Add(new ItemPair(item));
+            }
+
             // Finally, update the items on the screen
             UpdateVisibleItems();
         }
