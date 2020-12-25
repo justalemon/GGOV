@@ -284,7 +284,7 @@ namespace GGO.Inventory
                 itemsCorners.Add(new CornerSet());
             }
 
-            Recalculate();
+            Recalculate(false);
         }
 
         #endregion
@@ -294,7 +294,11 @@ namespace GGO.Inventory
         /// <summary>
         /// Recalculates the position of the menu.
         /// </summary>
-        public void Recalculate()
+        public void Recalculate() => Recalculate(true);
+        /// <summary>
+        /// Recalculates the position of the menu.
+        /// </summary>
+        public void Recalculate(bool doItems)
         {
             // Get the current width of the screen for the calculations
             // The height is always 1080
@@ -385,7 +389,10 @@ namespace GGO.Inventory
             itemsAreaSize = new SizeF((itemWidth * 3) + (4 * 2), (genericHeight * 6) + (genericHeightSeparation * 5));
             weaponAreaSize = new SizeF(weaponWidth, (genericHeight * 6) +  (genericHeightSeparation * 5));
 
-            UpdateItems();
+            if (doItems)
+            {
+                UpdateItems();
+            }
             UpdateWeapons();
         }
         /// <summary>

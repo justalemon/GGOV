@@ -150,7 +150,8 @@ namespace GGO
             // And add the tick event
             Tick += HUD_Tick;
 
-            // And create the events for item updates
+            // And create the events for PlayerCompanion updates
+            Companion.Ready += Companion_Ready;
             Companion.Inventories.ItemAdded += (sender, e) => inventory.UpdateItems();
             Companion.Inventories.ItemRemoved += (sender, e) => inventory.UpdateItems();
         }
@@ -158,6 +159,11 @@ namespace GGO
         #endregion
 
         #region Events
+
+        private void Companion_Ready(object sender, EventArgs e)
+        {
+            inventory.UpdateItems();
+        }
 
         private void HUD_Tick(object sender, EventArgs e)
         {
