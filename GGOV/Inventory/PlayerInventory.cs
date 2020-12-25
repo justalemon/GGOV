@@ -49,7 +49,11 @@ namespace GGO.Inventory
         /// </summary>
         internal void Draw()
         {
-            if (Item is StackableItem stackable)
+            if (Item is Magazines magazines)
+            {
+                Count.Text = magazines.MagCount.ToString();
+            }
+            else if (Item is StackableItem stackable)
             {
                 Count.Text = stackable.Count.ToString();
             }

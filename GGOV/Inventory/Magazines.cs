@@ -34,7 +34,7 @@ namespace GGO.Inventory
         /// <summary>
         /// The number of Magazines based on the Weapon and Ammo count.
         /// </summary>
-        public override int Count
+        public int MagCount
         {
             get
             {
