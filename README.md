@@ -1,4 +1,4 @@
-# GGOV<br>[![AppVeyor][appveyor-img]][appveyor-url] [![NuGet][nuget-img]][nuget-url] [![Discord][discord-img]][discord-url]
+# GGOV<br>[![AppVeyor][appveyor-img]][appveyor-url] [![Discord][discord-img]][discord-url]
 
 GGO V (previously GGOHud) is a mod for Grand Theft Auto V that adds a couple of features from the Gun Gale Online VRMMO in Sword Art Online:
 
