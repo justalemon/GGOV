@@ -24,6 +24,8 @@ After installing the mod, you will see the Squad Members and Player Information 
 
 There is a menu that you can use to configure some options. This menu can be opened by entering **ggo** in the cheat input field.
 
+For adding weapons and modifying other options, please check [the wiki](https://github.com/justalemon/GGOV/wiki).
+
 [appveyor-img]: https://img.shields.io/appveyor/build/justalemon/ggov?label=appveyor
 [appveyor-url]: https://ci.appveyor.com/project/justalemon/ggov
 [discord-img]: https://img.shields.io/badge/discord-join-7289DA.svg
