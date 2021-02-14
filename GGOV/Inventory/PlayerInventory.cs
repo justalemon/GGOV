@@ -630,6 +630,17 @@ namespace GGO.Inventory
                 }
             }
 
+            // Iterate over the list of items and trigger those hovered
+            for (int i = 0; i < itemsVisible.Count; i++)
+            {
+                PointF start = itemsCorners[i].Top.Position;
+                if (Game.IsControlJustPressed(Control.CursorAccept) && Screen.IsCursorInArea(start.X, start.Y, itemWidth, genericHeight))
+                {
+                    itemsVisible[i].Item.Use();
+                    break;
+                }
+            }
+
             // If the player moved the mouse wheel up or down when the weapons are selected, move
             bool upPressed = Game.IsControlJustPressed(Control.PhoneScrollBackward);
             bool downPressed = Game.IsControlJustPressed(Control.PhoneScrollForward);
