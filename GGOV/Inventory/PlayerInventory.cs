@@ -49,7 +49,7 @@ namespace GGO.Inventory
         /// </summary>
         internal void Draw()
         {
-            if (Item is Magazines magazines)
+            if (Item is AmmoCount magazines)
             {
                 Count.Text = magazines.MagCount.ToString();
             }
@@ -120,7 +120,7 @@ namespace GGO.Inventory
         /// The Weapons that the player can use in the Inventory.
         /// </summary>
         /// TODO: Read this from memory, either via SHVDN or Manually
-        private static readonly List<WeaponHash> weapons = ((WeaponHash[])Enum.GetValues(typeof(WeaponHash))).Where(x => Tools.GetWeaponType(x) == WeaponType.Primary || Tools.GetWeaponType(x) == WeaponType.Secondary || Tools.GetWeaponType(x) == WeaponType.Melee).ToList();
+        private static readonly List<WeaponHash> weapons = ((WeaponHash[])Enum.GetValues(typeof(WeaponHash))).Where(x => Tools.GetWeaponType(x) != WeaponType.Invalid && Tools.GetWeaponType(x) != WeaponType.Unknown).ToList();
 
         /// <summary>
         /// The last know Ped of the player.
@@ -207,9 +207,13 @@ namespace GGO.Inventory
         /// </summary>
         private readonly List<CornerSet> itemsCorners = new List<CornerSet>();
         /// <summary>
+        /// Inventory items that can be thrown.
+        /// </summary>
+        private readonly Dictionary<WeaponHash, AmmoCount> itemsThrowable = new Dictionary<WeaponHash, AmmoCount>();
+        /// <summary>
         /// The ammo currently being used by the player.
         /// </summary>
-        private readonly Dictionary<WeaponHash, Magazines> itemsAmmo = new Dictionary<WeaponHash, Magazines>();
+        private readonly Dictionary<WeaponHash, AmmoCount> itemsAmmo = new Dictionary<WeaponHash, AmmoCount>();
         /// <summary>
         /// The items that are currently in use.
         /// </summary>
@@ -273,7 +277,10 @@ namespace GGO.Inventory
                 {
                     case WeaponType.Primary:
                     case WeaponType.Secondary:
-                        itemsAmmo.Add(hash, new Magazines(hash));
+                        itemsAmmo.Add(hash, new AmmoCount(hash));
+                        break;
+                    case WeaponType.Gear:
+                        itemsThrowable.Add(hash, new AmmoCount(hash));
                         break;
                 }
             }
@@ -516,7 +523,15 @@ namespace GGO.Inventory
                     break;
                 }
             }
-            foreach (KeyValuePair<WeaponHash, Magazines> ammo in itemsAmmo)
+            foreach (KeyValuePair<WeaponHash, AmmoCount> throwable in itemsThrowable)
+            {
+                if (throwable.Value.Count > 0 && !itemsActive.Where(x => x.Item == throwable.Value).Any()) // TODO: Look for a better solution
+                {
+                    itemUpdateRequired = true;
+                    break;
+                }
+            }
+            foreach (KeyValuePair<WeaponHash, AmmoCount> ammo in itemsAmmo)
             {
                 if (ammo.Value.Count > 0 && !itemsActive.Where(x => x.Item == ammo.Value).Any()) // TODO: Look for a better solution
                 {
@@ -647,10 +662,22 @@ namespace GGO.Inventory
             // Clear the existing items
             itemsActive.Clear();
 
+            // Add the throwable items owned by the player if the player has at least one
+            if (true)
+            {
+                foreach (KeyValuePair<WeaponHash, AmmoCount> throwable in itemsThrowable)
+                {
+                    if (Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, throwable.Key, false) && throwable.Value.Count > 0)
+                    {
+                        itemsActive.Add(new ItemPair(throwable.Value));
+                    }
+                }
+            }
+
             // Add the ammo items for the weapons owned by the player if the player has the weapon and the number of mags is not zero
             if (GGO.menu.Ammo.Checked)
             {
-                foreach (KeyValuePair<WeaponHash, Magazines> ammo in itemsAmmo)
+                foreach (KeyValuePair<WeaponHash, AmmoCount> ammo in itemsAmmo)
                 {
                     if (Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, ammo.Key, false) && ammo.Value.Count > 0)
                     {

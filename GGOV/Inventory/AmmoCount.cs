@@ -9,10 +9,11 @@ namespace GGO.Inventory
     /// <summary>
     /// Item used to show the Ammo of specific weapons.
     /// </summary>
-    internal class Magazines : StackableItem
+    internal class AmmoCount : StackableItem
     {
         #region Fields
 
+        private readonly bool canBeEquipped = false;
         private readonly WeaponHash weapon = default;
 
         #endregion
@@ -26,7 +27,7 @@ namespace GGO.Inventory
         /// <summary>
         /// The icon for the Ammo Type.
         /// </summary>
-        public override ScaledTexture Icon { get; } = new ScaledTexture("ggo_ammo", "placeholder");
+        public override ScaledTexture Icon { get; } = new ScaledTexture("", "");
         /// <summary>
         /// The monetary value of the Ammo.
         /// </summary>
@@ -62,9 +63,34 @@ namespace GGO.Inventory
 
         #region Constructor
 
-        internal Magazines(WeaponHash hash)
+        internal AmmoCount(WeaponHash hash)
         {
             weapon = hash;
+            switch (Tools.GetWeaponType(hash))
+            {
+                case WeaponType.Gear:
+                    Icon.Dictionary = "ggo_gear";
+                    canBeEquipped = true;
+                    break;
+                default:
+                    Icon.Dictionary = "ggo_ammo";
+                    break;
+            }
+            Icon.Texture = ((int)hash).ToString();
+
+            Used += AmmoCount_Used;
+        }
+
+        #endregion
+
+        #region Events
+
+        private void AmmoCount_Used(object sender, EventArgs e)
+        {
+            if (canBeEquipped)
+            {
+                Function.Call(Hash.SET_CURRENT_PED_WEAPON, Game.Player.Character, weapon, false);
+            }
         }
 
         #endregion

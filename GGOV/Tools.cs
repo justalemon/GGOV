@@ -14,6 +14,7 @@ namespace GGO
         Primary = 1,
         Secondary = 2,
         Melee = 3,
+        Gear = 4,
     }
 
     /// <summary>
@@ -63,6 +64,8 @@ namespace GGO
                     return WeaponType.Secondary;
                 case WeaponGroup.Melee:
                     return WeaponType.Melee;
+                case WeaponGroup.Thrown:
+                    return WeaponType.Gear;
             }
 
             // If we got here, we don't know what type of weapon it is
