@@ -117,10 +117,18 @@ namespace GGO.Inventory
         #region Fields
 
         /// <summary>
-        /// The Weapons that the player can use in the Inventory.
+        /// The Weapons that are valid for the player to use.
         /// </summary>
         /// TODO: Read this from memory, either via SHVDN or Manually
-        private static readonly List<WeaponHash> weapons = ((WeaponHash[])Enum.GetValues(typeof(WeaponHash))).Where(x => Tools.GetWeaponType(x) != WeaponType.Invalid && Tools.GetWeaponType(x) != WeaponType.Unknown).ToList();
+        private static readonly List<WeaponHash> weaponsValid = ((WeaponHash[])Enum.GetValues(typeof(WeaponHash))).Where(x => Tools.GetWeaponType(x) != WeaponType.Invalid && Tools.GetWeaponType(x) != WeaponType.Unknown).ToList();
+        /// <summary>
+        /// The weapons that can be equipped by the player.
+        /// </summary>
+        private static readonly List<WeaponHash> weaponsEquippable = weaponsValid.Where(x => Tools.GetWeaponType(x) == WeaponType.Primary || Tools.GetWeaponType(x) == WeaponType.Secondary || Tools.GetWeaponType(x) == WeaponType.Melee).ToList();
+        /// <summary>
+        /// The gear or equipment that can be used by the player.
+        /// </summary>
+        private static readonly List<WeaponHash> weaponsGear = weaponsValid.Where(x => Tools.GetWeaponType(x) == WeaponType.Gear).ToList();
 
         /// <summary>
         /// The last know Ped of the player.
@@ -271,7 +279,7 @@ namespace GGO.Inventory
 
         internal PlayerInventory()
         {
-            foreach (WeaponHash hash in weapons)
+            foreach (WeaponHash hash in weaponsValid)
             {
                 switch (Tools.GetWeaponType(hash))
                 {
@@ -479,7 +487,7 @@ namespace GGO.Inventory
 
             // Make sure that the weapon images are up to date
             bool weaponUpdateRequired = false;
-            foreach (WeaponHash weaponHash in weapons)
+            foreach (WeaponHash weaponHash in weaponsEquippable)
             {
                 // Check if the player has the weapon
                 bool has = Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, weaponHash, false);
@@ -744,7 +752,7 @@ namespace GGO.Inventory
             // Remove all of the existing weapon activators
             weaponImages.Clear();
             // Iterate the weapons and add the images for the weapons that the player has
-            foreach (WeaponHash weaponHash in weapons)
+            foreach (WeaponHash weaponHash in weaponsEquippable)
             {
                 // If the player has the weapon, is not currently using it and is not equpped (if the setting is enabled)
                 if (Function.Call<bool>(Hash.HAS_PED_GOT_WEAPON, Game.Player.Character, weaponHash, false) &&
