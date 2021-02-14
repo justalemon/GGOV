@@ -33,7 +33,6 @@ namespace GGO
             {
                 // Invalid Weapons (aka no use for the GGO Mod)
                 case WeaponHash.Unarmed:
-                case WeaponHash.StunGun:
                     return WeaponType.Invalid;
                 // Primary Weapons (here because they have the wrong group)
                 case WeaponHash.Musket:
@@ -46,6 +45,7 @@ namespace GGO
                 case WeaponHash.SawnOffShotgun:
                 case WeaponHash.DoubleBarrelShotgun:
                 case WeaponHash.SweeperShotgun:
+                case WeaponHash.StunGun:
                     return WeaponType.Secondary;
             }
 

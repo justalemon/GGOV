@@ -161,7 +161,7 @@ namespace GGO.HUD
             infoBackground.Draw();
             if (lastType == WeaponType.Primary || lastType == WeaponType.Secondary || lastType == WeaponType.Melee)
             {
-                if (lastType == WeaponType.Melee)
+                if (lastType == WeaponType.Melee || lastHash == WeaponHash.StunGun)
                 {
                     noneAmmo.Draw();
                 }
