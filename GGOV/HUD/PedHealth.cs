@@ -125,7 +125,8 @@ namespace GGO.HUD
             // It is important to keep the player health up to date
 
             // Get the health percentage
-            float percentage = (Ped.HealthFloat - 100) / (Ped.MaxHealthFloat - 100);
+            float maxHealth = Ped.MaxHealthFloat == 0 ? Ped.MaxHealth : Ped.MaxHealthFloat;
+            float percentage = (Ped.HealthFloat - 100) / (maxHealth - 100);
             // Make sure that is not under 0, over 1 or NaN
             if (percentage < 0)
             {

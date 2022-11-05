@@ -470,7 +470,9 @@ namespace GGO.Inventory
             Hud.HideComponentThisFrame(HudComponent.Reticle);
 
             // Update the value of the health bar
-            float percentage = (Game.Player.Character.HealthFloat - 100) / (Game.Player.Character.MaxHealthFloat - 100);
+            Ped ped = Game.Player.Character;
+            float maxHealth = ped.MaxHealthFloat == 0 ? ped.MaxHealth : ped.MaxHealthFloat;
+            float percentage = (ped.HealthFloat - 100) / (maxHealth - 100);
             if (percentage < 0)
             {
                 percentage = 0;
