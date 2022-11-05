@@ -670,7 +670,7 @@ namespace GGO.Inventory
             // If the settings button was pressed, open the settings menu
             if (Game.IsControlJustPressed(Control.CursorAccept) && Screen.IsCursorInArea(settingsIcon.Position, settingsIcon.Size))
             {
-                GGO.menu.Open();
+                GGO.menu.Visible = true;
             }
         }
         /// <summary>
