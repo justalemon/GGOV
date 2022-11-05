@@ -23,14 +23,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="LemonUI.SHVDN3" Version="1.2.0">
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="LemonUI.SHVDN3" Version="1.9.1">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="PlayerCompanion" Version="1.0.0">
+    <PackageReference Include="PlayerCompanion" Version="1.3.2">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="ScriptHookVDotNet3" Version="3.0.4">
+    <PackageReference Include="ScriptHookVDotNet3" Version="3.5.1">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
     <None Update="GGOV\Names\Vanilla.json">
