@@ -33,16 +33,10 @@
     <PackageReference Include="ScriptHookVDotNet3" Version="3.5.1">
       <IncludeAssets>compile</IncludeAssets>
     </PackageReference>
-    <None Update="GGOV\Names\Vanilla.json">
+    <None Update="GGOV\Names\*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="INSTALL MANUALLY\ggo.ytd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="INSTALL MANUALLY\ggo_weapons.ytd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="INSTALL MANUALLY\README.txt">
+    <None Update="INSTALL MANUALLY\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
