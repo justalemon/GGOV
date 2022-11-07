@@ -2,6 +2,7 @@
 using LemonUI;
 using LemonUI.Extensions;
 using System.Drawing;
+using GTA.UI;
 
 namespace GGO.HUD
 {
@@ -60,6 +61,10 @@ namespace GGO.HUD
         /// </summary>
         public void Process()
         {
+            Hud.HideComponentThisFrame(HudComponent.AreaName);
+            Hud.HideComponentThisFrame(HudComponent.StreetName);
+            Hud.HideComponentThisFrame(HudComponent.VehicleName);
+
             Health.Process();
             PrimaryWeapon.Process();
             SecondaryWeapon.Process();
