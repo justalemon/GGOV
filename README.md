@@ -1,4 +1,4 @@
-# GGOV<br>[![AppVeyor][appveyor-img]][appveyor-url] [![Patreon][patreon-img]][patreon-url] [![PayPal][paypal-img]][paypal-url] [![Discord][discord-img]][discord-url]
+# GGOV<br>[![GitHub Actions][actions-img]][actions-url] [![Patreon][patreon-img]][patreon-url] [![PayPal][paypal-img]][paypal-url] [![Discord][discord-img]][discord-url]
 
 GGO V (previously GGOHud) is a mod for Grand Theft Auto V that adds a couple of features from the Gun Gale Online VRMMO in Sword Art Online:
 
@@ -26,8 +26,8 @@ There is a menu that you can use to configure some options. This menu can be ope
 
 For adding weapons and modifying other options, please check [the wiki](https://github.com/justalemon/GGOV/wiki).
 
-[appveyor-img]: https://img.shields.io/appveyor/build/justalemon/ggov?label=appveyor
-[appveyor-url]: https://ci.appveyor.com/project/justalemon/ggov
+[actions-img]: https://img.shields.io/github/workflow/status/justalemon/GGOV/Compile%20Mod?label=github%20actions
+[actions-url]: https://github.com/justalemon/GGOV/actions
 [patreon-img]: https://img.shields.io/badge/support-patreon-FF424D.svg
 [patreon-url]: https://www.patreon.com/lemonchan
 [paypal-img]: https://img.shields.io/badge/support-paypal-0079C1.svg
