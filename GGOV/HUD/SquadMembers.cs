@@ -3,6 +3,7 @@ using LemonUI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using GTA.Native;
 
 namespace GGO.HUD
 {
@@ -14,6 +15,8 @@ namespace GGO.HUD
         #region Fields
 
         private readonly List<PedHealth> members = new List<PedHealth>();
+        private bool lastHelpStatus = false;
+        private PointF offset = PointF.Empty;
 
         #endregion
 
@@ -130,6 +133,15 @@ namespace GGO.HUD
             {
                 return;
             }
+            
+            // Recalculate if the help message visibility has changed
+            bool helpMessageVisible = Function.Call<bool>(Hash.IS_HELP_MESSAGE_BEING_DISPLAYED);
+            if (helpMessageVisible != lastHelpStatus)
+            {
+                offset = helpMessageVisible ? new PointF(0, 150) : PointF.Empty;
+                lastHelpStatus = helpMessageVisible;
+                Recalculate();
+            }
 
             // Check that the peds are present in the game world
             // If not, force a recalculation
@@ -157,8 +169,8 @@ namespace GGO.HUD
         /// </summary>
         public void Recalculate()
         {
-            float x = GGO.menu.SquadX.SelectedItem;
-            float y = GGO.menu.SquadY.SelectedItem;
+            float x = GGO.menu.SquadX.SelectedItem + offset.X;
+            float y = GGO.menu.SquadY.SelectedItem + offset.Y;
 
             for (int i = 0; i < members.Count; i++)
             {
