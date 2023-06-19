@@ -450,7 +450,7 @@ namespace GGO.Inventory
             }
 
             // Show the cursor during this frame
-            Function.Call(Hash._SET_MOUSE_CURSOR_ACTIVE_THIS_FRAME);
+            Function.Call(Hash.SET_MOUSE_CURSOR_THIS_FRAME);
 
             // Disable the firing controls
             Game.DisableControlThisFrame(Control.Attack);
